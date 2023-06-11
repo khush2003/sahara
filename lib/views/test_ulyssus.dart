@@ -5,6 +5,10 @@ class TestUlyssus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+        appBar: AppBar(title: Text("Hello Ulyssus")),
+        body: const Center(
+          child: Text("Please don't test me."),
+        ));
   }
 }

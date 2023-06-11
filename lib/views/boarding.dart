@@ -13,14 +13,26 @@ class BoardingView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ElevatedButton(onPressed: () => Get.toNamed(Routes.testJames), child: const Text('Test James')),
-          ElevatedButton(onPressed: () => Get.toNamed(Routes.testKhush), child: const Text('Test Khush')),
-          ElevatedButton(onPressed: () => Get.toNamed(Routes.testUlyssus), child: const Text('Test Ulyssus')),
-          ElevatedButton(onPressed: () => Get.toNamed(Routes.testNote), child: const Text('Test Note')),
-          ElevatedButton(onPressed: () => Get.toNamed(Routes.testPoln), child: const Text('Test Poln')),
-          ElevatedButton(onPressed: () => Get.toNamed(Routes.testFai), child: const Text('Test Fai')),
+          ElevatedButton(
+              onPressed: () => Get.toNamed(Routes.testJames),
+              child: const Text('Test James')),
+          ElevatedButton(
+              onPressed: () => Get.toNamed(Routes.testKhush),
+              child: const Text('Test Khush')),
+          ElevatedButton(
+              onPressed: () => Get.toNamed(Routes.profile),
+              child: const Text('Profile')),
+          ElevatedButton(
+              onPressed: () => Get.toNamed(Routes.testNote),
+              child: const Text('Test Note')),
+          ElevatedButton(
+              onPressed: () => Get.toNamed(Routes.testPoln),
+              child: const Text('Test Poln')),
+          ElevatedButton(
+              onPressed: () => Get.toNamed(Routes.testFai),
+              child: const Text('Test Fai')),
         ],
       ),
     );
   }
-  }
+}
