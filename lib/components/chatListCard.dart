@@ -67,7 +67,23 @@ class _ChatListCardState extends State<ChatListCard> {
                           )),
                       IconButton(
                           padding: EdgeInsets.all(0),
-                          onPressed: () {},
+                          onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          // title: const Text('AlertDialog Title'),
+          content: const Text('Do you want to block this user?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Yes'),
+              child: const Text('Yes'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'No'),
+              child: const Text('No'),
+            ),
+          ],
+        ),
+      ),
                           icon: Icon(
                             Icons.no_accounts,
                             size: 40,

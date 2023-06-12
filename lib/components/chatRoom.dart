@@ -27,7 +27,7 @@ class _ChatRoomState extends State<ChatRoom> {
         actions: [
           Container(
             color: Color.fromRGBO(190, 239, 0, 1),
-
+            
             child: TextButton(
   style: TextButton.styleFrom(
     primary: Colors.black,
@@ -42,6 +42,8 @@ class _ChatRoomState extends State<ChatRoom> {
 
         ],
         ),
+
+        body: Center(child: Text('hi')),
 
     );
   }
