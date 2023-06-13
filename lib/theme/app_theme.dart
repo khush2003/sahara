@@ -60,21 +60,25 @@ ThemeData themedata = ThemeData(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w500,
         fontSize: 22,
+        height: 0.5,
         color: defaultTextColor),
     displayMedium: TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w500,
         fontSize: 18,
+        height: 0.5,
         color: defaultTextColor),
     displaySmall: TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w500,
         fontSize: 16,
+        height: 0.5,
         color: defaultTextColor),
     bodyMedium: TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w400,
         fontSize: 24,
+        height: 0.5,
         color: defaultTextColor),
   ),
   appBarTheme: const AppBarTheme(
@@ -88,6 +92,7 @@ ThemeData themedata = ThemeData(
         fontFamily: 'Dongle',
         fontWeight: FontWeight.w700,
         fontSize: 32,
+        height: 0.5,
         color: Colors.white),
   ),
 );
