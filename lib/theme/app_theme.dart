@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-const primary = Color(0xffEAAA37);
+const primary = Color(0xffFFC736);
 const secondary = Color(0xffFFE247);
 const sucess = Color(0xff5EF417);
-const warning = Color(0xffFFC736);
 const danger = Color(0xffFF2525);
 const neutral = Color(0xffF57070);
 const border = Color(0xffA1A1A1);
