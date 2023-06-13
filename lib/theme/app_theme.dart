@@ -5,41 +5,55 @@ const secondary = Color(0xffFFE247);
 const sucess = Color(0xff5EF417);
 const danger = Color(0xffFF2525);
 const neutral = Color(0xffF57070);
-const addOn = Color(0xff848484);
+const lonely = Color(0xff848484);
 const border = Color(0xffA1A1A1);
 const titleBackground = Color(0xff141D3A);
 const defaultTextColor = Colors.black;
 
-TextStyle titleText({Color color = Colors.black}) => TextStyle(
-    fontFamily: "Dongle",
-    fontWeight: FontWeight.bold,
-    fontSize: 36,
-    height: 0.5,
-    color: color);
-TextStyle headTextBold({Color color = defaultTextColor}) => TextStyle(
-    fontFamily: "Dongle",
-    fontWeight: FontWeight.bold,
-    fontSize: 32,
-    height: 0.5,
-    color: color);
-TextStyle headText({Color color = defaultTextColor}) => TextStyle(
-    fontFamily: "Dongle",
-    fontWeight: FontWeight.w400,
-    fontSize: 32,
-    height: 0.5,
-    color: color);
-TextStyle regularTextBold({Color color = defaultTextColor}) => TextStyle(
-    fontFamily: "Dongle",
-    fontWeight: FontWeight.bold,
-    fontSize: 24,
-    height: 0.5,
-    color: color);
-TextStyle regularText({Color color = defaultTextColor}) => TextStyle(
-    fontFamily: "Dongle",
-    fontWeight: FontWeight.w400,
-    fontSize: 24,
-    height: 0.5,
-    color: color);
+TextStyle titleText({Color color = defaultTextColor, double height = 0.5}) =>
+    TextStyle(
+        fontFamily: "Dongle",
+        fontWeight: FontWeight.w700,
+        fontSize: 36,
+        height: height,
+        color: color);
+TextStyle headTextBold({Color color = defaultTextColor, double height = 0.5}) =>
+    TextStyle(
+        fontFamily: "Dongle",
+        fontWeight: FontWeight.w700,
+        fontSize: 32,
+        height: height,
+        color: color);
+TextStyle headText({Color color = defaultTextColor, double height = 0.5}) =>
+    TextStyle(
+        fontFamily: "Dongle",
+        fontWeight: FontWeight.w400,
+        fontSize: 32,
+        height: height,
+        color: color);
+TextStyle formFieldText(
+        {Color color = defaultTextColor, double height = 0.5}) =>
+    TextStyle(
+        fontFamily: "Dongle",
+        fontWeight: FontWeight.w300,
+        fontSize: 32,
+        height: height,
+        color: color);
+TextStyle regularTextBold(
+        {Color color = defaultTextColor, double height = 0.5}) =>
+    TextStyle(
+        fontFamily: "Dongle",
+        fontWeight: FontWeight.w700,
+        fontSize: 24,
+        height: height,
+        color: color);
+TextStyle regularText({Color color = defaultTextColor, double height = 0.5}) =>
+    TextStyle(
+        fontFamily: "Dongle",
+        fontWeight: FontWeight.w300,
+        fontSize: 24,
+        height: height,
+        color: color);
 
 ThemeData themedata = ThemeData(
   scaffoldBackgroundColor: Colors.white,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sahara/components/primary_button.dart';
-import 'package:sahara/components/textfield.dart';
+import 'package:sahara/components/textfield_App.dart';
+import 'package:sahara/theme/app_theme.dart';
 
 class TestNote extends StatelessWidget {
   const TestNote({super.key});
@@ -13,18 +14,21 @@ class TestNote extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            children: const [
+            children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 310, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 310, 0, 0),
                 child: Center(
-                  child: Text("TRANSFORM\nWASTE\nINTO\nWISH",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: 'Dongle',
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontSize: 36,
-                          height: 1,
-                          fontWeight: FontWeight.w400)),
+                  child: PrimaryButton(
+                    text: "POST REVIEW",
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                child: TextfieldAPP(
+                  hintText: "input this or that",
+                  textStyle: formFieldText(color: lonely),
                 ),
               )
             ],
