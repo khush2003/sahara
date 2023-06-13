@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app_theme.dart';
+
 class PrimaryButton extends StatelessWidget {
   final Function()? onPressed;
   final String text;
 
-  PrimaryButton({
+  const PrimaryButton({
     super.key,
     this.onPressed,
     required this.text,
   });
 
-  Color mainColor = const Color(0xffFFC736);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: mainColor,
+          backgroundColor: primary,
         ),
         child: Text(text,
             style: const TextStyle(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/chatListCard.dart';
+import '../components/chat_list_card.dart';
 
 class TestFai extends StatelessWidget {
   const TestFai({super.key});

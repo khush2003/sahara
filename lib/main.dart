@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/routes/routes.dart';
+import 'package:sahara/theme/app_theme.dart';
 
 import 'firebase_options.dart';
 
@@ -19,7 +20,7 @@ class Application extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'WisMod',
-      // theme: AppThemeData.themedata,
+      theme: themedata,
       initialRoute: Routes.boarding,
       getPages: getPages,
     );

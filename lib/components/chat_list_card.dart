@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
-import 'chatRoom.dart';
-class ChatListCard extends StatefulWidget {
+import 'chat_room.dart';
+class ChatListCard extends StatelessWidget {
   const ChatListCard({super.key});
 
-  @override
-  State<ChatListCard> createState() => _ChatListCardState();
-}
-
-class _ChatListCardState extends State<ChatListCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ChatRoom()));
+            MaterialPageRoute(builder: (context) => const ChatRoom()));
       },
      
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               side: BorderSide(
                 color: Color.fromRGBO(120, 120, 120, 1),
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
             // clipBehavior is necessary because, without it, the InkWell's animation
             // will extend beyond the rounded edges of the [Card] (see https://github.com/flutter/flutter/issues/109776)
@@ -40,7 +35,7 @@ class _ChatListCardState extends State<ChatListCard> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                       ClipRRect(
@@ -49,24 +44,24 @@ class _ChatListCardState extends State<ChatListCard> {
                         child: Container(
                           height: 50.0,
                           width: 50.0,
-                          color: Color(0xffFF0E58),
+                          color: const Color(0xffFF0E58),
                           // child: Icon(Icons.volume_up, color: Colors.white, size: 50.0),
                           // Image.asset("Assets/Images/music_default.png",
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
                       Container(
                           width: 230,
-                          child: Text(
+                          child: const Text(
                             'Drinking bottle (Donor POV)',
                             style: TextStyle(fontSize: 20, height: 1),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                           )),
                       IconButton(
-                          padding: EdgeInsets.all(0),
+                          padding: const EdgeInsets.all(0),
                           onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -84,20 +79,20 @@ class _ChatListCardState extends State<ChatListCard> {
           ],
         ),
       ),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.no_accounts,
                             size: 40,
                           ))
                     ],
                   ),
-                  Divider(
+                  const Divider(
                     thickness: 1.5,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                       ClipRRect(
@@ -111,14 +106,14 @@ class _ChatListCardState extends State<ChatListCard> {
                           // Image.asset("Assets/Images/music_default.png",
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                       Container(
                           width: 230,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 'WaterMelon Sugar',
                                 style: TextStyle(fontSize: 20, height: 1),

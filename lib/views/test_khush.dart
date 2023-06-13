@@ -6,7 +6,7 @@ import 'package:sahara/utils/app_utils.dart';
 
 class TestKhush extends StatelessWidget {
   TestKhush({super.key});
-  final DonationPost donationPost = DonationPost.test();
+  final DonationItem donationPost = DonationItem.test();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

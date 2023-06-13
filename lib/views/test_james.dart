@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:sahara/models/donation_post.dart';
+import 'package:sahara/models/user.dart';
 
-import '../components/deliveryCard.dart';
+import '../components/delivery_card.dart';
 
 class TestJames extends StatelessWidget {
-  const TestJames({super.key});
-
+  TestJames({super.key});
+  final DonationItem item = DonationItem.test();
+  final UserSahara user = UserSahara.test();
+  final arrDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('James View'),),
+      appBar: AppBar(
+        title: const Text(
+          'James View',
+        ),
+      ),
       body: Center(
         child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            inTransitCard('James', '1 Day', 85,5000,'Supasek Dhanabordeephat','0885728260',200,'123/456 Soi Sukhumvit, Khwaeng Khlong Toei, Khet Khlong Toei, Bangkok 10110, Thailand'
-,DateTime.now())
+            InTransitCard(user: user, item: item, arrDate: arrDate)
           ],
         ),
       ),
     );
   }
 }
-

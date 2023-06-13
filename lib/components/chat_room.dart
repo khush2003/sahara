@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ChatRoom extends StatefulWidget {
+class ChatRoom extends StatelessWidget {
   const ChatRoom({super.key});
 
-  @override
-  State<ChatRoom> createState() => _ChatRoomState();
-}
-
-class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,28 +17,28 @@ class _ChatRoomState extends State<ChatRoom> {
             height: 30,
             color: Colors.pink,
           ),
-            Container(width: 200,child: Text('WaterMelon Sugar', style: TextStyle(fontSize: 20),overflow: TextOverflow.ellipsis, maxLines: 1,)),
+            Container(width: 200,child: const Text('WaterMelon Sugar', style: TextStyle(fontSize: 20),overflow: TextOverflow.ellipsis, maxLines: 1,)),
           ]),
         actions: [
           Container(
-            color: Color.fromRGBO(190, 239, 0, 1),
+            color: const Color.fromRGBO(190, 239, 0, 1),
             
             child: TextButton(
   style: TextButton.styleFrom(
-    primary: Colors.black,
-    onSurface: Colors.white,
+    foregroundColor: Colors.black,
+    disabledForegroundColor: Colors.white,
   ),
   onPressed: () {
 
   },
-  child: Text('Give', style: TextStyle(fontSize: 20)),
+  child: const Text('Give', style: TextStyle(fontSize: 20)),
 ),
           )
 
         ],
         ),
 
-        body: Center(child: Text('hi')),
+        body: const Center(child: Text('hi')),
 
     );
   }
