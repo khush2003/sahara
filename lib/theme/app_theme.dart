@@ -13,26 +13,31 @@ TextStyle titleText({Color color = Colors.black}) => TextStyle(
     fontFamily: "Dongle",
     fontWeight: FontWeight.bold,
     fontSize: 36,
+    height: 0.5,
     color: color);
 TextStyle headTextBold({Color color = defaultTextColor}) => TextStyle(
     fontFamily: "Dongle",
     fontWeight: FontWeight.bold,
     fontSize: 32,
+    height: 0.5,
     color: color);
 TextStyle headText({Color color = defaultTextColor}) => TextStyle(
     fontFamily: "Dongle",
     fontWeight: FontWeight.w400,
     fontSize: 32,
+    height: 0.5,
     color: color);
 TextStyle regularTextBold({Color color = defaultTextColor}) => TextStyle(
     fontFamily: "Dongle",
     fontWeight: FontWeight.bold,
     fontSize: 24,
+    height: 0.5,
     color: color);
 TextStyle regularText({Color color = defaultTextColor}) => TextStyle(
     fontFamily: "Dongle",
     fontWeight: FontWeight.w400,
     fontSize: 24,
+    height: 0.5,
     color: color);
 
 ThemeData themedata = ThemeData(
