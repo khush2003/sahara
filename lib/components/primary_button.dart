@@ -24,12 +24,7 @@ class PrimaryButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: primary,
         ),
-        child: Text(text,
-            style: const TextStyle(
-                fontFamily: "Dongle",
-                color: Colors.black,
-                fontSize: 36,
-                fontWeight: FontWeight.w700)),
+        child: Text(text, style: titleText(color: Colors.black, height: 1.5)),
       ),
     );
   }
