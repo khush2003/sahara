@@ -10,7 +10,7 @@ class PrimaryButton extends StatelessWidget {
     required this.text,
   });
 
-  Color mainColor = const Color(0xffFFC736);
+  Color mainColor = const Color(0xff141D3A);
 
   @override
   Widget build(BuildContext context) {

@@ -10,14 +10,27 @@ class TestNote extends StatelessWidget {
         body: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(
-        children: [
-          PrimaryButton(
-            onPressed: () {},
-            text: "POST REVIEW",
+            children: const [
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 310, 0, 0),
+                child: Center(
+                  child: Text("TRANSFORM\nWASTE\nINTO\nWISH",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'Dongle',
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 36,
+                          height: 1,
+                          fontWeight: FontWeight.w400)),
+                ),
+              )
+            ],
           ),
-        ],
-      )),
+        ),
+      ),
     ));
   }
 }
