@@ -9,14 +9,11 @@ class TestJames extends StatelessWidget {
   final DonationItem item = DonationItem.test();
   final UserSahara user = UserSahara.test();
   final arrDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'James View',
-        ),
-      ),
+      appBar: AppBar(title: Text('James View'),),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
