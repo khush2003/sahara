@@ -5,6 +5,7 @@ const secondary = Color(0xffFFE247);
 const sucess = Color(0xff5EF417);
 const danger = Color(0xffFF2525);
 const neutral = Color(0xffF57070);
+const addOn = Color(0xff848484);
 const border = Color(0xffA1A1A1);
 const titleBackground = Color(0xff141D3A);
 const defaultTextColor = Colors.black;
