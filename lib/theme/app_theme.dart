@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-const primary = Color(0xffEAAA37);
+const primary = Color(0xffFFC736);
 const secondary = Color(0xffFFE247);
 const sucess = Color(0xff5EF417);
-const warning = Color(0xffFFC736);
 const danger = Color(0xffFF2525);
 const neutral = Color(0xffF57070);
+const addOn = Color(0xff848484);
 const border = Color(0xffA1A1A1);
 const titleBackground = Color(0xff141D3A);
 const defaultTextColor = Colors.black;
@@ -14,26 +14,31 @@ TextStyle titleText({Color color = Colors.black}) => TextStyle(
     fontFamily: "Dongle",
     fontWeight: FontWeight.bold,
     fontSize: 36,
+    height: 0.5,
     color: color);
 TextStyle headTextBold({Color color = defaultTextColor}) => TextStyle(
     fontFamily: "Dongle",
     fontWeight: FontWeight.bold,
     fontSize: 32,
+    height: 0.5,
     color: color);
 TextStyle headText({Color color = defaultTextColor}) => TextStyle(
     fontFamily: "Dongle",
     fontWeight: FontWeight.w400,
     fontSize: 32,
+    height: 0.5,
     color: color);
 TextStyle regularTextBold({Color color = defaultTextColor}) => TextStyle(
     fontFamily: "Dongle",
     fontWeight: FontWeight.bold,
     fontSize: 24,
+    height: 0.5,
     color: color);
 TextStyle regularText({Color color = defaultTextColor}) => TextStyle(
     fontFamily: "Dongle",
     fontWeight: FontWeight.w400,
     fontSize: 24,
+    height: 0.5,
     color: color);
 
 ThemeData themedata = ThemeData(
@@ -56,21 +61,25 @@ ThemeData themedata = ThemeData(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w500,
         fontSize: 22,
+        height: 0.5,
         color: defaultTextColor),
     displayMedium: TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w500,
         fontSize: 18,
+        height: 0.5,
         color: defaultTextColor),
     displaySmall: TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w500,
         fontSize: 16,
+        height: 0.5,
         color: defaultTextColor),
     bodyMedium: TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w400,
         fontSize: 24,
+        height: 0.5,
         color: defaultTextColor),
   ),
   appBarTheme: const AppBarTheme(
@@ -84,6 +93,7 @@ ThemeData themedata = ThemeData(
         fontFamily: 'Dongle',
         fontWeight: FontWeight.w700,
         fontSize: 32,
+        height: 0.5,
         color: Colors.white),
   ),
 );
