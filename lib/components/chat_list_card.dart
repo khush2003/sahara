@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'chat_room.dart';
+
 class ChatListCard extends StatelessWidget {
   const ChatListCard({super.key});
 
@@ -7,10 +9,8 @@ class ChatListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const ChatRoom()));
+        Get.to(const ChatRoom());
       },
-     
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
@@ -39,8 +39,7 @@ class ChatListCard extends StatelessWidget {
                         width: 12,
                       ),
                       ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(10.0), //or 15.0
+                        borderRadius: BorderRadius.circular(10.0), //or 15.0
                         child: Container(
                           height: 50.0,
                           width: 50.0,
@@ -63,22 +62,25 @@ class ChatListCard extends StatelessWidget {
                       IconButton(
                           padding: const EdgeInsets.all(0),
                           onPressed: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          // title: const Text('AlertDialog Title'),
-          content: const Text('Do you want to block this user?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'Yes'),
-              child: const Text('Yes'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'No'),
-              child: const Text('No'),
-            ),
-          ],
-        ),
-      ),
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  // title: const Text('AlertDialog Title'),
+                                  content: const Text(
+                                      'Do you want to block this user?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'Yes'),
+                                      child: const Text('Yes'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'No'),
+                                      child: const Text('No'),
+                                    ),
+                                  ],
+                                ),
+                              ),
                           icon: const Icon(
                             Icons.no_accounts,
                             size: 40,
@@ -96,8 +98,7 @@ class ChatListCard extends StatelessWidget {
                         width: 12,
                       ),
                       ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(30.0), //or 15.0
+                        borderRadius: BorderRadius.circular(30.0), //or 15.0
                         child: Container(
                           height: 50.0,
                           width: 50.0,
@@ -125,8 +126,7 @@ class ChatListCard extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 20,
                                     height: 1,
-                                    color:
-                                        Color.fromRGBO(150, 150, 150, 1)),
+                                    color: Color.fromRGBO(150, 150, 150, 1)),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
@@ -153,4 +153,3 @@ class ChatListCard extends StatelessWidget {
     );
   }
 }
-

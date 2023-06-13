@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sahara/components/donation_card.dart';
-import 'package:sahara/models/author.dart';
 import 'package:sahara/models/donation_post.dart';
-import 'package:sahara/utils/app_utils.dart';
 
 class TestKhush extends StatelessWidget {
   TestKhush({super.key});
