@@ -255,6 +255,98 @@ class ToReceiveCard extends StatelessWidget {
   }
 }
 
+class DeliveredCard extends StatelessWidget {
+  final DonationItem item;
+  final UserSahara user;
+  final DateTime arrDate;
+
+  const DeliveredCard(
+      {super.key,
+      required this.user,
+      required this.item,
+      required this.arrDate});
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
+            )
+          ],
+          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // First Row
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                        // border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.amberAccent,
+                        image: const DecorationImage(
+                            image: NetworkImage(
+                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
+                  ),
+                  Expanded(
+                    // ignore: avoid_unnecessary_containers
+                    child: ItemDetails(item: item),
+                  )
+                ],
+              ),
+            ),
+            // Black line seperating top inf and bottom info
+            Container(
+              height: 0.5,
+              decoration: const BoxDecoration(color: Colors.black),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DeliveryInformationDelivered(arrDate: arrDate,item: item, user: user)
+            ),
+              Container(
+              height: 0.5,
+              decoration: const BoxDecoration(color: Colors.black),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: (){},
+                 child: Padding(
+                   padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8
+                   ),
+                   child: Text('Review', style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black
+                   ),),
+                 )),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
 
 class DeliveryInformation extends StatelessWidget {
   final DonationItem item;
@@ -285,3 +377,66 @@ class DeliveryInformation extends StatelessWidget {
     );
   }
 }
+
+class DeliveryInformationPickUp extends StatelessWidget {
+  final DonationItem item;
+  final UserSahara user;
+  final DateTime arrDate;
+  const DeliveryInformationPickUp(
+      {super.key,
+      required this.item,
+      required this.user,
+      required this.arrDate});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+            child: const Text(
+          'Delivery Information',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        )),
+        CardRowDesc(label: 'Name', input: user.name),
+        CardRowDesc(label: 'Phone', input: user.phone),
+        CardRowDesc(label: 'Delivery Fee', input: "฿${item.deliveryFees}"),
+        CardRowDesc(label: 'Address', input: user.address),
+        CardRowDesc(label: 'Pick Up Date', input: arrDate.toString())
+      ],
+    );
+  }
+}
+
+class DeliveryInformationDelivered extends StatelessWidget {
+  final DonationItem item;
+  final UserSahara user;
+  final DateTime arrDate;
+  const DeliveryInformationDelivered(
+      {super.key,
+      required this.item,
+      required this.user,
+      required this.arrDate});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+            child: const Text(
+          'Delivery Information',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        )),
+        CardRowDesc(label: 'Name', input: user.name),
+        CardRowDesc(label: 'Phone', input: user.phone),
+        CardRowDesc(label: 'Delivery Fee', input: "฿${item.deliveryFees}"),
+        CardRowDesc(label: 'Address', input: user.address),
+        CardRowDesc(label: 'Expected Arrival Date', input: arrDate.toString()),
+        
+      ],
+    );
+  }
+}
+
+

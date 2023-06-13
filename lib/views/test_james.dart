@@ -24,7 +24,8 @@ class TestJames extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            InTransitCard(user: user, item: item, arrDate: arrDate)
+            // InTransitCard(user: user, item: item, arrDate: arrDate)
+            DeliveredCard(user: user, item: item, arrDate: arrDate)
           ],
         ),
       ),
