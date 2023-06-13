@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
-import 'chatRoom.dart';
-class ChatListCard extends StatefulWidget {
+import 'package:get/get.dart';
+import 'chat_room.dart';
+
+class ChatListCard extends StatelessWidget {
   const ChatListCard({super.key});
 
-  @override
-  State<ChatListCard> createState() => _ChatListCardState();
-}
-
-class _ChatListCardState extends State<ChatListCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ChatRoom()));
+        Get.to(const ChatRoom());
       },
-     
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               side: BorderSide(
                 color: Color.fromRGBO(120, 120, 120, 1),
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
             // clipBehavior is necessary because, without it, the InkWell's animation
             // will extend beyond the rounded edges of the [Card] (see https://github.com/flutter/flutter/issues/109776)
@@ -40,69 +35,70 @@ class _ChatListCardState extends State<ChatListCard> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                       ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(10.0), //or 15.0
+                        borderRadius: BorderRadius.circular(10.0), //or 15.0
                         child: Container(
                           height: 50.0,
                           width: 50.0,
-                          color: Color(0xffFF0E58),
+                          color: const Color(0xffFF0E58),
                           // child: Icon(Icons.volume_up, color: Colors.white, size: 50.0),
                           // Image.asset("Assets/Images/music_default.png",
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
                       Container(
                           width: 230,
-                          child: Text(
+                          child: const Text(
                             'Drinking bottle (Donor POV)',
                             style: TextStyle(fontSize: 20, height: 1),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                           )),
                       IconButton(
-                          padding: EdgeInsets.all(0),
+                          padding: const EdgeInsets.all(0),
                           onPressed: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          // title: const Text('AlertDialog Title'),
-          content: const Text('Do you want to block this user?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'Yes'),
-              child: const Text('Yes'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'No'),
-              child: const Text('No'),
-            ),
-          ],
-        ),
-      ),
-                          icon: Icon(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  // title: const Text('AlertDialog Title'),
+                                  content: const Text(
+                                      'Do you want to block this user?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'Yes'),
+                                      child: const Text('Yes'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'No'),
+                                      child: const Text('No'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                          icon: const Icon(
                             Icons.no_accounts,
                             size: 40,
                           ))
                     ],
                   ),
-                  Divider(
+                  const Divider(
                     thickness: 1.5,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                       ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(30.0), //or 15.0
+                        borderRadius: BorderRadius.circular(30.0), //or 15.0
                         child: Container(
                           height: 50.0,
                           width: 50.0,
@@ -111,14 +107,14 @@ class _ChatListCardState extends State<ChatListCard> {
                           // Image.asset("Assets/Images/music_default.png",
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                       Container(
                           width: 230,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 'WaterMelon Sugar',
                                 style: TextStyle(fontSize: 20, height: 1),
@@ -130,8 +126,7 @@ class _ChatListCardState extends State<ChatListCard> {
                                 style: TextStyle(
                                     fontSize: 20,
                                     height: 1,
-                                    color:
-                                        Color.fromRGBO(150, 150, 150, 1)),
+                                    color: Color.fromRGBO(150, 150, 150, 1)),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
@@ -158,4 +153,3 @@ class _ChatListCardState extends State<ChatListCard> {
     );
   }
 }
-

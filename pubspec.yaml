@@ -88,28 +88,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Gotham
-      fonts:
-        - asset: fonts\GothamBold.ttf
-          weight: 700
-        - asset: fonts/GothamBoldItalic.ttf
-          weight: 700
-          style: italic
-        - asset: fonts/GothamBook.ttf
-          weight: 400
-        - asset: fonts/GothamBookItalic.ttf
-          weight: 400
-          style: italic
-        - asset: fonts/GothamLight.ttf
-          weight: 300
-        - asset: fonts/GothamLightItalic.ttf
-          weight: 300
-          style: italic
-        - asset: fonts/GothamMedium.ttf
-          weight: 500
-        - asset: fonts/GothamMediumItalic.ttf
-          weight: 500
-          style: italic
     - family: Dongle
       fonts:
         - asset: fonts/Dongle-Light.ttf

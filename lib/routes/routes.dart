@@ -21,7 +21,7 @@ abstract class Routes {
 
 final getPages = [
   GetPage(name: Routes.boarding, page: () => const BoardingView()),
-  GetPage(name: Routes.testJames, page: () => const TestJames()),
+  GetPage(name: Routes.testJames, page: () => TestJames()),
   GetPage(name: Routes.testKhush, page: () => TestKhush()),
   GetPage(name: Routes.profile, page: () => const Profile()),
   GetPage(name: Routes.testNote, page: () => const TestNote()),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sahara/components/primaryButton.dart';
+import 'package:sahara/components/primary_button.dart';
 import 'package:sahara/components/textfield.dart';
 
 class TestNote extends StatelessWidget {

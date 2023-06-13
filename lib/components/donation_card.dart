@@ -5,7 +5,7 @@ import 'package:sahara/utils/uni_icon.dart';
 import 'package:unicons/unicons.dart';
 
 class DonationCard extends StatelessWidget {
-  final DonationPost donationPost;
+  final DonationItem donationPost;
 
   const DonationCard({
     super.key,
@@ -30,7 +30,7 @@ class DonationCard extends StatelessWidget {
 }
 
 class DonationDetailSection extends StatelessWidget {
-  final DonationPost donationPost;
+  final DonationItem donationPost;
   const DonationDetailSection({super.key, required this.donationPost});
 
   @override
