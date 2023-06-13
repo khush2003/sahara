@@ -9,11 +9,15 @@ class TestNote extends StatelessWidget {
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(children: const [
-        PrimaryButton(
-          onPressed: null,
-        )
-      ]),
+      child: Center(
+          child: Column(
+        children: [
+          PrimaryButton(
+            onPressed: () {},
+            text: "POST REVIEW",
+          ),
+        ],
+      )),
     ));
   }
 }
