@@ -4,6 +4,11 @@ import 'package:sahara/models/user.dart';
 
 import '../components/delivery_card.dart';
 
+bool showInTransit = true;
+bool showToDeliver = false;
+bool showPickUp = false;
+bool showDelivered = false;
+
 class TestJames extends StatelessWidget {
   TestJames({super.key});
   final DonationItem item = DonationItem.test();
@@ -13,7 +18,7 @@ class TestJames extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('James View'),),
+      appBar: AppBar(title: const Text('James View'),),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
