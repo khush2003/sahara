@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const primary = Color(0xffFFC736);
 const secondary = Color(0xffFFE247);
@@ -12,21 +13,30 @@ const defaultTextColor = Colors.black;
 
 const defaultHeight = 1.0;
 
-TextStyle titleText({Color color = defaultTextColor, double? height = defaultHeight}) =>
+Icon bahtIconRegularText({Color color = defaultTextColor, double? size = 17}) =>
+    Icon(
+      FontAwesomeIcons.bahtSign,
+      color: defaultTextColor,
+      size: size,
+    );
+TextStyle titleText(
+        {Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w700,
         fontSize: 36,
         height: height,
         color: color);
-TextStyle headTextBold({Color color = defaultTextColor, double? height = defaultHeight}) =>
+TextStyle headTextBold(
+        {Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w700,
         fontSize: 32,
         height: height,
         color: color);
-TextStyle headText({Color color = defaultTextColor, double? height = defaultHeight}) =>
+TextStyle headText(
+        {Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w400,
@@ -49,7 +59,8 @@ TextStyle regularTextBold(
         fontSize: 24,
         height: height,
         color: color);
-TextStyle regularText({Color color = defaultTextColor, double? height = defaultHeight}) =>
+TextStyle regularText(
+        {Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w300,

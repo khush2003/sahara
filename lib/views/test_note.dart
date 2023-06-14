@@ -40,15 +40,27 @@ class TestNote extends StatelessWidget {
                       const WidgetSpan(
                         child: Icon(
                           FontAwesomeIcons.bahtSign,
-                          size: 18,
+                          size: 17,
                         ),
                       ),
                       TextSpan(text: "1000", style: regularText()),
                       TextSpan(
-                          text: "\nWOW testing\nHow are you?",
-                          style: regularText()),
+                          text: "\nWOW testing\nHow are yoiil?",
+                          style: titleText(height: 0.6)),
+                      WidgetSpan(
+                        child: bahtIconRegularText(),
+                      ),
+                      TextSpan(text: "1000", style: titleText(height: 0.6)),
                     ],
                   ),
+                ),
+                const Icon(
+                  FontAwesomeIcons.solidBell,
+                  size: 18,
+                ),
+                const Icon(
+                  FontAwesomeIcons.atlassian,
+                  size: 18,
                 ),
               ]),
             ))));
