@@ -29,5 +29,5 @@ final getPages = [
   GetPage(name: Routes.testNote, page: () => const TestNote()),
   GetPage(name: Routes.testPoln, page: () => const TestPoln()),
   GetPage(name: Routes.testFai, page: () => const TestFai()),
-  GetPage(name: Routes.profileView, page: () => const ProfileView()),
+  GetPage(name: Routes.profileView, page: () => ProfileView()),
 ];
