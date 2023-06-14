@@ -10,7 +10,7 @@ const border = Color(0xffA1A1A1);
 const titleBackground = Color(0xff141D3A);
 const defaultTextColor = Colors.black;
 
-const defaultHeight = null;
+const defaultHeight = 1.0;
 
 TextStyle titleText({Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
