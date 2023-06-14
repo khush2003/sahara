@@ -7,6 +7,7 @@ class TextfieldAPP extends StatelessWidget {
   final String hintText;
   final TextStyle textStyle;
   final Color borderColor;
+  late bool? secureText;
 
   TextfieldAPP({
     super.key,
@@ -14,12 +15,14 @@ class TextfieldAPP extends StatelessWidget {
     this.pretext,
     required this.textStyle,
     required this.borderColor,
+    this.secureText,
   });
 
   Color mainColor = lonely;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: secureText ?? false,
       initialValue: pretext,
       style: textStyle,
       decoration: InputDecoration(

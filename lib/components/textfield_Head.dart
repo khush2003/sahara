@@ -7,6 +7,8 @@ class TextfieldWithHead extends StatelessWidget {
   final String hintText;
   final TextStyle textStyle;
   final Color borderColor;
+  final String headText;
+  late bool? secureText;
 
   TextfieldWithHead({
     super.key,
@@ -14,26 +16,40 @@ class TextfieldWithHead extends StatelessWidget {
     this.pretext,
     required this.textStyle,
     required this.borderColor,
+    required this.headText,
+    this.secureText,
   });
 
   Color mainColor = lonely;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 40,
-      child: TextField(
-        style: formFieldText(height: 1.5, color: primary),
-        obscureText: false,
-        decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            enabledBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: borderColor)),
-            labelText: hintText,
-            labelStyle: textStyle.copyWith(color: lonely),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 0)),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          headText,
+          style: headTextBold(),
+          textAlign: TextAlign.left,
+        ),
+        SizedBox(
+          width: double.infinity,
+          height: 40,
+          child: TextField(
+            style: formFieldText(
+              height: 1.5,
+            ),
+            obscureText: secureText ?? false,
+            decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: borderColor)),
+                labelText: hintText,
+                labelStyle: textStyle.copyWith(color: lonely),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 0)),
+          ),
+        ),
+      ],
     );
   }
 }

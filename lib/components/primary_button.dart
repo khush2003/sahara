@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 class PrimaryButton extends StatelessWidget {
-  final Function()? onPressed;
+  final Function() onPressed;
   final String text;
 
   PrimaryButton({
-    super.key,
-    this.onPressed,
+    Key? key,
+    required this.onPressed,
     required this.text,
   });
 
@@ -22,9 +22,11 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: primary,
-        ),
-        child: Text(text, style: titleText(color: Colors.black, height: 1.5)),
+            backgroundColor: primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            )),
+        child: Text(text, style: titleText(color: Colors.black, height: 1.3)),
       ),
     );
   }
