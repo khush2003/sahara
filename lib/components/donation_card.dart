@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahara/components/card_with_shadow.dart';
 import 'package:sahara/models/author.dart';
 import 'package:sahara/models/donation_post.dart';
 import 'package:sahara/utils/uni_icon.dart';
@@ -24,6 +25,7 @@ class DonationCard extends StatelessWidget {
             DonationDetailSection(donationPost: donationPost),
             const Divider(),
             AutherDetailSection(author: donationPost.author),
+            const CardSahara()
           ],
         ));
   }

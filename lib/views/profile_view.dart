@@ -5,12 +5,12 @@ import '../models/donation_post.dart';
 import '../theme/app_theme.dart';
 import 'package:get/get.dart';
 
-import '../controllers/profile_view_controller.dart' as MyTabController;
+import '../controllers/profile_view_controller.dart';
 
 class ProfileView extends StatelessWidget {
   ProfileView({super.key});
-  final MyTabController.CustomTabController _tabController =
-      Get.put(MyTabController.CustomTabController());
+  final CustomTabController _tabController =
+      Get.put(CustomTabController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ProfileView extends StatelessWidget {
               SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 215,
                       child: TopSection(
                         profile:
@@ -48,13 +48,13 @@ class ProfileView extends StatelessWidget {
                       ),
                     ),
                     TabSection(),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Obx(() {
                       if (_tabController.isGiveSelected.value) {
                         return Column(
                           children: [
                             NewAndHistory(),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             _tabController.isNewSelected.value
                                 ? DonatingItem()
                                 : DonatedItem(),
@@ -75,17 +75,17 @@ class ProfileView extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Color.fromARGB(255, 96, 94, 94),
                       ),
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         top: 10,
                         right: 10,
                         bottom: 10,
                         left: 15,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
                         size: 24,
@@ -137,7 +137,7 @@ class TopSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: Color(0xFFBEEF00),
+                      color: const Color(0xFFBEEF00),
                       width: 2,
                     ),
                   ),
@@ -178,10 +178,12 @@ class SocialIcons extends StatelessWidget {
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8), // Set the desired border radius
       side:
-          BorderSide(color: Color(0xfff0eeee)), // Set the desired border color
+          const BorderSide(color: Color(0xfff0eeee)), // Set the desired border color
     ),
-    fixedSize: Size(100, 38),
+    fixedSize: const Size(100, 38),
   );
+
+  SocialIcons({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +199,7 @@ class SocialIcons extends StatelessWidget {
             '../../assets/images/social_icons/facebook.png',
             height: 20,
           ),
-          label: Text('Facebook', style: TextStyle(fontSize: 10)),
+          label: const Text('Facebook', style: TextStyle(fontSize: 10)),
         ),
         ElevatedButton.icon(
           onPressed: () {
@@ -208,7 +210,7 @@ class SocialIcons extends StatelessWidget {
             '../../assets/images/social_icons/instagram.png',
             height: 20,
           ),
-          label: Text('Instagram', style: TextStyle(fontSize: 9)),
+          label: const Text('Instagram', style: TextStyle(fontSize: 9)),
         ),
         ElevatedButton.icon(
           onPressed: () {
@@ -219,7 +221,7 @@ class SocialIcons extends StatelessWidget {
             '../../assets/images/social_icons/twitter.png',
             height: 17,
           ),
-          label: Text('Twitter', style: TextStyle(fontSize: 10)),
+          label: const Text('Twitter', style: TextStyle(fontSize: 10)),
         ),
       ],
     );
@@ -227,8 +229,10 @@ class SocialIcons extends StatelessWidget {
 }
 
 class TabSection extends StatelessWidget {
-  final MyTabController.CustomTabController _tabController =
-      Get.put(MyTabController.CustomTabController());
+  final CustomTabController _tabController =
+      Get.put(CustomTabController());
+
+  TabSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -246,7 +250,7 @@ class TabSection extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: _tabController.isGiveSelected.value
                                 ? Colors.black
-                                : Color(0xff848484),
+                                : const Color(0xff848484),
                           ),
                           textAlign: TextAlign.center)),
                   Visibility(
@@ -271,7 +275,7 @@ class TabSection extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: _tabController.isReceiveSelected.value
                               ? Colors.black
-                              : Color(0xff848484),
+                              : const Color(0xff848484),
                         ),
                         textAlign: TextAlign.center),
                   ),
@@ -292,8 +296,10 @@ class TabSection extends StatelessWidget {
 }
 
 class NewAndHistory extends StatelessWidget {
-  final MyTabController.CustomTabController _tabController =
-      Get.put(MyTabController.CustomTabController());
+  final CustomTabController _tabController =
+      Get.put(CustomTabController());
+
+  NewAndHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -306,16 +312,16 @@ class NewAndHistory extends StatelessWidget {
                 primary: Colors.white,
                 onPrimary: _tabController.isNewSelected.value
                     ? Colors.black
-                    : Color(0xff848484),
+                    : const Color(0xff848484),
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
                       color: _tabController.isNewSelected.value
                           ? Colors.black
-                          : Color(0xff848484)),
+                          : const Color(0xff848484)),
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: SizedBox(
+              child: const SizedBox(
                 width: 120,
                 child: Text(
                   'New',
@@ -332,16 +338,16 @@ class NewAndHistory extends StatelessWidget {
                 primary: Colors.white,
                 onPrimary: _tabController.isHistorySelected.value
                     ? Colors.black
-                    : Color(0xff848484),
+                    : const Color(0xff848484),
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
                       color: _tabController.isHistorySelected.value
                           ? Colors.black
-                          : Color(0xff848484)),
+                          : const Color(0xff848484)),
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: SizedBox(
+              child: const SizedBox(
                 width: 120,
                 child: Text(
                   'History',
@@ -360,6 +366,8 @@ class NewAndHistory extends StatelessWidget {
 // For New Tab
 class DonatingItem extends StatelessWidget {
   final DonationItem donationPost = DonationItem.test();
+
+  DonatingItem({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -376,6 +384,8 @@ class DonatingItem extends StatelessWidget {
 // For History Tab
 class DonatedItem extends StatelessWidget {
   final DonationItem donationPost = DonationItem.test();
+
+  DonatedItem({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -393,6 +403,8 @@ class DonatedItem extends StatelessWidget {
 
 class ReceivedItem extends StatelessWidget {
   final DonationItem donationPost = DonationItem.test();
+
+  ReceivedItem({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(

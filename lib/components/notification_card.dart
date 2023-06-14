@@ -37,8 +37,8 @@ class NotificationCard extends StatelessWidget {
                   const SizedBox(
                     width: 8,
                   ),
-                  const Column(
-                    children: [
+                  Column(
+                    children: const [
                       SizedBox(
                         width: 230,
                         child: Text(

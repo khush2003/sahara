@@ -16,10 +16,7 @@ class TestJames extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: TabBarJames(myuser: user, myitem: item, myarrDate: arrDate,),
-    );
+    return TabBarJames(myitem: item, myuser: user, myarrDate: arrDate);
     
     
     

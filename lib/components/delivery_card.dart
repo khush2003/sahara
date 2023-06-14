@@ -331,8 +331,8 @@ class DeliveredCard extends StatelessWidget {
                     backgroundColor: primary
                   ),
                   onPressed: (){},
-                 child: Padding(
-                   padding: const EdgeInsets.symmetric(
+                 child: const Padding(
+                   padding: EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 8
                    ),

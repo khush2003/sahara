@@ -10,11 +10,11 @@ class TestPoln extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Notification"),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          children: const [
             NotificationCard(),
             NotificationCard(),
         ]),
