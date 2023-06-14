@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sahara/models/donation_post.dart';
 import 'package:sahara/models/user.dart';
+import 'package:sahara/theme/app_theme.dart';
 
 class InTransitCard extends StatelessWidget {
   final DonationItem item;
@@ -181,7 +182,7 @@ class ToDeliverCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: DeliveryInformation(item: item, user: user, arrDate: arrDate)
+              child: DeliveryInformationPickUp(item: item, user: user, arrDate: arrDate)
             )
           ],
         ),
@@ -326,6 +327,9 @@ class DeliveredCard extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Center(
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primary
+                  ),
                   onPressed: (){},
                  child: Padding(
                    padding: const EdgeInsets.symmetric(
