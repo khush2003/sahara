@@ -37,12 +37,14 @@ class Profile extends StatelessWidget {
 class ButtonSection extends StatelessWidget {
   const ButtonSection({super.key});
 
-  Widget _buildStyledButton(
-      {required IconData icon,
-      required Color iconColor,
-      required String label,
-      required Color labelColor,
-      required Color backgroundColor}) {
+  Widget _buildStyledButton({
+    required IconData icon,
+    required Color iconColor,
+    required String label,
+    required Color labelColor,
+    required Color backgroundColor,
+    required VoidCallback onPress,
+  }) {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -55,9 +57,7 @@ class ButtonSection extends StatelessWidget {
         ],
       ),
       child: ElevatedButton.icon(
-        onPressed: () {
-          // Button action
-        },
+        onPressed: onPress,
         icon: Icon(icon, color: iconColor),
         label: Text(
           label,
@@ -91,6 +91,9 @@ class ButtonSection extends StatelessWidget {
                   label: 'Help',
                   labelColor: Colors.black,
                   backgroundColor: Colors.white,
+                  onPress: () {
+                    // Add the desired action for the button here
+                  },
                 ),
               ),
               const SizedBox(width: 10),
@@ -101,6 +104,9 @@ class ButtonSection extends StatelessWidget {
                   label: 'Block',
                   labelColor: Colors.black,
                   backgroundColor: Colors.white,
+                  onPress: () {
+                    Get.toNamed(Routes.blockUsers);
+                  },
                 ),
               ),
             ],
@@ -112,6 +118,9 @@ class ButtonSection extends StatelessWidget {
             label: 'Discount Coupon',
             labelColor: Colors.green,
             backgroundColor: Colors.white,
+            onPress: () {
+              // Add the desired action for the button here
+            },
           ),
           const SizedBox(height: 10),
           _buildStyledButton(
@@ -120,6 +129,9 @@ class ButtonSection extends StatelessWidget {
             label: 'Setting',
             labelColor: Colors.black,
             backgroundColor: Colors.white,
+            onPress: () {
+              // Add the desired action for the button here
+            },
           ),
           const SizedBox(height: 10),
           _buildStyledButton(
@@ -128,6 +140,9 @@ class ButtonSection extends StatelessWidget {
             label: 'Log Out',
             labelColor: Colors.red,
             backgroundColor: Colors.white,
+            onPress: () {
+              // Add the desired action for the button here
+            },
           ),
         ],
       ),
