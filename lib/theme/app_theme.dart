@@ -10,21 +10,23 @@ const border = Color(0xffA1A1A1);
 const titleBackground = Color(0xff141D3A);
 const defaultTextColor = Colors.black;
 
-TextStyle titleText({Color color = defaultTextColor, double height = 0.5}) =>
+const defaultHeight = null;
+
+TextStyle titleText({Color color = defaultTextColor, double height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w700,
         fontSize: 36,
         height: height,
         color: color);
-TextStyle headTextBold({Color color = defaultTextColor, double height = 0.5}) =>
+TextStyle headTextBold({Color color = defaultTextColor, double height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w700,
         fontSize: 32,
         height: height,
         color: color);
-TextStyle headText({Color color = defaultTextColor, double height = 0.5}) =>
+TextStyle headText({Color color = defaultTextColor, double height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w400,
@@ -32,7 +34,7 @@ TextStyle headText({Color color = defaultTextColor, double height = 0.5}) =>
         height: height,
         color: color);
 TextStyle formFieldText(
-        {Color color = defaultTextColor, double height = 0.5}) =>
+        {Color color = defaultTextColor, double height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w300,
@@ -40,14 +42,14 @@ TextStyle formFieldText(
         height: height,
         color: color);
 TextStyle regularTextBold(
-        {Color color = defaultTextColor, double height = 0.5}) =>
+        {Color color = defaultTextColor, double height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w700,
         fontSize: 24,
         height: height,
         color: color);
-TextStyle regularText({Color color = defaultTextColor, double height = 0.5}) =>
+TextStyle regularText({Color color = defaultTextColor, double height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w300,
@@ -75,25 +77,25 @@ ThemeData themedata = ThemeData(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w500,
         fontSize: 22,
-        height: 0.5,
+        height: defaultHeight,
         color: defaultTextColor),
     displayMedium: TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w500,
         fontSize: 18,
-        height: 0.5,
+        height: defaultHeight,
         color: defaultTextColor),
     displaySmall: TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w500,
         fontSize: 16,
-        height: 0.5,
+        height: defaultHeight,
         color: defaultTextColor),
     bodyMedium: TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w400,
         fontSize: 24,
-        height: 0.5,
+        height: defaultHeight,
         color: defaultTextColor),
   ),
   appBarTheme: const AppBarTheme(
@@ -107,7 +109,7 @@ ThemeData themedata = ThemeData(
         fontFamily: 'Dongle',
         fontWeight: FontWeight.w700,
         fontSize: 32,
-        height: 0.5,
+        height: defaultHeight,
         color: Colors.white),
   ),
 );
