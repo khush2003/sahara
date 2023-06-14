@@ -40,7 +40,7 @@ class DonationItem {
         description:
             'I am thrilled to announce a special giveaway of a premium water bottle that is practically brand new! This sleek and stylish hydration company.This sleek and stylish hydration company ',
         imageUrl:
-            'https://img.freepik.com/premium-photo/silver-steel-fridge-model-isolated-white-background_124507-67356.jpg',
+            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
         category: 'Refrigerator',
         itemWidth: 20,
         itemLength: 10,
@@ -50,13 +50,13 @@ class DonationItem {
         usedDuration: const Duration(days: 14),
         useability: 0.80,
         price: 5000,
-        deliveryFees: 500,
+        deliveryFees: 5000,
         tags: ['fridge', 'giveaway'],
         author: Author(
             authorId: '12',
             name: 'James',
             imageUrl:
-                'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg'));
+                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'));
   }
   factory DonationItem.fromJson(Map<String, dynamic> json) {
     return DonationItem(
