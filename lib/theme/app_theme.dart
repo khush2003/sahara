@@ -12,21 +12,21 @@ const defaultTextColor = Colors.black;
 
 const defaultHeight = null;
 
-TextStyle titleText({Color color = defaultTextColor, double height = defaultHeight}) =>
+TextStyle titleText({Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w700,
         fontSize: 36,
         height: height,
         color: color);
-TextStyle headTextBold({Color color = defaultTextColor, double height = defaultHeight}) =>
+TextStyle headTextBold({Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w700,
         fontSize: 32,
         height: height,
         color: color);
-TextStyle headText({Color color = defaultTextColor, double height = defaultHeight}) =>
+TextStyle headText({Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w400,
@@ -34,7 +34,7 @@ TextStyle headText({Color color = defaultTextColor, double height = defaultHeigh
         height: height,
         color: color);
 TextStyle formFieldText(
-        {Color color = defaultTextColor, double height = defaultHeight}) =>
+        {Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w300,
@@ -42,14 +42,14 @@ TextStyle formFieldText(
         height: height,
         color: color);
 TextStyle regularTextBold(
-        {Color color = defaultTextColor, double height = defaultHeight}) =>
+        {Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w700,
         fontSize: 24,
         height: height,
         color: color);
-TextStyle regularText({Color color = defaultTextColor, double height = defaultHeight}) =>
+TextStyle regularText({Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
         fontWeight: FontWeight.w300,
