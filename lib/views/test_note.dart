@@ -26,8 +26,7 @@ class TestNote extends StatelessWidget {
               count++;
             }
             if (count > 500) {
-              print(count);
-              Get.to(() => Routes.login);
+              Get.offAllNamed(Routes.login);
             }
           },
           onVerticalDragEnd: (details) {
