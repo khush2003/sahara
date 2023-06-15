@@ -36,14 +36,21 @@ class DonationCard extends StatelessWidget {
 
 class DonationDetailSection extends StatelessWidget {
   final DonationItem donationPost;
-  const DonationDetailSection({super.key, required this.donationPost});
+  final bool showDescription, showTags;
+  final bool showOverPricedWarning;
+  const DonationDetailSection(
+      {super.key,
+      required this.donationPost,
+      this.showDescription = true,
+      this.showTags = true,
+      this.showOverPricedWarning = false});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (donationPost.isOverPriced)
+        if (donationPost.isOverPriced && showOverPricedWarning)
           WarningOverPriced(
               deliveryFees: donationPost.deliveryFees,
               estimatedItemValue: donationPost.estimatedItemValue),
@@ -71,13 +78,19 @@ class DonationDetailSection extends StatelessWidget {
             )
           ],
         ),
-        const SizedBox(height: 15),
-        Text(
-          'Description',
-          style: regularTextBold(),
-        ),
-        Text(donationPost.description),
-        createTags(donationPost.tags)
+        if (showDescription) const SizedBox(height: 15),
+        if (showDescription)
+          Text(
+            'Description',
+            style: regularTextBold(),
+          ),
+        if (showDescription)
+          Text(
+            donationPost.description,
+            style: const TextStyle(
+                fontWeight: FontWeight.w300, fontSize: 24, height: 0.7),
+          ),
+        if (showTags) createTags(donationPost.tags)
       ],
     );
   }
@@ -207,7 +220,9 @@ class WarningOverPriced extends StatelessWidget {
 
 class AutherDetailSection extends StatelessWidget {
   final Author author;
-  const AutherDetailSection({super.key, required this.author});
+  final bool showChatButton;
+  const AutherDetailSection(
+      {super.key, required this.author, this.showChatButton = true});
 
   @override
   Widget build(BuildContext context) {
@@ -215,9 +230,13 @@ class AutherDetailSection extends StatelessWidget {
       children: [
         ImageThumbnail(imageUrl: author.imageUrl, isCircular: true, size: 45),
         const SizedBox(width: 10),
-        Text(author.name),
+        Text(
+          author.name,
+          style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 32),
+        ),
         const Spacer(),
-        IconButton(onPressed: () {}, icon: const UnIcon(UniconsLine.comment))
+        if (showChatButton)
+          IconButton(onPressed: () {}, icon: const UnIcon(UniconsLine.comment))
       ],
     );
   }
