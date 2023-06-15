@@ -32,7 +32,7 @@ class TextfieldAPP extends StatelessWidget {
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           hintText: hintText,
-          hintStyle: formFieldText(color: lonely)),
+          hintStyle: textStyle.copyWith(color: lonely)),
     );
   }
 }

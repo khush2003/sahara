@@ -18,7 +18,7 @@ class TestNote extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                   child: AspectRatio(
-                    aspectRatio: 2.5,
+                    aspectRatio: 3,
                     child: Image.asset(
                       "assets/images/new_hd_logo.png",
                       fit: BoxFit.contain,
@@ -83,7 +83,7 @@ class TestNote extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 25),
+                        padding: const EdgeInsets.only(top: 20),
                         child: Column(
                           children: [
                             Text("Or Login with",
@@ -101,14 +101,14 @@ class TestNote extends StatelessWidget {
                               Expanded(
                                   child: Image.asset(
                                 "assets/images/GoogleIcon.png",
-                                height: 70,
-                                width: 70,
+                                height: 50,
+                                width: 50,
                               )),
                               Expanded(
                                   child: Image.asset(
                                 "assets/images/FacebookIcon.png",
-                                height: 70,
-                                width: 70,
+                                height: 50,
+                                width: 50,
                               ))
                             ],
                           ),
