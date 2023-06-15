@@ -3,8 +3,8 @@ import 'package:sahara/components/primary_button.dart';
 import 'package:sahara/components/textfield_App.dart';
 import 'package:sahara/theme/app_theme.dart';
 
-class TestNote extends StatelessWidget {
-  const TestNote({Key? key}) : super(key: key);
+class LoginView extends StatelessWidget {
+  const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
