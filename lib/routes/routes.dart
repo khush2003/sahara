@@ -10,6 +10,7 @@ import 'package:sahara/views/test_poln.dart';
 import 'package:sahara/views/test_ulyssus.dart';
 import 'package:sahara/views/profile.dart';
 import 'package:sahara/views/whatIs_view.dart';
+import 'package:sahara/views/Help.dart';
 
 import '../views/block_users.dart';
 import '../views/boarding.dart';
@@ -31,6 +32,7 @@ abstract class Routes {
   static const String whatIs = '/whatIs';
   static const String onboarding = '/onboarding';
   static const String review = '/review';
+  static const String help = '/help';
 }
 
 final getPages = [
@@ -47,5 +49,6 @@ final getPages = [
   GetPage(name: Routes.register, page: () => RegisterView()),
   GetPage(name: Routes.whatIs, page: () => WhatIs()),
   GetPage(name: Routes.onboarding, page: () => OnBoarding()),
-  GetPage(name: Routes.review, page: ()=> ReviewPage())
+  GetPage(name: Routes.review, page: () => ReviewPage()),
+  GetPage(name: Routes.help, page: () => Help())
 ];

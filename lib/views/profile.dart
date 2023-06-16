@@ -92,7 +92,7 @@ class ButtonSection extends StatelessWidget {
                   labelColor: Colors.black,
                   backgroundColor: Colors.white,
                   onPress: () {
-                    // Add the desired action for the button here
+                    Get.toNamed(Routes.help);
                   },
                 ),
               ),

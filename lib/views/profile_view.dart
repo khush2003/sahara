@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../components/donation_card.dart';
 import '../components/receive_card.dart';
+import '../components/review_card.dart';
 import '../models/donation_post.dart';
+import '../models/review.dart';
 import '../theme/app_theme.dart';
 import 'package:get/get.dart';
 
@@ -9,8 +11,7 @@ import '../controllers/profile_view_controller.dart';
 
 class ProfileView extends StatelessWidget {
   ProfileView({super.key});
-  final CustomTabController _tabController =
-      Get.put(CustomTabController());
+  final CustomTabController _tabController = Get.put(CustomTabController());
 
   @override
   Widget build(BuildContext context) {
@@ -177,8 +178,8 @@ class SocialIcons extends StatelessWidget {
     elevation: 3, // Set the desired box shadow elevation
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8), // Set the desired border radius
-      side:
-          const BorderSide(color: Color(0xfff0eeee)), // Set the desired border color
+      side: const BorderSide(
+          color: Color(0xfff0eeee)), // Set the desired border color
     ),
     fixedSize: const Size(100, 38),
   );
@@ -229,8 +230,7 @@ class SocialIcons extends StatelessWidget {
 }
 
 class TabSection extends StatelessWidget {
-  final CustomTabController _tabController =
-      Get.put(CustomTabController());
+  final CustomTabController _tabController = Get.put(CustomTabController());
 
   TabSection({super.key});
 
@@ -296,8 +296,7 @@ class TabSection extends StatelessWidget {
 }
 
 class NewAndHistory extends StatelessWidget {
-  final CustomTabController _tabController =
-      Get.put(CustomTabController());
+  final CustomTabController _tabController = Get.put(CustomTabController());
 
   NewAndHistory({super.key});
 
@@ -403,16 +402,25 @@ class DonatedItem extends StatelessWidget {
 
 class ReceivedItem extends StatelessWidget {
   final DonationItem donationPost = DonationItem.test();
+  final Review review = Review.test();
 
   ReceivedItem({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ReceivedCard(donationPost: donationPost),
-        ReceivedCard(donationPost: donationPost),
-        ReceivedCard(donationPost: donationPost),
-        // Add more DonationCard widgets here as needed
+        ReviewCard(
+          donationPost: donationPost,
+          review: review,
+        ),
+        ReviewCard(
+          donationPost: donationPost,
+          review: review,
+        ),
+        ReviewCard(
+          donationPost: donationPost,
+          review: review,
+        ),
       ],
     );
   }
