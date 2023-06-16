@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sahara/components/primary_button.dart';
 import 'package:sahara/components/textfield_App.dart';
 import 'package:sahara/theme/app_theme.dart';
+import 'package:get/get.dart';
+import '../../../../routes/routes.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class LoginView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                   child: AspectRatio(
-                    aspectRatio: 2.5,
+                    aspectRatio: 3,
                     child: Image.asset(
                       "assets/images/new_hd_logo.png",
                       fit: BoxFit.contain,
@@ -72,7 +74,9 @@ class LoginView extends StatelessWidget {
                           children: [
                             PrimaryButton(text: "Login", onPressed: () {}),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.offAllNamed(Routes.register);
+                                },
                                 child: Text(
                                   "Create an account!",
                                   style: regularText(color: Colors.white)
@@ -83,7 +87,7 @@ class LoginView extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 25),
+                        padding: const EdgeInsets.only(top: 20),
                         child: Column(
                           children: [
                             Text("Or Login with",
@@ -101,14 +105,14 @@ class LoginView extends StatelessWidget {
                               Expanded(
                                   child: Image.asset(
                                 "assets/images/GoogleIcon.png",
-                                height: 70,
-                                width: 70,
+                                height: 50,
+                                width: 50,
                               )),
                               Expanded(
                                   child: Image.asset(
                                 "assets/images/FacebookIcon.png",
-                                height: 70,
-                                width: 70,
+                                height: 50,
+                                width: 50,
                               ))
                             ],
                           ),
@@ -123,7 +127,9 @@ class LoginView extends StatelessWidget {
           Align(
               alignment: Alignment.bottomCenter,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.offAllNamed(Routes.boarding);
+                },
                 child: Text(
                   "What is Sahara?",
                   style: formFieldText(color: primary)

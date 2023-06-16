@@ -37,8 +37,6 @@ final getPages = [
   GetPage(name: Routes.testFai, page: () => const TestFai()),
   GetPage(name: Routes.profileView, page: () => ProfileView()),
   GetPage(name: Routes.blockUsers, page: () => BlockUsers()),
-  GetPage(name: Routes.login, page: () => LoginView()),
+  GetPage(name: Routes.login, page: () => const LoginView()),
   GetPage(name: Routes.register, page: () => RegisterView()),
 ];
-
-

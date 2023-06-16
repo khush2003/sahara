@@ -3,8 +3,8 @@ import 'package:sahara/theme/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:sahara/views/login_view.dart';
 
-class TestNote extends StatelessWidget {
-  TestNote({Key? key}) : super(key: key);
+class OnBoarding extends StatelessWidget {
+  OnBoarding({Key? key}) : super(key: key);
   int count = 0;
   @override
   Widget build(BuildContext context) {
