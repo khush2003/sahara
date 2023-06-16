@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sahara/models/donation_post.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/theme/app_theme.dart';
+
+import '../routes/routes.dart';
 
 class InTransitCard extends StatelessWidget {
   final DonationItem item;
@@ -50,6 +53,8 @@ class InTransitCard extends StatelessWidget {
                             image: NetworkImage(
                                 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
                   ),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 5))
+                  ,
                   Expanded(
                     // ignore: avoid_unnecessary_containers
                     child: ItemDetails(item: item),
@@ -169,6 +174,8 @@ class ToDeliverCard extends StatelessWidget {
                             image: NetworkImage(
                                 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
                   ),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 5))
+                  ,
                   Expanded(
                     child: ItemDetails(item: item)
                   )
@@ -234,6 +241,8 @@ class ToReceiveCard extends StatelessWidget {
                           image: NetworkImage(
                               'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
                 ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 5))
+                  ,
                 Expanded(
                   child: ItemDetails(item: item)
                 )
@@ -303,6 +312,8 @@ class DeliveredCard extends StatelessWidget {
                             image: NetworkImage(
                                 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
                   ),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 5))
+                  ,
                   Expanded(
                     // ignore: avoid_unnecessary_containers
                     child: ItemDetails(item: item),
@@ -330,7 +341,8 @@ class DeliveredCard extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primary
                   ),
-                  onPressed: (){},
+                  onPressed: () => Get.toNamed(Routes.review)
+                  ,
                  child: const Padding(
                    padding: EdgeInsets.symmetric(
                     horizontal: 16,

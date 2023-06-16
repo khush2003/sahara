@@ -55,6 +55,7 @@ class TabBarJames extends StatelessWidget {
       length: 4, 
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: titleBackground,
           // title: Text('Delivery Page'),
           bottom: const TabBar(
@@ -66,14 +67,17 @@ class TabBarJames extends StatelessWidget {
         
           ]),
         ),
-         body: TabBarView(
-            children: [
-              InTransitCard(user: myuser, item: myitem, arrDate: myarrDate),
-              ToDeliverCard(user: myuser, item: myitem, arrDate: myarrDate),
-              ToReceiveCard(item: myitem, user: myuser, arrDate: myarrDate),
-              DeliveredCard(item: myitem, user: myuser,  arrDate: myarrDate)
-            ],
-          ),)
+         body: SizedBox(
+          height: 500,
+           child: TabBarView(
+              children: [
+                InTransitCard(user: myuser, item: myitem, arrDate: myarrDate),
+                ToDeliverCard(user: myuser, item: myitem, arrDate: myarrDate),
+                ToReceiveCard(item: myitem, user: myuser, arrDate: myarrDate),
+                DeliveredCard(item: myitem, user: myuser,  arrDate: myarrDate)
+              ],
+            ),
+         ),)
       );
   }
 }

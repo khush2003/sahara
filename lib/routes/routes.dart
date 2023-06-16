@@ -12,6 +12,7 @@ import 'package:sahara/views/profile.dart';
 import '../views/block_users.dart';
 import '../views/boarding.dart';
 import '../views/profile_view.dart';
+import '../views/review_page.dart';
 
 abstract class Routes {
   static const String boarding = '/boarding';
@@ -25,6 +26,7 @@ abstract class Routes {
   static const String blockUsers = '/blockUsers';
   static const String login = '/login';
   static const String register = '/register';
+  static const String review = '/review';
 }
 
 final getPages = [
@@ -39,4 +41,5 @@ final getPages = [
   GetPage(name: Routes.blockUsers, page: () => BlockUsers()),
   GetPage(name: Routes.login, page: () => const LoginView()),
   GetPage(name: Routes.register, page: () => RegisterView()),
+  GetPage(name: Routes.review, page: ()=> ReviewPage())
 ];
