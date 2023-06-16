@@ -128,7 +128,7 @@ class LoginView extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: TextButton(
                 onPressed: () {
-                  Get.offAllNamed(Routes.boarding);
+                  Get.offAllNamed(Routes.whatIs);
                 },
                 child: Text(
                   "What is Sahara?",

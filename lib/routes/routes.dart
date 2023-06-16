@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sahara/views/login_view.dart';
+import 'package:sahara/views/onboarding_view.dart';
 import 'package:sahara/views/register_view.dart';
 import 'package:sahara/views/test_fai.dart';
 import 'package:sahara/views/test_james.dart';
@@ -8,6 +9,7 @@ import 'package:sahara/views/test_note.dart';
 import 'package:sahara/views/test_poln.dart';
 import 'package:sahara/views/test_ulyssus.dart';
 import 'package:sahara/views/profile.dart';
+import 'package:sahara/views/whatIs_view.dart';
 
 import '../views/block_users.dart';
 import '../views/boarding.dart';
@@ -26,6 +28,8 @@ abstract class Routes {
   static const String blockUsers = '/blockUsers';
   static const String login = '/login';
   static const String register = '/register';
+  static const String whatIs = '/whatIs';
+  static const String onboarding = '/onboarding';
   static const String review = '/review';
 }
 
@@ -41,5 +45,7 @@ final getPages = [
   GetPage(name: Routes.blockUsers, page: () => BlockUsers()),
   GetPage(name: Routes.login, page: () => const LoginView()),
   GetPage(name: Routes.register, page: () => RegisterView()),
+  GetPage(name: Routes.whatIs, page: () => WhatIs()),
+  GetPage(name: Routes.onboarding, page: () => OnBoarding()),
   GetPage(name: Routes.review, page: ()=> ReviewPage())
 ];
