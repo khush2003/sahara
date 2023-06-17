@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sahara/components/primary_button.dart';
-import 'package:sahara/components/textfield_App.dart';
+import 'package:sahara/components/textfield_app.dart';
 import 'package:sahara/theme/app_theme.dart';
 import 'package:get/get.dart';
 import '../../../../routes/routes.dart';
@@ -66,10 +66,10 @@ class _LoginViewState extends State<TestNote> {
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 500),
                         child: _showPageOne == 0
-                            ? PageOne()
+                            ? const PageOne()
                             : _showPageOne == 1
-                                ? PageTwo()
-                                : PageThree(),
+                                ? const PageTwo()
+                                : const PageThree(),
                       ),
                     ],
                   ),
@@ -129,6 +129,8 @@ class _LoginViewState extends State<TestNote> {
 }
 
 class PageOne extends StatelessWidget {
+  const PageOne({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -148,6 +150,8 @@ class PageOne extends StatelessWidget {
 }
 
 class PageTwo extends StatelessWidget {
+  const PageTwo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -167,6 +171,8 @@ class PageTwo extends StatelessWidget {
 }
 
 class PageThree extends StatelessWidget {
+  const PageThree({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(

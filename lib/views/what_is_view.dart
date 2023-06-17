@@ -67,10 +67,10 @@ class _WhatIsState extends State<WhatIs> {
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 500),
                         child: _showPageOne == 0
-                            ? PageOne()
+                            ? const PageOne()
                             : _showPageOne == 1
-                                ? PageTwo()
-                                : PageThree(),
+                                ? const PageTwo()
+                                : const PageThree(),
                       ),
                     ],
                   ),

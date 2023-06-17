@@ -33,13 +33,13 @@ class BlockUsers extends StatelessWidget {
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
               UserProfile(
                 picturePath:
                     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
                 username: 'Gorgeous Girl',
               ),
-              const Spacer(),
+              Spacer(),
               CrossIcon(),
               SizedBox(width: 8)
             ],
@@ -77,7 +77,7 @@ class CrossIcon extends StatelessWidget {
                                 Navigator.of(context).pop();
                               },
                               style: TextButton.styleFrom(
-                                backgroundColor: Color(0xFFffC736),
+                                backgroundColor: const Color(0xFFffC736),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -93,7 +93,7 @@ class CrossIcon extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
                           Expanded(
@@ -105,7 +105,7 @@ class CrossIcon extends StatelessWidget {
                               style: TextButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                       color:
                                           Color.fromARGB(255, 164, 164, 164)),
                                 ),
@@ -127,7 +127,7 @@ class CrossIcon extends StatelessWidget {
               );
             },
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.red,
                 shape: BoxShape.circle,
               ),
@@ -176,7 +176,7 @@ class UserProfile extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               username,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],

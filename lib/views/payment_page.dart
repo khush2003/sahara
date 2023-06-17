@@ -14,16 +14,16 @@ class PaymentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Payment'),
+        title: const Text('Payment'),
       ),
       body: ListView(
         children: [
           CardItemInfo(),
           QRCard(),
-          ImageInput(),
-          Padding(padding: EdgeInsets.all(16)),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const ImageInput(),
+          const Padding(padding: EdgeInsets.all(16)),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: GiveButton(),
           )
         ],
@@ -99,7 +99,7 @@ class ImageInput extends StatelessWidget {
       child: SizedBox(
         height: 200,
         child: OutlinedButton.icon(
-                                    icon: Icon(Icons.image),
+                                    icon: const Icon(Icons.image),
                                  
                                     onPressed: () {},
                                     label: const Text('Add Image'),
@@ -124,13 +124,13 @@ class GiveButton extends StatelessWidget {
     return ElevatedButton(
             onPressed: (){
               showDialog(context: context, builder: (BuildContext context){
-                return AlertDialog(
+                return const AlertDialog(
                   title: Text('Successfully Donate Item'),
                   content: Padding(padding: EdgeInsets.all(16.0), child: Text('Your Item will be delivered soon.'),),
                 );
               });
-          }, child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+          }, child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
             child: Text('Give', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
           )
           );

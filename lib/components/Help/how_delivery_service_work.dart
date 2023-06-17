@@ -7,13 +7,13 @@ class HowDeliveryServiceWorks extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Delivery Services'),
+        title: const Text('Delivery Services'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: const [
             Text(
               'Delivery Services',
               style: TextStyle(

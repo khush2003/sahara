@@ -7,13 +7,13 @@ class ItemPackaging extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Item Packaging'),
+        title: const Text('Item Packaging'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: const [
             Text(
               'Item Packaging',
               style: TextStyle(

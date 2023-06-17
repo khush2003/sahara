@@ -5,13 +5,13 @@ class HowToMeasureYourItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Measure Your Item'),
+        title: const Text('Measure Your Item'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: const [
             Text(
               'How To Measure Your Item',
               style: TextStyle(
@@ -80,16 +80,16 @@ class MeasurementStepWidget extends StatelessWidget {
       children: [
         Text(
           stepNumber,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Expanded(
           child: Text(
             stepDescription,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
             ),
           ),

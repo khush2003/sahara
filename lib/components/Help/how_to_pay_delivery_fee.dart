@@ -5,13 +5,13 @@ class HowToPayDeliveryFee extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pay Delivery Fee'),
+        title: const Text('Pay Delivery Fee'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: const [
             Text(
               'How To Pay Delivery Fee',
               style: TextStyle(
@@ -77,19 +77,19 @@ class PaymentOptionWidget extends StatelessWidget {
       children: [
         Text(
           optionTitle,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           optionDescription,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: steps.map((step) => buildStepWidget(step)).toList(),
@@ -104,18 +104,18 @@ class PaymentOptionWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
+          const Icon(
             Icons.check_circle,
             color: Colors.green,
             size: 18,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(3.0),
               child: Text(
                 step,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                 ),
               ),

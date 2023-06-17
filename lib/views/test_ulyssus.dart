@@ -6,7 +6,7 @@ class TestUlyssus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Hello Ulyssus")),
+        appBar: AppBar(title: const Text("Hello Ulyssus")),
         body: const Center(
           child: Text("Please don't test me."),
         ));

@@ -6,7 +6,7 @@ class HowToDonateUsedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Donate Your Item'),
+        title: const Text('Donate Your Item'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -17,36 +17,36 @@ class HowToDonateUsedItem extends StatelessWidget {
               'How To Donate Used Item?',
               style: headTextBold(),
             ),
-            SizedBox(height: 20),
-            StepWidget(
+            const SizedBox(height: 20),
+            const StepWidget(
               stepNumber: '1',
               stepTitle: 'Upload Item Information',
               stepDescription:
                   'To donate something on our platform, start by uploading the necessary information about the used item. Provide accurate details and include any relevant descriptions or photos.',
             ),
-            SizedBox(height: 20),
-            StepWidget(
+            const SizedBox(height: 20),
+            const StepWidget(
               stepNumber: '2',
               stepTitle: 'Interact with Potential Receivers',
               stepDescription:
                   'After posting your donation, interested receivers will initiate chats with you. Engage in conversations and evaluate the suitability of each receiver for your item. Take your time to decide which receiver you want to give the item to.',
             ),
-            SizedBox(height: 20),
-            StepWidget(
+            const SizedBox(height: 20),
+            const StepWidget(
               stepNumber: '3',
               stepTitle: 'Confirm Donation',
               stepDescription:
                   'Once you have chosen a receiver, click the "Give" button located at the top of the chat window with the selected receiver. This confirms your decision to donate the item to that specific receiver.',
             ),
-            SizedBox(height: 20),
-            StepWidget(
+            const SizedBox(height: 20),
+            const StepWidget(
               stepNumber: '4',
               stepTitle: 'Pay Delivery Fee',
               stepDescription:
                   'There are two options for paying the delivery fee: donor pay or receiver pay. The preferred payment method must be provided when uploading the donation post. Make the necessary payment as instructed to proceed with the delivery process.',
             ),
-            SizedBox(height: 20),
-            StepWidget(
+            const SizedBox(height: 20),
+            const StepWidget(
               stepNumber: '5',
               stepTitle: 'Delivery Process',
               stepDescription:
@@ -79,29 +79,29 @@ class StepWidget extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 18,
-              backgroundColor: Color(0xffffc736),
+              backgroundColor: const Color(0xffffc736),
               child: Text(
                 stepNumber,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               stepTitle,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           stepDescription,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
           ),
         ),

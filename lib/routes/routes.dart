@@ -11,7 +11,7 @@ import 'package:sahara/views/test_khush.dart';
 import 'package:sahara/views/test_note.dart';
 import 'package:sahara/views/test_poln.dart';
 import 'package:sahara/views/profile.dart';
-import 'package:sahara/views/whatIs_view.dart';
+import 'package:sahara/views/what_is_view.dart';
 import 'package:sahara/views/help.dart';
 
 import '../views/block_users.dart';

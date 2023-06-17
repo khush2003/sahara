@@ -138,7 +138,7 @@ class Receiver extends StatelessWidget {
             ImageThumbnail(imageUrl: author.imageUrl),
             Text(author.name),
             const Spacer(),
-            Icon(Icons.star_rate_rounded),
+            const Icon(Icons.star_rate_rounded),
           ],
         ),
         Row(

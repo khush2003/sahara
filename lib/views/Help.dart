@@ -43,12 +43,12 @@ class Help extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              ItemDonation(),
-              SizedBox(
+              const ItemDonation(),
+              const SizedBox(
                 height: 10,
               ),
-              DeliveryService(),
-              SizedBox(height: 10),
+              const DeliveryService(),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Expanded(
@@ -56,17 +56,17 @@ class Help extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ContactUs()),
+                          MaterialPageRoute(builder: (context) => const ContactUs()),
                         );
                       },
-                      label: Text(
+                      label: const Text(
                         'Contact Us',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
                       ),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.contact_phone_outlined,
                         color: Colors.black,
                       ),
@@ -112,7 +112,7 @@ class ItemDonation extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xffffc736),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
@@ -121,10 +121,10 @@ class ItemDonation extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(
+                      padding: EdgeInsets.only(
                         left: 0.0,
                         right: 0.0,
                         top: 8.0,
@@ -153,7 +153,7 @@ class ItemDonation extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () => navigateToTopic(context, 'How to donate used item?'),
-              child: Text(
+              child: const Text(
                 'How to donate used item?',
                 style: TextStyle(decoration: TextDecoration.underline),
               ),
@@ -161,7 +161,7 @@ class ItemDonation extends StatelessWidget {
           ),
           Container(
             height: 1,
-            color: Color(0xff9a9a9a),
+            color: const Color(0xff9a9a9a),
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -173,7 +173,7 @@ class ItemDonation extends StatelessWidget {
             child: GestureDetector(
               onTap: () =>
                   navigateToTopic(context, 'How to measure your item?'),
-              child: Text(
+              child: const Text(
                 'How to measure your item?',
                 style: TextStyle(decoration: TextDecoration.underline),
               ),
@@ -181,7 +181,7 @@ class ItemDonation extends StatelessWidget {
           ),
           Container(
             height: 1,
-            color: Color(0xff9a9a9a),
+            color: const Color(0xff9a9a9a),
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -192,7 +192,7 @@ class ItemDonation extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () => navigateToTopic(context, 'How to pay delivery fee?'),
-              child: Text(
+              child: const Text(
                 'How to pay delivery fee?',
                 style: TextStyle(decoration: TextDecoration.underline),
               ),
@@ -210,12 +210,12 @@ class DeliveryService extends StatelessWidget {
     if (topic == 'How delivery service works?') {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HowDeliveryServiceWorks()),
+        MaterialPageRoute(builder: (context) => const HowDeliveryServiceWorks()),
       );
     } else if (topic == 'Item packaging') {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ItemPackaging()),
+        MaterialPageRoute(builder: (context) => const ItemPackaging()),
       );
     } else if (topic == 'How to pay delivery fee?') {
       Navigator.push(
@@ -236,7 +236,7 @@ class DeliveryService extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xffffc736),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
@@ -245,10 +245,10 @@ class DeliveryService extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(
+                      padding: EdgeInsets.only(
                         left: 0.0,
                         right: 0.0,
                         top: 8.0,
@@ -278,7 +278,7 @@ class DeliveryService extends StatelessWidget {
             child: GestureDetector(
               onTap: () =>
                   navigateToTopic(context, 'How delivery service works?'),
-              child: Text(
+              child: const Text(
                 'How delivery service works?',
                 style: TextStyle(decoration: TextDecoration.underline),
               ),
@@ -286,7 +286,7 @@ class DeliveryService extends StatelessWidget {
           ),
           Container(
             height: 1,
-            color: Color(0xff9a9a9a),
+            color: const Color(0xff9a9a9a),
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -297,7 +297,7 @@ class DeliveryService extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () => navigateToTopic(context, 'Item packaging'),
-              child: Text(
+              child: const Text(
                 'Item packaging',
                 style: TextStyle(decoration: TextDecoration.underline),
               ),

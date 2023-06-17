@@ -4,8 +4,8 @@ import 'package:sahara/theme/app_theme.dart';
 class ContactUs extends StatelessWidget {
   const ContactUs({Key? key});
   Widget buildBulletPoint() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10.0, top: 5),
+    return const Padding(
+      padding: EdgeInsets.only(right: 10.0, top: 5),
       child: Icon(
         Icons.brightness_1,
         size: 8,
@@ -48,32 +48,32 @@ class ContactUs extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildTitle('Our Phone Numbers'),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 buildText('+669-887-332-137'),
                 buildText('+669-739-643-234'),
                 buildText('+669-932-248-242'),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildTitle('Our Email'),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 buildText('sahara.customerservice@sah.com'),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildTitle('Our Address'),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 buildText(
                     'No.442, Pracha Uthit 45, Bangmod, Thung Khru, Bangkok, 10140'),
               ],

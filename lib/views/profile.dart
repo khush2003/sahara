@@ -17,7 +17,7 @@ class Profile extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            ProfileCard(),
+            const ProfileCard(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -198,7 +198,7 @@ class ProfileCard extends StatelessWidget {
                     Get.toNamed(Routes.profileView);
                   },
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Gorgeous Girl',
                       style: headTextBold(),

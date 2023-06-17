@@ -19,12 +19,12 @@ class ReviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Review'),
+        title: const Text('Review'),
       ),
       body: Column(
         children: [
           ReviewCard(user: user, item: item, arrDate: arrDate),
-          Center(
+          const Center(
             child: PostButton()
           )
         ],
@@ -69,8 +69,8 @@ class ReviewCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ItemInfo(item: item)
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: TextField(
                 keyboardType: TextInputType.multiline,
                 maxLines: 4,
@@ -86,7 +86,7 @@ class ReviewCard extends StatelessWidget {
               height: 0.5,
               decoration: const BoxDecoration(color: Colors.black),
             ),
-            PointSlider()
+            const PointSlider()
             
           ],
         ),
@@ -103,13 +103,13 @@ class PostButton extends StatelessWidget {
     return ElevatedButton(
             onPressed: (){
               showDialog(context: context, builder: (BuildContext context){
-                return AlertDialog(
+                return const AlertDialog(
                   title: Text('Successfully Post Review'),
                   content: Padding(padding: EdgeInsets.all(16.0), child: Text('Your Review will be shown in the Feed Page.'),),
                 );
               });
-          }, child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+          }, child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
             child: Text('Post', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
           )
           );
@@ -126,7 +126,7 @@ class PointSlider extends StatefulWidget {
 
 class _PointSliderState extends State<PointSlider> {
 
-  double current_slider_value = 0;
+  double currentSliderValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -139,15 +139,15 @@ class _PointSliderState extends State<PointSlider> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Please rate the item'),
-                Text('${(current_slider_value*2500).round()}'+ '/2500')
+                const Text('Please rate the item'),
+                Text('${(currentSliderValue*2500).round()} /2500')
               ],
             ),
           ),
-          Slider(value: current_slider_value,
+          Slider(value: currentSliderValue,
            onChanged: (double value){
             setState(() {
-              current_slider_value = value;
+              currentSliderValue = value;
             });
            }
            
