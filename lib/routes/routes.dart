@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sahara/components/on_boarding.dart';
+import 'package:sahara/views/FirstVisitPages/onboarding_view.dart';
 import 'package:sahara/views/SettingPages/change_address_view.dart';
 import 'package:sahara/views/SettingPages/change_password_view.dart';
 import 'package:sahara/views/SettingPages/change_phone_number_view.dart';
@@ -18,7 +18,6 @@ import 'package:sahara/views/test_note.dart';
 import 'package:sahara/views/test_poln.dart';
 import 'package:sahara/views/profile.dart';
 import 'package:sahara/views/what_is_view.dart';
-import 'package:sahara/views/FirstVisitPages/whatIs_view.dart';
 import 'package:sahara/views/help.dart';
 
 import '../views/block_users.dart';
@@ -69,7 +68,7 @@ final getPages = [
   GetPage(name: Routes.login, page: () => const LoginView()),
   GetPage(name: Routes.register, page: () => RegisterView()),
   GetPage(name: Routes.whatIs, page: () => WhatIsView()),
-  GetPage(name: Routes.onboarding, page: () => Onboarding()),
+  GetPage(name: Routes.onboarding, page: () => OnBoardingView()),
   GetPage(name: Routes.review, page: () => ReviewPage()),
   GetPage(name: Routes.help, page: () => Help()),
   GetPage(name: Routes.donationDetails, page: () => DonationItemDetailsView()),

@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 
 import 'login_view.dart';
 
-class OnBoarding extends StatefulWidget {
-  OnBoarding({Key? key}) : super(key: key);
+class OnBoardingView extends StatefulWidget {
+  OnBoardingView({Key? key}) : super(key: key);
 
   @override
   _OnBoardingState createState() => _OnBoardingState();
 }
 
-class _OnBoardingState extends State<OnBoarding> {
+class _OnBoardingState extends State<OnBoardingView> {
   int count = 0;
 
   @override
