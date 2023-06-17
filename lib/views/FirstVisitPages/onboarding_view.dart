@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sahara/theme/app_theme.dart';
 import 'package:get/get.dart';
-import 'package:sahara/views/login_view.dart';
+
+import 'login_view.dart';
 
 class OnBoarding extends StatefulWidget {
   OnBoarding({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _OnBoardingState extends State<OnBoarding> {
               Get.offAll(
                 () => const LoginView(),
                 transition: Transition.fade,
-                duration: const Duration(seconds: 3),
+                duration: const Duration(seconds: 2),
               );
             }
           },

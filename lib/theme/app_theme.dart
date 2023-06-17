@@ -16,7 +16,7 @@ const defaultHeight = 1.0;
 Icon bahtIconRegularText({Color color = defaultTextColor, double? size = 17}) =>
     Icon(
       FontAwesomeIcons.bahtSign,
-      color: defaultTextColor,
+      color: color,
       size: size,
     );
 TextStyle titleText(

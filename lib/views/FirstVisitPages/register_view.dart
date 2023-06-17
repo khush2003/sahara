@@ -4,8 +4,8 @@ import 'package:sahara/components/primary_button.dart';
 import 'package:sahara/components/textfield_app.dart';
 import 'package:sahara/theme/app_theme.dart';
 import 'package:get/get.dart';
-import 'package:sahara/views/login_view.dart';
-import '../../../../routes/routes.dart';
+import 'package:sahara/views/FirstVisitPages/login_view.dart';
+import '../../../../../routes/routes.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({Key? key}) : super(key: key);

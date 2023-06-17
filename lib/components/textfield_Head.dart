@@ -33,7 +33,6 @@ class TextfieldWithHead extends StatelessWidget {
         ),
         SizedBox(
           width: double.infinity,
-          height: 40,
           child: TextField(
             style: formFieldText(
               height: 1.5,
@@ -42,7 +41,9 @@ class TextfieldWithHead extends StatelessWidget {
             decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: borderColor)),
+                  borderSide: BorderSide(color: borderColor),
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 labelText: hintText,
                 labelStyle: textStyle.copyWith(color: lonely),
                 contentPadding:

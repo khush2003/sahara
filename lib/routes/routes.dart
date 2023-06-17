@@ -1,10 +1,15 @@
 import 'package:get/get.dart';
+import 'package:sahara/components/on_boarding.dart';
+import 'package:sahara/views/SettingPages/change_address_view.dart';
+import 'package:sahara/views/SettingPages/change_password_view.dart';
+import 'package:sahara/views/SettingPages/change_phone_number_view.dart';
+import 'package:sahara/views/SettingPages/change_username_view.dart';
 import 'package:sahara/views/create_donation.dart';
 import 'package:sahara/views/donation_item_details.dart';
-import 'package:sahara/views/login_view.dart';
-import 'package:sahara/views/onboarding_view.dart';
 import 'package:sahara/views/payment_page.dart';
-import 'package:sahara/views/register_view.dart';
+import 'package:sahara/views/FirstVisitPages/login_view.dart';
+import 'package:sahara/views/SettingPages/profile_setting_view.dart';
+import 'package:sahara/views/FirstVisitPages/register_view.dart';
 import 'package:sahara/views/test_fai.dart';
 import 'package:sahara/views/test_james.dart';
 import 'package:sahara/views/test_khush.dart';
@@ -12,6 +17,7 @@ import 'package:sahara/views/test_note.dart';
 import 'package:sahara/views/test_poln.dart';
 import 'package:sahara/views/profile.dart';
 import 'package:sahara/views/what_is_view.dart';
+import 'package:sahara/views/FirstVisitPages/whatIs_view.dart';
 import 'package:sahara/views/help.dart';
 
 import '../views/block_users.dart';
@@ -40,6 +46,11 @@ abstract class Routes {
   static const String payment = '/payment';
   static const String donationDetails = '/donationDetails';
    static const String reviewDetails = '/reviewDetails';
+  static const String profileSetting = '/profileSetting';
+  static const String changeUsername = '/changeUsername';
+  static const String changePhoneNumber = '/changePhoneNumber';
+  static const String changeAddress = '/changeAddress';
+  static const String changePassword = '/changePassword';
 }
 
 final getPages = [
@@ -55,11 +66,17 @@ final getPages = [
   GetPage(name: Routes.blockUsers, page: () => BlockUsers()),
   GetPage(name: Routes.login, page: () => const LoginView()),
   GetPage(name: Routes.register, page: () => RegisterView()),
-  GetPage(name: Routes.whatIs, page: () => WhatIs()),
-  GetPage(name: Routes.onboarding, page: () => OnBoarding()),
+  GetPage(name: Routes.whatIs, page: () => WhatIsView()),
+  GetPage(name: Routes.onboarding, page: () => Onboarding()),
   GetPage(name: Routes.review, page: () => ReviewPage()),
   GetPage(name: Routes.help, page: () => Help()),
   GetPage(name: Routes.donationDetails, page: () =>  DonationItemDetailsView()),
   GetPage(name: Routes.payment, page: () => PaymentPage()),
   GetPage(name: Routes.reviewDetails, page: () =>  ReviewPostDetailsView()),
+  GetPage(name: Routes.donationDetails, page: () => DonationItemDetailsView()),
+  GetPage(name: Routes.profileSetting, page: () => ProfileSettingView()),
+  GetPage(name: Routes.changeUsername, page: () => ChangeUsernameView()),
+  GetPage(name: Routes.changePhoneNumber, page: () => ChangePhoneNumberView()),
+  GetPage(name: Routes.changeAddress, page: () => ChangeAddressView()),
+  GetPage(name: Routes.changePassword, page: () => ChangePasswordView())
 ];

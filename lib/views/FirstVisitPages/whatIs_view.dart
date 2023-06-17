@@ -5,16 +5,17 @@ import '../../../../../routes/routes.dart';
 // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class WhatIsView extends StatefulWidget {
-  const WhatIsView({super.key});
+class WhatIs extends StatefulWidget {
+  const WhatIs({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
   _WhatIsState createState() => _WhatIsState();
 }
 
-class _WhatIsState extends State<WhatIsView> {
+class _WhatIsState extends State<WhatIs> {
   int _showPageOne = 0;
+  
 
   bool isPageOne = false;
   bool isPageTwo = false;
