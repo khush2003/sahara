@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../routes/routes.dart';
-import '../theme/app_theme.dart';
+import 'package:sahara/theme/app_theme.dart';
 
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,6 @@ class BlockUsers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //why aren't there any back button. WTH
       appBar: AppBar(
         title: const Text('Block Users'),
       ),
@@ -66,9 +65,9 @@ class CrossIcon extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('Confirm'),
-                    content: const Text(
-                        'Are you sure you want to unblock this user?'),
+                    //title: const Text('Confirm'),
+                    title: Text('Are you sure you want to unblock this user?',
+                        style: headTextBold()),
                     actions: [
                       Row(
                         children: [
@@ -83,10 +82,11 @@ class CrossIcon extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: const Text(
-                                'Unblock',
-                                style: TextStyle(
-                                  color: Colors.black,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  'Unblock',
+                                  style: headText(),
                                 ),
                               ),
                             ),
@@ -110,10 +110,11 @@ class CrossIcon extends StatelessWidget {
                                           Color.fromARGB(255, 164, 164, 164)),
                                 ),
                               ),
-                              child: const Text(
-                                'Cancel',
-                                style: TextStyle(
-                                  color: Colors.black,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  'Cancel',
+                                  style: headText(),
                                 ),
                               ),
                             ),
