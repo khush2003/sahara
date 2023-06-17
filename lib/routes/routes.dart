@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:sahara/views/create_donation.dart';
 import 'package:sahara/views/login_view.dart';
 import 'package:sahara/views/onboarding_view.dart';
+import 'package:sahara/views/payment_page.dart';
 import 'package:sahara/views/register_view.dart';
 import 'package:sahara/views/test_fai.dart';
 import 'package:sahara/views/test_james.dart';
@@ -34,6 +35,7 @@ abstract class Routes {
   static const String review = '/review';
   static const String help = '/help';
   static const String createDonation = '/createDonation';
+  static const String payment = '/payment';
 }
 
 final getPages = [
@@ -52,5 +54,6 @@ final getPages = [
   GetPage(name: Routes.whatIs, page: () => WhatIs()),
   GetPage(name: Routes.onboarding, page: () => OnBoarding()),
   GetPage(name: Routes.review, page: () => ReviewPage()),
-  GetPage(name: Routes.help, page: () => Help())
+  GetPage(name: Routes.help, page: () => Help()),
+  GetPage(name: Routes.payment, page: () => PaymentPage())
 ];

@@ -4,7 +4,7 @@ import 'package:sahara/models/donation_post.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/theme/app_theme.dart';
 
-import '../routes/routes.dart';
+import '../../routes/routes.dart';
 
 class InTransitCard extends StatelessWidget {
   final DonationItem item;
@@ -40,26 +40,7 @@ class InTransitCard extends StatelessWidget {
             // First Row
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                        // border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.amberAccent,
-                        image: const DecorationImage(
-                            image: NetworkImage(
-                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
-                  ),
-                  const Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
-                  Expanded(
-                    // ignore: avoid_unnecessary_containers
-                    child: ItemDetails(item: item),
-                  )
-                ],
-              ),
+              child: ItemInfo(item: item)
             ),
             // Black line seperating top inf and bottom info
             Container(
@@ -163,23 +144,7 @@ class ToDeliverCard extends StatelessWidget {
             // First Row
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                        // border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.amberAccent,
-                        image: const DecorationImage(
-                            image: NetworkImage(
-                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
-                  ),
-                  const Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
-                  Expanded(child: ItemDetails(item: item))
-                ],
-              ),
+              child: ItemInfo(item: item)
             ),
             // Black line seperating top inf and bottom info
             Container(
@@ -231,23 +196,7 @@ class ToReceiveCard extends StatelessWidget {
             // First Row
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                        // border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.amberAccent,
-                        image: const DecorationImage(
-                            image: NetworkImage(
-                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
-                  ),
-                  const Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
-                  Expanded(child: ItemDetails(item: item))
-                ],
-              ),
+              child: ItemInfo(item: item)
             ),
             // Black line seperating top inf and bottom info
             Container(
@@ -299,26 +248,7 @@ class DeliveredCard extends StatelessWidget {
             // First Row
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                        // border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.amberAccent,
-                        image: const DecorationImage(
-                            image: NetworkImage(
-                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
-                  ),
-                  const Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
-                  Expanded(
-                    // ignore: avoid_unnecessary_containers
-                    child: ItemDetails(item: item),
-                  )
-                ],
-              ),
+              child: ItemInfo(item: item)
             ),
             // Black line seperating top inf and bottom info
             Container(
@@ -444,5 +374,34 @@ class DeliveryInformationDelivered extends StatelessWidget {
         CardRowDesc(label: 'Expected Arrival Date', input: arrDate.toString()),
       ],
     );
+  }
+}
+
+class ItemInfo extends StatelessWidget {
+  final DonationItem item;
+  const ItemInfo({super.key, required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+                children: [
+                  Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                        // border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.amberAccent,
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                item.imageUrl))),
+                  ),
+                  const Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
+                  Expanded(
+                    // ignore: avoid_unnecessary_containers
+                    child: ItemDetails(item: item),
+                  )
+                ],
+              );
   }
 }
