@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../../routes/routes.dart';
 
 class ChatRoom extends StatelessWidget {
   const ChatRoom({super.key});
@@ -29,7 +33,7 @@ class ChatRoom extends StatelessWidget {
     disabledForegroundColor: Colors.white,
   ),
   onPressed: () {
-
+    Get.toNamed(Routes.payment);
   },
   child: const Text('Give', style: TextStyle(fontSize: 20)),
 ),

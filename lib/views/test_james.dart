@@ -4,7 +4,7 @@ import 'package:sahara/models/donation_post.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/theme/app_theme.dart';
 
-import '../components/delivery_card.dart';
+import '../components/DeliveryPage/delivery_card.dart';
 
 
 

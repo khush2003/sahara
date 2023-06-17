@@ -16,85 +16,88 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: ScrollConfiguration(
-          behavior: ScrollConfiguration.of(context).copyWith(
-            scrollbars: false,
-          ),
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 215,
-                      child: TopSection(
-                        profile:
-                            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                        cover:
-                            'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFuZHNjYXBlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60',
-                        username: 'Gorgeous Owl',
-                        email: 'johndoe@example.com',
+      body: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(
+          scrollbars: false,
+        ),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 215,
+                    child: TopSection(
+                      profile:
+                          'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                      cover:
+                          'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFuZHNjYXBlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60',
+                      username: 'Gorgeous Owl',
+                      email: 'johndoe@example.com',
+                    ),
+                  ),
+                  SocialIcons(),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      height: 0.5,
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 161, 158, 158),
                       ),
                     ),
-                    SocialIcons(),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Container(
-                        height: 0.5,
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 161, 158, 158),
-                        ),
-                      ),
-                    ),
-                    TabSection(),
-                    const SizedBox(height: 10),
-                    Obx(() {
-                      if (_tabController.isGiveSelected.value) {
-                        return Column(
+                  ),
+                  TabSection(),
+                  const SizedBox(height: 10),
+                  Obx(() {
+                    if (_tabController.isGiveSelected.value) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
                           children: [
                             NewAndHistory(),
                             const SizedBox(height: 10),
                             _tabController.isNewSelected.value
                                 ? DonatingItem()
-                                : DonatedItem(),
+                                : ReceivedItem(),
                           ],
-                        );
-                      } else {
-                        return ReceivedItem();
-                      }
-                    }),
-                  ],
-                ),
+                        ),
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ReceivedItem(),
+                      );
+                    }
+                  }),
+                ],
               ),
-              Positioned(
-                  top: 16,
-                  left: 16,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color.fromARGB(255, 96, 94, 94),
-                      ),
-                      padding: const EdgeInsets.only(
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                        left: 15,
-                      ),
-                      child: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                        size: 24,
-                      ),
+            ),
+            Positioned(
+                top: 16,
+                left: 16,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color.fromARGB(255, 96, 94, 94),
                     ),
-                  ))
-            ],
-          ),
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      right: 10,
+                      bottom: 10,
+                      left: 15,
+                    ),
+                    child: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  ),
+                ))
+          ],
         ),
       ),
     );
@@ -188,43 +191,46 @@ class SocialIcons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ElevatedButton.icon(
-          onPressed: () {
-            // Handle button press
-          },
-          style: buttonStyle,
-          icon: Image.asset(
-            '../../assets/images/social_icons/facebook.png',
-            height: 20,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ElevatedButton.icon(
+            onPressed: () {
+              // Handle button press
+            },
+            style: buttonStyle,
+            icon: Image.asset(
+              '../../assets/images/social_icons/facebook.png',
+              height: 20,
+            ),
+            label: const Text('Facebook', style: TextStyle(fontSize: 10)),
           ),
-          label: const Text('Facebook', style: TextStyle(fontSize: 10)),
-        ),
-        ElevatedButton.icon(
-          onPressed: () {
-            // Handle button press
-          },
-          style: buttonStyle,
-          icon: Image.asset(
-            '../../assets/images/social_icons/instagram.png',
-            height: 20,
+          ElevatedButton.icon(
+            onPressed: () {
+              // Handle button press
+            },
+            style: buttonStyle,
+            icon: Image.asset(
+              '../../assets/images/social_icons/instagram.png',
+              height: 20,
+            ),
+            label: const Text('Instagram', style: TextStyle(fontSize: 9)),
           ),
-          label: const Text('Instagram', style: TextStyle(fontSize: 9)),
-        ),
-        ElevatedButton.icon(
-          onPressed: () {
-            // Handle button press
-          },
-          style: buttonStyle,
-          icon: Image.asset(
-            '../../assets/images/social_icons/twitter.png',
-            height: 17,
+          ElevatedButton.icon(
+            onPressed: () {
+              // Handle button press
+            },
+            style: buttonStyle,
+            icon: Image.asset(
+              '../../assets/images/social_icons/twitter.png',
+              height: 17,
+            ),
+            label: const Text('Twitter', style: TextStyle(fontSize: 10)),
           ),
-          label: const Text('Twitter', style: TextStyle(fontSize: 10)),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -381,24 +387,24 @@ class DonatingItem extends StatelessWidget {
 }
 
 // For History Tab
-class DonatedItem extends StatelessWidget {
-  final DonationItem donationPost = DonationItem.test();
+// class DonatedItem extends StatelessWidget {
+//   final DonationItem donationPost = DonationItem.test();
 
-  DonatedItem({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        DonationCard(donationPost: donationPost),
-        DonationCard(donationPost: donationPost),
-        DonationCard(donationPost: donationPost),
-        // Add more DonationCard widgets here as needed
-      ],
-    );
-  }
-}
+//   DonatedItem({super.key});
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         DonationCard(donationPost: donationPost),
+//         DonationCard(donationPost: donationPost),
+//         DonationCard(donationPost: donationPost),
+//         // Add more DonationCard widgets here as needed
+//       ],
+//     );
+//   }
+// }
 
-// For Receive Tab
+// For History and Receive Tabs
 
 class ReceivedItem extends StatelessWidget {
   final DonationItem donationPost = DonationItem.test();

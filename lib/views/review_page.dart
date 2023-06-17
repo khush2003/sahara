@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../components/delivery_card.dart';
+import '../components/DeliveryPage/delivery_card.dart';
 import '../models/donation_post.dart';
 import '../models/user.dart';
 
@@ -67,27 +67,7 @@ class ReviewCard extends StatelessWidget {
             // First Row
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                        // border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.amberAccent,
-                        image: const DecorationImage(
-                            image: NetworkImage(
-                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
-                  ),
-                  Padding(padding: EdgeInsets.symmetric(horizontal: 5))
-                  ,
-                  Expanded(
-                    // ignore: avoid_unnecessary_containers
-                    child: ItemDetails(item: item),
-                  )
-                ],
-              ),
+              child: ItemInfo(item: item)
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
