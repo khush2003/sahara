@@ -5,8 +5,8 @@ import 'package:sahara/theme/app_theme.dart';
 
 import '../components/coupon_card.dart';
 
-class TestNote extends StatelessWidget {
-  const TestNote({super.key});
+class CouponView extends StatelessWidget {
+  const CouponView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -25,13 +25,13 @@ class BoardingView extends StatelessWidget {
           Column(
             children: [
               ElevatedButton(
-                  onPressed: () => Get.toNamed(Routes.testNote),
+                  onPressed: () => Get.toNamed(Routes.onboarding),
                   child: const Text('Test Note_Onboarding')),
               ElevatedButton(
-                  onPressed: () => Get.toNamed(Routes.testNote),
+                  onPressed: () => Get.toNamed(Routes.coupon),
                   child: const Text('Test Note_Coupon')),
               ElevatedButton(
-                  onPressed: () => Get.toNamed(Routes.testNote),
+                  onPressed: () => Get.toNamed(Routes.profileSetting),
                   child: const Text('Test Note_Setting'))
             ],
           ),

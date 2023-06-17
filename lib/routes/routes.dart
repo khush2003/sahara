@@ -4,6 +4,7 @@ import 'package:sahara/views/SettingPages/change_address_view.dart';
 import 'package:sahara/views/SettingPages/change_password_view.dart';
 import 'package:sahara/views/SettingPages/change_phone_number_view.dart';
 import 'package:sahara/views/SettingPages/change_username_view.dart';
+import 'package:sahara/views/coupon_view.dart';
 import 'package:sahara/views/create_donation.dart';
 import 'package:sahara/views/donation_item_details.dart';
 import 'package:sahara/views/payment_page.dart';
@@ -45,12 +46,13 @@ abstract class Routes {
   static const String createDonation = '/createDonation';
   static const String payment = '/payment';
   static const String donationDetails = '/donationDetails';
-   static const String reviewDetails = '/reviewDetails';
+  static const String reviewDetails = '/reviewDetails';
   static const String profileSetting = '/profileSetting';
   static const String changeUsername = '/changeUsername';
   static const String changePhoneNumber = '/changePhoneNumber';
   static const String changeAddress = '/changeAddress';
   static const String changePassword = '/changePassword';
+  static const String coupon = '/coupon';
 }
 
 final getPages = [
@@ -70,13 +72,14 @@ final getPages = [
   GetPage(name: Routes.onboarding, page: () => Onboarding()),
   GetPage(name: Routes.review, page: () => ReviewPage()),
   GetPage(name: Routes.help, page: () => Help()),
-  GetPage(name: Routes.donationDetails, page: () =>  DonationItemDetailsView()),
+  GetPage(name: Routes.donationDetails, page: () => DonationItemDetailsView()),
   GetPage(name: Routes.payment, page: () => PaymentPage()),
-  GetPage(name: Routes.reviewDetails, page: () =>  ReviewPostDetailsView()),
+  GetPage(name: Routes.reviewDetails, page: () => ReviewPostDetailsView()),
   GetPage(name: Routes.donationDetails, page: () => DonationItemDetailsView()),
   GetPage(name: Routes.profileSetting, page: () => ProfileSettingView()),
   GetPage(name: Routes.changeUsername, page: () => ChangeUsernameView()),
   GetPage(name: Routes.changePhoneNumber, page: () => ChangePhoneNumberView()),
   GetPage(name: Routes.changeAddress, page: () => ChangeAddressView()),
-  GetPage(name: Routes.changePassword, page: () => ChangePasswordView())
+  GetPage(name: Routes.changePassword, page: () => ChangePasswordView()),
+  GetPage(name: Routes.coupon, page: () => CouponView())
 ];
