@@ -24,18 +24,9 @@ class ReviewPage extends StatelessWidget {
       body: Column(
         children: [
           ReviewCard(user: user, item: item, arrDate: arrDate),
-          Center(child: ElevatedButton(
-            onPressed: (){
-              showDialog(context: context, builder: (BuildContext context){
-                return AlertDialog(
-                  title: Text('Successfully Post Review'),
-                  content: Padding(padding: EdgeInsets.all(16.0), child: Text('Your Review will be shown in the Feed Page.'),),
-                );
-              });
-          }, child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
-            child: Text('Post', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
-          )))
+          Center(
+            child: PostButton()
+          )
         ],
       ),
     );
@@ -115,9 +106,73 @@ class ReviewCard extends StatelessWidget {
               height: 0.5,
               decoration: const BoxDecoration(color: Colors.black),
             ),
+            PointSlider()
             
           ],
         ),
+      ),
+    );
+  }
+}
+
+class PostButton extends StatelessWidget {
+  const PostButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+            onPressed: (){
+              showDialog(context: context, builder: (BuildContext context){
+                return AlertDialog(
+                  title: Text('Successfully Post Review'),
+                  content: Padding(padding: EdgeInsets.all(16.0), child: Text('Your Review will be shown in the Feed Page.'),),
+                );
+              });
+          }, child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+            child: Text('Post', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
+          )
+          );
+  }
+}
+
+
+class PointSlider extends StatefulWidget {
+  const PointSlider({super.key});
+
+  @override
+  State<PointSlider> createState() => _PointSliderState();
+}
+
+class _PointSliderState extends State<PointSlider> {
+
+  double current_slider_value = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Please rate the item'),
+                Text('${(current_slider_value*2500).round()}'+ '/2500')
+              ],
+            ),
+          ),
+          Slider(value: current_slider_value,
+           onChanged: (double value){
+            setState(() {
+              current_slider_value = value;
+            });
+           }
+           
+           ),
+        ],
       ),
     );
   }
