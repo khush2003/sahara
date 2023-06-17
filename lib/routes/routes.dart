@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sahara/views/create_donation.dart';
 import 'package:sahara/views/login_view.dart';
 import 'package:sahara/views/onboarding_view.dart';
 import 'package:sahara/views/register_view.dart';
@@ -7,10 +8,9 @@ import 'package:sahara/views/test_james.dart';
 import 'package:sahara/views/test_khush.dart';
 import 'package:sahara/views/test_note.dart';
 import 'package:sahara/views/test_poln.dart';
-import 'package:sahara/views/test_ulyssus.dart';
 import 'package:sahara/views/profile.dart';
 import 'package:sahara/views/whatIs_view.dart';
-import 'package:sahara/views/Help.dart';
+import 'package:sahara/views/help.dart';
 
 import '../views/block_users.dart';
 import '../views/boarding.dart';
@@ -33,6 +33,7 @@ abstract class Routes {
   static const String onboarding = '/onboarding';
   static const String review = '/review';
   static const String help = '/help';
+  static const String createDonation = '/createDonation';
 }
 
 final getPages = [
@@ -41,6 +42,7 @@ final getPages = [
   GetPage(name: Routes.testKhush, page: () => TestKhush()),
   GetPage(name: Routes.profile, page: () => const Profile()),
   GetPage(name: Routes.testNote, page: () => TestNote()),
+  GetPage(name: Routes.createDonation, page: () => CreateDonationView()),
   GetPage(name: Routes.testPoln, page: () => const TestPoln()),
   GetPage(name: Routes.testFai, page: () => const TestFai()),
   GetPage(name: Routes.profileView, page: () => ProfileView()),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../components/donation_card.dart';
+import '../components/Feed/donation_card.dart';
 import '../components/receive_card.dart';
-import '../components/review_card.dart';
+import '../components/Feed/review_card.dart';
 import '../models/donation_post.dart';
 import '../models/review.dart';
 import '../theme/app_theme.dart';

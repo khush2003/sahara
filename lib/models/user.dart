@@ -1,10 +1,11 @@
 class UserSahara {
-  final String name, phone, address;
-  UserSahara(
-      {required this.name,
-      required this.phone,
-      required this.address,
-    });
+  final String name;
+  final String? phone, address;
+  UserSahara({
+    required this.name,
+    this.phone,
+    this.address,
+  });
   factory UserSahara.test() {
     return UserSahara(
         name: 'James',
