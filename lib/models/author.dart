@@ -8,6 +8,14 @@ class Author {
     required this.imageUrl,
   });
 
+  factory Author.test() {
+    return Author(
+      authorId: '1',
+      name: 'John Doe',
+      imageUrl: 'https://picsum.photos/200',
+    );
+  }
+
   factory Author.fromJson(Map<String, dynamic> json) {
     return Author(
       authorId: json['authorId'],

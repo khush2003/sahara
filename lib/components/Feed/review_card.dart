@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sahara/components/Feed/author_detail_section.dart';
+import 'package:sahara/components/Feed/donation_details_section.dart';
 import 'package:sahara/components/card_with_shadow.dart';
+import 'package:sahara/components/image_thumbnail.dart';
 import 'package:sahara/models/donation_post.dart';
 
 import '../../models/review.dart';
-import 'donation_card.dart';
 
 class ReviewCard extends StatelessWidget {
   final DonationItem donationPost;
