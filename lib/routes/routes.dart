@@ -17,6 +17,7 @@ import '../views/block_users.dart';
 import '../views/boarding.dart';
 import '../views/profile_view.dart';
 import '../views/review_page.dart';
+import '../views/review_post_details.dart';
 
 abstract class Routes {
   static const String boarding = '/boarding';
@@ -36,6 +37,7 @@ abstract class Routes {
   static const String help = '/help';
   static const String createDonation = '/createDonation';
   static const String donationDetails = '/donationDetails';
+   static const String reviewDetails = '/reviewDetails';
 }
 
 final getPages = [
@@ -55,5 +57,6 @@ final getPages = [
   GetPage(name: Routes.onboarding, page: () => OnBoarding()),
   GetPage(name: Routes.review, page: () => ReviewPage()),
   GetPage(name: Routes.help, page: () => Help()),
-  GetPage(name: Routes.donationDetails, page: () =>  DonationItemDetailsView())
+  GetPage(name: Routes.donationDetails, page: () =>  DonationItemDetailsView()),
+  GetPage(name: Routes.reviewDetails, page: () =>  ReviewPostDetailsView()),
 ];

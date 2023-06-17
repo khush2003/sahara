@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sahara/components/Feed/author_detail_section.dart';
 import 'package:sahara/components/Feed/donation_details_section.dart';
 import 'package:sahara/components/card_with_shadow.dart';
 import 'package:sahara/components/image_thumbnail.dart';
 import 'package:sahara/models/donation_post.dart';
+import 'package:sahara/routes/routes.dart';
 
 import '../../models/review.dart';
 
@@ -20,34 +22,36 @@ class ReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardSahara(
+        onPressed: () => Get.toNamed(Routes.reviewDetails),
         child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 10),
-          AutherDetailSection(
-            author: donationPost.author,
-            showChatButton: false,
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 10),
+              AutherDetailSection(
+                author: donationPost.author,
+                showChatButton: false,
+              ),
+              const Divider(),
+              DonationDetailSection(
+                  showOverPricedWarning: false,
+                  donationPost: donationPost,
+                  showDescription: false,
+                  showTags: false),
+              const Divider(),
+              ReviewSection(review: review, maxLines: 3),
+              const SizedBox(height: 5)
+            ],
           ),
-          const Divider(),
-          DonationDetailSection(
-              showOverPricedWarning: false,
-              donationPost: donationPost,
-              showDescription: false,
-              showTags: false),
-          const Divider(),
-          ReviewSection(review: review),
-          const SizedBox(height: 5)
-        ],
-      ),
-    ));
+        ));
   }
 }
 
 class ReviewSection extends StatelessWidget {
+  final int? maxLines;
   final Review review;
-  const ReviewSection({super.key, required this.review});
+  const ReviewSection({super.key, required this.review, this.maxLines});
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +75,8 @@ class ReviewSection extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           review.reviewText,
+          maxLines: maxLines,
+          overflow: maxLines != null ? TextOverflow.ellipsis : null,
           style: const TextStyle(
               fontWeight: FontWeight.w300, fontSize: 24, height: 0.7),
         )

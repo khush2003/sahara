@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:sahara/theme/app_theme.dart';
 
 class Tag extends StatelessWidget {
   final String tag;
@@ -8,8 +8,16 @@ class Tag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         decoration: BoxDecoration(
-            color: Colors.grey, borderRadius: BorderRadius.circular(20)),
-        child: Text(tag));
+          border: Border.all(color: primary, width: 1),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Row(mainAxisSize: MainAxisSize.min, children: [
+          Text(
+            '#$tag',
+            style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
+          ),
+        ]));
   }
 }

@@ -6,6 +6,8 @@ import 'package:sahara/models/donation_post.dart';
 import 'package:sahara/theme/app_theme.dart';
 import 'package:sahara/utils/app_utils.dart';
 
+import '../tag.dart';
+
 class DonationDetailSection extends StatelessWidget {
   final DonationItem donationPost;
   final bool showDescription, showTags;
@@ -72,18 +74,7 @@ Widget createTags(List<String> tags) {
   final tagsWidgets = <Widget>[];
   for (int i = 0; i < tags.length; i++) {
     tagsWidgets.add(
-      Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: primary, width: 1),
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Row(mainAxisSize: MainAxisSize.min, children: [
-            Text(
-              '#${tags[i]}',
-              style:
-                  const TextStyle(fontWeight: FontWeight.normal, fontSize: 18),
-            ),
-          ])),
+      Tag(tags[i])
     );
   }
   return Wrap(

@@ -13,6 +13,7 @@ class DonationItemDetailsView extends StatelessWidget {
   final Author author = Author.test();
   final UserSahara user = UserSahara.test();
   final DonationItem item = DonationItem.test();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,7 @@ class DonationItemDetailsView extends StatelessWidget {
               author: author,
               item: item,
             ),
-            Divider(),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Text('Description', style: headTextBold()),
@@ -45,8 +46,12 @@ class DonationItemDetailsView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Text(item.description, style: regularText(height: 0.7)),
             ),
-            Divider(),
-            createTags(item.tags),
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: createTags(item.tags),
+            ),
+           
           ],
         )));
   }

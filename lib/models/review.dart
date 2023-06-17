@@ -17,7 +17,7 @@ class Review {
       reviewerId: 'reviewerId',
       donationId: 'donationId',
       reviewText:
-          "I'm absolutely thrilled about the wonderful water bottle you graciously gave me! It has truly become an essential part of my daily routine, a...",
+          "I'm absolutely thrilled about the wonderful water bottle you graciously gave me! It has truly become an essential part of my daily routine, I'm absolutely thrilled about the wonderful water bottle you graciously gave me! It has truly become an essential part of my daily routine,",
       name: 'Khush Agarwal',
       imageUrl: 'imageUrl',
     );
