@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sahara/components/app_bar_feed_page.dart';
 import 'package:sahara/components/app_bottom_nav_bar.dart';
-import 'package:sahara/components/donation_card.dart';
-import 'package:sahara/components/review_card.dart';
+import 'package:sahara/components/Feed/donation_card.dart';
+import 'package:sahara/components/Feed/review_card.dart';
 import 'package:sahara/models/donation_post.dart';
 
 import '../models/review.dart';

@@ -43,7 +43,7 @@ class DonationDetailSection extends StatelessWidget {
       required this.donationPost,
       this.showDescription = true,
       this.showTags = true,
-      this.showOverPricedWarning = false});
+      this.showOverPricedWarning = true});
 
   @override
   Widget build(BuildContext context) {

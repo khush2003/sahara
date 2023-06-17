@@ -6,13 +6,10 @@ class PrimaryButton extends StatelessWidget {
   final Function() onPressed;
   final String text;
 
-  PrimaryButton({
-    Key? key,
+  const PrimaryButton({super.key, 
     required this.onPressed,
     required this.text,
   });
-
-  Color mainColor = const Color(0xff141D3A);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +21,7 @@ class PrimaryButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             backgroundColor: primary,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
             )),
         child: Text(text, style: titleText(color: Colors.black, height: 1.3)),
       ),

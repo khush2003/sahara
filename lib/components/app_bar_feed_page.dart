@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sahara/components/Feed/filter_menu.dart';
+import 'package:sahara/routes/routes.dart';
 import 'package:unicons/unicons.dart';
 
 class AppBarFeedPage extends StatelessWidget implements PreferredSizeWidget {
@@ -46,12 +49,16 @@ class AppBarFeedPage extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed(Routes.createDonation);
+        },
         icon: const Icon(UniconsLine.plus_circle),
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            openFilterDialog();
+          },
           icon: const Icon(UniconsLine.filter),
         ),
         IconButton(
