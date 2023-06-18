@@ -57,7 +57,9 @@ class LoginView extends StatelessWidget {
                               secureText: true,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.toNamed(Routes.forgotPass);
+                              },
                               child: Text(
                                 "Forgot Password?",
                                 style: regularText(color: Colors.white)

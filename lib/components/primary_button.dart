@@ -5,11 +5,13 @@ import '../theme/app_theme.dart';
 class PrimaryButton extends StatelessWidget {
   final Function() onPressed;
   final String text;
+  late Color? backgroundColor;
 
-  const PrimaryButton({super.key, 
-    required this.onPressed,
-    required this.text,
-  });
+  PrimaryButton(
+      {super.key,
+      required this.onPressed,
+      required this.text,
+      this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-            backgroundColor: primary,
+            backgroundColor: backgroundColor ?? primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             )),

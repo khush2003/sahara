@@ -8,6 +8,7 @@ class TextfieldWithHead extends StatelessWidget {
   final TextStyle textStyle;
   final Color borderColor;
   final String headText;
+  late Color? headTextColor;
   late bool? secureText;
 
   TextfieldWithHead({
@@ -18,6 +19,7 @@ class TextfieldWithHead extends StatelessWidget {
     required this.borderColor,
     required this.headText,
     this.secureText,
+    this.headTextColor,
   });
 
   Color mainColor = lonely;
@@ -28,7 +30,7 @@ class TextfieldWithHead extends StatelessWidget {
       children: [
         Text(
           headText,
-          style: headTextBold(),
+          style: headTextBold(color: headTextColor ?? defaultTextColor),
           textAlign: TextAlign.left,
         ),
         SizedBox(
