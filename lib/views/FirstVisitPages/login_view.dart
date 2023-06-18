@@ -57,17 +57,14 @@ class LoginView extends StatelessWidget {
                               secureText: true,
                             ),
                             TextButton(
-                              onPressed: () {},
-                              child: GestureDetector(
-                                onDoubleTap: () {
-                                  Get.offAllNamed(Routes.forgotPass);
-                                },
-                                child: Text(
-                                  "Forgot Password?",
-                                  style: regularText(color: Colors.white)
-                                      .copyWith(
-                                          decoration: TextDecoration.underline),
-                                ),
+                              onPressed: () {
+                                Get.toNamed(Routes.forgotPass);
+                              },
+                              child: Text(
+                                "Forgot Password?",
+                                style: regularText(color: Colors.white)
+                                    .copyWith(
+                                        decoration: TextDecoration.underline),
                               ),
                             )
                           ],

@@ -53,13 +53,12 @@ class _ForgotPassView extends State<ForgotPassView> {
                             color: const Color.fromARGB(255, 255, 255, 255)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: TextfieldWithHead(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: TextfieldAPP(
                             hintText: "Enter your email",
                             textStyle: formFieldText(color: Colors.white),
                             borderColor: lonely,
-                            headText: "Email"),
-                      ),
+                          )),
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: Text(
@@ -70,57 +69,41 @@ class _ForgotPassView extends State<ForgotPassView> {
                         Padding(
                             padding: const EdgeInsets.only(top: 20),
                             child: Text(
-                                "We sent the password reset mail to your email inbox! Please check it. This may took a while",
+                                "We sent the password reset mail to your email! Please check the inbox. This may took a while",
                                 style: regularText(color: sucess)))
                       else
                         Container(),
                       Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: PrimaryButton(
-                              onPressed: () {
-                                if (isSent) {
-                                  Get.offAllNamed(Routes.login);
-                                } else {
-                                  _changeTextFromSent();
-                                }
-                              },
-                              text: isSent
-                                  ? "Go back to Login page"
-                                  : "Password Reset")),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Center(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  child: Image.asset(
-                                "assets/images/GoogleIcon.png",
-                                height: 50,
-                                width: 50,
-                              )),
-                              Expanded(
-                                  child: Image.asset(
-                                "assets/images/FacebookIcon.png",
-                                height: 50,
-                                width: 50,
-                              ))
-                            ],
-                          ),
-                        ),
+                        padding: const EdgeInsets.only(top: 20),
+                        child: PrimaryButton(
+                            onPressed: () {
+                              if (isSent) {
+                              } else {
+                                _changeTextFromSent();
+                              }
+                            },
+                            text: "Password Reset",
+                            backgroundColor: isSent ? lonely : primary),
                       ),
+                      Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: TextButton(
+                            onPressed: () {
+                              Get.offAllNamed(Routes.login);
+                            },
+                            child: Text(
+                              "Go back to Login",
+                              style: formFieldText(color: Colors.white)
+                                  .copyWith(
+                                      decoration: TextDecoration.underline),
+                            ),
+                          ))
                     ],
                   ),
                 )
               ],
             ),
           ),
-          Align(
-              alignment: Alignment.topLeft,
-              child: GestureDetector(
-                  onTap: () {
-                    Get.offAllNamed(Routes.login);
-                  },
-                  child: const Icon(FontAwesomeIcons.arrowLeft))),
         ],
       ),
     );
