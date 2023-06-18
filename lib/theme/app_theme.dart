@@ -67,6 +67,15 @@ TextStyle regularText(
         fontSize: 24,
         height: height,
         color: color);
+TextStyle textFromFieldInput(
+  {Color color = Colors.grey, double? height = defaultHeight}) =>
+  TextStyle(
+        fontFamily: "Dongle",
+        fontWeight: FontWeight.w500,
+        fontSize: 22,
+        height: defaultHeight,
+        color: color,
+        );
 
 ThemeData themedata = ThemeData(
   scaffoldBackgroundColor: Colors.white,
