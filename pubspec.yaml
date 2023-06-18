@@ -51,6 +51,7 @@ dependencies:
   page_transition: "^2.0.9"
   custom_navigation_bar: ^0.8.2
   just_audio: ^0.9.34 
+  chatview2: any
 
 dev_dependencies:
   flutter_test:
