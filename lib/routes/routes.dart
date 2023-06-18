@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sahara/views/FirstVisitPages/forgot_password_view.dart';
 import 'package:sahara/views/FirstVisitPages/onboarding_view.dart';
 import 'package:sahara/views/SettingPages/change_address_view.dart';
 import 'package:sahara/views/SettingPages/change_password_view.dart';
@@ -52,6 +53,7 @@ abstract class Routes {
   static const String changeAddress = '/changeAddress';
   static const String changePassword = '/changePassword';
   static const String coupon = '/coupon';
+  static const String forgotPass = '/forgotPass';
 }
 
 final getPages = [
@@ -80,5 +82,6 @@ final getPages = [
   GetPage(name: Routes.changePhoneNumber, page: () => ChangePhoneNumberView()),
   GetPage(name: Routes.changeAddress, page: () => ChangeAddressView()),
   GetPage(name: Routes.changePassword, page: () => ChangePasswordView()),
-  GetPage(name: Routes.coupon, page: () => CouponView())
+  GetPage(name: Routes.coupon, page: () => CouponView()),
+  GetPage(name: Routes.forgotPass, page: () => ForgotPassView())
 ];
