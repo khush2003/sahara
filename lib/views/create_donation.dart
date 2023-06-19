@@ -350,8 +350,9 @@ class CreateDonationView extends State<CreateDonation> {
                   ],
                 ),
               ),
-               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                 child: Row(
                   children: const [
                     SizedBox(
@@ -510,8 +511,9 @@ class CreateDonationView extends State<CreateDonation> {
                   ],
                 ),
               ),
-               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                 child: Row(
                   children: const [
                     SizedBox(
@@ -681,7 +683,7 @@ class CreateDonationView extends State<CreateDonation> {
                   width: MediaQuery.of(context).size.width,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () => Get.toNamed(Routes.testKhush),
+                    onPressed: () => Get.toNamed(Routes.feed),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),

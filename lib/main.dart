@@ -21,7 +21,7 @@ class Application extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sahara',
       theme: themedata,
-      initialRoute: Routes.boarding,
+      initialRoute: Routes.onboarding,
       getPages: getPages,
     );
   }

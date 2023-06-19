@@ -14,11 +14,11 @@ class BoardingView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ElevatedButton(
-              onPressed: () => Get.toNamed(Routes.testJames),
+              onPressed: () => Get.toNamed(Routes.delivery),
               child: const Text('Test James')),
           ElevatedButton(
-              onPressed: () => Get.toNamed(Routes.testKhush),
-              child: const Text('Test Khush')),
+              onPressed: () => Get.toNamed(Routes.app),
+              child: const Text('Main Application')),
           ElevatedButton(
               onPressed: () => Get.toNamed(Routes.profile),
               child: const Text('Profile')),
@@ -36,10 +36,10 @@ class BoardingView extends StatelessWidget {
             ],
           ),
           ElevatedButton(
-              onPressed: () => Get.toNamed(Routes.testPoln),
+              onPressed: () => Get.toNamed(Routes.notifications),
               child: const Text('Test Poln')),
           ElevatedButton(
-              onPressed: () => Get.toNamed(Routes.testFai),
+              onPressed: () => Get.toNamed(Routes.chat),
               child: const Text('Test Fai')),
         ],
       ),

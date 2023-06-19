@@ -1,14 +1,16 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:unicons/unicons.dart';
 
+import '../controllers/nav_bar_controller.dart';
 import '../theme/app_theme.dart';
 import '../utils/uni_icon.dart';
 
 class AppBottomNavBar extends StatelessWidget {
+  final NavBarController navController;
   const AppBottomNavBar({
-    super.key,
+    super.key, required this.navController,
   });
 
   @override
@@ -16,13 +18,13 @@ class AppBottomNavBar extends StatelessWidget {
     return DecoratedBox(
       decoration: const BoxDecoration(
           border: Border(top: BorderSide(color: Colors.grey, width: 10))),
-      child: SalomonBottomBar(
+      child: Obx(() => SalomonBottomBar(
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           backgroundColor: const Color(0xffffffff),
           itemPadding: const EdgeInsets.all(16),
           selectedItemColor: primary,
-          onTap: (index) => 1,
-          currentIndex: 1,
+          onTap: navController.changeIndex,
+          currentIndex: navController.selectedIndex,
           items: [
             SalomonBottomBarItem(
                 icon: const UnIcon(
@@ -54,7 +56,7 @@ class AppBottomNavBar extends StatelessWidget {
                   size: 20,
                 ),
                 title: const Text("User")),
-          ]),
+          ])),
     );
   }
 }
