@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/routes/routes.dart';
 import 'package:sahara/theme/app_theme.dart';
-
 import 'firebase_options.dart';
 
 void main() async {
