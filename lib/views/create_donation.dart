@@ -350,10 +350,10 @@ class CreateDonationView extends State<CreateDonation> {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                 child: Row(
-                  children: [
+                  children: const [
                     SizedBox(
                       width: 300,
                       child: Text(
@@ -510,10 +510,10 @@ class CreateDonationView extends State<CreateDonation> {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                 child: Row(
-                  children: [
+                  children: const [
                     SizedBox(
                       width: 300,
                       child: Text(
