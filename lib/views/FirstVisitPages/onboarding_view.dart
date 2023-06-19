@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'login_view.dart';
 
 class OnBoardingView extends StatefulWidget {
-  OnBoardingView({Key? key}) : super(key: key);
+  const OnBoardingView({Key? key}) : super(key: key);
 
   @override
   _OnBoardingState createState() => _OnBoardingState();

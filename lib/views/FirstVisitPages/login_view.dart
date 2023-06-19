@@ -74,7 +74,11 @@ class LoginView extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 20),
                         child: Column(
                           children: [
-                            PrimaryButton(text: "Login", onPressed: () {}),
+                            PrimaryButton(
+                                text: "Login",
+                                onPressed: () {
+                                  Get.offAllNamed(Routes.app);
+                                }),
                             TextButton(
                                 onPressed: () {
                                   Get.offAllNamed(Routes.register);

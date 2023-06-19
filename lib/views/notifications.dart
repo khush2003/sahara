@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sahara/components/notification_card.dart';
 
-class TestPoln extends StatelessWidget {
-  const TestPoln({super.key});
+class NotificationsView extends StatelessWidget {
+  const NotificationsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +12,12 @@ class TestPoln extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            NotificationCard(),
-            NotificationCard(),
-        ]),
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              NotificationCard(),
+              NotificationCard(),
+            ]),
       ),
     );
   }

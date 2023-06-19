@@ -130,9 +130,7 @@ class ButtonSection extends StatelessWidget {
             label: 'Setting',
             labelColor: Colors.black,
             backgroundColor: Colors.white,
-            onPress: () {
-              // Add the desired action for the button here
-            },
+            onPress: () => Get.toNamed(Routes.profileSetting),
           ),
           const SizedBox(height: 10),
           _buildStyledButton(

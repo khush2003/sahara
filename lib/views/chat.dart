@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../components/Chat/chat_list_card.dart';
 
-class TestFai extends StatelessWidget {
-  const TestFai({super.key});
+class ChatView extends StatelessWidget {
+  const ChatView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +12,13 @@ class TestFai extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            ChatListCard(),
-            ChatListCard(),
-        ]),
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              ChatListCard(),
+              ChatListCard(),
+            ]),
       ),
     );
   }
 }
-

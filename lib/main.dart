@@ -18,9 +18,9 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'WisMod',
+      title: 'Sahara',
       theme: themedata,
-      initialRoute: Routes.boarding,
+      initialRoute: Routes.onboarding,
       getPages: getPages,
     );
   }
