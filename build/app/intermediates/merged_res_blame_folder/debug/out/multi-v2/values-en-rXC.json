@@ -1,0 +1,60 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.sahara.app-mergeDebugResources-20:/values-en-rXC/values-en-rXC.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\kanti\\.gradle\\caches\\transforms-3\\74ce2690f7529852b8321388684fcbb6\\transformed\\core-1.7.0\\res\\values-en-rXC\\values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "203",
+                        "endOffsets": "254"
+                    },
+                    "to": {
+                        "startLines": "11",
+                        "startColumns": "4",
+                        "startOffsets": "1922",
+                        "endColumns": "203",
+                        "endOffsets": "2121"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\kanti\\.gradle\\caches\\transforms-3\\392643a040d0a7ef9b2ed4537c4719d5\\transformed\\browser-1.4.0\\res\\values-en-rXC\\values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,255,454,665",
+                        "endColumns": "199,198,210,201",
+                        "endOffsets": "250,449,660,862"
+                    },
+                    "to": {
+                        "startLines": "2,4,5,6",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,462,661,872",
+                        "endColumns": "199,198,210,201",
+                        "endOffsets": "250,656,867,1069"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\kanti\\.gradle\\caches\\transforms-3\\f921d35191e816e13bbe81a1a7adc2e8\\transformed\\jetified-media2-session-1.2.1\\res\\values-en-rXC\\values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,262,461,655,879",
+                        "endColumns": "206,198,193,223,230",
+                        "endOffsets": "257,456,650,874,1105"
+                    },
+                    "to": {
+                        "startLines": "3,7,8,9,10",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "255,1074,1273,1467,1691",
+                        "endColumns": "206,198,193,223,230",
+                        "endOffsets": "457,1268,1462,1686,1917"
+                    }
+                }
+            ]
+        }
+    ]
+}

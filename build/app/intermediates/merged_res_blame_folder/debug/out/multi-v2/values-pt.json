@@ -1,0 +1,77 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.sahara.app-mergeDebugResources-20:/values-pt/values-pt.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\kanti\\.gradle\\caches\\transforms-3\\74ce2690f7529852b8321388684fcbb6\\transformed\\core-1.7.0\\res\\values-pt\\values-pt.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "20",
+                        "startColumns": "4",
+                        "startOffsets": "1738",
+                        "endColumns": "100",
+                        "endOffsets": "1834"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\kanti\\.gradle\\caches\\transforms-3\\ef2321c8ef384bd7d821c1ecf44a36ab\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-pt\\values-pt.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,195,267,333,410,477,578,671",
+                        "endColumns": "69,69,71,65,76,66,100,92,69",
+                        "endOffsets": "120,190,262,328,405,472,573,666,736"
+                    },
+                    "to": {
+                        "startLines": "4,5,6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "276,346,416,488,554,631,698,799,892",
+                        "endColumns": "69,69,71,65,76,66,100,92,69",
+                        "endOffsets": "341,411,483,549,626,693,794,887,957"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\kanti\\.gradle\\caches\\transforms-3\\392643a040d0a7ef9b2ed4537c4719d5\\transformed\\browser-1.4.0\\res\\values-pt\\values-pt.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,170,269,381",
+                        "endColumns": "114,98,111,105",
+                        "endOffsets": "165,264,376,482"
+                    },
+                    "to": {
+                        "startLines": "2,13,14,15",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,962,1061,1173",
+                        "endColumns": "114,98,111,105",
+                        "endOffsets": "165,1056,1168,1274"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\kanti\\.gradle\\caches\\transforms-3\\f921d35191e816e13bbe81a1a7adc2e8\\transformed\\jetified-media2-session-1.2.1\\res\\values-pt\\values-pt.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,161,259,356,485",
+                        "endColumns": "105,97,96,128,134",
+                        "endOffsets": "156,254,351,480,615"
+                    },
+                    "to": {
+                        "startLines": "3,16,17,18,19",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "170,1279,1377,1474,1603",
+                        "endColumns": "105,97,96,128,134",
+                        "endOffsets": "271,1372,1469,1598,1733"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,60 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.sahara.app-mergeDebugResources-20:/values-en-rCA/values-en-rCA.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\kanti\\.gradle\\caches\\transforms-3\\f921d35191e816e13bbe81a1a7adc2e8\\transformed\\jetified-media2-session-1.2.1\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,159,256,350,471",
+                        "endColumns": "103,96,93,120,128",
+                        "endOffsets": "154,251,345,466,595"
+                    },
+                    "to": {
+                        "startLines": "3,7,8,9,10",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "153,562,659,753,874",
+                        "endColumns": "103,96,93,120,128",
+                        "endOffsets": "252,654,748,869,998"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\kanti\\.gradle\\caches\\transforms-3\\74ce2690f7529852b8321388684fcbb6\\transformed\\core-1.7.0\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "11",
+                        "startColumns": "4",
+                        "startOffsets": "1003",
+                        "endColumns": "100",
+                        "endOffsets": "1099"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\kanti\\.gradle\\caches\\transforms-3\\392643a040d0a7ef9b2ed4537c4719d5\\transformed\\browser-1.4.0\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,153,250,359",
+                        "endColumns": "97,96,108,98",
+                        "endOffsets": "148,245,354,453"
+                    },
+                    "to": {
+                        "startLines": "2,4,5,6",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,257,354,463",
+                        "endColumns": "97,96,108,98",
+                        "endOffsets": "148,349,458,557"
+                    }
+                }
+            ]
+        }
+    ]
+}
