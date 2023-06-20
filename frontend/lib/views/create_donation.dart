@@ -211,15 +211,19 @@ class CreateDonationView extends State<CreateDonation> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 hintText: '1',
-                                hintStyle: Theme.of(context).textTheme.displayLarge,
+                                hintStyle:
+                                    Theme.of(context).textTheme.displayLarge,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
-                                      color: Theme.of(context).colorScheme.primary),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(color: Colors.black),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
                                 ),
                               ),
                               dropdownColor: Colors.white,
@@ -254,15 +258,19 @@ class CreateDonationView extends State<CreateDonation> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 hintText: 'Week',
-                                hintStyle: Theme.of(context).textTheme.displayLarge,
+                                hintStyle:
+                                    Theme.of(context).textTheme.displayLarge,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
-                                      color: Theme.of(context).colorScheme.primary),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(color: Colors.black),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
                                 ),
                               ),
                               dropdownColor: Colors.white,
@@ -291,7 +299,7 @@ class CreateDonationView extends State<CreateDonation> {
                       style: regularTextBold(),
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.5,
                       child: Expanded(
                         child: Slider(
                           value: usabilityValue,
@@ -318,21 +326,21 @@ class CreateDonationView extends State<CreateDonation> {
                       'Price',
                       style: regularTextBold(),
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          '฿',
-                          style: smallTextBold(),
-                        ),
-                        SizedBox(width: 5),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          child: Expanded(
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Row(
+                        children: [
+                          Text(
+                            '฿',
+                            style: smallTextBold(),
+                          ),
+                          SizedBox(width: 5),
+                          Expanded(
                             child: NumberTextFormFieldThemed(
                                 hintText: 'Enter Item Price'),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -374,54 +382,54 @@ class CreateDonationView extends State<CreateDonation> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          child: Expanded(
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.25,
+                      child: Row(
+                        children: [
+                          Expanded(
                             child: NumberTextFormFieldThemed(hintText: 'Width'),
                           ),
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          'In',
-                          style: regularTextBold(),
-                        ),
-                      ],
+                          SizedBox(width: 5),
+                          Text(
+                            'In',
+                            style: regularTextBold(),
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(width: 10),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          child: Expanded(
+                    SizedBox(width: 10),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.25,
+                      child: Row(
+                        children: [
+                          Expanded(
                             child:
                                 NumberTextFormFieldThemed(hintText: 'Length'),
                           ),
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          'In',
-                          style: regularTextBold(),
-                        ),
-                      ],
+                          SizedBox(width: 5),
+                          Text(
+                            'In',
+                            style: regularTextBold(),
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(width: 10),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          child: Expanded(
+                    SizedBox(width: 10),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.25,
+                      child: Row(
+                        children: [
+                          Expanded(
                             child:
                                 NumberTextFormFieldThemed(hintText: 'Height'),
                           ),
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          'In',
-                          style: regularTextBold(),
-                        ),
-                      ],
+                          SizedBox(width: 5),
+                          Text(
+                            'In',
+                            style: regularTextBold(),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -436,21 +444,22 @@ class CreateDonationView extends State<CreateDonation> {
                       'Item Weight',
                       style: regularTextBold(),
                     ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          child: Expanded(
-                            child:
-                                NumberTextFormFieldThemed(hintText: 'Weight', suffixIcon: Text('Kg', style: regularTextBold()),),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: NumberTextFormFieldThemed(
+                              hintText: 'Weight',
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          'Kg',
-                          style: regularTextBold(),
-                        ),
-                      ],
+                          SizedBox(width: 10),
+                          Text(
+                            'Kg',
+                            style: regularTextBold(),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -465,6 +474,7 @@ class CreateDonationView extends State<CreateDonation> {
                       style: regularTextBold(color: Colors.green),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
                           '฿',
