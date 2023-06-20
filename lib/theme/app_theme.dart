@@ -31,7 +31,7 @@ TextStyle headTextBold(
         {Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.bold,
         fontSize: 32,
         height: height,
         color: color);
@@ -51,11 +51,12 @@ TextStyle formFieldText(
         fontSize: 32,
         height: height,
         color: color);
+
 TextStyle regularTextBold(
         {Color color = defaultTextColor, double? height = defaultHeight}) =>
     TextStyle(
         fontFamily: "Dongle",
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.bold,
         fontSize: 24,
         height: height,
         color: color);
@@ -67,15 +68,33 @@ TextStyle regularText(
         fontSize: 24,
         height: height,
         color: color);
-TextStyle textFromFieldInput(
-  {Color color = Colors.grey, double? height = defaultHeight}) =>
-  TextStyle(
+
+TextStyle smallTextBold(
+        {Color color = defaultTextColor, double? height = defaultHeight}) =>
+    TextStyle(
         fontFamily: "Dongle",
-        fontWeight: FontWeight.w500,
-        fontSize: 22,
-        height: defaultHeight,
-        color: color,
-        );
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        height: height,
+        color: color);
+TextStyle smallText(
+        {Color color = defaultTextColor, double? height = defaultHeight}) =>
+    TextStyle(
+        fontFamily: "Dongle",
+        fontWeight: FontWeight.w300,
+        fontSize: 20,
+        height: height,
+        color: color);
+
+TextStyle textFromFieldInput(
+        {Color color = Colors.grey, double? height = defaultHeight}) =>
+    TextStyle(
+      fontFamily: "Dongle",
+      fontWeight: FontWeight.w500,
+      fontSize: 24,
+      height: defaultHeight,
+      color: color,
+    );
 
 ThemeData themedata = ThemeData(
   scaffoldBackgroundColor: Colors.white,

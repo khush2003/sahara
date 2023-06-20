@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +7,7 @@ import 'package:sahara/components/Feed/upload_address_popup.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/routes/routes.dart';
 import 'package:sahara/theme/app_theme.dart';
+import 'package:sahara/theme/global_widget.dart';
 
 class CreateDonation extends StatefulWidget {
   const CreateDonation({Key? key}) : super(key: key);
@@ -62,34 +65,17 @@ class CreateDonationView extends State<CreateDonation> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: 100,
-                      child: Text(
-                        'Item Name',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
+                    Text(
+                      'Item Name',
+                      style: regularTextBold(),
                     ),
-                    Expanded(
-                      child: TextFormField(
-                        controller: null,
-                        validator: null,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
-                          filled: true,
-                          fillColor: Colors.white,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: Expanded(
+                        child: TextFormFieldThemed(
                           hintText: 'Enter Item Name',
-                          hintStyle: textFromFieldInput(),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black),
-                          ),
                         ),
                       ),
                     ),
@@ -99,47 +85,50 @@ class CreateDonationView extends State<CreateDonation> {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                child: Expanded(
-                  child: DropdownButtonFormField(
-                    items: const [
-                      DropdownMenuItem(
-                        value: 'Item Category',
-                        child: Text('Item Category 1'),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Expanded(
+                    child: DropdownButtonFormField(
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'Item Category',
+                          child: Text('Item Category 1'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Item Category',
+                          child: Text('Item Category 2'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Item Category',
+                          child: Text('Item Category 3'),
+                        ),
+                      ],
+                      onChanged: (String? value) {},
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10.0),
+                        filled: true,
+                        fillColor: primary,
+                        hintText: 'Item Category',
+                        hintStyle: Theme.of(context).textTheme.displayLarge,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.primary),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.black),
+                        ),
                       ),
-                      DropdownMenuItem(
-                        value: 'Item Category',
-                        child: Text('Item Category 2'),
+                      dropdownColor: Colors.white,
+                      icon: const Icon(
+                        Icons.arrow_drop_down,
                       ),
-                      DropdownMenuItem(
-                        value: 'Item Category',
-                        child: Text('Item Category 3'),
-                      ),
-                    ],
-                    onChanged: (String? value) {},
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 10.0),
-                      filled: true,
-                      fillColor: primary,
-                      hintText: 'Item Category',
-                      hintStyle: Theme.of(context).textTheme.displayLarge,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.black),
-                      ),
+                      iconSize: 32,
+                      elevation: 2,
+                      isExpanded: true,
                     ),
-                    dropdownColor: Colors.white,
-                    icon: const Icon(
-                      Icons.arrow_drop_down,
-                    ),
-                    iconSize: 32,
-                    elevation: 2,
-                    isExpanded: true,
                   ),
                 ),
               ),
@@ -147,66 +136,370 @@ class CreateDonationView extends State<CreateDonation> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: 200,
-                      child: Text(
-                        'Used Duration',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
+                    Text(
+                      'Used Duration',
+                      style: regularTextBold(),
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          child: Expanded(
+                            child: DropdownButtonFormField(
+                              items: const [
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('1'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('2'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('3'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('4'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('5'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('6'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('7'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('8'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('9'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('10'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('11'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Duration Number',
+                                  child: Text('12'),
+                                ),
+                              ],
+                              onChanged: (String? value) {},
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0, vertical: 8.0),
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: '1',
+                                hintStyle: Theme.of(context).textTheme.displayLarge,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).colorScheme.primary),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(color: Colors.black),
+                                ),
+                              ),
+                              dropdownColor: Colors.white,
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                              ),
+                              iconSize: 24,
+                              elevation: 2,
+                              isExpanded: true,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10.0),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          child: Expanded(
+                            child: DropdownButtonFormField(
+                              items: const [
+                                DropdownMenuItem(
+                                  value: 'Used Duration',
+                                  child: Text('Week'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Used Duration',
+                                  child: Text('Month'),
+                                ),
+                              ],
+                              onChanged: (String? value) {},
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0, vertical: 8.0),
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Week',
+                                hintStyle: Theme.of(context).textTheme.displayLarge,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).colorScheme.primary),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(color: Colors.black),
+                                ),
+                              ),
+                              dropdownColor: Colors.white,
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                              ),
+                              iconSize: 24,
+                              elevation: 2,
+                              isExpanded: true,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Usability',
+                      style: regularTextBold(),
                     ),
                     SizedBox(
-                      width: 60,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Expanded(
+                        child: Slider(
+                          value: usabilityValue,
+                          min: 49.0,
+                          max: 100.0,
+                          label: '${usabilityValue.round()}%',
+                          onChanged: (newUsabilityValue) {
+                            setState(() => usabilityValue = newUsabilityValue);
+                          },
+                          activeColor: primary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Price',
+                      style: regularTextBold(),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '฿',
+                          style: smallTextBold(),
+                        ),
+                        SizedBox(width: 5),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: Expanded(
+                            child: NumberTextFormFieldThemed(
+                                hintText: 'Enter Item Price'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Estimated Current Price',
+                      style: regularTextBold(color: Colors.red),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '฿',
+                          style: smallTextBold(color: Colors.red),
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          '--',
+                          style: regularTextBold(color: Colors.red),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 0),
+                child: Text(
+                  'Item Size',
+                  style: regularTextBold(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          child: Expanded(
+                            child: NumberTextFormFieldThemed(hintText: 'Width'),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'In',
+                          style: regularTextBold(),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 10),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          child: Expanded(
+                            child:
+                                NumberTextFormFieldThemed(hintText: 'Length'),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'In',
+                          style: regularTextBold(),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 10),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          child: Expanded(
+                            child:
+                                NumberTextFormFieldThemed(hintText: 'Height'),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'In',
+                          style: regularTextBold(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Item Weight',
+                      style: regularTextBold(),
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: Expanded(
+                            child:
+                                NumberTextFormFieldThemed(hintText: 'Weight', suffixIcon: Text('Kg', style: regularTextBold()),),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'Kg',
+                          style: regularTextBold(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Delivery Fee',
+                      style: regularTextBold(color: Colors.green),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '฿',
+                          style: smallTextBold(color: Colors.green),
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          '--',
+                          style: regularTextBold(color: Colors.green),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Delivery Fee Paid By',
+                      style: regularTextBold(),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
                       child: Expanded(
                         child: DropdownButtonFormField(
                           items: const [
                             DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('1'),
+                              value: 'Paid By',
+                              child: Text('Donor (You)'),
                             ),
                             DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('2'),
+                              value: 'Paid By',
+                              child: Text('50/50'),
                             ),
                             DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('3'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('4'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('5'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('6'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('7'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('8'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('9'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('10'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('11'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Duration Number',
-                              child: Text('12'),
+                              value: 'Paid By',
+                              child: Text('Reciever'),
                             ),
                           ],
                           onChanged: (String? value) {},
@@ -215,7 +508,7 @@ class CreateDonationView extends State<CreateDonation> {
                                 horizontal: 10.0, vertical: 8.0),
                             filled: true,
                             fillColor: Colors.white,
-                            hintText: '1',
+                            hintText: 'Select',
                             hintStyle: Theme.of(context).textTheme.displayLarge,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -237,443 +530,31 @@ class CreateDonationView extends State<CreateDonation> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 10.0),
-                    Expanded(
-                      child: DropdownButtonFormField(
-                        items: const [
-                          DropdownMenuItem(
-                            value: 'Used Duration',
-                            child: Text('Week'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'Used Duration',
-                            child: Text('Month'),
-                          ),
-                        ],
-                        onChanged: (String? value) {},
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 8.0),
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'Week',
-                          hintStyle: Theme.of(context).textTheme.displayLarge,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black),
-                          ),
-                        ),
-                        dropdownColor: Colors.white,
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                        ),
-                        iconSize: 24,
-                        elevation: 2,
-                        isExpanded: true,
-                      ),
-                    ),
                   ],
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 175,
-                      child: Text(
-                        'Usability',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: Slider(
-                        value: usabilityValue,
-                        min: 49.0,
-                        max: 100.0,
-                        label: '${usabilityValue.round()}%',
-                        onChanged: (newUsabilityValue) {
-                          setState(() => usabilityValue = newUsabilityValue);
-                        },
-                        activeColor: primary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 200,
-                      child: Text(
-                        'Price',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                    ),
-                    Text(
-                      '฿',
-                      style: Theme.of(context).textTheme.displaySmall,
-                    ),
-                    const SizedBox(width: 5.0),
-                    Expanded(
-                      child: TextFormField(
-                        controller: null,
-                        validator: null,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'Enter Item Price',
-                          hintStyle: textFromFieldInput(),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                child: Row(
-                  children: const [
-                    SizedBox(
-                      width: 300,
-                      child: Text(
-                        'Estimated Current Price',
-                        style: TextStyle(
-                          fontFamily: "Dongle",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 22,
-                          height: defaultHeight,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      '฿ --',
-                      style: TextStyle(
-                        fontFamily: "Dongle",
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        height: defaultHeight,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 0),
-                child: Text(
-                  'Item Size',
-                  style: TextStyle(
-                    fontFamily: "Dongle",
-                    fontWeight: FontWeight.w500,
-                    fontSize: 22,
-                    height: defaultHeight,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: null,
-                        validator: null,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'Width',
-                          hintStyle: textFromFieldInput(),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: TextFormField(
-                        controller: null,
-                        validator: null,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'Length',
-                          hintStyle: textFromFieldInput(),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: TextFormField(
-                        controller: null,
-                        validator: null,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'Height',
-                          hintStyle: textFromFieldInput(),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 200,
-                      child: Text(
-                        'Item Weight',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: TextFormField(
-                        controller: null,
-                        validator: null,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'Weight',
-                          hintStyle: textFromFieldInput(),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                child: Row(
-                  children: const [
-                    SizedBox(
-                      width: 300,
-                      child: Text(
-                        'Delivery Fee',
-                        style: TextStyle(
-                          fontFamily: "Dongle",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 22,
-                          height: defaultHeight,
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      '฿ --',
-                      style: TextStyle(
-                        fontFamily: "Dongle",
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        height: defaultHeight,
-                        color: Colors.green,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 200,
-                      child: Text(
-                        'Delivery Fee Paid By',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                    ),
-                    Expanded(
-                      child: DropdownButtonFormField(
-                        items: const [
-                          DropdownMenuItem(
-                            value: 'Paid By',
-                            child: Text('Donor (You)'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'Paid By',
-                            child: Text('50/50'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'Paid By',
-                            child: Text('Reciever'),
-                          ),
-                        ],
-                        onChanged: (String? value) {},
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 8.0),
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'Select',
-                          hintStyle: Theme.of(context).textTheme.displayLarge,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black),
-                          ),
-                        ),
-                        dropdownColor: Colors.white,
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                        ),
-                        iconSize: 24,
-                        elevation: 2,
-                        isExpanded: true,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Padding(
                 padding: EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 0),
                 child: Text(
                   'Item Description',
-                  style: TextStyle(
-                    fontFamily: "Dongle",
-                    fontWeight: FontWeight.w500,
-                    fontSize: 22,
-                    height: defaultHeight,
-                    color: Colors.black,
-                  ),
+                  style: regularTextBold(),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 8.0),
                 child: Expanded(
-                  child: TextFormField(
-                    controller: null,
-                    validator: null,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 10.0),
-                      filled: true,
-                      fillColor: Colors.white,
-                      hintText: 'Share your experience',
-                      hintStyle: textFromFieldInput(),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.grey),
-                      ),
-                    ),
-                    minLines: 1,
-                    maxLines: 3,
-                  ),
+                  child: AreaTextFormFieldThemed(
+                      hintText: 'Share your experience'),
                 ),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: null,
-                        validator: null,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'Add Tags',
-                          hintStyle: textFromFieldInput(),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.primary),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.grey),
-                          ),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.add, color: primary),
-                    ),
-                  ],
+                child: Expanded(
+                  child: TextFormFieldThemed(
+                    hintText: 'Add tags',
+                    suffixIcon: Icon(Icons.add),
+                  ),
                 ),
               ),
               Padding(
@@ -683,21 +564,15 @@ class CreateDonationView extends State<CreateDonation> {
                   width: MediaQuery.of(context).size.width,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () => Get.toNamed(Routes.feed),
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Post',
-                      style: TextStyle(
-                        fontFamily: "Dongle",
-                        fontWeight: FontWeight.bold,
-                        fontSize: 32,
-                        height: defaultHeight,
-                        color: Colors.black,
-                      ),
+                      style: headTextBold(),
                     ),
                   ),
                 ),
@@ -711,7 +586,7 @@ class CreateDonationView extends State<CreateDonation> {
 }
 
 /*
-Widget createTags(CreateEventController controller) {
+Widget createTags(CreateDonationController controller) {
   final tagsWidgets = <Widget>[];
   for (int i = 0; i < controller.tags.length; i++) {
     tagsWidgets.add(
