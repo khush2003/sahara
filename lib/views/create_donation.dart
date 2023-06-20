@@ -40,7 +40,7 @@ class CreateDonationView extends State<CreateDonation> {
                     horizontal: 20.0, vertical: 18.0),
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: 175,
+                  height: 250,
                   child: OutlinedButton.icon(
                     icon: const Icon(
                       Icons.image_outlined,
