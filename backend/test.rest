@@ -1,7 +1,0 @@
-
-POST https://localhost:8000/post/addRecord
-Content-Type: application/json
-
-{
-    "name": "tomato"
-}
