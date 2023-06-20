@@ -1,7 +1,7 @@
 import express, {Request,Response,Application} from 'express';
 
 const app:Application = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 import getRoutes from './get/index';
 import postRoutes from './post/index';
 import deleteRoutes from './delete/index';
