@@ -13,7 +13,7 @@ const port = process.env.PORT;
 
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('123 Express + TypeScript Server');
+  res.send('Welcome to Sahara Donation App Backend!');
 });
 
 
