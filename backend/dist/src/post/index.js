@@ -23,4 +23,8 @@ postRoutes.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, functio
     });
     res.status(200).send(user);
 }));
+postRoutes.post("/donationItem", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const donationItem = yield firebase_1.db.collection('donationItems').add(req.body);
+    res.status(200).send(donationItem);
+}));
 exports.default = postRoutes;

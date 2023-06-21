@@ -12,3 +12,29 @@ Content-Type: application/json
 
 ### GET all donations
 GET http://localhost:8000/get/donationItems
+
+### POST
+POST http://localhost:8000/post/donationItem
+Content-Type: application/json
+
+{
+    "name": "Refrigertor Samsung",
+    "description": "Refrigertor Samsung 2019 model in good condition with a shelf for storing food. The ice box is not working but everything else is working. There are a few scratches",
+    "category": "Electronics",
+    "imageUrl": "https://images.unsplash.com/photo-1581091019745-0d5b8b6a4b0e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVmcmlnZXJ0b3IlMjBzb21ldGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
+    "useability": 0.9,
+    "price": 888.8,
+    "itemWidth": 500.2,
+    "itemHeight": 100,
+    "itemLength": 800,
+    "weight": 1000,
+    "tags": ["fridge", "samsung", "icebox", "refrigertor"],
+    "deliveryFees": 700,
+    "deliveryPaidBy": "Donor",
+    "donorName": "John Doe",
+    "usedDuration": 2,
+    "isGiven": false,
+    "authorId": "60b9b5b9e4b0f3b2a8b0b3a0",
+    "authorName": "John Doe",
+    "authorImageURL": "https://images.unsplash.com/photo-1581091019745-0d5b8b6a4b0e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVmcmlnZXJ0b3IlMjBzb21ldGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
+}
