@@ -22,7 +22,8 @@ getRoutes.get('/donationItems', (req, res) => __awaiter(void 0, void 0, void 0, 
         const snapshot = yield firebase_1.db.collection('donationItems').get();
         const donationItems = [];
         snapshot.forEach(doc => {
-            donationItems.push(doc.data());
+            var donationItemsWithId = Object.assign({ donationId: doc.id }, doc.data());
+            donationItems.push(donationItemsWithId);
         });
         res.status(200).send(donationItems);
     }

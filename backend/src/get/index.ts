@@ -10,7 +10,11 @@ getRoutes.get('/donationItems', async (req, res) => {
         const snapshot = await db.collection('donationItems').get()
         const donationItems: any[] = []
         snapshot.forEach(doc => {
-            donationItems.push(doc.data())
+            var donationItemsWithId = {
+                donationId: doc.id,
+                ...doc.data(),
+            }
+            donationItems.push(donationItemsWithId)
         })
         res.status(200).send(donationItems)
     } catch (error) {

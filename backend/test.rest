@@ -30,7 +30,7 @@ Content-Type: application/json
     "weight": 1000,
     "tags": ["fridge", "samsung", "icebox", "refrigertor"],
     "deliveryFees": 700,
-    "deliveryPaidBy": "Donor",
+    "deliveryPaidBy": "donor",
     "donorName": "John Doe",
     "usedDuration": 2,
     "isGiven": false,

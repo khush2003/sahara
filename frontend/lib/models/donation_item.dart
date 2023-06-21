@@ -1,5 +1,3 @@
-
-
 import '../utils/app_utils.dart';
 import 'author.dart';
 
@@ -48,7 +46,7 @@ class DonationItem {
         itemLength: 10,
         itemHeight: 50,
         weight: 120,
-        deliveryPaidBy: DeliveryPaidBy.self,
+        deliveryPaidBy: DeliveryPaidBy.donor,
         usedDuration: const Duration(days: 14),
         useability: 0.80,
         price: 5000,
@@ -71,12 +69,14 @@ class DonationItem {
         itemLength: json['itemLength'],
         itemHeight: json['itemHeight'],
         weight: json['weight'],
-        deliveryPaidBy: json['deliveryPaidBy'],
-        usedDuration: json['usedDuration'],
+        deliveryPaidBy: convertFromString(json['deliveryPaidBy']),
+        usedDuration: Duration(days: json['usedDuration'] as int),
         useability: json['useability'],
         price: json['price'],
         deliveryFees: json['deliveryFees'],
-        tags: json['tags'],
-        author: Author.fromJson(json['author']));
+        tags: json['tags'] == null
+            ? []
+            : List<String>.from(json['tags'] as List<dynamic>),
+        author: Author.fromJson(json));
   }
 }

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
 import '../components/app_bar_feed_page.dart';
+import '../controllers/donation_item_controller.dart';
 import '../models/donation_item.dart';
 import '../models/review.dart';
 
 class FeedView extends StatelessWidget {
   FeedView({super.key});
+  final donationItemController = DonationItemController.instance;
   final DonationItem donationPost = DonationItem.test();
   final Review review = Review.test();
   @override

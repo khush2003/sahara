@@ -7,9 +7,12 @@ import putRoutes from './put';
 import deleteRoutes from './delete';
 import { DonationItem } from '../types';
 dotenv.config();
+import cors from 'cors';
 
 const app: Express = express();
 const port = process.env.PORT;
+
+app.use(cors());
 
 
 app.get('/', (req: Request, res: Response) => {
