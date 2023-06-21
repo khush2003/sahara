@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../models/donation_post.dart';
+import '../../models/donation_item.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/app_utils.dart';
 import '../image_thumbnail.dart';

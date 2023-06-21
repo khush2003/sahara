@@ -5,7 +5,7 @@ import '../components/Feed/donation_details_section.dart';
 import '../components/Feed/donation_details_section_detailed.dart';
 import '../components/image_thumbnail.dart';
 import '../models/author.dart';
-import '../models/donation_post.dart';
+import '../models/donation_item.dart';
 import '../models/user.dart';
 import '../theme/app_theme.dart';
 

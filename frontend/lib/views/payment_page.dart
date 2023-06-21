@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../components/DeliveryPage/delivery_card.dart';
-import '../models/donation_post.dart';
+import '../models/donation_item.dart';
 
 class PaymentPage extends StatelessWidget {
 

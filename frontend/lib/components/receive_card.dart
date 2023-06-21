@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/author.dart';
-import '../models/donation_post.dart';
+import '../models/donation_item.dart';
 
 
 class ReceivedCard extends StatelessWidget {

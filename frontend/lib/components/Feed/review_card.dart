@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../models/donation_post.dart';
+import '../../models/donation_item.dart';
 import '../../routes/routes.dart';
 import '../card_with_shadow.dart';
 import '../image_thumbnail.dart';

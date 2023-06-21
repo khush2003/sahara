@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/DeliveryPage/delivery_card.dart';
-import '../models/donation_post.dart';
+import '../models/donation_item.dart';
 import '../models/user.dart';
 
 class ReviewPage extends StatelessWidget {

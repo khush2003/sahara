@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
 import '../components/app_bar_feed_page.dart';
-import '../models/donation_post.dart';
+import '../models/donation_item.dart';
 import '../models/review.dart';
 
 class FeedView extends StatelessWidget {

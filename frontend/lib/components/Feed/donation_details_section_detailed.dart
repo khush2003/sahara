@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:unicons/unicons.dart';
 
 
-import '../../models/donation_post.dart';
+import '../../models/donation_item.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/uni_icon.dart';
 import '../../models/author.dart';
