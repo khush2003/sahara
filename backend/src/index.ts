@@ -5,6 +5,7 @@ import postRoutes from './post';
 import getRoutes from './get';
 import putRoutes from './put';
 import deleteRoutes from './delete';
+import { DonationItem } from '../types';
 dotenv.config();
 
 const app: Express = express();
@@ -12,8 +13,9 @@ const port = process.env.PORT;
 
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScdksript Server');
+  res.send('123 Express + TypeScript Server');
 });
+
 
 app.use('/post', postRoutes)
 app.use('/get', getRoutes)

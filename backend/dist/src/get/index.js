@@ -17,10 +17,17 @@ const firebase_1 = require("../firebase");
 const getRoutes = (0, express_1.default)();
 getRoutes.use(express_1.default.json());
 // Place Routes Here
-getRoutes.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield firebase_1.db.collection('users').add({
-        'hello': 'world'
-    });
-    res.send(user);
+getRoutes.get('/donationItems', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const snapshot = yield firebase_1.db.collection('donationItems').get();
+        const donationItems = [];
+        snapshot.forEach(doc => {
+            donationItems.push(doc.data());
+        });
+        res.status(200).send(donationItems);
+    }
+    catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
 }));
 exports.default = getRoutes;

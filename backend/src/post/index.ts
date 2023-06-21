@@ -1,5 +1,6 @@
 import express from "express";
 import { db } from "../firebase";
+import { DonationItem } from "../../types";
 const postRoutes = express()
 postRoutes.use(express.json())
 
