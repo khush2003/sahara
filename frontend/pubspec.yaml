@@ -50,7 +50,8 @@ dependencies:
   flutter_screenutil: ^5.7.0
   page_transition: "^2.0.9"
   custom_navigation_bar: ^0.8.2
-  just_audio: ^0.9.34 
+  just_audio: ^0.9.34
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_test:

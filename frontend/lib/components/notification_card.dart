@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:sahara/theme/app_theme.dart';
 
 class NotificationCard extends StatelessWidget {
   const NotificationCard({super.key});
@@ -22,51 +25,36 @@ class NotificationCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // TODO: Use image from database if exists
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: Container(
-                      height: 50.0,
-                      width: 50.0,
-                      color: const Color(0xffFF0E58),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Column(
-                    children: const [
-                      SizedBox(
-                        width: 230,
-                        child: Text(
-                          'Your post has reached 100 likes!',
-                          style: TextStyle(
-                            fontSize: 22,
-                            height: 1,
-                            fontWeight: FontWeight.bold
-                          ),
-                          overflow: TextOverflow.ellipsis,
+                  Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15.0),
+                        child: Container(
+                          height: 50.0,
+                          width: 50.0,
+                          color: const Color(0xffFF0E58),
                         ),
                       ),
-                      SizedBox(
-                        width: 230,
-                        child: Text(
-                          'Congratulations!',
-                          style: TextStyle(
-                            fontSize: 20,
-                            height: 0.5,
-                            color: Colors.grey,
+                      SizedBox(width: 8),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Your post has reached 100 likes!',
+                            style: regularTextBold(),
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                          Text(
+                            'Congratulations!',
+                            style: smallText(color: Colors.grey, height: 0.5),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
                     ],
-                  ),
-                  const SizedBox(
-                    width: 12,
                   ),
                   IconButton(
                     padding: const EdgeInsets.all(0),
@@ -75,7 +63,7 @@ class NotificationCard extends StatelessWidget {
                     },
                     icon: const Icon(
                       Icons.delete_forever_outlined,
-                      size: 40,
+                      size: 32,
                       color: Colors.red,
                     ),
                   ),

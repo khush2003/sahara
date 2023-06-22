@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
@@ -17,7 +19,7 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       body: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
-          scrollbars: false,
+          scrollbars: true,
         ),
         child: Stack(
           children: [
@@ -180,7 +182,7 @@ class SocialIcons extends StatelessWidget {
       side: const BorderSide(
           color: Color(0xfff0eeee)), // Set the desired border color
     ),
-    fixedSize: const Size(100, 38),
+    fixedSize: const Size(105, 35),
   );
 
   SocialIcons({super.key});
@@ -190,7 +192,7 @@ class SocialIcons extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ElevatedButton.icon(
             onPressed: () {
@@ -203,6 +205,7 @@ class SocialIcons extends StatelessWidget {
             ),
             label: const Text('Facebook', style: TextStyle(fontSize: 10)),
           ),
+          SizedBox(width: 10),
           ElevatedButton.icon(
             onPressed: () {
               // Handle button press
@@ -212,8 +215,9 @@ class SocialIcons extends StatelessWidget {
               '../../assets/images/social_icons/instagram.png',
               height: 20,
             ),
-            label: const Text('Instagram', style: TextStyle(fontSize: 9)),
+            label: const Text('Instagram', style: TextStyle(fontSize: 10)),
           ),
+          SizedBox(width: 10),
           ElevatedButton.icon(
             onPressed: () {
               // Handle button press
