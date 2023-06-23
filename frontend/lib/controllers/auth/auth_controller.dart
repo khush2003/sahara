@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/user.dart';
 
-import '../rest_api.dart';
-import '../routes/routes.dart';
-import '../utils/app_utils.dart';
+import '../../rest_api.dart';
+import '../../routes/routes.dart';
+import '../../utils/app_utils.dart';
 
 class AuthController extends GetxController {
   static AuthController get instance => Get.find();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final restApi = RestAPI.instance;
 
-
-    void sendDataToFirestore(String username) async {
+  void sendDataToFirestore(String username) async {
     dynamic result = await restApi.postUserInfo(UserSahara(userName: username));
     if (result != null) {
       // Success, handle the response data
@@ -26,7 +25,7 @@ class AuthController extends GetxController {
 
   Future<String?> createUser(
       String email, String password, UserSahara user) async {
-        print("Create user Activated");
+    print("Create user Activated");
     try {
       // Authenticate user (Create account)
       await _auth.createUserWithEmailAndPassword(
@@ -52,7 +51,7 @@ class AuthController extends GetxController {
     return null;
   }
 
-   Future<String?> loginWithEmailAndPassword(
+  Future<String?> loginWithEmailAndPassword(
       String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -64,5 +63,30 @@ class AuthController extends GetxController {
       return "There was an unexpected error occurred, Please try again later";
     }
     return null;
+  }
+
+  Future<String?> updateUserPhoneNumber(String userPhoneNumber) async {
+    try {
+      final User? user = _auth.currentUser;
+      final uid = user!.uid;
+      //Get the current user id
+      final UserSahara currentUser = await restApi.getCurrentUserInfo(uid);
+
+      // Update the phone number in the user data
+      currentUser.userPhoneNumber = userPhoneNumber;
+
+      final result = await restApi.putUserInfo(currentUser);
+
+      if (result != null) {
+      // Handle success scenario
+      return 'Phone number updated successfully';
+    } else {
+      // Handle error scenario
+      return 'Failed to update phone number';
+    }
+    } catch (e) {
+      // Handle exception/error
+    return 'An error occurred. Please try again later';
+    }
   }
 }

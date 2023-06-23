@@ -4,7 +4,7 @@ import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
 import 'package:get/get.dart';
 
-import '../utils/app_utils.dart';
+import '../../utils/app_utils.dart';
 import 'auth_controller.dart';
 
 class RegisterController extends GetxController {

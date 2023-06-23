@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sahara/controllers/register_controller.dart';
+import 'package:sahara/controllers/auth/register_controller.dart';
 import 'package:sahara/views/profile_view.dart';
 import '../../components/primary_button.dart';
 import '../../components/textfield_app.dart';

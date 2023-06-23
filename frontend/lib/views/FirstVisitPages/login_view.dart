@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sahara/controllers/auth_controller.dart';
-import 'package:sahara/controllers/login_controller.dart';
+import 'package:sahara/controllers/auth/auth_controller.dart';
+import 'package:sahara/controllers/auth/login_controller.dart';
 import '../../components/primary_button.dart';
 import '../../components/textfield_app.dart';
 import '../../routes/routes.dart';
