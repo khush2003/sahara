@@ -33,12 +33,12 @@ class RestAPI {
     }
   }
 
-   Future<dynamic> postUserInfo(UserSahara userData) async {
+   Future<dynamic> postUserInfo(UserSahara user) async {
 
    //body data
-   final jsonData = jsonEncode(userData);
+   final Map<String, dynamic> userData = user.toJson();
 
-   Response response = await connect.post('$postBackendUrl/users', jsonData);
+   Response response = await connect.post('$postBackendUrl/users', userData);
    if(response.statusCode == 200) {
      return response.body;
    }else{

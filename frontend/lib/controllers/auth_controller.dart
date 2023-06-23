@@ -27,6 +27,7 @@ class AuthController extends GetxController {
 
   Future<String?> createUser(
       String email, String password, UserSahara user) async {
+        print("Create user Activated");
     try {
       // Authenticate user (Create account)
       await _auth.createUserWithEmailAndPassword(
@@ -46,8 +47,9 @@ class AuthController extends GetxController {
       sucessSnackBar("Account Created Sucessfully!");
     } on FirebaseAuthException catch (e) {
       return getAuthErrorMessage(e.code);
-    } catch (_) {
-      return "An error occured. Please try again later";
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
     }
     return null;
   }

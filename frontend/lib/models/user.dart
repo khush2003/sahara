@@ -60,9 +60,20 @@ class UserSahara {
       userReviewPost: List<String>.from(json['UserReviewPost'] ?? []),
     );
   }
-}
-
-bool checkUserInList(String userId, List<UserSahara> list) {
+   Map<String, dynamic> toJson() {
+    return {
+      'uid': uid,
+      'userName': userName,
+      'userPhoneNumber': userPhoneNumber,
+      'profilePicture': profilePicture,
+      'userAddress': userAddress,
+      'blockedUser': blockedUser,
+      'discountCoupon': discountCoupon,
+      'userOwnPost': userOwnPost,
+      'userReviewPost': userReviewPost,
+      'token': token,
+    };}
+    bool checkUserInList(String userId, List<UserSahara> list) {
   return list.any((user) => user.uid == userId);
 }
 
@@ -73,3 +84,6 @@ UserSahara? getUserInList(String userId, List<UserSahara> list) {
     return null;
   }
 }
+}
+
+

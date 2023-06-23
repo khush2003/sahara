@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/register_controller.dart';
+import 'package:sahara/views/profile_view.dart';
 import '../../components/primary_button.dart';
 import '../../components/textfield_app.dart';
 import '../../routes/routes.dart';
@@ -11,6 +12,7 @@ import '../../theme/app_theme.dart';
 class RegisterView extends StatelessWidget {
   RegisterView({Key? key}) : super(key: key);
   final RegisterController registerController = Get.put(RegisterController());
+  final DonatingItem donationItemsController = Get.put(DonatingItem());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
