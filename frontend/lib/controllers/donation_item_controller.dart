@@ -7,7 +7,8 @@ import 'package:sahara/views/profile_view.dart';
 
 class DonationItemController extends GetxController {
   final restApi = RestAPI.instance;
-  static DonationItemController get instance => Get.find<DonationItemController>();
+  static DonationItemController get instance =>
+      Get.find<DonationItemController>();
   final RxList<DonationItem> donationItems = <DonationItem>[].obs;
   @override
   void onInit() async {
@@ -17,7 +18,6 @@ class DonationItemController extends GetxController {
     } else {
       donationItems(result);
     }
-    print(result);
     super.onInit();
   }
 }

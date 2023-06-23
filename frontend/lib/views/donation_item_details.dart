@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sahara/controllers/donation_details_controller.dart';
+import 'package:sahara/controllers/donation_item_controller.dart';
 
 import '../components/Feed/author_detail_section.dart';
 import '../components/Feed/donation_details_section.dart';
@@ -11,10 +14,9 @@ import '../theme/app_theme.dart';
 
 class DonationItemDetailsView extends StatelessWidget {
   DonationItemDetailsView({super.key});
-  final Author author = Author.test();
   final UserSahara user = UserSahara.test();
-  final DonationItem item = DonationItem.test();
-  
+  final DonationDetailsController donationDetailsController =
+      Get.put(DonationDetailsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,16 +29,17 @@ class DonationItemDetailsView extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: AutherDetailSection(author: author),
+              child: AutherDetailSection(
+                  author: donationDetailsController.donationItem.author),
             ),
             ImageThumbnail(
                 fixedHeight: 300,
                 isFlat: true,
-                imageUrl: 'https://picsum.photos/200',
+                imageUrl: donationDetailsController.donationItem.imageUrl,
                 size: MediaQuery.of(context).size.width),
             DonationDetailsSectionDetailed(
-              author: author,
-              item: item,
+              author: donationDetailsController.donationItem.author,
+              item: donationDetailsController.donationItem,
             ),
             const Divider(),
             Padding(
@@ -45,14 +48,14 @@ class DonationItemDetailsView extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Text(item.description, style: regularText(height: 0.7)),
+              child: Text(donationDetailsController.donationItem.description,
+                  style: regularText(height: 0.7)),
             ),
             const Divider(),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: createTags(item.tags),
+              child: createTags(donationDetailsController.donationItem.tags),
             ),
-           
           ],
         )));
   }

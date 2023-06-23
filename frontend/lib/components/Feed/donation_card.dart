@@ -21,7 +21,7 @@ class DonationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardSahara(
-        onPressed: () => Get.toNamed(Routes.donationDetails),
+        onPressed: () => Get.toNamed(Routes.donationDetails, parameters: {'id': donationPost.donationId}),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
@@ -37,7 +37,6 @@ class DonationCard extends StatelessWidget {
         ));
   }
 }
-
 
 class DetailRow extends StatelessWidget {
   const DetailRow({
@@ -58,7 +57,6 @@ class DetailRow extends StatelessWidget {
     );
   }
 }
-
 
 class WarningOverPriced extends StatelessWidget {
   final double deliveryFees, estimatedItemValue;
@@ -95,4 +93,3 @@ class WarningOverPriced extends StatelessWidget {
     );
   }
 }
-

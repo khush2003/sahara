@@ -17,10 +17,11 @@ class RestAPI {
   Future<dynamic> getDonationItems() async {
     Response response = await connect.get('$getBackendUrl/donationItems');
     if (response.statusCode == 200) {
-      final List<DonationItem> donationItems = []; 
+      final List<DonationItem> donationItems = [];
       response.body.forEach((element) {
         donationItems.add(DonationItem.fromJson(element));
       });
+      print(donationItems);
       return donationItems;
     } else {
       print("No status code");

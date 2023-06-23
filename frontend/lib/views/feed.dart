@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
@@ -28,7 +29,15 @@ class FeedView extends StatelessWidget {
                     review: review,
                   )
                 ]),
-                Column(children: [DonationCard(donationPost: donationPost)]),
+                Obx(
+                  () => ListView.builder(
+                      itemCount: donationItemController.donationItems.length,
+                      itemBuilder: (context, index) {
+                        return DonationCard(
+                            donationPost:
+                                donationItemController.donationItems[index]);
+                      }),
+                )
               ],
             )),
       ),

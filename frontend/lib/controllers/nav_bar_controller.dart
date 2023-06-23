@@ -6,7 +6,6 @@ class NavBarController extends GetxController {
   int get selectedIndex => _selectedIndex.value;
 
   void changeIndex(int index) {
-    print(_selectedIndex);
     _selectedIndex(index);
   }
 }

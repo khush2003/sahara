@@ -79,4 +79,9 @@ class DonationItem {
             : List<String>.from(json['tags'] as List<dynamic>),
         author: Author.fromJson(json));
   }
+
+  @override
+  String toString() {
+    return 'DonationItem{donationId: $donationId, name: $name, description: $description, imageUrl: $imageUrl, category: $category, itemWidth: $itemWidth, itemLength: $itemLength, itemHeight: $itemHeight, weight: $weight, deliveryPaidBy: $deliveryPaidBy, usedDuration: $usedDuration, useability: $useability, price: $price, deliveryFees: $deliveryFees, tags: $tags, author: $author, isOverPriced: $isOverPriced, estimatedItemValue: $estimatedItemValue}';
+  }
 }
