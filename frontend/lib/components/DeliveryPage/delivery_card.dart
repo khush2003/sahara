@@ -304,10 +304,10 @@ class DeliveryInformation extends StatelessWidget {
           'Delivery Information',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        CardRowDesc(label: 'Name', input: user.name),
-        CardRowDesc(label: 'Phone', input: user.phone),
+        CardRowDesc(label: 'Name', input: user.userName),
+        CardRowDesc(label: 'Phone', input: user.userPhoneNumber),
         CardRowDesc(label: 'Delivery Fee', input: "฿${item.deliveryFees}"),
-        CardRowDesc(label: 'Address', input: user.address),
+        CardRowDesc(label: 'Address', input: user.userAddress),
         CardRowDesc(label: 'Expected Arrival Date', input: arrDate.toString())
       ],
     );
@@ -333,10 +333,10 @@ class DeliveryInformationPickUp extends StatelessWidget {
           'Delivery Information',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        CardRowDesc(label: 'Name', input: user.name),
-        CardRowDesc(label: 'Phone', input: user.phone),
+        CardRowDesc(label: 'Name', input: user.userName),
+        CardRowDesc(label: 'Phone', input: user.userPhoneNumber),
         CardRowDesc(label: 'Delivery Fee', input: "฿${item.deliveryFees}"),
-        CardRowDesc(label: 'Address', input: user.address),
+        CardRowDesc(label: 'Address', input: user.userAddress),
         CardRowDesc(label: 'Pick Up Date', input: arrDate.toString())
       ],
     );
@@ -362,10 +362,10 @@ class DeliveryInformationDelivered extends StatelessWidget {
           'Delivery Information',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        CardRowDesc(label: 'Name', input: user.name),
-        CardRowDesc(label: 'Phone', input: user.phone),
+        CardRowDesc(label: 'Name', input: user.userName),
+        CardRowDesc(label: 'Phone', input: user.userPhoneNumber),
         CardRowDesc(label: 'Delivery Fee', input: "฿${item.deliveryFees}"),
-        CardRowDesc(label: 'Address', input: user.address),
+        CardRowDesc(label: 'Address', input: user.userAddress),
         CardRowDesc(label: 'Expected Arrival Date', input: arrDate.toString()),
       ],
     );

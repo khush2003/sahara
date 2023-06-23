@@ -8,12 +8,7 @@ import 'package:sahara/models/user.dart';
 import 'package:sahara/routes/routes.dart';
 import 'package:sahara/theme/app_theme.dart';
 import 'package:sahara/theme/global_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../models/user.dart';
-import '../routes/routes.dart';
-import '../theme/app_theme.dart';
 
 class CreateDonation extends StatefulWidget {
   const CreateDonation({Key? key}) : super(key: key);
@@ -23,7 +18,7 @@ class CreateDonation extends StatefulWidget {
 }
 
 class CreateDonationView extends State<CreateDonation> {
-  final user = UserSahara(name: 'H');
+  final user = UserSahara( userName: '', userPhoneNumber: '');
 
   double usabilityValue = 50;
 
