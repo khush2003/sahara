@@ -23,7 +23,7 @@ String formatDuration(Duration duration) {
 
 bool checkEmail(String input) {
   RegExp regex =
-      RegExp(r'^[a-zA-Z0-9._%+-]+(@kmutt\.ac\.th)?$', caseSensitive: false);
+      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+", caseSensitive: false);
   return regex.hasMatch(input);
 }
 

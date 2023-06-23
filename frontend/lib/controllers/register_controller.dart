@@ -33,6 +33,7 @@ class RegisterController extends GetxController {
   }
 
   Future<void>? registerUser() async {
+    print("buttoniscliked");
     String username = usernameController.text;
     String email = emailController.text;
     String password = passwordController.text;
@@ -78,7 +79,7 @@ class RegisterController extends GetxController {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';
     }
-    return checkEmail(emailController.text.trim())
+    return checkEmail(emailController.text)
         ? null
         : "Please enter a vaild email";
   }

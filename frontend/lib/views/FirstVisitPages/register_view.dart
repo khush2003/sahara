@@ -80,7 +80,7 @@ class RegisterView extends StatelessWidget {
                                 hintText: "Enter your password",
                                 secureText: true,
                                 controllerFunction: registerController.passwordController,
-                                validator: registerController.validateConfirmPassword,
+                                validator: registerController.validatePassword,
                               ),
                             ],
                           ),
@@ -96,6 +96,8 @@ class RegisterView extends StatelessWidget {
                                 textStyle: formFieldText(color: Colors.white),
                                 hintText: "Confirm your password",
                                 secureText: true,
+                                controllerFunction: registerController.confirmPasswordController,
+                                validator: registerController.validateConfirmPassword,
                               ),
                             ],
                           ),
@@ -104,10 +106,10 @@ class RegisterView extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 40),
                           child: Column(
                             children: [
-                              PrimaryButton(text: "Register", onPressed: () {}),
+                              PrimaryButton(text: "Register", onPressed: () {registerController.registerUser();}),
                               TextButton(
                                   onPressed: () {
-                                    registerController.registerUser();
+                                    Get.offAllNamed(Routes.login);
                                   },
                                   child: Text(
                                     "Go back to Login page",
