@@ -57,13 +57,22 @@ class RestAPI {
     }
   }
 
-   Future<dynamic> getCurrentUserInfo(String currentId) async {
-   Response response = await connect.get('$getBackendUrl/users/$currentId');
-   if(response.statusCode == 200) {
-    final userData = jsonDecode(response.body);
-     return UserSahara.fromjson(userData, currentId);
-   }else{
-     return null;
-   }
- }
+  Future<dynamic> getCurrentUserInfo(String currentId) async {
+    Response response = await connect.get('$getBackendUrl/users/$currentId');
+    if (response.statusCode == 200) {
+      final userData = jsonDecode(response.body);
+      return UserSahara.fromjson(userData, currentId);
+    } else {
+      return null;
+    }
+  }
+
+  Future<dynamic> getUserById(String userId) async {
+    Response response = await connect.get('$getBackendUrl/users/$userId');
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      print("No user found!");
+    }
+  }
 }
