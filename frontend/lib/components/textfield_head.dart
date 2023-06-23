@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../theme/app_theme.dart';
 
@@ -11,6 +12,8 @@ class TextfieldWithHead extends StatelessWidget {
   final String headText;
   late Color? headTextColor;
   late bool? secureText;
+  late TextEditingController? controllerFunction;
+  final FormFieldValidator<String>? validator;
 
   TextfieldWithHead({
     super.key,
@@ -21,6 +24,8 @@ class TextfieldWithHead extends StatelessWidget {
     required this.headText,
     this.secureText,
     this.headTextColor,
+    this.controllerFunction,
+    this.validator
   });
 
   Color mainColor = lonely;
@@ -36,7 +41,7 @@ class TextfieldWithHead extends StatelessWidget {
         ),
         SizedBox(
           width: double.infinity,
-          child: TextField(
+          child: TextFormField(
             style: formFieldText(
               height: 1.5,
             ),
@@ -51,6 +56,8 @@ class TextfieldWithHead extends StatelessWidget {
                 labelStyle: textStyle.copyWith(color: lonely),
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 0)),
+                    controller: controllerFunction,
+                    validator: validator
           ),
         ),
       ],

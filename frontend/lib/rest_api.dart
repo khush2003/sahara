@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/views/profile_view.dart';
+
+import 'models/user.dart';
 
 const backendPort = 8000;
 const backendUrl = 'http://localhost:$backendPort';
@@ -29,16 +33,12 @@ class RestAPI {
     }
   }
 
-   Future<dynamic> postUserInfo() async {
-    print('postUserInfo() method called');
+   Future<dynamic> postUserInfo(UserSahara user) async {
 
    //body data
-   FormData jsonData = FormData({
-     'Username': 'Note',
-     'UserPhoneNumber': '089-449-9153',
-   });
+   final Map<String, dynamic> userData = user.toJson();
 
-   Response response = await connect.post('$postBackendUrl/users', jsonData);
+   Response response = await connect.post('$postBackendUrl/users', userData);
    if(response.statusCode == 200) {
      return response.body;
    }else{

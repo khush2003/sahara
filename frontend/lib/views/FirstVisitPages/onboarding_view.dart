@@ -33,7 +33,7 @@ class OnBoardingState extends State<OnBoardingView> {
             }
             if (count > 10) {
               Get.offAll(
-                () => const LoginView(),
+                () => LoginView(),
                 transition: Transition.fade,
                 duration: const Duration(seconds: 2),
               );

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/auth_controller.dart';
+import 'package:sahara/controllers/login_controller.dart';
 import '../../components/primary_button.dart';
 import '../../components/textfield_app.dart';
 import '../../routes/routes.dart';
 import '../../theme/app_theme.dart';
 
-
 class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+  LoginView({Key? key}) : super(key: key);
+  final AuthController authController= Get.put(AuthController());
+  final LogInController logInController = Get.put(LogInController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +46,8 @@ class LoginView extends StatelessWidget {
                           borderColor: const Color.fromARGB(255, 255, 255, 255),
                           textStyle: formFieldText(color: Colors.white),
                           hintText: "Email",
+                          controllerFunction: logInController.emailController,
+                          validator: logInController.validateEmail,
                         ),
                       ),
                       Padding(
@@ -55,6 +60,9 @@ class LoginView extends StatelessWidget {
                                   const Color.fromARGB(255, 255, 255, 255),
                               textStyle: formFieldText(color: Colors.white),
                               hintText: "Password",
+                              controllerFunction:
+                                  logInController.passwordController,
+                              validator: logInController.validatePassword,
                               secureText: true,
                             ),
                             TextButton(
@@ -78,7 +86,7 @@ class LoginView extends StatelessWidget {
                             PrimaryButton(
                                 text: "Login",
                                 onPressed: () {
-                                  Get.offAllNamed(Routes.app);
+                                  logInController.loginUser();
                                 }),
                             TextButton(
                                 onPressed: () {
