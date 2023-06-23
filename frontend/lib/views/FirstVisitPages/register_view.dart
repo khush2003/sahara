@@ -12,7 +12,6 @@ import '../../theme/app_theme.dart';
 class RegisterView extends StatelessWidget {
   RegisterView({Key? key}) : super(key: key);
   final RegisterController registerController = Get.put(RegisterController());
-  final DonatingItem donationItemsController = Get.put(DonatingItem());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

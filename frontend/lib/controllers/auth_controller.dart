@@ -42,7 +42,7 @@ class AuthController extends GetxController {
           discountCoupon: [],
           userOwnPost: [],
           userReviewPost: []);
-      Get.offAllNamed(Routes.feed);
+      Get.offAllNamed(Routes.app);
       dynamic result = await restApi.postUserInfo(confirmedUser);
       sucessSnackBar("Account Created Sucessfully!");
     } on FirebaseAuthException catch (e) {
