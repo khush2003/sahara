@@ -6,7 +6,9 @@ class DonationItem {
   final String name, description, imageUrl, category;
   final double itemWidth, itemLength, itemHeight, weight;
   final DeliveryPaidBy deliveryPaidBy;
-  final Duration usedDuration;
+  final int usedDuration;
+  final String usedDurationType;
+  final Duration usedDurationTotal;
   final double useability, price, deliveryFees;
   final List<String> tags;
   final Author author;
@@ -25,6 +27,8 @@ class DonationItem {
     required this.weight,
     required this.deliveryPaidBy,
     required this.usedDuration,
+    required this.usedDurationType,
+    this.usedDurationTotal = const Duration(days: 0),
     required this.useability,
     required this.price,
     required this.deliveryFees,
@@ -47,7 +51,9 @@ class DonationItem {
         itemHeight: 50,
         weight: 120,
         deliveryPaidBy: DeliveryPaidBy.donor,
-        usedDuration: const Duration(days: 14),
+        usedDuration: 2,
+        usedDurationType: 'Week',
+        usedDurationTotal: const Duration(days: 14),
         useability: 0.80,
         price: 5000,
         deliveryFees: 5000,
@@ -70,7 +76,9 @@ class DonationItem {
         itemHeight: json['itemHeight'],
         weight: json['weight'],
         deliveryPaidBy: convertFromString(json['deliveryPaidBy']),
-        usedDuration: Duration(days: json['usedDuration'] as int),
+        usedDuration: json['usedDuration'],
+        usedDurationType: json['usedDurationType'],
+        usedDurationTotal: Duration(days: json['usedDuration'] as int),
         useability: json['useability'],
         price: json['price'],
         deliveryFees: json['deliveryFees'],
@@ -82,6 +90,6 @@ class DonationItem {
 
   @override
   String toString() {
-    return 'DonationItem{donationId: $donationId, name: $name, description: $description, imageUrl: $imageUrl, category: $category, itemWidth: $itemWidth, itemLength: $itemLength, itemHeight: $itemHeight, weight: $weight, deliveryPaidBy: $deliveryPaidBy, usedDuration: $usedDuration, useability: $useability, price: $price, deliveryFees: $deliveryFees, tags: $tags, author: $author, isOverPriced: $isOverPriced, estimatedItemValue: $estimatedItemValue}';
+    return 'DonationItem{donationId: $donationId, name: $name, description: $description, imageUrl: $imageUrl, category: $category, itemWidth: $itemWidth, itemLength: $itemLength, itemHeight: $itemHeight, weight: $weight, deliveryPaidBy: $deliveryPaidBy, usedDuration: $usedDuration, usedDurationType: $usedDurationType, usedDurationTotal: $usedDurationTotal, useability: $useability, price: $price, deliveryFees: $deliveryFees, tags: $tags, author: $author, isOverPriced: $isOverPriced, estimatedItemValue: $estimatedItemValue}';
   }
 }

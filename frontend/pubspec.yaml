@@ -52,6 +52,7 @@ dependencies:
   custom_navigation_bar: ^0.8.2
   just_audio: ^0.9.34
   url_launcher: ^6.1.11
+  image_picker: ^0.8.9
 
 dev_dependencies:
   flutter_test:

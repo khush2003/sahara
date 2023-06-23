@@ -40,7 +40,7 @@ class DonationDetailSection extends StatelessWidget {
                 DetailRow(label: 'Name', value: donationPost.name),
                 DetailRow(
                     label: 'Used Duration',
-                    value: formatDuration(donationPost.usedDuration)),
+                    value: formatDuration(donationPost.usedDurationTotal)),
                 DetailRow(
                     label: 'Useability',
                     value: '${donationPost.useability * 100}%'),
