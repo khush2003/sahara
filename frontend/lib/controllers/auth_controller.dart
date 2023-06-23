@@ -58,7 +58,7 @@ class AuthController extends GetxController {
       String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      Get.offAllNamed(Routes.feed);
+      Get.offAllNamed(Routes.app);
       sucessSnackBar("Login Sucess!");
     } on FirebaseAuthException catch (e) {
       return getAuthErrorMessage(e.code);
