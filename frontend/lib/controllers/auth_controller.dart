@@ -44,12 +44,11 @@ class AuthController extends GetxController {
           userReviewPost: []);
       Get.offAllNamed(Routes.app);
       dynamic result = await restApi.postUserInfo(confirmedUser);
-      sucessSnackBar("Account Created Sucessfully!");
+      successSnackBar("Account Created Sucessfully!");
     } on FirebaseAuthException catch (e) {
       return getAuthErrorMessage(e.code);
     } catch (e) {
-      print(e.toString());
-      return e.toString();
+      return ("There was an unexpected error occurred, Please try again later");
     }
     return null;
   }
@@ -59,11 +58,11 @@ class AuthController extends GetxController {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       Get.offAllNamed(Routes.app);
-      sucessSnackBar("Login Sucess!");
+      successSnackBar("Login Sucess!");
     } on FirebaseAuthException catch (e) {
       return getAuthErrorMessage(e.code);
     } catch (_) {
-      return "There was an unexpected error! Please try again later";
+      return "This email hasn't been registered to Sahara";
     }
     return null;
   }

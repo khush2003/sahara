@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/theme/app_theme.dart';
 
 enum DeliveryPaidBy { donor, receiver, both }
 
@@ -22,23 +23,58 @@ String formatDuration(Duration duration) {
 }
 
 bool checkEmail(String input) {
-  RegExp regex =
-      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+", caseSensitive: false);
+  RegExp regex = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+      caseSensitive: false);
   return regex.hasMatch(input);
 }
 
-void sucessSnackBar(String message) {
-  Get.snackbar("Sucess", message,
-      snackPosition: SnackPosition.BOTTOM,
-      colorText: Colors.white,
-      backgroundColor: Colors.green);
+void successSnackBar(String message) {
+  Get.snackbar(
+    "Success",
+    message,
+    snackPosition: SnackPosition.BOTTOM,
+    colorText: Colors.white,
+    backgroundColor: Colors.green,
+    margin: EdgeInsets.all(16),
+    padding: EdgeInsets.all(16),
+    borderRadius: 8,
+    duration: Duration(seconds: 3),
+    snackStyle: SnackStyle.FLOATING,
+    shouldIconPulse: true,
+    titleText: Text(
+      "Success",
+      style: headTextBold(),
+    ),
+    messageText: Text(
+      message,
+      style: regularTextBold(color: Colors.white),
+    ),
+  );
 }
 
 void errorSnackBar(String message) {
-  Get.snackbar("Error", message,
-      snackPosition: SnackPosition.BOTTOM,
-      colorText: Colors.white,
-      backgroundColor: Colors.red);
+  Get.snackbar(
+    "Error",
+    message,
+    snackPosition: SnackPosition.BOTTOM,
+    colorText: Colors.white,
+    backgroundColor: Colors.red,
+    margin: EdgeInsets.all(16),
+    padding: EdgeInsets.all(16),
+    borderRadius: 8,
+    duration: Duration(seconds: 3),
+    snackStyle: SnackStyle.FLOATING,
+    shouldIconPulse: true,
+    titleText: Text(
+      "Error",
+      style: headTextBold(),
+    ),
+    messageText: Text(
+      message,
+      style: regularTextBold(color: Colors.white),
+    ),
+  );
 }
 
 String getAuthErrorMessage(String errorCode) {
