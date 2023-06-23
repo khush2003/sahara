@@ -28,4 +28,22 @@ class RestAPI {
       return null;
     }
   }
+
+   Future<dynamic> postUserInfo() async {
+
+   //body data
+   FormData formData = FormData({
+     'Username': 'Note',
+     'UserPhoneNumber': '089-449-9153',
+   });
+
+   Response response = await connect.post('$postBackendUrl/users', formData);
+   if(response.statusCode == 200) {
+     return response.body;
+   }else{
+     return null;
+   }
+ }
 }
+
+
