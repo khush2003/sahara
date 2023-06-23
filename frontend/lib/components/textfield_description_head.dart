@@ -10,6 +10,7 @@ class TextfieldDescriptionWithHead extends StatelessWidget {
   final Color borderColor;
   final String headText;
   late bool? secureText;
+  late TextEditingController? controllerFunction;
 
   TextfieldDescriptionWithHead({
     super.key,
@@ -19,6 +20,7 @@ class TextfieldDescriptionWithHead extends StatelessWidget {
     required this.borderColor,
     required this.headText,
     this.secureText,
+    this.controllerFunction
   });
 
   Color mainColor = lonely;
@@ -56,6 +58,7 @@ class TextfieldDescriptionWithHead extends StatelessWidget {
                   hintStyle: textStyle.copyWith(color: lonely),
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 0)),
+                      controller: controllerFunction,
             ),
           ),
         ),

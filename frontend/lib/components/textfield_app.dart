@@ -9,6 +9,9 @@ class TextfieldAPP extends StatelessWidget {
   final TextStyle textStyle;
   final Color borderColor;
   late bool? secureText;
+  late TextEditingController? controllerFunction;
+  late FormFieldValidator<String?>? validator;
+  
 
   TextfieldAPP({
     super.key,
@@ -17,6 +20,8 @@ class TextfieldAPP extends StatelessWidget {
     required this.textStyle,
     required this.borderColor,
     this.secureText,
+    this.controllerFunction,
+    this.validator,
   });
 
   Color mainColor = lonely;
@@ -34,6 +39,8 @@ class TextfieldAPP extends StatelessWidget {
               const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           hintText: hintText,
           hintStyle: textStyle.copyWith(color: lonely)),
+          controller: controllerFunction,
+          validator: validator,
     );
   }
 }

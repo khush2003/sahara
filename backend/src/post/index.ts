@@ -19,7 +19,6 @@ postRoutes.post("/donationItem", async (req, res) =>  {
 
 postRoutes.post("/users", async (req, res) =>  {
     const user = await db.collection('users').add(req.body
-
     );
     res.status(200).send(user);
 });
