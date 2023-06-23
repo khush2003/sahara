@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:sahara/controllers/auth_controller.dart';
 import 'package:sahara/models/author.dart';
 import 'package:sahara/models/donation_item.dart';
 
@@ -33,6 +34,8 @@ class CreateDonationController extends GetxController {
 
   final _firebaseStorage = FirebaseStorage.instance;
   final _imagePicker = ImagePicker();
+
+  //final _auth = AuthController.instance;
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
@@ -64,7 +67,7 @@ class CreateDonationController extends GetxController {
     durationTypeOptions =
         await FirebaseService().getDurationTypes() ?? ['Week', 'Month'];
     paidByOptions = await FirebaseService().getPaidBy() ??
-        ['Donor (you)', '50/50' ,'Receiver'];
+        ['Donor (you)', '50/50', 'Receiver'];
     isLoading(false);
     super.onInit();
   }
@@ -98,7 +101,7 @@ class CreateDonationController extends GetxController {
       var downloadUrl = await snapshot.ref.getDownloadURL();
       imageUrl(downloadUrl);
     } else {
-      const SnackBar(content: Text('No Image Selected'));
+      warningSnackBar('Warning: No Image Selected');
       return;
     }
   }
@@ -108,8 +111,7 @@ class CreateDonationController extends GetxController {
     if (!tags.contains(tag)) {
       tags.add(tag);
     } else {
-      Get.snackbar('Warning', 'Tag with same name already exists',
-          backgroundColor: Colors.yellow, snackPosition: SnackPosition.BOTTOM);
+      warningSnackBar('Warning: Tag with same name already exists');
     }
   }
 
@@ -173,15 +175,14 @@ class CreateDonationController extends GetxController {
             imageUrl: '',
           ),
         );
-        const SnackBar(content: Text('Donation Item was created successfully'));
+        await FirebaseService().addItem(item /* _auth.user!*/);
+        successSnackBar('Success: Donation Item was created successfully');
         Get.offAllNamed(Routes.feed);
       } catch (e) {
-        const SnackBar(
-            content: Text('Error: There is an error in creating donation'));
+        errorSnackBar('Error: There is an error in creating donation');
       }
     } else {
-      const SnackBar(
-          content: Text('Error: Fill all the fields to create a donation'));
+      errorSnackBar('Error: Fill all the fields to create a donation');
     }
   }
 }

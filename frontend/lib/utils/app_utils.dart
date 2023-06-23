@@ -36,14 +36,38 @@ void successSnackBar(String message) {
     snackPosition: SnackPosition.BOTTOM,
     colorText: Colors.white,
     backgroundColor: Colors.green,
-    margin: EdgeInsets.all(16),
-    padding: EdgeInsets.all(16),
+    margin: const EdgeInsets.all(16),
+    padding: const EdgeInsets.all(16),
     borderRadius: 8,
-    duration: Duration(seconds: 3),
+    duration: const Duration(seconds: 3),
     snackStyle: SnackStyle.FLOATING,
     shouldIconPulse: true,
     titleText: Text(
       "Success",
+      style: headTextBold(),
+    ),
+    messageText: Text(
+      message,
+      style: regularTextBold(color: Colors.white),
+    ),
+  );
+}
+
+void warningSnackBar(String message) {
+  Get.snackbar(
+    "Warning",
+    message,
+    snackPosition: SnackPosition.BOTTOM,
+    colorText: Colors.white,
+    backgroundColor: Colors.orange,
+    margin: const EdgeInsets.all(16),
+    padding: const EdgeInsets.all(16),
+    borderRadius: 8,
+    duration: const Duration(seconds: 3),
+    snackStyle: SnackStyle.FLOATING,
+    shouldIconPulse: true,
+    titleText: Text(
+      "Warning",
       style: headTextBold(),
     ),
     messageText: Text(
@@ -60,10 +84,10 @@ void errorSnackBar(String message) {
     snackPosition: SnackPosition.BOTTOM,
     colorText: Colors.white,
     backgroundColor: Colors.red,
-    margin: EdgeInsets.all(16),
-    padding: EdgeInsets.all(16),
+    margin: const EdgeInsets.all(16),
+    padding: const EdgeInsets.all(16),
     borderRadius: 8,
-    duration: Duration(seconds: 3),
+    duration: const Duration(seconds: 3),
     snackStyle: SnackStyle.FLOATING,
     shouldIconPulse: true,
     titleText: Text(
