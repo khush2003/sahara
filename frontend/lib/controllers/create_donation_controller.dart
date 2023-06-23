@@ -1,24 +1,17 @@
-import 'dart:ffi';
 import 'dart:io';
-import 'dart:convert';
 
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:http/http.dart' as http;
-import 'package:sahara/controllers/auth_controller.dart';
 import 'package:sahara/models/author.dart';
 import 'package:sahara/models/donation_item.dart';
 
 import 'package:sahara/routes/routes.dart';
-import 'package:sahara/controllers/donation_item_controller.dart';
 import 'package:sahara/services/firebase_firestore_service.dart';
 import 'package:sahara/utils/app_utils.dart';
-import 'package:sahara/views/profile_view.dart';
 
 class CreateDonationController extends GetxController {
   final imageUrl = ''.obs;
