@@ -19,7 +19,7 @@ class RegisterController extends GetxController {
 
       final _auth = AuthController.instance;
 
-  //Not finished YET!! Don't change anything!!!!
+
 
 
   void authStateChanges() {

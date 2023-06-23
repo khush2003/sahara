@@ -12,7 +12,6 @@ class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final restApi = RestAPI.instance;
 
-  //Not finished YET!! Don't change anything!!!!
 
     void sendDataToFirestore(String username) async {
     dynamic result = await restApi.postUserInfo(UserSahara(userName: username));
