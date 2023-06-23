@@ -62,7 +62,7 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       return getAuthErrorMessage(e.code);
     } catch (_) {
-      return "This email hasn't been registered to Sahara";
+      return "There was an unexpected error occurred, Please try again later";
     }
     return null;
   }
