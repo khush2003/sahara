@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class UserSahara {
   final String? uid;
   final String userName;
@@ -24,8 +26,7 @@ class UserSahara {
   });
   @override
   String toString() {
-    return 'AppUser{uid: $uid, '
-        '}';
+    return 'AppUser{uid: $uid, ''}';
   }
 
   factory UserSahara.empty() {
@@ -45,18 +46,18 @@ class UserSahara {
     );
   }
 
-  factory UserSahara.fromMap(Map<String, dynamic> map, String userId) {
+  factory UserSahara.fromjson(Map<String, dynamic> json,String userId) {
     return UserSahara(
-      token: map['Token'] ?? '',
+      token: json['Token'] ?? '',
       uid: userId,
-      userName: map['Username'],
-      userPhoneNumber: map['UserPhoneNumber'],
-      profilePicture: map['ProfilePicture'],
-      userAddress: map['UserAddress'],
-      blockedUser: List<String>.from(map['BlockedUser'] ?? []),
-      discountCoupon: List<String>.from(map['DiscountCoupon'] ?? []),
-      userOwnPost: List<String>.from(map['YserOwnPost'] ?? []),
-      userReviewPost: List<String>.from(map['UserReviewPost'] ?? []),
+      userName: json['Username'],
+      userPhoneNumber: json['UserPhoneNumber'],
+      profilePicture: json['ProfilePicture'],
+      userAddress: json['UserAddress'],
+      blockedUser: List<String>.from(json['BlockedUser'] ?? []),
+      discountCoupon: List<String>.from(json['DiscountCoupon'] ?? []),
+      userOwnPost: List<String>.from(json['YserOwnPost'] ?? []),
+      userReviewPost: List<String>.from(json['UserReviewPost'] ?? []),
     );
   }
 }

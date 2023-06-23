@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
 import 'package:get/get.dart';
 
 
 class RegisterController extends GetxController {
+  late UserSahara user;
   final restApi = RestAPI.instance;
   static RegisterController get instance => Get.find();
   final FirebaseAuth _auth = FirebaseAuth.instance;
