@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import
 
+import 'dart:html';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -113,8 +115,8 @@ class CreateDonationView extends State<CreateDonation> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 8.0),
                         child: DropDownCustomCategory(
-                              controller: createDonationController,
-                            ),
+                          controller: createDonationController,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -504,6 +506,11 @@ class CreateDonationView extends State<CreateDonation> {
   }
 }
 
+int deliveryFees(double width, double length, double height, double weight) {
+    double totalFee = (0.3 * (width + length + height) * (0.25 * weight));
+    return totalFee.round();
+  }
+
 Widget createTags(CreateDonationController controller) {
   final tagsWidgets = <Widget>[];
   for (int i = 0; i < controller.tags.length; i++) {
@@ -574,8 +581,7 @@ class DropDownCustomCategory extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide:
-                BorderSide(color: primary),
+            borderSide: BorderSide(color: primary),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -635,8 +641,7 @@ class DropDownCustomDuration extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide:
-                BorderSide(color: primary),
+            borderSide: BorderSide(color: primary),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -673,7 +678,6 @@ class DropDownCustomDuration extends StatelessWidget {
 }
 
 class DropDownCustomDurationType extends StatelessWidget {
-
   const DropDownCustomDurationType({
     super.key,
     required this.controller,
@@ -697,8 +701,7 @@ class DropDownCustomDurationType extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide:
-                BorderSide(color: primary),
+            borderSide: BorderSide(color: primary),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -735,7 +738,6 @@ class DropDownCustomDurationType extends StatelessWidget {
 }
 
 class DropDownCustomPaidBy extends StatelessWidget {
-
   const DropDownCustomPaidBy({
     super.key,
     required this.controller,
@@ -759,8 +761,7 @@ class DropDownCustomPaidBy extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide:
-                BorderSide(color: primary),
+            borderSide: BorderSide(color: primary),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -795,4 +796,3 @@ class DropDownCustomPaidBy extends StatelessWidget {
     );
   }
 }
-

@@ -19,7 +19,7 @@ class CreateDonationController extends GetxController {
   final selectedCategory = 'Electronic'.obs;
   final duration = '1'.obs;
   final durationType = 'Week'.obs;
-  final usability = '0.5'.obs;
+  final usability = ''.obs;
   final paidBy = 'Donor (you)'.obs;
 
   final isOn = false.obs;
