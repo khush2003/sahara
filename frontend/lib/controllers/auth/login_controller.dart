@@ -34,7 +34,7 @@ class LogInController extends GetxController {
       }
     } else {
       errorSnackBar(
-          "Please enter a vaild Email without a domain (no @...) or with @kmutt.ac.th");
+          "Please enter a vaild Email without a domain (no @...)");
     }
   }
   String? validateEmail(String? value) {
