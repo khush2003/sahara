@@ -51,30 +51,28 @@ class FirebaseService {
   }
 
   Future<void> addItem(DonationItem item /*, UserSahara user*/) async {
-    final doc = await _firestore.collection('donationItems').add(
-      {
-        'donationId': item.donationId,
-        'name': item.name,
-        'description': item.description,
-        'imageUrl': item.imageUrl,
-        'category': item.category,
-        'itemWidth': item.itemWidth,
-        'itemLength': item.itemLength,
-        'itemHeight': item.itemHeight,
-        'weight': item.weight,
-        'deliveryPaidBy': item.deliveryPaidBy,
-        'usedDuration': item.usedDuration,
-        'usedDurationType': item.usedDurationType,
-        'usedDurationTotal': item.usedDurationTotal.inDays,
-        'useability': item.useability,
-        'price': item.price,
-        'deliveryFees': item.deliveryFees,
-        'tags': item.tags,
-        /*'authorId': user.uid,
+    final doc = await _firestore.collection('donationItems').add({
+      'donationId': item.donationId,
+      'name': item.name,
+      'description': item.description,
+      'imageUrl': item.imageUrl,
+      'category': item.category,
+      'itemWidth': item.itemWidth,
+      'itemLength': item.itemLength,
+      'itemHeight': item.itemHeight,
+      'weight': item.weight,
+      'deliveryPaidBy': item.deliveryPaidBy,
+      'usedDuration': item.usedDuration,
+      'usedDurationType': item.usedDurationType,
+      'usedDurationTotal': item.usedDurationTotal.inDays,
+      'useability': item.useability,
+      'price': item.price,
+      'deliveryFees': item.deliveryFees,
+      'tags': item.tags,
+      /*'authorId': user.uid,
         'authorName': user.userName,
         'authorImageUrl': user.profilePicture,*/
-      }
-    );
+    });
   }
 
   Future<void> addUser(UserSahara user) async {
@@ -90,5 +88,29 @@ class FirebaseService {
       'userReviewPost': user.userReviewPost ?? [],
       'token': user.token ?? '',
     });
+  }
+
+  Future<UserSahara?> getUserById(String userId) async {
+    final document = _firestore.collection('users').doc(userId);
+    final snapshot = await document.get();
+
+    if (!snapshot.exists) {
+      return null;
+    }
+
+    final data = snapshot.data() as Map<String, dynamic>;
+
+    return UserSahara(
+      uid: data['uid'],
+      userName: data['userName'],
+      userPhoneNumber: data['userPhoneNumber'],
+      profilePicture: data['profilePicture'],
+      userAddress: data['userAddress'],
+      blockedUser: List<String>.from(data['blockedUser'] ?? []),
+      discountCoupon: List<String>.from(data['discountCoupon'] ?? []),
+      userOwnPost: List<String>.from(data['userOwnPost'] ?? []),
+      userReviewPost: List<String>.from(data['userReviewPost'] ?? []),
+      token: data['token'],
+    );
   }
 }

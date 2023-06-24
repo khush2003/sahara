@@ -18,9 +18,21 @@ const putRoutes = (0, express_1.default)();
 putRoutes.use(express_1.default.json());
 // Place Routes Here
 putRoutes.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield firebase_1.db.collection('users').add({
-        'hello': 'world'
+    const user = yield firebase_1.db.collection("users").add({
+        hello: "world",
     });
     res.send(user);
+}));
+putRoutes.put("/users/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.params.id;
+    const userData = req.body;
+    try {
+        yield firebase_1.db.collection('users').doc(userId).set(userData, { merge: true });
+        res.status(200).send("User updated successfully");
+    }
+    catch (error) {
+        console.error("Error updating user:", error);
+        res.status(500).send("Error updating user");
+    }
 }));
 exports.default = putRoutes;

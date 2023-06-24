@@ -5,6 +5,7 @@ import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
 import '../models/donation_item.dart';
 import '../models/review.dart';
+import '../models/user.dart';
 import '../theme/app_theme.dart';
 import 'package:get/get.dart';
 
@@ -13,28 +14,41 @@ import '../controllers/profile_view_controller.dart';
 class ProfileView extends StatelessWidget {
   ProfileView({super.key});
   final CustomTabController _tabController = Get.put(CustomTabController());
+  // CustomTabController _tabController = Get.find<CustomTabController>();
 
   @override
   Widget build(BuildContext context) {
+    final UserSahara? user = _tabController.user;
     return Scaffold(
       body: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
-          scrollbars: true,
+          scrollbars: false,
         ),
         child: Stack(
           children: [
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     height: 215,
-                    child: TopSection(
-                      profile:
-                          'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                      cover:
-                          'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFuZHNjYXBlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60',
-                      username: 'Gorgeous Owl',
-                      email: 'johndoe@example.com',
+                    child: FutureBuilder<UserSahara?>(
+                      future:
+                          _tabController.getUserById('cZIHOdL8GxrleOT9uUYL'),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          final user = snapshot.data!;
+                          return TopSection(
+                            profile:
+                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                            cover:
+                                'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFuZHNjYXBlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60',
+                            username: user.userName ?? '',
+                            email: 'johndoe@example.com',
+                          );
+                        } else {
+                          return Text('Error: ${snapshot.error}');
+                        }
+                      },
                     ),
                   ),
                   SocialIcons(),
@@ -175,7 +189,8 @@ class TopSection extends StatelessWidget {
 
 class SocialIcons extends StatelessWidget {
   final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
-    foregroundColor: Colors.black, backgroundColor: Colors.white, // Set text color to black
+    foregroundColor: Colors.black,
+    backgroundColor: Colors.white, // Set text color to black
     elevation: 3, // Set the desired box shadow elevation
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8), // Set the desired border radius

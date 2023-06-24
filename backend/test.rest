@@ -53,3 +53,18 @@ Content-Type: application/json
    "userOwnPost": [],
    "userReviewPost":[]
 }
+
+
+### PUT
+PUT http://localhost:8000/put/users/ACRU8gZWtOEJl9hvFicK
+Content-Type: application/json
+
+{
+  "userName": "Updated Name",
+  "userPhoneNumber": "1234567890",
+  "userAddress": "New Address"
+}
+
+### GET
+GET http://localhost:8000/get/users/ACRU8gZWtOEJl9hvFicK
+

@@ -3,7 +3,7 @@ import 'dart:convert';
 class UserSahara {
   final String? uid;
   final String userName;
-  final String? userPhoneNumber;
+  late final String? userPhoneNumber;
   final String? profilePicture;
   final String? userAddress;
   final List<String>? blockedUser;

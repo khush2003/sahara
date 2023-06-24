@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sahara/controllers/auth_controller.dart';
+import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/utils/app_utils.dart';
 
 class LogInController extends GetxController {

@@ -133,4 +133,14 @@ getRoutes.get('/payments/:id', (req, res) => __awaiter(void 0, void 0, void 0, f
         return res.status(400).send("An Error Occured" + error);
     }
 }));
+getRoutes.get('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const snapshot = yield firebase_1.db.collection('users').doc(req.params.id).get();
+        const users = snapshot.data();
+        res.status(200).send(users);
+    }
+    catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+}));
 exports.default = getRoutes;

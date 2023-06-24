@@ -131,6 +131,17 @@ getRoutes.get('/payments/:id', async (req, res) => {
     }
 })
 
+getRoutes.get('/users/:id', async (req, res) => {
+    try {
+        const snapshot = await db.collection('users').doc(req.params.id).get()
+        const users = snapshot.data()
+        res.status(200).send(users)
+    } catch (error) {
+        return res.status(400).send("An Error Occured" + error)
+    }
+})
+
+
 
 
 export default getRoutes

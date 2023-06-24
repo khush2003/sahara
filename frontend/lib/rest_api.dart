@@ -33,18 +33,46 @@ class RestAPI {
     }
   }
 
-   Future<dynamic> postUserInfo(UserSahara user) async {
+  Future<dynamic> postUserInfo(UserSahara user) async {
+    //body data
+    final Map<String, dynamic> userData = user.toJson();
 
-   //body data
-   final Map<String, dynamic> userData = user.toJson();
+    Response response = await connect.post('$postBackendUrl/users', userData);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return null;
+    }
+  }
 
-   Response response = await connect.post('$postBackendUrl/users', userData);
-   if(response.statusCode == 200) {
-     return response.body;
-   }else{
-     return null;
-   }
- }
+  Future<dynamic> putUserInfo(UserSahara user) async {
+    //body data
+    final Map<String, dynamic> userData = user.toJson();
+
+    Response response = await connect.put('$putBackendUrl/users', userData);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return null;
+    }
+  }
+
+  Future<dynamic> getCurrentUserInfo(String currentId) async {
+    Response response = await connect.get('$getBackendUrl/users/$currentId');
+    if (response.statusCode == 200) {
+      final userData = jsonDecode(response.body);
+      return UserSahara.fromjson(userData, currentId);
+    } else {
+      return null;
+    }
+  }
+
+  Future<dynamic> getUserById(String userId) async {
+    Response response = await connect.get('$getBackendUrl/users/$userId');
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      print("No user found!");
+    }
+  }
 }
-
-
