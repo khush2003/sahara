@@ -68,3 +68,20 @@ Content-Type: application/json
 ### GET
 GET http://localhost:8000/get/users/ACRU8gZWtOEJl9hvFicK
 
+### POST 
+
+POST http://localhost:8000/post/review
+Content-Type: application/json
+
+{
+  "itemName": "Chair",
+  "donorName": "Thomas Shelby",
+  "receiverName": "James Shelby",
+  "itemImage": "",
+  "rating": 0,
+  "price": 0,
+  "usability": 0,
+  "usedDuration": 0,
+  "reviewText": "James loves this chair."
+}
+

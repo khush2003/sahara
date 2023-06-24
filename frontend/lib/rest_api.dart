@@ -75,4 +75,17 @@ class RestAPI {
       print("No user found!");
     }
   }
+
+    Future<dynamic> postReview(UserSahara user) async {
+    //body data
+    final Map<String, dynamic> userData = user.toJson();
+
+    Response response = await connect.post('$postBackendUrl/users', userData);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return null;
+    }
+  }
+
 }

@@ -23,4 +23,10 @@ postRoutes.post("/users", async (req, res) =>  {
     res.status(200).send(user);
 });
 
+postRoutes.post("/review", async (req, res) =>  {
+    const user = await db.collection('reviews').add(req.body
+    );
+    res.status(200).send(user);
+});
+
 export default postRoutes
