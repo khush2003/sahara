@@ -88,4 +88,39 @@ class AuthController extends GetxController {
       return 'An error occurred. Please try again later';
     }
   }
+
+  Future<String?> updateUserName(String userName) async {
+    try {
+      //Get the current user id
+      final UserSahara currentUser = await restApi.getCurrentUserInfo();
+
+      // Update the phone number in the user data
+      final updatedUser = UserSahara(
+        userName: userName,
+        userPhoneNumber: currentUser.userPhoneNumber,
+        profilePicture: currentUser.profilePicture,
+        coverPicture: currentUser.coverPicture,
+        userAddress: currentUser.userAddress,
+        blockedUser: currentUser.blockedUser,
+        discountCoupon: currentUser.discountCoupon,
+        userOwnPost: currentUser.userOwnPost,
+        userReviewPost: currentUser.userReviewPost,
+        token: currentUser.token,
+      );
+
+      final result = await restApi.putUserInfo(updatedUser);
+
+      if (result != null) {
+        // Handle success scenario
+        return 'Phone number updated successfully';
+      } else {
+        // Handle error scenario
+        return 'Failed to update phone number';
+      }
+    } catch (e) {
+      // Handle exception/error
+      print(e);
+      return 'An error occurred. Please try again later';
+    }
+  }
 }

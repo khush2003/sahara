@@ -7,6 +7,7 @@ import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
 import 'package:sahara/theme/app_theme.dart';
 import 'package:sahara/utils/app_utils.dart';
+import 'package:sahara/views/SettingPages/change_phone_number_view.dart';
 
 class PhoneNumberController extends GetxController {
   final restApi = RestAPI.instance;
@@ -19,9 +20,10 @@ class PhoneNumberController extends GetxController {
   Future<void>? updateUserPhoneNumber() async {
     final phoneNumber = phoneNumberController.text;
     if (validateInputs()) {
-      String? error = await _auth.updateUserPhoneNumber(phoneNumber);
-      if (error != null) {
-        errorSnackBar(error.toString());
+      String? result = await _auth.updateUserPhoneNumber(phoneNumber);
+      if (result != null) {
+        successSnackBar(result.toString());
+        refreshPage();
       }
     } else {
       errorSnackBar('Please fill the phoneNumber field correctly.');
@@ -33,13 +35,15 @@ class PhoneNumberController extends GetxController {
       // Get the current user info
       final UserSahara currentUser = await restApi.getCurrentUserInfo();
 
-      print("User phone number: $currentUser");
-
-      return currentUser.userPhoneNumber;
+      if (currentUser.userPhoneNumber != '') {
+        return currentUser.userPhoneNumber;
+      } else {
+        return "Didn't have a number yet";
+      }
     } catch (error) {
       print(error);
-      return null;
     }
+    return null;
   }
 
   String? validatePhoneNumber(String? value) {
@@ -79,6 +83,13 @@ class PhoneNumberController extends GetxController {
         }
         return CircularProgressIndicator();
       },
+    );
+  }
+
+  void refreshPage() {
+    Navigator.pushReplacement(
+      Get.context!,
+      MaterialPageRoute(builder: (context) => ChangePhoneNumberView()),
     );
   }
 }

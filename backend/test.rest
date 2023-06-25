@@ -68,7 +68,7 @@ Content-Type: application/json
 }
 
 ### GET
-GET http://localhost:8000/get/users/vY9xlAikX2RnpXG6JpuV1zZbIQq1
+GET http://localhost:8000/get/users/xmAaGZwuTPbiXENzvuSKeRdpaWG2
 
 ### POST 
 
