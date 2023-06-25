@@ -33,7 +33,7 @@ class UserSahara {
   }
 
   factory UserSahara.empty() {
-    return UserSahara(uid: '',userName: '');
+    return UserSahara(uid: '', userName: '');
   }
 
   String getName() {
@@ -49,7 +49,7 @@ class UserSahara {
     );
   }
 
-  factory UserSahara.fromjson(Map<String, dynamic> json,String userId) {
+  factory UserSahara.fromjson(Map<String, dynamic> json, String userId) {
     return UserSahara(
       uid: userId,
       token: json['token'] ?? '',
@@ -66,7 +66,6 @@ class UserSahara {
   }
   Map<String, dynamic> toJson() {
     return {
-      'uid': uid,
       'userName': userName,
       'userPhoneNumber': userPhoneNumber,
       'profilePicture': profilePicture,

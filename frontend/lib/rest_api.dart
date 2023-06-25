@@ -36,11 +36,8 @@ class RestAPI {
     }
   }
 
-  Future<dynamic> postUserInfo(UserSahara user) async {
-    //body data
-    final uid = auth.currentUser!.uid;
+  Future<dynamic> postUserInfo(UserSahara user, String uid) async {
     final Map<String, dynamic> userData = user.toJson();
-
     Response response =
         await connect.post('$postBackendUrl/users/$uid', userData);
     if (response.statusCode == 200) {

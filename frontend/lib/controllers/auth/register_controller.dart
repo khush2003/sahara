@@ -38,7 +38,7 @@ class RegisterController extends GetxController {
     String email = emailController.text;
     String password = passwordController.text;
     if(validateInputs()){
-    final user = UserSahara(userName: username,uid: uid);
+    final user = UserSahara(userName: username);
     String? error = await _auth.createUser(email, password, user);
     if (error != null) {
         errorSnackBar(error.toString());

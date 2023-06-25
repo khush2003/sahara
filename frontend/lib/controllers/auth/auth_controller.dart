@@ -12,26 +12,15 @@ class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final restApi = RestAPI.instance;
 
-  void sendDataToFirestore(String username) async {
-    dynamic result = await restApi.postUserInfo(UserSahara(userName: username));
-    if (result != null) {
-      // Success, handle the response data
-      print('Data sent successfully: $result');
-    } else {
-      // Error, handle the failure
-      print('Failed to send data');
-    }
-  }
 
   Future<String?> createUser(
       String email, String password, UserSahara user) async {
     print("Create user Activated");
     try {
       // Authenticate user (Create account)
-      await _auth.createUserWithEmailAndPassword(
+      final userData = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       final confirmedUser = UserSahara(
-          uid: _auth.currentUser!.uid,
           userName: user.userName,
           userPhoneNumber: '',
           userAddress: '',
@@ -42,7 +31,7 @@ class AuthController extends GetxController {
           userOwnPost: [],
           userReviewPost: []);
       Get.offAllNamed(Routes.app);
-      dynamic result = await restApi.postUserInfo(confirmedUser);
+      await restApi.postUserInfo(confirmedUser, userData.user!.uid);
       successSnackBar("Account Created Sucessfully!");
     } on FirebaseAuthException catch (e) {
       return getAuthErrorMessage(e.code);
