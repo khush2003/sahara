@@ -31,6 +31,7 @@ class AuthController extends GetxController {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       final confirmedUser = UserSahara(
+          uid: _auth.currentUser!.uid,
           userName: user.userName,
           userPhoneNumber: '',
           userAddress: '',
