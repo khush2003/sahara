@@ -25,15 +25,15 @@ class CustomTabController extends GetxController {
   //   print(user);
   // }
   @override
-  void onInit() {
-    super.onInit();
-    getUserById('cZIHOdL8GxrleOT9uUYL');
-    // ever(user, (UserSahara? user) {
-    //   if (user != null) {
-    //     print(user.userName);
-    //   }
-    // });
-  }
+  // void onInit() {
+  //   super.onInit();
+  //   getUserById('cZIHOdL8GxrleOT9uUYL');
+  //   // ever(user, (UserSahara? user) {
+  //   //   if (user != null) {
+  //   //     print(user.userName);
+  //   //   }
+  //   // });
+  // }
 
   void selectNew() {
     isNewSelected.value = true;
@@ -64,14 +64,14 @@ class CustomTabController extends GetxController {
   //     print("User not found");
   //   }
   // }
-  Future<UserSahara?> getUserById(String userId) async {
-    UserSahara? fetchedUser = await firebaseService.getUserById(userId);
-    if (fetchedUser != null) {
-      user = fetchedUser;
-      print(user!.userPhoneNumber);
-    } else {
-      print("User not found");
-    }
-    return fetchedUser;
-  }
+  // Future<UserSahara?> getUserById(String userId) async {
+  //   UserSahara? fetchedUser = await firebaseService.getUserById(userId);
+  //   if (fetchedUser != null) {
+  //     user = fetchedUser;
+  //     print(user!.userPhoneNumber);
+  //   } else {
+  //     print("User not found");
+  //   }
+  //   return fetchedUser;
+  // }
 }

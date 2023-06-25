@@ -75,42 +75,42 @@ class FirebaseService {
     });
   }
 
-  Future<void> addUser(UserSahara user) async {
-    await _firestore.collection('users').doc(user.uid).set({
-      'uid': user.uid,
-      'userName': user.userName,
-      'userPhoneNumber': user.userPhoneNumber,
-      'profilePicture': user.profilePicture,
-      'userAddress': user.userAddress,
-      'blockedUser': user.blockedUser ?? [],
-      'discountCoupon': user.discountCoupon ?? [],
-      'userOwnPost': user.userOwnPost ?? [],
-      'userReviewPost': user.userReviewPost ?? [],
-      'token': user.token ?? '',
-    });
-  }
+  // Future<void> addUser(UserSahara user) async {
+  //   await _firestore.collection('users').doc(user.uid).set({
+  //     'uid': user.uid,
+  //     'userName': user.userName,
+  //     'userPhoneNumber': user.userPhoneNumber,
+  //     'profilePicture': user.profilePicture,
+  //     'userAddress': user.userAddress,
+  //     'blockedUser': user.blockedUser ?? [],
+  //     'discountCoupon': user.discountCoupon ?? [],
+  //     'userOwnPost': user.userOwnPost ?? [],
+  //     'userReviewPost': user.userReviewPost ?? [],
+  //     'token': user.token ?? '',
+  //   });
+  // }
 
-  Future<UserSahara?> getUserById(String userId) async {
-    final document = _firestore.collection('users').doc(userId);
-    final snapshot = await document.get();
+  // Future<UserSahara?> getUserById(String userId) async {
+  //   final document = _firestore.collection('users').doc(userId);
+  //   final snapshot = await document.get();
 
-    if (!snapshot.exists) {
-      return null;
-    }
+  //   if (!snapshot.exists) {
+  //     return null;
+  //   }
 
-    final data = snapshot.data() as Map<String, dynamic>;
+  //   final data = snapshot.data() as Map<String, dynamic>;
 
-    return UserSahara(
-      uid: data['uid'],
-      userName: data['userName'],
-      userPhoneNumber: data['userPhoneNumber'],
-      profilePicture: data['profilePicture'],
-      userAddress: data['userAddress'],
-      blockedUser: List<String>.from(data['blockedUser'] ?? []),
-      discountCoupon: List<String>.from(data['discountCoupon'] ?? []),
-      userOwnPost: List<String>.from(data['userOwnPost'] ?? []),
-      userReviewPost: List<String>.from(data['userReviewPost'] ?? []),
-      token: data['token'],
-    );
-  }
+  //   return UserSahara(
+  //     uid: data['uid'],
+  //     userName: data['userName'],
+  //     userPhoneNumber: data['userPhoneNumber'],
+  //     profilePicture: data['profilePicture'],
+  //     userAddress: data['userAddress'],
+  //     blockedUser: List<String>.from(data['blockedUser'] ?? []),
+  //     discountCoupon: List<String>.from(data['discountCoupon'] ?? []),
+  //     userOwnPost: List<String>.from(data['userOwnPost'] ?? []),
+  //     userReviewPost: List<String>.from(data['userReviewPost'] ?? []),
+  //     token: data['token'],
+  //   );
+  // }
 }

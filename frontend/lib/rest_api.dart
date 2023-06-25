@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/views/profile_view.dart';
 
@@ -35,9 +37,11 @@ class RestAPI {
 
   Future<dynamic> postUserInfo(UserSahara user) async {
     //body data
+    final uid = FirebaseAuth.instance.currentUser!.uid;
     final Map<String, dynamic> userData = user.toJson();
 
-    Response response = await connect.post('$postBackendUrl/users', userData);
+    Response response =
+        await connect.post('$postBackendUrl/users/$uid', userData);
     if (response.statusCode == 200) {
       return response.body;
     } else {
@@ -67,16 +71,17 @@ class RestAPI {
     }
   }
 
-  Future<dynamic> getUserById(String userId) async {
+  Future<UserSahara?> getUserById(String userId) async {
     Response response = await connect.get('$getBackendUrl/users/$userId');
     if (response.statusCode == 200) {
       return response.body;
     } else {
       print("No user found!");
     }
+    return null;
   }
 
-    Future<dynamic> postReview(UserSahara user) async {
+  Future<dynamic> postReview(UserSahara user) async {
     //body data
     final Map<String, dynamic> userData = user.toJson();
 
@@ -87,5 +92,4 @@ class RestAPI {
       return null;
     }
   }
-
 }
