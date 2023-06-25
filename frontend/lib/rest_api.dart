@@ -21,7 +21,7 @@ class RestAPI {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   //GET all donation items
-  Future<dynamic> getDonationItems() async {
+  Future<dynamic> getDonationItems() async {  
     Response response = await connect.get('$getBackendUrl/donationItems');
     if (response.statusCode == 200) {
       final List<DonationItem> donationItems = [];
