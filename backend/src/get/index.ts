@@ -49,8 +49,9 @@ getRoutes.get('/users', async (req, res) => {
 getRoutes.get('/users/:id', async (req, res) => {
     try {
         const snapshot = await db.collection('users').doc(req.params.id).get()
-        const user = snapshot.data()
-        res.status(200).send(user)
+        const user = snapshot.data();
+        const result = { ...user, uid: req.params.id};
+        res.status(200).send(result)
     } catch (error) {
         return res.status(400).send("An Error Occured" + error)
     }

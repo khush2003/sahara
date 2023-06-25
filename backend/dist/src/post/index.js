@@ -16,13 +16,6 @@ const express_1 = __importDefault(require("express"));
 const firebase_1 = require("../firebase");
 const postRoutes = (0, express_1.default)();
 postRoutes.use(express_1.default.json());
-// Place Routes Here
-postRoutes.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield firebase_1.db.collection('users').add({
-        'hello': 'world'
-    });
-    res.status(200).send(user);
-}));
 postRoutes.post("/donationItem", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const donationItem = yield firebase_1.db.collection('donationItems').add(req.body);
     res.status(200).send(donationItem);
@@ -30,7 +23,7 @@ postRoutes.post("/donationItem", (req, res) => __awaiter(void 0, void 0, void 0,
 postRoutes.post("/users/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.params.id;
     const user = yield firebase_1.db.collection('users').doc(userId).set(req.body);
-    res.status(200).send(user);
+    res.status(200).send(userId);
 }));
 postRoutes.post("/review", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield firebase_1.db.collection('reviews').add(req.body);

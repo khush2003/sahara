@@ -39,8 +39,8 @@ Content-Type: application/json
     "authorImageURL": "https://images.unsplash.com/photo-1581091019745-0d5b8b6a4b0e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVmcmlnZXJ0b3IlMjBzb21ldGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
 }
 
-### POST
-POST http://localhost:8000/post/users
+### POST (change id everytime you post)
+POST http://localhost:8000/post/users/testid1
 Content-Type: application/json
 
 {
@@ -51,7 +51,9 @@ Content-Type: application/json
    "blockedUser": [],
    "discountCoupon": [],
    "userOwnPost": [],
-   "userReviewPost":[]
+   "userReviewPost":[],
+   "coverPicture": "",
+   "token": ""
 }
 
 

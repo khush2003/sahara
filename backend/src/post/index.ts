@@ -4,14 +4,6 @@ import { DonationItem } from "../../types";
 const postRoutes = express()
 postRoutes.use(express.json())
 
-// Place Routes Here
-postRoutes.post("/user", async (req, res) =>  {
-    const user = await db.collection('users').add({
-        'hello': 'world'
-    });
-    res.status(200).send(user);
-});
-
 postRoutes.post("/donationItem", async (req, res) =>  {
     const donationItem = await db.collection('donationItems').add(req.body);
     res.status(200).send(donationItem);
@@ -21,7 +13,7 @@ postRoutes.post("/users/:id", async (req, res) =>  {
     const userId = req.params.id;
     const user = await db.collection('users').doc(userId).set(req.body
     );
-    res.status(200).send(user);
+    res.status(200).send(userId);
 });
 
 postRoutes.post("/review", async (req, res) =>  {
