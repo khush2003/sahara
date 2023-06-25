@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +36,12 @@ class ProfileView extends StatelessWidget {
                       final user = _tabController.user.value;
                       if (user != null) {
                         return TopSection(
-                          profile:
-                              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                          cover:
-                              'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFuZHNjYXBlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60',
+                          profile: user.profilePicture == ''
+                              ? 'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg'
+                              : user.profilePicture,
+                          cover: user.coverPicture,
                           username: user.userName,
-                          email: 'johndoe@example.com',
+                          email: FirebaseAuth.instance.currentUser!.email ?? '',
                         );
                       } else {
                         return Center(
@@ -118,12 +120,13 @@ class ProfileView extends StatelessWidget {
 }
 
 class TopSection extends StatelessWidget {
-  final String profile;
-  final String cover;
+  final String? profile;
+  final String? cover;
   final String username;
   final String email;
+  final CustomTabController _tabController = Get.put(CustomTabController());
 
-  const TopSection({
+  TopSection({
     required this.profile,
     required this.cover,
     required this.username,
@@ -136,11 +139,29 @@ class TopSection extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        Image.network(
-          cover,
-          height: 150,
-          width: double.infinity,
-          fit: BoxFit.fitWidth,
+        GestureDetector(
+          onTap: () => _tabController.uploadImage(),
+          child: Container(
+            height: 150,
+            width: double.infinity,
+            color: cover != '' ? null : Colors.white,
+            child: cover != ''
+                ? Image.network(
+                    cover!,
+                    height: 150,
+                    width: double.infinity,
+                    fit: BoxFit.fitWidth,
+                  )
+                : Center(
+                    child: Text(
+                      'Add Cover Photo',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+          ),
         ),
         Positioned(
           top: 75,
@@ -157,13 +178,16 @@ class TopSection extends StatelessWidget {
                     width: 2,
                   ),
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    profile,
-                    height: 130,
-                    width: 130,
-                    fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () => _tabController.uploadImage(),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      profile!,
+                      height: 130,
+                      width: 130,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -172,12 +196,12 @@ class TopSection extends StatelessWidget {
         ),
         Positioned(
           top: 160,
-          left: 150,
+          left: 155,
           child: Text(username, style: headTextBold()),
         ),
         Positioned(
           top: 185,
-          left: 150,
+          left: 155,
           child: Text(email, style: regularText()),
         ),
       ],

@@ -284,7 +284,6 @@ class EstimatedItemValue extends StatefulWidget {
 
 class EstimatedItemValueState extends State<EstimatedItemValue> {
   final createDonationController = Get.put(CreateDonationController());
-  //double currentSliderValue = 0.5;
 
   double price = 0;
   double usability = 0.5;
@@ -331,20 +330,25 @@ class EstimatedItemValueState extends State<EstimatedItemValue> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.35,
-                    child: Expanded(
-                      child: Slider(
-                        value: usability,
-                        min: 0.5,
-                        max: 1.0,
-                        onChanged: (double value) {
-                          setState(
-                            () {
-                              usability = value;
-                              estimatedCalculated();
+                    child: Flex(
+                      direction: Axis.horizontal,
+                      children: [
+                        Expanded(
+                          child: Slider(
+                            value: usability,
+                            min: 0.5,
+                            max: 1.0,
+                            onChanged: (double value) {
+                              setState(
+                                () {
+                                  usability = value;
+                                  estimatedCalculated();
+                                },
+                              );
                             },
-                          );
-                        },
-                      ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Text(
@@ -374,22 +378,27 @@ class EstimatedItemValueState extends State<EstimatedItemValue> {
                       style: smallTextBold(),
                     ),
                     SizedBox(width: 5),
-                    Expanded(
-                      child: NumberTextFormFieldThemed(
-                        hintText: 'Enter Item Price',
-                        validator: createDonationController.numberValidator,
-                        controller: createDonationController.priceController,
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp(r'^\d+\.?\d{0,2}')),
-                        ],
-                        onChanged: (String value) {
-                          updatePrice(value);
-                          estimatedCalculated();
-                        },
-                      ),
+                    Flex(
+                      direction: Axis.horizontal,
+                      children: [
+                        Expanded(
+                          child: NumberTextFormFieldThemed(
+                            hintText: 'Enter Item Price',
+                            validator: createDonationController.numberValidator,
+                            controller: createDonationController.priceController,
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d+\.?\d{0,2}')),
+                            ],
+                            onChanged: (String value) {
+                              updatePrice(value);
+                              estimatedCalculated();
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
