@@ -56,7 +56,7 @@ Content-Type: application/json
 
 
 ### PUT
-PUT http://localhost:8000/put/users/ACRU8gZWtOEJl9hvFicK
+PUT http://localhost:8000/put/users/vY9xlAikX2RnpXG6JpuV1zZbIQq1
 Content-Type: application/json
 
 {

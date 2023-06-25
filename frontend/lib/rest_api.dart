@@ -38,7 +38,7 @@ class RestAPI {
 
   Future<dynamic> postUserInfo(UserSahara user) async {
     //body data
-    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final uid = auth.currentUser!.uid;
     final Map<String, dynamic> userData = user.toJson();
 
     Response response =
@@ -52,9 +52,11 @@ class RestAPI {
 
   Future<dynamic> putUserInfo(UserSahara user) async {
     //body data
+    final uid = auth.currentUser!.uid;
     final Map<String, dynamic> userData = user.toJson();
 
-    Response response = await connect.put('$putBackendUrl/users', userData);
+    Response response =
+        await connect.put('$putBackendUrl/users/$uid', userData);
     if (response.statusCode == 200) {
       return response.body;
     } else {
@@ -73,7 +75,7 @@ class RestAPI {
       } else {
         throw Exception('Failed to retrieve user info');
       }
-    } on Exception catch (e) {
+    } catch (e) {
       throw Exception('Error: $e');
     }
   }
@@ -81,11 +83,12 @@ class RestAPI {
   Future<UserSahara?> getUserById(String userId) async {
     Response response = await connect.get('$getBackendUrl/users/$userId');
     if (response.statusCode == 200) {
-      return response.body;
+      dynamic userData = response.body;
+      return UserSahara.fromjson(userData);
     } else {
       print("No user found!");
+      return null;
     }
-    return null;
   }
 
   Future<dynamic> postReview(UserSahara user) async {

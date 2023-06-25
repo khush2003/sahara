@@ -57,7 +57,7 @@ class UserSahara {
       userAddress: json['UserAddress'],
       blockedUser: List<String>.from(json['BlockedUser'] ?? []),
       discountCoupon: List<String>.from(json['DiscountCoupon'] ?? []),
-      userOwnPost: List<String>.from(json['YserOwnPost'] ?? []),
+      userOwnPost: List<String>.from(json['UserOwnPost'] ?? []),
       userReviewPost: List<String>.from(json['UserReviewPost'] ?? []),
     );
   }
