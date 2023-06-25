@@ -71,9 +71,20 @@ class AuthController extends GetxController {
       final UserSahara currentUser = await restApi.getCurrentUserInfo();
 
       // Update the phone number in the user data
-      currentUser.userPhoneNumber = userPhoneNumber;
+      final updatedUser = UserSahara(
+        userName: currentUser.userName,
+        userPhoneNumber: userPhoneNumber,
+        profilePicture: currentUser.profilePicture,
+        coverPicture: currentUser.coverPicture,
+        userAddress: currentUser.userAddress,
+        blockedUser: currentUser.blockedUser,
+        discountCoupon: currentUser.discountCoupon,
+        userOwnPost: currentUser.userOwnPost,
+        userReviewPost: currentUser.userReviewPost,
+        token: currentUser.token,
+      );
 
-      final result = await restApi.putUserInfo(currentUser);
+      final result = await restApi.putUserInfo(updatedUser);
 
       if (result != null) {
         // Handle success scenario
@@ -84,6 +95,7 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       // Handle exception/error
+      print(e);
       return 'An error occurred. Please try again later';
     }
   }
