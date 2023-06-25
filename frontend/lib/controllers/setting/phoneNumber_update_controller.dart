@@ -46,7 +46,7 @@ class PhoneNumberController extends GetxController {
     if (value == null || value.isEmpty) {
       return 'Please enter your phonenumber';
     } else if (value.length > 20) {
-      return 'First name cannot be longer than 20 characters';
+      return 'Phone number cannot be longer than 20 characters';
     } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
       return 'Phone number should contain only numbers';
     }
@@ -81,6 +81,4 @@ class PhoneNumberController extends GetxController {
       },
     );
   }
-
-  
 }
