@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 class UserSahara {
-  // final String? uid;
   final String userName;
   late final String? userPhoneNumber;
   final String? profilePicture;
@@ -15,7 +14,6 @@ class UserSahara {
 
   UserSahara({
     this.token,
-    // this.uid,
     this.profilePicture,
     this.coverPicture,
     this.blockedUser,
@@ -26,6 +24,11 @@ class UserSahara {
     this.userAddress,
     this.discountCoupon,
   });
+
+  @override
+  String toString() {
+    return jsonEncode(toJson());
+  }
 
   factory UserSahara.empty() {
     return UserSahara(userName: '');
@@ -44,10 +47,9 @@ class UserSahara {
     );
   }
 
-  factory UserSahara.fromjson(Map<String, dynamic> json,String userId) {
+  factory UserSahara.fromjson(Map<String, dynamic> json) {
     return UserSahara(
       token: json['Token'] ?? '',
-      // uid: userId,
       userName: json['Username'],
       userPhoneNumber: json['UserPhoneNumber'],
       profilePicture: json['ProfilePicture'],
@@ -59,9 +61,8 @@ class UserSahara {
       userReviewPost: List<String>.from(json['UserReviewPost'] ?? []),
     );
   }
-   Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson() {
     return {
-
       'userName': userName,
       'userPhoneNumber': userPhoneNumber,
       'profilePicture': profilePicture,
@@ -72,7 +73,6 @@ class UserSahara {
       'userOwnPost': userOwnPost,
       'userReviewPost': userReviewPost,
       'token': token,
-    };}
+    };
+  }
 }
-
-

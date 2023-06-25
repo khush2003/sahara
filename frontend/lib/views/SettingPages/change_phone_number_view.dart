@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/controllers/setting/phoneNumber_update_controller.dart';
 
 import '../../components/primary_button.dart';
@@ -9,7 +10,9 @@ import '../../theme/app_theme.dart';
 class ChangePhoneNumberView extends StatelessWidget {
   ChangePhoneNumberView({super.key});
 
-  final PhoneNumberController phoneNumberController = Get.put(PhoneNumberController());
+  final PhoneNumberController phoneNumberController =
+      Get.put(PhoneNumberController());
+  final AuthController donationDetailsController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +42,7 @@ class ChangePhoneNumberView extends StatelessWidget {
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        phoneNumberController.getCurrentPhoneNumber() as String,
-                        style: headText()
-                            .copyWith(decoration: TextDecoration.underline),
-                      ),
+                      child: phoneNumberController.buildPhoneNumberWidget(),
                     ),
                   ),
                   Padding(
@@ -53,12 +52,17 @@ class ChangePhoneNumberView extends StatelessWidget {
                         textStyle: formFieldText(),
                         borderColor: defaultTextColor,
                         headText: "New Phone Number",
-                        controllerFunction: phoneNumberController.phoneNumberController,
+                        controllerFunction:
+                            phoneNumberController.phoneNumberController,
                         validator: phoneNumberController.validatePhoneNumber),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: PrimaryButton(onPressed: () {}, text: "Change"),
+                    child: PrimaryButton(
+                        onPressed: () {
+                          phoneNumberController.updateUserPhoneNumber();
+                        },
+                        text: "Change"),
                   )
                 ],
               ),

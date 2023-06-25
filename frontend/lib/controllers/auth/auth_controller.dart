@@ -67,10 +67,8 @@ class AuthController extends GetxController {
 
   Future<String?> updateUserPhoneNumber(String userPhoneNumber) async {
     try {
-      final User? user = _auth.currentUser;
-      final uid = user!.uid;
       //Get the current user id
-      final UserSahara currentUser = await restApi.getCurrentUserInfo(uid);
+      final UserSahara currentUser = await restApi.getCurrentUserInfo();
 
       // Update the phone number in the user data
       currentUser.userPhoneNumber = userPhoneNumber;

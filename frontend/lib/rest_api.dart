@@ -18,6 +18,7 @@ const deleteBackendUrl = '$backendUrl/delete';
 class RestAPI {
   final connect = Get.find<GetConnect>();
   static RestAPI get instance => Get.find<RestAPI>();
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   //GET all donation items
   Future<dynamic> getDonationItems() async {
@@ -61,13 +62,19 @@ class RestAPI {
     }
   }
 
-  Future<dynamic> getCurrentUserInfo(String currentId) async {
-    Response response = await connect.get('$getBackendUrl/users/$currentId');
-    if (response.statusCode == 200) {
-      final userData = jsonDecode(response.body);
-      return UserSahara.fromjson(userData, currentId);
-    } else {
-      return null;
+  Future<dynamic> getCurrentUserInfo() async {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    try {
+      Response response = await connect.get('$getBackendUrl/users/$uid');
+      if (response.statusCode == 200) {
+        dynamic userData = response.body;
+        return UserSahara.fromjson(userData);
+      } else {
+        throw Exception('Failed to retrieve user info');
+      }
+    } on Exception catch (e) {
+      throw Exception('Error: $e');
     }
   }
 
