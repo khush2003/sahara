@@ -12,7 +12,6 @@ class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final restApi = RestAPI.instance;
 
-
   Future<String?> createUser(
       String email, String password, UserSahara user) async {
     print("Create user Activated");
@@ -62,7 +61,6 @@ class AuthController extends GetxController {
 
       // Update the phone number in the user data
       final updatedUser = UserSahara(
-        uid: currentUser.uid,
         userName: currentUser.userName,
         userPhoneNumber: userPhoneNumber,
         profilePicture: currentUser.profilePicture,
