@@ -25,19 +25,19 @@ class DonationDetailsSectionDetailed extends StatelessWidget {
         InfoRow(
             icon: UniconsLine.clock,
             label: 'Used Duration',
-            value: formatDuration(item.usedDuration)),
+            value: formatDuration(item.usedDurationTotal)),
         InfoRow(
             icon: UniconsLine.star,
-            label: 'Useability',
-            value: '${item.useability * 100}%'),
+            label: 'Usability',
+            value: '${item.usability * 100}%'),
         InfoRow(
             icon: UniconsLine.bitcoin_circle,
             label: 'Price',
-            value: '${item.price} bhat'),
+            value: '${item.price} baht'),
         InfoRow(
             icon: UniconsLine.parcel,
             label: 'Delivery Fees',
-            value: '${item.deliveryFees} bhat'),
+            value: '${item.deliveryFees} baht'),
       ],
     );
   }
