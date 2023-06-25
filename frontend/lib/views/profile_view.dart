@@ -13,13 +13,11 @@ import 'package:get/get.dart';
 import '../controllers/profile_view_controller.dart';
 
 class ProfileView extends StatelessWidget {
-  ProfileView({super.key});
+  ProfileView({Key? key}) : super(key: key);
   final CustomTabController _tabController = Get.put(CustomTabController());
-  // CustomTabController _tabController = Get.find<CustomTabController>();
 
   @override
   Widget build(BuildContext context) {
-    final UserSahara? user = _tabController.user;
     return Scaffold(
       body: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
@@ -32,27 +30,25 @@ class ProfileView extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 215,
-                    child: FutureBuilder<UserSahara?>(
-                      future:
-                          _tabController.restApi.getUserById(FirebaseAuth.instance.currentUser!.uid),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          final user = snapshot.data!;
-                          return TopSection(
-                            profile:
-                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                            cover:
-                                'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFuZHNjYXBlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60',
-                            username: user.userName ?? '',
-                            email: 'johndoe@example.com',
-                          );
-                        } else {
-                          return Text('Error: ${snapshot.error}');
-                        }
-                      },
-                    ),
+                    child: Obx(() {
+                      final user = _tabController.user.value;
+                      if (user != null) {
+                        return TopSection(
+                          profile:
+                              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                          cover:
+                              'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFuZHNjYXBlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60',
+                          username: user.userName,
+                          email: 'johndoe@example.com',
+                        );
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    }),
                   ),
-                  SocialIcons(),
+                  //SocialIcons(),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Container(
@@ -89,30 +85,31 @@ class ProfileView extends StatelessWidget {
               ),
             ),
             Positioned(
-                top: 16,
-                left: 16,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color.fromARGB(255, 96, 94, 94),
-                    ),
-                    padding: const EdgeInsets.only(
-                      top: 10,
-                      right: 10,
-                      bottom: 10,
-                      left: 15,
-                    ),
-                    child: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                      size: 24,
-                    ),
+              top: 16,
+              left: 16,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromARGB(255, 96, 94, 94),
                   ),
-                ))
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    right: 10,
+                    bottom: 10,
+                    left: 15,
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                    size: 24,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

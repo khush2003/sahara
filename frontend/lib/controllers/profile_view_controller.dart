@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
@@ -8,6 +9,7 @@ import 'package:sahara/rest_api.dart';
 import '../services/firebase_firestore_service.dart';
 
 class CustomTabController extends GetxController {
+  static CustomTabController get instance => Get.find<CustomTabController>();
   FirebaseService firebaseService = FirebaseService();
   final connect = Get.find<GetConnect>();
   final restApi = RestAPI.instance;
@@ -16,24 +18,24 @@ class CustomTabController extends GetxController {
   final isNewSelected = true.obs;
   final isHistorySelected = false.obs;
 
-  UserSahara? user;
+  Rx<UserSahara?> user = Rx<UserSahara?>(null);
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   getUserById('t2W6MkNYcs63irPKBwdb');
-  //   print(user);
-  // }
   @override
-  // void onInit() {
-  //   super.onInit();
-  //   getUserById('cZIHOdL8GxrleOT9uUYL');
-  //   // ever(user, (UserSahara? user) {
-  //   //   if (user != null) {
-  //   //     print(user.userName);
-  //   //   }
-  //   // });
-  // }
+  void onInit() {
+    super.onInit();
+    getUserById();
+  }
+
+  void getUserById() async {
+    UserSahara? fetchedUser = await FirebaseService()
+        .getUserById(FirebaseAuth.instance.currentUser!.uid);
+    if (fetchedUser != null) {
+      user.value = fetchedUser;
+      print(user.value!.userName);
+    } else {
+      print("User not found");
+    }
+  }
 
   void selectNew() {
     isNewSelected.value = true;
@@ -54,24 +56,4 @@ class CustomTabController extends GetxController {
     isGiveSelected.value = false;
     isReceiveSelected.value = true;
   }
-
-  // void getUserById(String userId) async {
-  //   UserSahara? fetchedUser = await firebaseService.getUserById(userId);
-  //   if (fetchedUser != null) {
-  //     user = fetchedUser;
-  //     print(user!.userPhoneNumber);
-  //   } else {
-  //     print("User not found");
-  //   }
-  // }
-  // Future<UserSahara?> getUserById(String userId) async {
-  //   UserSahara? fetchedUser = await firebaseService.getUserById(userId);
-  //   if (fetchedUser != null) {
-  //     user = fetchedUser;
-  //     print(user!.userPhoneNumber);
-  //   } else {
-  //     print("User not found");
-  //   }
-  //   return fetchedUser;
-  // }
 }

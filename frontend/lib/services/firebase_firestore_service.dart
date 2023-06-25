@@ -75,6 +75,30 @@ class FirebaseService {
     });
   }
 
+  Future<UserSahara?> getUserById(String userId) async {
+    final document = _firestore.collection('users').doc(userId);
+    final snapshot = await document.get();
+
+    if (!snapshot.exists) {
+      return null;
+    }
+
+    final data = snapshot.data() as Map<String, dynamic>;
+
+    return UserSahara(
+      userName: data['userName'],
+      userPhoneNumber: data['userPhoneNumber'],
+      profilePicture: data['profilePicture'],
+      coverPicture: data['coverPicture'],
+      userAddress: data['userAddress'],
+      blockedUser: List<String>.from(data['blockedUser'] ?? []),
+      discountCoupon: List<String>.from(data['discountCoupon'] ?? []),
+      userOwnPost: List<String>.from(data['userOwnPost'] ?? []),
+      userReviewPost: List<String>.from(data['userReviewPost'] ?? []),
+      token: data['token'],
+    );
+  }
+
   // Future<void> addUser(UserSahara user) async {
   //   await _firestore.collection('users').doc(user.uid).set({
   //     'uid': user.uid,
