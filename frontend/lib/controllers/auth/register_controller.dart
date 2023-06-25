@@ -33,7 +33,6 @@ class RegisterController extends GetxController {
   }
 
   Future<void>? registerUser() async {
-    final uid = FirebaseAuth.instance.currentUser!.uid;
     String username = usernameController.text;
     String email = emailController.text;
     String password = passwordController.text;
