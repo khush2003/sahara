@@ -289,7 +289,7 @@ class EstimatedItemValueState extends State<EstimatedItemValue> {
   double usability = 0.5;
   double estimatedValue = 0;
 
-  updatePrice(String value) {
+  void updatePrice(String value) {
     setState(
       () {
         price = double.parse(value);
@@ -297,7 +297,7 @@ class EstimatedItemValueState extends State<EstimatedItemValue> {
     );
   }
 
-  estimatedCalculated() {
+  void estimatedCalculated() {
     setState(
       () {
         estimatedValue = price * usability;
@@ -305,11 +305,11 @@ class EstimatedItemValueState extends State<EstimatedItemValue> {
     );
   }
 
-  getUsabilityValue() {
+  double getUsabilityValue() {
     return usability;
   }
 
-  getEstimatedValue() {
+  double getEstimatedValue() {
     return estimatedValue;
   }
 
@@ -378,27 +378,23 @@ class EstimatedItemValueState extends State<EstimatedItemValue> {
                       style: smallTextBold(),
                     ),
                     SizedBox(width: 5),
-                    Flex(
-                      direction: Axis.horizontal,
-                      children: [
-                        Expanded(
-                          child: NumberTextFormFieldThemed(
-                            hintText: 'Enter Item Price',
-                            validator: createDonationController.numberValidator,
-                            controller: createDonationController.priceController,
-                            keyboardType:
-                                TextInputType.numberWithOptions(decimal: true),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'^\d+\.?\d{0,2}')),
-                            ],
-                            onChanged: (String value) {
-                              updatePrice(value);
-                              estimatedCalculated();
-                            },
-                          ),
-                        ),
-                      ],
+                    Expanded(
+                      child: NumberTextFormFieldThemed(
+                        hintText: 'Enter Item Price',
+                        validator: createDonationController.numberValidator,
+                        controller:
+                            createDonationController.priceController,
+                        keyboardType:
+                            TextInputType.numberWithOptions(decimal: true),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^\d+\.?\d{0,2}')),
+                        ],
+                        onChanged: (String value) {
+                          updatePrice(value);
+                          estimatedCalculated();
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -703,18 +699,21 @@ class CategoryDropDownState extends State<CategoryDropDown> {
     'Furniture',
     'Accessaries',
   ];
-  String selectedCategory = 'Electronic';
+  //String selectedCategory = 'Electronic';
 
-  getSelectedCategory() {
+  final CreateDonationController createDonationController =
+      Get.put(CreateDonationController());
+
+  /*getSelectedCategory() {
     return selectedCategory;
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return Flex(direction: Axis.horizontal, children: [
       Expanded(
         child: DropdownButtonFormField<String>(
-          value: selectedCategory,
+          value: createDonationController.selectedCategory.value,
           items: categoryList.map(
             (category) {
               return DropdownMenuItem(
@@ -735,7 +734,7 @@ class CategoryDropDownState extends State<CategoryDropDown> {
           onChanged: (value) {
             setState(
               () {
-                selectedCategory = value!;
+                createDonationController.selectedCategory(value);
               },
             );
           },
@@ -775,21 +774,36 @@ class DurationDropDown extends StatefulWidget {
   State<DurationDropDown> createState() => DurationDropDownState();
 }
 
-class DurationDropDownState extends State<DurationDropDown>{
-  final durationList = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-                        '11', '12'];
-  String selectedDuration = '1';
+class DurationDropDownState extends State<DurationDropDown> {
+  final durationList = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12'
+  ];
+  //String selectedDuration = '1';
 
   final durationTypeList = ['Week', 'Month'];
-  String selectedDurationType = 'Week';
+  //String selectedDurationType = 'Week';
 
-  getSelectedDuration() {
+  final CreateDonationController createDonationController =
+      Get.put(CreateDonationController());
+
+  /*getSelectedDuration() {
     return selectedDuration;
   }
 
   getSelectedDurationType() {
     return selectedDurationType;
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -800,7 +814,7 @@ class DurationDropDownState extends State<DurationDropDown>{
           child: Flex(direction: Axis.horizontal, children: [
             Expanded(
               child: DropdownButtonFormField<String>(
-                value: selectedDuration,
+                value: createDonationController.duration.value,
                 items: durationList.map(
                   (duration) {
                     return DropdownMenuItem(
@@ -821,7 +835,7 @@ class DurationDropDownState extends State<DurationDropDown>{
                 onChanged: (value) {
                   setState(
                     () {
-                      selectedDuration = value!;
+                      createDonationController.setDuration(value!);
                     },
                   );
                 },
@@ -858,7 +872,7 @@ class DurationDropDownState extends State<DurationDropDown>{
           child: Flex(direction: Axis.horizontal, children: [
             Expanded(
               child: DropdownButtonFormField<String>(
-                value: selectedDurationType,
+                value: createDonationController.durationType.value,
                 items: durationTypeList.map(
                   (durationType) {
                     return DropdownMenuItem(
@@ -879,7 +893,7 @@ class DurationDropDownState extends State<DurationDropDown>{
                 onChanged: (value) {
                   setState(
                     () {
-                      selectedDurationType = value!;
+                      createDonationController.setDurationType(value!);
                     },
                   );
                 },
@@ -922,20 +936,23 @@ class PaidByDropDown extends StatefulWidget {
   State<PaidByDropDown> createState() => PaidByDropDownState();
 }
 
-class PaidByDropDownState extends State<PaidByDropDown>{
+class PaidByDropDownState extends State<PaidByDropDown> {
   final paidByList = ['Donor (you)', '50/50', 'Receiver'];
-  String selectedPaidBy = 'Donor (you)';
+  //String selectedPaidBy = 'Donor (you)';
 
-  getSelectedPaidBy() {
+  /*getSelectedPaidBy() {
     return selectedPaidBy;
-  }
+  }*/
+
+  final CreateDonationController createDonationController =
+      Get.put(CreateDonationController());
 
   @override
   Widget build(BuildContext context) {
     return Flex(direction: Axis.horizontal, children: [
       Expanded(
         child: DropdownButtonFormField<String>(
-          value: selectedPaidBy,
+          value: createDonationController.paidBy.value,
           items: paidByList.map(
             (paidBy) {
               return DropdownMenuItem(
@@ -956,7 +973,7 @@ class PaidByDropDownState extends State<PaidByDropDown>{
           onChanged: (value) {
             setState(
               () {
-                selectedPaidBy = value!;
+                createDonationController.setPaidBy(value!);
               },
             );
           },

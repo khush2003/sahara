@@ -19,7 +19,7 @@ class CreateDonationController extends GetxController {
   final imageUrl = ''.obs;
   final tags = <String>[].obs;
   final selectedCategory = 'Electronic'.obs;
-  final duration = 1.obs;
+  final duration = '1'.obs;
   final durationType = 'Week'.obs;
   final durationTotal = const Duration(days: 1).obs;
   final paidBy = 'Donor (you)'.obs;
@@ -76,45 +76,62 @@ class CreateDonationController extends GetxController {
     super.onInit();
   }
 
-  String getCategories(){
+  void setSelectedCatagory(String value){
+    selectedCategory.value = value;
+  }
+
+  void setDuration (String value){
+    duration.value = value;
+  }
+
+  void setDurationType (String value){
+    durationType.value = value;
+  }
+
+  void setPaidBy (String value){
+    paidBy.value = value;
+  }
+
+  /*String getCategories(){
     selectedCategory.value = CategoryDropDownState().getSelectedCategory();
     return selectedCategory.value;
-  }
+  }*/
 
-  int getDuration(){
+  /*int getDuration(){
     duration.value = int.parse(DurationDropDownState().getSelectedDuration());
     return duration.value;
-  }
+  }*/
 
-  String getDurationType(){
+  /*String getDurationType(){
     durationType.value = DurationDropDownState().getSelectedDurationType();
     return durationType.value;
-  }
+  }*/
 
   Duration getDurationTotal(){
-    if(getDurationType() == 'Week'){
+    if(durationType.value == 'Week'){
       durationTotal.value = Duration(
-        days: getDuration() * 7,
+        days: int.parse(duration.value) * 7,
       );
       return durationTotal.value;
     }
-    else if(getDurationType() == 'Month'){
+    else if(durationType.value == 'Month'){
       durationTotal.value = Duration(
-        days: getDuration() * 30,
+        days: int.parse(duration.value) * 30,
       );
       return durationTotal.value;
     }
     return durationTotal.value;
   }
 
-  double getUsabilityValue() {
+  getUsabilityValue() {
     usability.value = EstimatedItemValueState().getUsabilityValue();
     return usability.value;
   }
 
-  double getEstimatedValue() {
+  getEstimatedValue() {
     //estimatedValue.value = EstimatedItemValueState().getEstimatedValue();
-    estimatedValue.value = EstimatedItemValueState().estimatedValue;
+    //estimatedValue.value = EstimatedItemValueState().estimatedValue;
+    estimatedValue.value = getUsabilityValue() * double.parse(priceController.text);
     return estimatedValue.value;
   }
 
@@ -123,10 +140,10 @@ class CreateDonationController extends GetxController {
     return deliveryFee.value;
   }
 
-  String getPaidByValue() {
+  /*String getPaidByValue() {
     paidBy.value = PaidByDropDownState().getSelectedPaidBy();
     return paidBy.value;
-  }
+  }*/
 
   uploadImage() async {
     //Select Image
@@ -194,9 +211,9 @@ class CreateDonationController extends GetxController {
           donationId: '',
           imageUrl: imageUrl.value,
           name: nameController.text,
-          category: getCategories(),
-          usedDuration: getDuration(),
-          usedDurationType: getDurationType(),
+          category: selectedCategory.value ?? 'Electronic',
+          usedDuration: int.parse(duration.value) ?? 1,
+          usedDurationType: durationType.value ?? 'Week',
           usedDurationTotal: getDurationTotal(),
           usability: getUsabilityValue(),
           price: double.parse(priceController.text),
@@ -206,7 +223,7 @@ class CreateDonationController extends GetxController {
           itemHeight: double.parse(heightController.text),
           weight: double.parse(weightController.text),
           deliveryFees: getDeliveryFeeValue(),
-          deliveryPaidBy: getPaidByValue(),
+          deliveryPaidBy: paidBy.value ?? 'Donor (you)',
           description: descriptionController.text,
           tags: tags,
           author: Author(
