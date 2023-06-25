@@ -33,12 +33,12 @@ class RegisterController extends GetxController {
   }
 
   Future<void>? registerUser() async {
-    print("buttoniscliked");
+    final uid = FirebaseAuth.instance.currentUser!.uid;
     String username = usernameController.text;
     String email = emailController.text;
     String password = passwordController.text;
     if(validateInputs()){
-    final user = UserSahara(userName: username);
+    final user = UserSahara(userName: username,uid: uid);
     String? error = await _auth.createUser(email, password, user);
     if (error != null) {
         errorSnackBar(error.toString());

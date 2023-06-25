@@ -21,7 +21,7 @@ class RestAPI {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   //GET all donation items
-  Future<dynamic> getDonationItems() async {  
+  Future<dynamic> getDonationItems() async {
     Response response = await connect.get('$getBackendUrl/donationItems');
     if (response.statusCode == 200) {
       final List<DonationItem> donationItems = [];
@@ -71,7 +71,7 @@ class RestAPI {
       Response response = await connect.get('$getBackendUrl/users/$uid');
       if (response.statusCode == 200) {
         dynamic userData = response.body;
-        return UserSahara.fromjson(userData);
+        return UserSahara.fromjson(userData, uid);
       } else {
         throw Exception('Failed to retrieve user info');
       }
@@ -84,7 +84,7 @@ class RestAPI {
     Response response = await connect.get('$getBackendUrl/users/$userId');
     if (response.statusCode == 200) {
       dynamic userData = response.body;
-      return UserSahara.fromjson(userData);
+      return UserSahara.fromjson(userData, userId);
     } else {
       print("No user found!");
       return null;

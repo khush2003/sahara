@@ -72,6 +72,7 @@ class AuthController extends GetxController {
 
       // Update the phone number in the user data
       final updatedUser = UserSahara(
+        uid: currentUser.uid,
         userName: currentUser.userName,
         userPhoneNumber: userPhoneNumber,
         profilePicture: currentUser.profilePicture,
