@@ -112,8 +112,9 @@ class CreateDonationController extends GetxController {
     return usability.value;
   }
 
-  double getPriceValue() {
-    estimatedValue.value = EstimatedItemValueState().getEstimatedValue();
+  double getEstimatedValue() {
+    //estimatedValue.value = EstimatedItemValueState().getEstimatedValue();
+    estimatedValue.value = EstimatedItemValueState().estimatedValue;
     return estimatedValue.value;
   }
 
@@ -199,7 +200,7 @@ class CreateDonationController extends GetxController {
           usedDurationTotal: getDurationTotal(),
           usability: getUsabilityValue(),
           price: double.parse(priceController.text),
-          estimatedItemValue: getPriceValue(),
+          estimatedItemValue: getEstimatedValue(),
           itemWidth: double.parse(widthController.text),
           itemLength: double.parse(lengthController.text),
           itemHeight: double.parse(heightController.text),
