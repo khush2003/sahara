@@ -6,11 +6,9 @@ import 'package:get/get.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
 
-import '../services/firebase_firestore_service.dart';
 
 class CustomTabController extends GetxController {
   static CustomTabController get instance => Get.find<CustomTabController>();
-  FirebaseService firebaseService = FirebaseService();
   final connect = Get.find<GetConnect>();
   final restApi = RestAPI.instance;
   final isGiveSelected = true.obs;
@@ -27,14 +25,14 @@ class CustomTabController extends GetxController {
   }
 
   void getUserById() async {
-    UserSahara? fetchedUser = await FirebaseService()
-        .getUserById(FirebaseAuth.instance.currentUser!.uid);
-    if (fetchedUser != null) {
-      user.value = fetchedUser;
-      print(user.value!.userName);
-    } else {
-      print("User not found");
-    }
+    // UserSahara? fetchedUser = await FirebaseService()
+    //     .getUserById(FirebaseAuth.instance.currentUser!.uid);
+    // if (fetchedUser != null) {
+    //   user.value = fetchedUser;
+    //   print(user.value!.userName);
+    // } else {
+    //   print("User not found");
+    // }
   }
 
   void selectNew() {

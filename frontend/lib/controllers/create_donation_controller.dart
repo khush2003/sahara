@@ -10,7 +10,6 @@ import 'package:sahara/models/author.dart';
 import 'package:sahara/models/donation_item.dart';
 
 import 'package:sahara/routes/routes.dart';
-import 'package:sahara/services/firebase_firestore_service.dart';
 import 'package:sahara/utils/app_utils.dart';
 
 class CreateDonationController extends GetxController {
@@ -47,19 +46,19 @@ class CreateDonationController extends GetxController {
   @override
   void onInit() async {
     isLoading(true);
-    categoryOptions = await FirebaseService().getCategories() ??
-        [
-          'Electronic',
-          'Clothing',
-          'Cosmetic',
-          'Furniture',
-          'Accessaries',
-        ];
-    durationOptions = await FirebaseService().getDuration() ??
-        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-    durationTypeOptions =
-        await FirebaseService().getDurationTypes() ?? ['Week', 'Month'];
-    paidByOptions = await FirebaseService().getPaidBy() ??
+    // categoryOptions = await FirebaseService().getCategories() ??
+    //     [
+    //       'Electronic',
+    //       'Clothing',
+    //       'Cosmetic',
+    //       'Furniture',
+    //       'Accessaries',
+    //     ];
+    // durationOptions = await FirebaseService().getDuration() ??
+    //     ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    // durationTypeOptions =
+    //     await FirebaseService().getDurationTypes() ?? ['Week', 'Month'];
+    // paidByOptions = await FirebaseService().getPaidBy() ??
         ['Donor (you)', '50/50', 'Receiver'];
     isLoading(false);
     super.onInit();
@@ -168,7 +167,7 @@ class CreateDonationController extends GetxController {
             imageUrl: '',
           ),
         );
-        await FirebaseService().addItem(item /* _auth.user!*/);
+        // await FirebaseService().addItem(item /* _auth.user!*/);
         successSnackBar('Success: Donation Item was created successfully');
         Get.offAllNamed(Routes.feed);
       } catch (e) {
