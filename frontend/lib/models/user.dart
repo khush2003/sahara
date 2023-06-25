@@ -49,7 +49,7 @@ class UserSahara {
     );
   }
 
-  factory UserSahara.fromjson(Map<String, dynamic> json,String userId) {
+  factory UserSahara.fromjson(Map<String, dynamic> json, String userId) {
     return UserSahara(
       uid: userId,
       token: json['token'] ?? '',
@@ -64,6 +64,7 @@ class UserSahara {
       userReviewPost: List<String>.from(json['userReviewPost'] ?? []),
     );
   }
+  
   Map<String, dynamic> toJson() {
     return {
       'uid': uid,
@@ -78,5 +79,17 @@ class UserSahara {
       'userReviewPost': userReviewPost,
       'token': token,
     };
+  }
+
+  bool checkUserInList(String userId, List<UserSahara> list) {
+    return list.any((user) => user.uid == userId);
+  }
+
+  UserSahara? getUserInList(String userId, List<UserSahara> list) {
+    try {
+      return list.where((user) => user.uid == userId).first;
+    } catch (e) {
+      return null;
+    }
   }
 }

@@ -23,4 +23,12 @@ class Author {
       imageUrl: json['authorImageURL'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'authorId': authorId,
+      'authorName': name,
+      'authorImageURL': imageUrl,
+    };
+  }
 }

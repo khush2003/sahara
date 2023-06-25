@@ -1,14 +1,17 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/models/author.dart';
 import 'package:sahara/models/donation_item.dart';
-
+import 'package:sahara/rest_api.dart';
+import 'package:sahara/views/create_donation.dart';
 import 'package:sahara/routes/routes.dart';
 import 'package:sahara/utils/app_utils.dart';
 
@@ -18,16 +21,21 @@ class CreateDonationController extends GetxController {
   final selectedCategory = 'Electronic'.obs;
   final duration = 1.obs;
   final durationType = 'Week'.obs;
-  final usability = ''.obs;
+  final durationTotal = const Duration(days: 1).obs;
   final paidBy = 'Donor (you)'.obs;
+
+  final usability = 0.0.obs;
+  final estimatedValue = 0.0.obs;
+  final deliveryFee = 0.0.obs;
 
   final isOn = false.obs;
   final isLoading = true.obs;
 
   final _firebaseStorage = FirebaseStorage.instance;
+  final _firebaseAuth = FirebaseAuth.instance;
   final _imagePicker = ImagePicker();
 
-  //final _auth = AuthController.instance;
+  final restAPI = RestAPI.instance;
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
@@ -38,47 +46,85 @@ class CreateDonationController extends GetxController {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController tagsController = TextEditingController();
 
-  late List<String> categoryOptions;
-  late List<String> durationOptions;
-  late List<String> durationTypeOptions;
-  late List<String> paidByOptions;
+  /*
+  List<String>? categoryOptions;
+  List<String>? durationOptions;
+  List<String>? durationTypeOptions;
+  List<String>? paidByOptions;
+  */
 
   @override
   void onInit() async {
     isLoading(true);
-    // categoryOptions = await FirebaseService().getCategories() ??
-    //     [
-    //       'Electronic',
-    //       'Clothing',
-    //       'Cosmetic',
-    //       'Furniture',
-    //       'Accessaries',
-    //     ];
-    // durationOptions = await FirebaseService().getDuration() ??
-    //     ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-    // durationTypeOptions =
-    //     await FirebaseService().getDurationTypes() ?? ['Week', 'Month'];
-    // paidByOptions = await FirebaseService().getPaidBy() ??
-        ['Donor (you)', '50/50', 'Receiver'];
+    /*
+    categoryOptions = await FirebaseService().getCategories() ??
+         [
+           'Electronic',
+           'Clothing',
+           'Cosmetic',
+           'Furniture',
+           'Accessaries',
+         ];
+    durationOptions = await FirebaseService().getDuration() ??
+         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    durationTypeOptions = await FirebaseService().getDurationTypes() ?? 
+         ['Week', 'Month'];
+    paidByOptions = await FirebaseService().getPaidBy() ??
+      ['Donor (you)', '50/50', 'Receiver'];
+    */
     isLoading(false);
     super.onInit();
   }
 
-  void setSelectedCategory(String? value) {
-    selectedCategory(value ?? '');
+  String getCategories(){
+    selectedCategory.value = CategoryDropDownState().getSelectedCategory();
+    return selectedCategory.value;
   }
 
-  void setDuration(String value) {
-    int intVal = int.parse(value);
-    duration(intVal);
+  int getDuration(){
+    duration.value = int.parse(DurationDropDownState().getSelectedDuration());
+    return duration.value;
   }
 
-  void setDurationType(String? value) {
-    durationType(value ?? '');
+  String getDurationType(){
+    durationType.value = DurationDropDownState().getSelectedDurationType();
+    return durationType.value;
   }
 
-  void setPaidBy(String? value) {
-    paidBy(value ?? '');
+  Duration getDurationTotal(){
+    if(getDurationType() == 'Week'){
+      durationTotal.value = Duration(
+        days: getDuration() * 7,
+      );
+      return durationTotal.value;
+    }
+    else if(getDurationType() == 'Month'){
+      durationTotal.value = Duration(
+        days: getDuration() * 30,
+      );
+      return durationTotal.value;
+    }
+    return durationTotal.value;
+  }
+
+  double getUsabilityValue() {
+    usability.value = EstimatedItemValueState().getUsabilityValue();
+    return usability.value;
+  }
+
+  double getPriceValue() {
+    estimatedValue.value = EstimatedItemValueState().getEstimatedValue();
+    return estimatedValue.value;
+  }
+
+  double getDeliveryFeeValue() {
+    deliveryFee.value = DeliveryFeeValueState().getDeliveryFee();
+    return deliveryFee.value;
+  }
+
+  String getPaidByValue() {
+    paidBy.value = PaidByDropDownState().getSelectedPaidBy();
+    return paidBy.value;
   }
 
   uploadImage() async {
@@ -144,32 +190,33 @@ class CreateDonationController extends GetxController {
     if (validateInputs()) {
       try {
         final item = DonationItem(
-          donationId: '12',
+          donationId: '',
           imageUrl: imageUrl.value,
           name: nameController.text,
-          category: selectedCategory.value,
-          usedDuration: durationType.value == 'Week'
-              ? Duration(days: duration.value * 7)
-              : Duration(days: duration.value * 30),
-          useability: double.parse(usability.value),
+          category: getCategories(),
+          usedDuration: getDuration(),
+          usedDurationType: getDurationType(),
+          usedDurationTotal: getDurationTotal(),
+          usability: getUsabilityValue(),
           price: double.parse(priceController.text),
+          estimatedItemValue: getPriceValue(),
           itemWidth: double.parse(widthController.text),
           itemLength: double.parse(lengthController.text),
           itemHeight: double.parse(heightController.text),
           weight: double.parse(weightController.text),
-          deliveryFees: 100.00,
-          deliveryPaidBy: DeliveryPaidBy.donor,
+          deliveryFees: getDeliveryFeeValue(),
+          deliveryPaidBy: getPaidByValue(),
           description: descriptionController.text,
           tags: tags,
           author: Author(
-            authorId: '12',
-            name: 'James',
-            imageUrl: '',
+            authorId: _firebaseAuth.currentUser!.uid,
+            name: _firebaseAuth.currentUser!.displayName!,
+            imageUrl: _firebaseAuth.currentUser!.photoURL!,
           ),
         );
-        // await FirebaseService().addItem(item /* _auth.user!*/);
+        await restAPI.postDonationItem(item);
         successSnackBar('Success: Donation Item was created successfully');
-        Get.offAllNamed(Routes.feed);
+        Get.offAllNamed(Routes.app);
       } catch (e) {
         errorSnackBar('Error: There is an error in creating donation $e');
       }

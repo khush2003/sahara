@@ -26,7 +26,7 @@ class RestAPI {
     if (response.statusCode == 200) {
       final List<DonationItem> donationItems = [];
       response.body.forEach((element) {
-        donationItems.add(DonationItem.fromJson(element));
+        donationItems.add(DonationItem.fromJson(element, element['donationId']));
       });
       print(donationItems);
       return donationItems;
@@ -100,6 +100,17 @@ class RestAPI {
       return response.body;
     } else {
       return null;
+    }
+  }
+
+  Future<dynamic> postDonationItem(DonationItem item) async {
+    final Map<String, dynamic> itemData = item.toJson();
+    Response response =
+        await connect.post('$postBackendUrl/donationItem', itemData);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return 'Error: Did not post donation item';
     }
   }
 }

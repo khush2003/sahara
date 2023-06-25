@@ -73,7 +73,7 @@ class ItemDetails extends StatelessWidget {
         CardRowDesc(label: 'Name', input: item.name),
         CardRowDesc(
             label: 'Used Duration', input: item.usedDuration.toString()),
-        CardRowDesc(label: 'Usability', input: '${item.useability}%'),
+        CardRowDesc(label: 'Usability', input: '${item.usability}%'),
         CardRowDesc(label: 'Price', input: "฿${item.price}")
       ],
     );

@@ -52,7 +52,7 @@ class DonationDetailSection extends StatelessWidget {
                     value: donationPost.usedDuration.toString()),
                 DetailRow(
                     label: 'Useability',
-                    value: '${donationPost.useability * 100}%'),
+                    value: '${donationPost.usability * 100}%'),
                 DetailRow(label: 'Price', value: '฿${donationPost.price}'),
                 DetailRow(
                     label: 'Delivery Fees',
