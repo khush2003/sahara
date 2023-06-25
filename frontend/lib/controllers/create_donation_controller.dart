@@ -17,7 +17,7 @@ class CreateDonationController extends GetxController {
   final imageUrl = ''.obs;
   final tags = <String>[].obs;
   final selectedCategory = 'Electronic'.obs;
-  final duration = '1'.obs;
+  final duration = 1.obs;
   final durationType = 'Week'.obs;
   final usability = ''.obs;
   final paidBy = 'Donor (you)'.obs;
@@ -69,8 +69,9 @@ class CreateDonationController extends GetxController {
     selectedCategory(value ?? '');
   }
 
-  void setDuration(String? value) {
-    duration(value ?? '');
+  void setDuration(String value) {
+    int intVal = int.parse(value);
+    duration(intVal);
   }
 
   void setDurationType(String? value) {
@@ -148,12 +149,11 @@ class CreateDonationController extends GetxController {
           imageUrl: imageUrl.value,
           name: nameController.text,
           category: selectedCategory.value,
-          usedDuration: int.parse(duration.value),
-          usedDurationType: durationType.value,
-          usedDurationTotal: Duration(days: int.parse(duration.value)),
+          usedDuration: durationType.value == 'Week'
+              ? Duration(days: duration.value * 7)
+              : Duration(days: duration.value * 30),
           useability: double.parse(usability.value),
           price: double.parse(priceController.text),
-          //estimatedItemValue: double.parse(priceController.text) * double.parse(usability.value),
           itemWidth: double.parse(widthController.text),
           itemLength: double.parse(lengthController.text),
           itemHeight: double.parse(heightController.text),
@@ -172,7 +172,7 @@ class CreateDonationController extends GetxController {
         successSnackBar('Success: Donation Item was created successfully');
         Get.offAllNamed(Routes.feed);
       } catch (e) {
-        errorSnackBar('Error: There is an error in creating donation');
+        errorSnackBar('Error: There is an error in creating donation $e');
       }
     } else {
       errorSnackBar('Error: Fill all the fields to create a donation');

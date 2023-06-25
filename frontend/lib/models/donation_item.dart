@@ -6,9 +6,7 @@ class DonationItem {
   final String name, description, imageUrl, category;
   final double itemWidth, itemLength, itemHeight, weight;
   final DeliveryPaidBy deliveryPaidBy;
-  final int usedDuration;
-  final String usedDurationType;
-  final Duration usedDurationTotal;
+  final Duration usedDuration;
   final double useability, price, deliveryFees;
   final List<String> tags;
   final Author author;
@@ -27,8 +25,6 @@ class DonationItem {
     required this.weight,
     required this.deliveryPaidBy,
     required this.usedDuration,
-    required this.usedDurationType,
-    this.usedDurationTotal = const Duration(days: 0),
     required this.useability,
     required this.price,
     required this.deliveryFees,
@@ -51,9 +47,7 @@ class DonationItem {
         itemHeight: 50,
         weight: 120,
         deliveryPaidBy: DeliveryPaidBy.donor,
-        usedDuration: 2,
-        usedDurationType: 'Week',
-        usedDurationTotal: const Duration(days: 14),
+        usedDuration: const Duration(days: 14),
         useability: 0.80,
         price: 5000,
         deliveryFees: 5000,
@@ -76,9 +70,7 @@ class DonationItem {
         itemHeight: json['itemHeight'],
         weight: json['weight'],
         deliveryPaidBy: convertFromString(json['deliveryPaidBy']),
-        usedDuration: json['usedDuration'],
-        usedDurationType: json['usedDurationType'],
-        usedDurationTotal: Duration(days: json['usedDuration'] as int),
+        usedDuration: Duration(days: json['usedDuration'] as int),
         useability: json['useability'],
         price: json['price'],
         deliveryFees: json['deliveryFees'],
@@ -86,10 +78,5 @@ class DonationItem {
             ? []
             : List<String>.from(json['tags'] as List<dynamic>),
         author: Author.fromJson(json));
-  }
-
-  @override
-  String toString() {
-    return 'DonationItem{donationId: $donationId, name: $name, description: $description, imageUrl: $imageUrl, category: $category, itemWidth: $itemWidth, itemLength: $itemLength, itemHeight: $itemHeight, weight: $weight, deliveryPaidBy: $deliveryPaidBy, usedDuration: $usedDuration, usedDurationType: $usedDurationType, usedDurationTotal: $usedDurationTotal, useability: $useability, price: $price, deliveryFees: $deliveryFees, tags: $tags, author: $author, isOverPriced: $isOverPriced, estimatedItemValue: $estimatedItemValue}';
   }
 }

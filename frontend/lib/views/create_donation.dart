@@ -507,9 +507,9 @@ class CreateDonationView extends State<CreateDonation> {
 }
 
 int deliveryFees(double width, double length, double height, double weight) {
-    double totalFee = (0.3 * (width + length + height) * (0.25 * weight));
-    return totalFee.round();
-  }
+  double totalFee = (0.3 * (width + length + height) * (0.25 * weight));
+  return totalFee.round();
+}
 
 Widget createTags(CreateDonationController controller) {
   final tagsWidgets = <Widget>[];
@@ -628,11 +628,11 @@ class DropDownCustomDuration extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: DropdownButtonFormField<String>(
-        value: controller.duration.value,
+        value: controller.duration.value.toString(),
         items: controller.durationOptions.map((duration) {
           return dropdownMenuItemCustom(duration);
         }).toList(),
-        onChanged: controller.setDuration,
+        onChanged: (value) => controller.setDuration(value!),
         style: regularTextBold(),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(

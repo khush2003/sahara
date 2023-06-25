@@ -51,7 +51,7 @@ class FirebaseService {
   }
 
   Future<void> addItem(DonationItem item /*, UserSahara user*/) async {
-    final doc = await _firestore.collection('donationItems').add({
+    await _firestore.collection('donationItems').add({
       'donationId': item.donationId,
       'name': item.name,
       'description': item.description,
@@ -63,8 +63,6 @@ class FirebaseService {
       'weight': item.weight,
       'deliveryPaidBy': item.deliveryPaidBy,
       'usedDuration': item.usedDuration,
-      'usedDurationType': item.usedDurationType,
-      'usedDurationTotal': item.usedDurationTotal.inDays,
       'useability': item.useability,
       'price': item.price,
       'deliveryFees': item.deliveryFees,
