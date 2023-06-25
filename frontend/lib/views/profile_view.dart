@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
@@ -33,7 +34,7 @@ class ProfileView extends StatelessWidget {
                     height: 215,
                     child: FutureBuilder<UserSahara?>(
                       future:
-                          _tabController.getUserById('cZIHOdL8GxrleOT9uUYL'),
+                          _tabController.restApi.getUserById(FirebaseAuth.instance.currentUser!.uid),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           final user = snapshot.data!;

@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 class UserSahara {
-  final String? uid;
+  // final String? uid;
   final String userName;
   late final String? userPhoneNumber;
   final String? profilePicture;
+  final String? coverPicture;
   final String? userAddress;
   final List<String>? blockedUser;
   final List<String>? discountCoupon;
@@ -14,8 +15,9 @@ class UserSahara {
 
   UserSahara({
     this.token,
-    this.uid,
+    // this.uid,
     this.profilePicture,
+    this.coverPicture,
     this.blockedUser,
     this.userOwnPost,
     this.userReviewPost,
@@ -24,10 +26,6 @@ class UserSahara {
     this.userAddress,
     this.discountCoupon,
   });
-  @override
-  String toString() {
-    return 'AppUser{uid: $uid, ''}';
-  }
 
   factory UserSahara.empty() {
     return UserSahara(userName: '');
@@ -49,10 +47,11 @@ class UserSahara {
   factory UserSahara.fromjson(Map<String, dynamic> json,String userId) {
     return UserSahara(
       token: json['Token'] ?? '',
-      uid: userId,
+      // uid: userId,
       userName: json['Username'],
       userPhoneNumber: json['UserPhoneNumber'],
       profilePicture: json['ProfilePicture'],
+      coverPicture: json['coverPicture'],
       userAddress: json['UserAddress'],
       blockedUser: List<String>.from(json['BlockedUser'] ?? []),
       discountCoupon: List<String>.from(json['DiscountCoupon'] ?? []),
@@ -62,10 +61,11 @@ class UserSahara {
   }
    Map<String, dynamic> toJson() {
     return {
-      'uid': uid,
+
       'userName': userName,
       'userPhoneNumber': userPhoneNumber,
       'profilePicture': profilePicture,
+      'coverPicture': coverPicture,
       'userAddress': userAddress,
       'blockedUser': blockedUser,
       'discountCoupon': discountCoupon,
@@ -73,17 +73,6 @@ class UserSahara {
       'userReviewPost': userReviewPost,
       'token': token,
     };}
-    bool checkUserInList(String userId, List<UserSahara> list) {
-  return list.any((user) => user.uid == userId);
-}
-
-UserSahara? getUserInList(String userId, List<UserSahara> list) {
-  try {
-    return list.where((user) => user.uid == userId).first;
-  } catch (e) {
-    return null;
-  }
-}
 }
 
 

@@ -31,11 +31,11 @@ class AuthController extends GetxController {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       final confirmedUser = UserSahara(
-          uid: _auth.currentUser!.uid,
           userName: user.userName,
           userPhoneNumber: '',
           userAddress: '',
           profilePicture: '',
+          coverPicture: '',
           blockedUser: [],
           discountCoupon: [],
           userOwnPost: [],
@@ -78,15 +78,15 @@ class AuthController extends GetxController {
       final result = await restApi.putUserInfo(currentUser);
 
       if (result != null) {
-      // Handle success scenario
-      return 'Phone number updated successfully';
-    } else {
-      // Handle error scenario
-      return 'Failed to update phone number';
-    }
+        // Handle success scenario
+        return 'Phone number updated successfully';
+      } else {
+        // Handle error scenario
+        return 'Failed to update phone number';
+      }
     } catch (e) {
       // Handle exception/error
-    return 'An error occurred. Please try again later';
+      return 'An error occurred. Please try again later';
     }
   }
 }

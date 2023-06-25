@@ -27,8 +27,9 @@ postRoutes.post("/donationItem", (req, res) => __awaiter(void 0, void 0, void 0,
     const donationItem = yield firebase_1.db.collection('donationItems').add(req.body);
     res.status(200).send(donationItem);
 }));
-postRoutes.post("/users", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield firebase_1.db.collection('users').add(req.body);
+postRoutes.post("/users/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.params.id;
+    const user = yield firebase_1.db.collection('users').doc(userId).set(req.body);
     res.status(200).send(user);
 }));
 postRoutes.post("/review", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
