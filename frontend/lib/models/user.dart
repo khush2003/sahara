@@ -33,7 +33,7 @@ class UserSahara {
   }
 
   factory UserSahara.empty() {
-    return UserSahara(uid: '',userName: '');
+    return UserSahara(uid: '', userName: '');
   }
 
   String getName() {
@@ -67,7 +67,6 @@ class UserSahara {
   
   Map<String, dynamic> toJson() {
     return {
-      'uid': uid,
       'userName': userName,
       'userPhoneNumber': userPhoneNumber,
       'profilePicture': profilePicture,
