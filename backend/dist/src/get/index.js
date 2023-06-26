@@ -65,19 +65,18 @@ getRoutes.get('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, func
         return res.status(400).send("An Error Occured" + error);
     }
 }));
-getRoutes.get('/reviews', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const snapshot = yield firebase_1.db.collection('reviews').get();
-        const reviews = [];
-        snapshot.forEach(doc => {
-            reviews.push(doc.data());
-        });
-        res.status(200).send(reviews);
-    }
-    catch (error) {
-        return res.status(400).send("An Error Occured" + error);
-    }
-}));
+// getRoutes.get('/reviews', async (req, res) => {
+//     try {
+//         const snapshot = await db.collection('reviews').get()
+//         const reviews: any[] = []
+//         snapshot.forEach(doc => {
+//             reviews.push(doc.data())
+//         })
+//         res.status(200).send(reviews)
+//     } catch (error) {
+//         return res.status(400).send("An Error Occured" + error)
+//     }
+// })
 getRoutes.get('/reviews/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const snapshot = yield firebase_1.db.collection('reviews').doc(req.params.id).get();
@@ -139,6 +138,20 @@ getRoutes.get('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, func
         const snapshot = yield firebase_1.db.collection('users').doc(req.params.id).get();
         const users = snapshot.data();
         res.status(200).send(users);
+    }
+    catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+}));
+getRoutes.get('/reviews', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const snapshot = yield firebase_1.db.collection('reviews').get();
+        const donationItems = [];
+        snapshot.forEach(doc => {
+            var reviewsWithId = Object.assign({ reviewId: doc.id }, doc.data());
+            donationItems.push(reviewsWithId);
+        });
+        res.status(200).send(donationItems);
     }
     catch (error) {
         return res.status(400).send("An Error Occured" + error);

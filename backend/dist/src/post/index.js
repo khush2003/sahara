@@ -25,7 +25,7 @@ postRoutes.post("/users/:id", (req, res) => __awaiter(void 0, void 0, void 0, fu
     const user = yield firebase_1.db.collection('users').doc(userId).set(req.body);
     res.status(200).send(userId);
 }));
-postRoutes.post("/review", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+postRoutes.post("/reviews", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield firebase_1.db.collection('reviews').add(req.body);
     res.status(200).send(user);
 }));

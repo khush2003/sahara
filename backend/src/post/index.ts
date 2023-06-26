@@ -16,7 +16,8 @@ postRoutes.post("/users/:id", async (req, res) =>  {
     res.status(200).send(userId);
 });
 
-postRoutes.post("/review", async (req, res) =>  {
+postRoutes.post("/reviews", async (req, res) =>  {
+
     const user = await db.collection('reviews').add(req.body
     );
     res.status(200).send(user);
