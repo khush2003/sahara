@@ -5,15 +5,13 @@ import 'donation_item_controller.dart';
 
 class DonationDetailsController extends GetxController {
   late DonationItem donationItem;
-  final DonationItemController donationItemController =
-      DonationItemController.instance;
+  final DonationItemController donationItemController = DonationItemController.instance;
 
   @override
   void onInit() {
     try{
-        var eventId = Get.parameters['id'];
-    donationItem = donationItemController.donationItems
-        .firstWhere((element) => element.donationId == eventId);
+        var donationId = Get.parameters['id'];
+    donationItem = DonationItem.getFromId(donationId!, donationItemController.donationItems);
     } catch(e){
       print(e); //TODO: Handle Error
     }

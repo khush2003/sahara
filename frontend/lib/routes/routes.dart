@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../components/Chat/chat_room.dart';
 import '../views/FirstVisitPages/forgot_password_view.dart';
 import '../views/FirstVisitPages/login_view.dart';
 import '../views/FirstVisitPages/onboarding_view.dart';
@@ -54,10 +55,12 @@ abstract class Routes {
   static const String coupon = '/coupon';
   static const String forgotPass = '/forgotPass';
   static const String app = '/app';
+  static const String chatRoom = '/chatRoom';
 }
 
 final getPages = [
   GetPage(name: Routes.delivery, page: () => DeliveryView()),
+  GetPage(name: Routes.chatRoom, page: () => ChatRoom()),
   GetPage(name: Routes.feed, page: () => FeedView()),
   GetPage(name: Routes.profile, page: () => const Profile()),
   GetPage(name: Routes.testNote, page: () => TestNote()),

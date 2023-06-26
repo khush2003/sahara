@@ -36,7 +36,7 @@ class ReviewPostDetailsView extends StatelessWidget {
             ImageThumbnail(
                 fixedHeight: 300,
                 isFlat: true,
-                imageUrl: 'https://picsum.photos/200',
+                imageUrl: item.imageUrl,
                 size: MediaQuery.of(context).size.width),
             DonationDetailsSectionDetailed(
               author: item.author,

@@ -21,7 +21,7 @@ class DonationDetailsSectionDetailed extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
-        Center(child: Text('Refigerator', style: titleText())),
+        Center(child: Text(item.name, style: titleText())),
         InfoRow(
             icon: UniconsLine.clock,
             label: 'Used Duration',

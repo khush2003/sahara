@@ -44,6 +44,7 @@ class ReviewPage extends StatelessWidget {
                 item.description,
                 item.imageUrl,
                 item.name,
+                0
               );
             },
           ))
@@ -57,10 +58,10 @@ class ReviewCard extends StatelessWidget {
   final DonationItem item;
   final UserSahara user;
   final DateTime arrDate;
-  late TextEditingController? controllerFunction;
-  late ValueNotifier<int>? controllerFunctionSlider;
+  final TextEditingController? controllerFunction;
+  final ValueNotifier<int>? controllerFunctionSlider;
 
-  ReviewCard(
+  const ReviewCard(
       {super.key,
       required this.user,
       required this.item,

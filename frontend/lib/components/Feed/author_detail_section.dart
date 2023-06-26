@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sahara/routes/routes.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../models/author.dart';
@@ -31,7 +32,10 @@ class AutherDetailSection extends StatelessWidget {
         ),
         const Spacer(),
         if (showChatButton)
-          IconButton(onPressed: () {}, icon: const UnIcon(UniconsLine.comment))
+          IconButton(
+              onPressed: () => Get.toNamed(Routes.chatRoom,
+                  parameters: {"id": author.authorId}),
+              icon: const UnIcon(UniconsLine.comment))
       ],
     );
   }

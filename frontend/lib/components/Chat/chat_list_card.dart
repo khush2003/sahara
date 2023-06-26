@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'chat_room.dart';
+import 'package:sahara/routes/routes.dart';
 
 class ChatListCard extends StatelessWidget {
   const ChatListCard({super.key});
@@ -9,7 +9,7 @@ class ChatListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(const ChatRoom());
+        Get.toNamed(Routes.chatRoom);
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
