@@ -16,6 +16,19 @@ GET http://localhost:8000/get/donationItems/kbVtokJSTNiGTirsmnQZ
 ### Get Reviews
 GET http://localhost:8000/get/reviews
 
+### POST Review
+POST http://localhost:8000/post/review
+Content-Type: application/json
+
+{
+    "reviewerId": "vY9xlAikX2RnpXG6JpuV1zZbIQq1",
+    "donationId": "kbVtokJSTNiGTirsmnQZ",
+    "reviewText": "What a fabulous item, helped me a lot!",
+    "reviewerName": "John Doe",
+    "reviewerImageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png",
+    "rating": 200
+}
+
 ### POST
 POST http://localhost:8000/post/donationItem
 Content-Type: application/json

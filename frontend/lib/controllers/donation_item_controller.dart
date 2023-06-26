@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/review.dart';
 import 'package:sahara/rest_api.dart';
-import 'package:sahara/views/profile_view.dart';
 
 class DonationItemController extends GetxController {
   final restApi = RestAPI.instance;

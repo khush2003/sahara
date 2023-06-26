@@ -6,7 +6,6 @@ import '../card_with_shadow.dart';
 import '../image_thumbnail.dart';
 import 'author_detail_section.dart';
 
-
 import '../../models/review.dart';
 import 'donation_details_section.dart';
 
@@ -62,10 +61,10 @@ class ReviewSection extends StatelessWidget {
         Row(
           children: [
             ImageThumbnail(
-                imageUrl: review.imageUrl, isCircular: true, size: 45),
+                imageUrl: review.reviewerImageURL, isCircular: true, size: 45),
             const SizedBox(width: 10),
             Text(
-              review.name,
+              review.reviewerName,
               style:
                   const TextStyle(fontWeight: FontWeight.normal, fontSize: 32),
             ),

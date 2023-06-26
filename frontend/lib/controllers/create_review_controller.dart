@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/review.dart';
 import 'package:sahara/rest_api.dart';
-import 'package:sahara/views/profile_view.dart';
-import 'package:slider_controller/slider_controller.dart';
 
 import '../models/user.dart';
 import '../utils/app_utils.dart';
@@ -53,17 +51,13 @@ class CreateReviewController extends GetxController {
         // Authenticate user (Create account)
 
         final review = Review(
-            reviewerId: auth.currentUser!.uid,
-            donationId: donationId,
-            reviewText: reviewText,
-            name: name,
-            imageUrl: imageUrl,
-            receiverName: receiverName,
-            donorName: donorName,
-            usability: usability,
-            usedDuration: duration,
-            rating: rating,
-            price: price);
+          reviewerId: auth.currentUser!.uid,
+          donationId: donationId,
+          reviewText: reviewText,
+          reviewerName: name,
+          reviewerImageURL: imageUrl,
+          rating: rating,
+        );
 
         await restAPI.postReview(review);
 
