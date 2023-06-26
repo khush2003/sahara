@@ -104,4 +104,17 @@ class RestAPI {
       throw Exception('Failed to post donation info');
     }
   }
+
+  Future<List<Review>?> getReviews() async {
+    Response response = await connect.get('$getBackendUrl/reviews');
+    if (response.statusCode == 200) {
+      final List<Review> reviews = [];
+      response.body.forEach((element) {
+        reviews.add(Review.fromJson(element));
+      });
+      return reviews;
+    } else {
+      return null;
+    } 
+  }
 }

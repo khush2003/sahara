@@ -6,13 +6,10 @@ import '../components/Feed/review_card.dart';
 import '../components/app_bar_feed_page.dart';
 import '../controllers/donation_item_controller.dart';
 import '../models/donation_item.dart';
-import '../models/review.dart';
 
 class FeedView extends StatelessWidget {
   FeedView({super.key});
   final donationItemController = DonationItemController.instance;
-  final DonationItem donationPost = DonationItem.test();
-  final Review review = Review.test();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -23,14 +20,22 @@ class FeedView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TabBarView(
               children: [
-                Column(children: [
-                  ReviewCard(
-                    donationPost: donationPost,
-                    review: review,
-                  )
-                ]),
+                Obx(() => ListView.separated(
+                    itemBuilder: (context, index) {
+                      return ReviewCard(
+                          donationPost: DonationItem.getFromId(
+                              donationItemController
+                                  .reviewList[index].donationId,
+                              donationItemController.donationItems),
+                          review: donationItemController.reviewList[index]);
+                    },
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 10),
+                    itemCount: donationItemController.reviewList.length)),
                 Obx(
-                  () => ListView.builder(
+                  () => ListView.separated(
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 10),
                       itemCount: donationItemController.donationItems.length,
                       itemBuilder: (context, index) {
                         return DonationCard(
