@@ -8,16 +8,14 @@ import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/utils/app_utils.dart';
 
 class LogInController extends GetxController {
-  final isvisible = false.obs;
+  final _auth = AuthController.instance;
 
-  bool buttonclicked = false;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final _auth = AuthController.instance;
-  void toogleVisible() {
-    isvisible(!isvisible.value);
-  }
+
+  
+
 
   Future<void> loginUser() async {
     bool vaildEmail = checkEmail(emailController.text.trim());
@@ -37,6 +35,7 @@ class LogInController extends GetxController {
           "Please enter a vaild Email!");
     }
   }
+  
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';
@@ -54,11 +53,4 @@ class LogInController extends GetxController {
     return null;
   }
 
-  isButtonClicked() {
-    if (buttonclicked == true) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/controllers/auth/login_controller.dart';
 import '../../components/primary_button.dart';
 import '../../components/textfield_app.dart';
@@ -9,7 +8,6 @@ import '../../theme/app_theme.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({Key? key}) : super(key: key);
-  final AuthController authController= Get.put(AuthController());
   final LogInController logInController = Get.put(LogInController());
   @override
   Widget build(BuildContext context) {
@@ -18,125 +16,126 @@ class LoginView extends StatelessWidget {
       backgroundColor: titleBackground,
       body: Stack(
         children: [
-          Center(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
-                  child: AspectRatio(
-                    aspectRatio: 3,
-                    child: Image.asset(
-                      "assets/images/new_hd_logo.png",
-                      fit: BoxFit.contain,
+          SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                    child: AspectRatio(
+                      aspectRatio: 3,
+                      child: Image.asset(
+                        "assets/images/new_hd_logo.png",
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Login with",
-                        style: titleText(
-                            color: const Color.fromARGB(255, 255, 255, 255)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: TextfieldAPP(
-                          borderColor: const Color.fromARGB(255, 255, 255, 255),
-                          textStyle: formFieldText(color: Colors.white),
-                          hintText: "Email",
-                          controllerFunction: logInController.emailController,
-                          validator: logInController.validateEmail,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Login with",
+                          style: titleText(
+                              color: const Color.fromARGB(255, 255, 255, 255)),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            TextfieldAPP(
-                              borderColor:
-                                  const Color.fromARGB(255, 255, 255, 255),
-                              textStyle: formFieldText(color: Colors.white),
-                              hintText: "Password",
-                              controllerFunction:
-                                  logInController.passwordController,
-                              validator: logInController.validatePassword,
-                              secureText: true,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Get.toNamed(Routes.forgotPass);
-                              },
-                              child: Text(
-                                "Forgot Password?",
-                                style: regularText(color: Colors.white)
-                                    .copyWith(
-                                        decoration: TextDecoration.underline),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: TextfieldAPP(
+                            borderColor:
+                                const Color.fromARGB(255, 255, 255, 255),
+                            textStyle: formFieldText(color: Colors.white),
+                            hintText: "Email",
+                            controllerFunction: logInController.emailController,
+                            validator: logInController.validateEmail,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 40),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              TextfieldAPP(
+                                borderColor:
+                                    const Color.fromARGB(255, 255, 255, 255),
+                                textStyle: formFieldText(color: Colors.white),
+                                hintText: "Password",
+                                controllerFunction:
+                                    logInController.passwordController,
+                                validator: logInController.validatePassword,
+                                secureText: true,
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Column(
-                          children: [
-                            PrimaryButton(
-                                text: "Login",
+                              TextButton(
                                 onPressed: () {
-                                  logInController.loginUser();
-                                }),
-                            TextButton(
-                                onPressed: () {
-                                  Get.offAllNamed(Routes.register);
+                                  Get.toNamed(Routes.forgotPass);
                                 },
                                 child: Text(
-                                  "Create an account!",
+                                  "Forgot Password?",
                                   style: regularText(color: Colors.white)
                                       .copyWith(
                                           decoration: TextDecoration.underline),
-                                )),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Column(
-                          children: [
-                            Text("Or Login with",
-                                style: headText(
-                                    color: const Color.fromARGB(
-                                        255, 255, 255, 255))),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Center(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  child: Image.asset(
-                                "assets/images/GoogleIcon.png",
-                                height: 50,
-                                width: 50,
-                              )),
-                              Expanded(
-                                  child: Image.asset(
-                                "assets/images/FacebookIcon.png",
-                                height: 50,
-                                width: 50,
-                              ))
+                                ),
+                              )
                             ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Column(
+                            children: [
+                              PrimaryButton(
+                                  text: "Login",
+                                  onPressed:logInController.loginUser,),
+                              TextButton(
+                                  onPressed: () {
+                                    Get.offAllNamed(Routes.register);
+                                  },
+                                  child: Text(
+                                    "Create an account!",
+                                    style: regularText(color: Colors.white)
+                                        .copyWith(
+                                            decoration:
+                                                TextDecoration.underline),
+                                  )),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Column(
+                            children: [
+                              Text("Or Login with",
+                                  style: headText(
+                                      color: Colors.white)),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Center(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: Image.asset(
+                                  "assets/images/GoogleIcon.png",
+                                  height: 50,
+                                  width: 50,
+                                )),
+                                Expanded(
+                                    child: Image.asset(
+                                  "assets/images/FacebookIcon.png",
+                                  height: 50,
+                                  width: 50,
+                                ))
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Align(

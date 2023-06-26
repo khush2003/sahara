@@ -1,10 +1,6 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/models/donation_item.dart';
-import 'package:sahara/views/profile_view.dart';
 
 import 'models/user.dart';
 
@@ -29,10 +25,8 @@ class RestAPI {
         donationItems
             .add(DonationItem.fromJson(element, element['donationId']));
       });
-      print(donationItems);
       return donationItems;
     } else {
-      print("No status code");
       return null;
     }
   }
@@ -44,7 +38,7 @@ class RestAPI {
     if (response.statusCode == 200) {
       return response.body;
     } else {
-      return null;
+      throw Exception('Failed to post user info');
     }
   }
 
@@ -58,7 +52,7 @@ class RestAPI {
     if (response.statusCode == 200) {
       return response.body;
     } else {
-      return null;
+      throw Exception('Failed to post user info');
     }
   }
 
@@ -84,7 +78,6 @@ class RestAPI {
       dynamic userData = response.body;
       return UserSahara.fromjson(userData, userId);
     } else {
-      print("No user found!");
       return null;
     }
   }
@@ -97,7 +90,7 @@ class RestAPI {
     if (response.statusCode == 200) {
       return response.body;
     } else {
-      return null;
+      throw Exception('Failed to post review info');
     }
   }
 
@@ -108,7 +101,7 @@ class RestAPI {
     if (response.statusCode == 200) {
       return response.body;
     } else {
-      return 'Error: Did not post donation item';
+      throw Exception('Failed to post donation info');
     }
   }
 }

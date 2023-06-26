@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/user.dart';
 
@@ -13,14 +12,13 @@ class AuthController extends GetxController {
   final restApi = RestAPI.instance;
 
   Future<String?> createUser(
-      String email, String password, UserSahara user) async {
-    print("Create user Activated");
+      String email, String password, String userName) async {
     try {
       // Authenticate user (Create account)
       final userData = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       final confirmedUser = UserSahara(
-          userName: user.userName,
+          userName: userName,
           userPhoneNumber: '',
           userAddress: '',
           profilePicture: '',
@@ -28,9 +26,10 @@ class AuthController extends GetxController {
           blockedUser: [],
           discountCoupon: [],
           userOwnPost: [],
-          userReviewPost: []);
-      Get.offAllNamed(Routes.app);
+          userReviewPost: [],
+          );
       await restApi.postUserInfo(confirmedUser, userData.user!.uid);
+      Get.offAllNamed(Routes.app);
       successSnackBar("Account Created Sucessfully!");
     } on FirebaseAuthException catch (e) {
       return getAuthErrorMessage(e.code);

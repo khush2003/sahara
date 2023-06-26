@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/routes/routes.dart';
 import '../../theme/app_theme.dart';
 
 import 'login_view.dart';
@@ -23,7 +24,7 @@ class OnBoardingState extends State<OnBoardingView> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/boardingPageTemplate.png"),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
         ),
         child: GestureDetector(
@@ -32,10 +33,8 @@ class OnBoardingState extends State<OnBoardingView> {
               count++;
             }
             if (count > 10) {
-              Get.offAll(
-                () => LoginView(),
-                transition: Transition.fade,
-                duration: const Duration(seconds: 2),
+              Get.offAllNamed(
+                Routes.login,
               );
             }
           },

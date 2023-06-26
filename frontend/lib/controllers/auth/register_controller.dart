@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sahara/models/user.dart';
-import 'package:sahara/rest_api.dart';
 import 'package:get/get.dart';
 
 import '../../utils/app_utils.dart';
@@ -9,40 +7,24 @@ import 'auth_controller.dart';
 
 class RegisterController extends GetxController {
   late UserSahara user;
-  final restApi = RestAPI.instance;
-  static RegisterController get instance => Get.find();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-      final _auth = AuthController.instance;
-
-
-
-
-  void authStateChanges() {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        print('User is signed in!');
-      }
-    });
-  }
+  final _auth = AuthController.instance;
 
   Future<void>? registerUser() async {
     String username = usernameController.text;
     String email = emailController.text;
     String password = passwordController.text;
-    if(validateInputs()){
-    final user = UserSahara(userName: username);
-    String? error = await _auth.createUser(email, password, user);
-    if (error != null) {
+    if (validateInputs()) {
+      String? error = await _auth.createUser(email, password, username);
+      if (error != null) {
         errorSnackBar(error.toString());
       }
-    }else {
+    } else {
       errorSnackBar(
           'Please fill in all the fields correctly to create an account.');
     }
@@ -51,8 +33,8 @@ class RegisterController extends GetxController {
   String? validateUsername(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your first name';
-    } else if (value.length > 20) {
-      return 'First name cannot be longer than 20 characters';
+    } else if (value.length > 40) {
+      return 'User\'s name cannot be longer than 40 characters';
     }
     return null;
   }
@@ -74,7 +56,8 @@ class RegisterController extends GetxController {
     }
     return null;
   }
-    String? validateEmail(String? value) {
+
+  String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';
     }

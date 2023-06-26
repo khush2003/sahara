@@ -7,6 +7,6 @@ class DependencyInjection {
   static void init() async {
     Get.put<GetConnect>(GetConnect()); //initializing GetConnect
     Get.put<RestAPI>(RestAPI()); //initializing RestAPI
-    Get.put<AuthController>(AuthController()); //initializing RestAPI
+    Get.put<AuthController>(AuthController());
   }
 }

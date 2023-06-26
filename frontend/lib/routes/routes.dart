@@ -66,7 +66,12 @@ final getPages = [
   GetPage(name: Routes.chat, page: () => const ChatView()),
   GetPage(name: Routes.profileView, page: () => ProfileView()),
   GetPage(name: Routes.blockUsers, page: () => BlockUsers()),
-  GetPage(name: Routes.login, page: () => LoginView()),
+  GetPage(
+    name: Routes.login,
+    page: () => LoginView(),
+    transition: Transition.fade,
+    transitionDuration: const Duration(milliseconds: 500),
+  ),
   GetPage(name: Routes.register, page: () => RegisterView()),
   GetPage(name: Routes.whatIs, page: () => WhatIsView()),
   GetPage(name: Routes.onboarding, page: () => OnBoardingView()),
