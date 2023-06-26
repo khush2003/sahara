@@ -15,6 +15,7 @@ class CreateReviewController extends GetxController {
   final dateTime = DateTime.now().obs;
   final sliderValue = 0.obs;
   final TextEditingController reviewContentController = TextEditingController();
+  ValueNotifier<int> reviewSliderController = ValueNotifier<int>(0);
   final auth = FirebaseAuth.instance;
   final DonationItem item = DonationItem.test();
   final RestAPI restAPI = RestAPI();
@@ -28,6 +29,8 @@ class CreateReviewController extends GetxController {
   Future<String> getCurrentUsername() async {
     try {
       // Get the current user info
+
+  
       final UserSahara currentUser = await restAPI.getCurrentUserInfo();
 
       return currentUser.userName;
@@ -39,18 +42,17 @@ class CreateReviewController extends GetxController {
 
   Future<void>? createReview(
       String name,
-      int duration,
-      int usability,
-      int price,
+      Duration duration,
+      double usability,
+      double price,
       String donationId,
       String reviewText,
       String imageUrl,
-      String receiverName,
-      String donorName,
-      int rating) async {
+      String donorName,) async {
     if (validateInputs()) {
       try {
         // Authenticate user (Create account)
+        final String receiverName = await getCurrentUsername();
 
         final review = Review(
             reviewerId: auth.currentUser!.uid,
@@ -62,7 +64,7 @@ class CreateReviewController extends GetxController {
             donorName: donorName,
             usability: usability,
             usedDuration: duration,
-            rating: rating,
+            rating: reviewSliderController.value,
             price: price);
 
         await restAPI.postReview(review);

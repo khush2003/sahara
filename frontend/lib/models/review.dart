@@ -7,10 +7,10 @@ class Review {
   final String imageUrl;
   final String receiverName;
   final String donorName;
-  final int usability;
-  final int usedDuration;
+  final double usability;
+  final Duration usedDuration;
   final int rating;
-  final int price;
+  final double price;
 
   Review(
       {this.reviewId,
@@ -38,7 +38,7 @@ class Review {
       rating: 0,
       price: 100,
       usability: 50,
-      usedDuration: 9,
+      usedDuration: const Duration(days: 14),
       reviewText:
           "I'm absolutely thrilled about the wonderful water bottle you graciously gave me! It has truly become an essential part of my daily routine, I'm absolutely thrilled about the wonderful water bottle you graciously gave me! It has truly become an essential part of my daily routine,",
     );
@@ -54,10 +54,10 @@ class Review {
         imageUrl: json['imageUrl'] ?? '',
         receiverName: json['receiverName'] ?? '',
         donorName: json['donorName'] ?? '',
-        usability: json['usability'] ?? int,
-        usedDuration: json['usedDuration'] ?? int,
+        usability: json['usability'] ?? double,
+        usedDuration: json['usedDuration'] ?? Duration,
         rating: json['rating'] ?? int,
-        price: json['price'] ?? int);
+        price: json['price'] ?? double);
   }
 
   
