@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/donation_item.dart';
+import 'package:sahara/models/review.dart';
 
 import 'models/user.dart';
 
@@ -81,11 +82,11 @@ class RestAPI {
     }
   }
 
-  Future<dynamic> postReview(UserSahara user) async {
+   Future<dynamic> postReview(Review review) async {
     //body data
-    final Map<String, dynamic> userData = user.toJson();
+    final Map<String, dynamic> reviewData = review.toJson();
 
-    Response response = await connect.post('$postBackendUrl/users', userData);
+    Response response = await connect.post('$postBackendUrl/reviews', reviewData);
     if (response.statusCode == 200) {
       return response.body;
     } else {

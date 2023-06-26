@@ -32,9 +32,9 @@ class ReviewPage extends StatelessWidget {
           ReviewCard(user: user, item: item, arrDate: arrDate,controllerFunction: reviewControler.reviewContentController),
           Center(
             child: PostButton(onPressed: () {
-                  reviewControler.createReview(
-                    item.name, item.usedDuration, item.usability, item.price, 
-                      item.description, item.imageUrl, 'Note', 'Poln','James',19);
+                  // reviewControler.createReview(
+                  //   item.name, item.usedDuration, item.usability, item.price, 
+                  //     item.description, item.imageUrl, 'Note', 'Poln','James',19);
 
 
             },))

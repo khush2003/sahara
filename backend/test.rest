@@ -11,14 +11,14 @@ Content-Type: application/json
 }
 
 ### GET all donations
-GET http://localhost:8000/get/donationItems
+GET http://localhost:8000/get/donationItems/kbVtokJSTNiGTirsmnQZ
 
 ### POST
 POST http://localhost:8000/post/donationItem
 Content-Type: application/json
 
 {
-    "name": "Refrigertor Samsung",
+    "name": "Refrigertor SamsungNote",
     "description": "Refrigertor Samsung 2019 model in good condition with a shelf for storing food. The ice box is not working but everything else is working. There are a few scratches",
     "category": "Electronics",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png",
