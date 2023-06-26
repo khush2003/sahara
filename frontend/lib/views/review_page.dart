@@ -1,6 +1,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:sahara/controllers/create_review_controller.dart';
 
 import '../components/DeliveryPage/delivery_card.dart';
 import '../models/donation_item.dart';
@@ -14,6 +17,7 @@ class ReviewPage extends StatelessWidget {
   final DonationItem item = DonationItem.test();
   final UserSahara user = UserSahara.test();
   final arrDate = DateTime.now();
+  final CreateReviewController reviewControler = Get.put(CreateReviewController());
 
   // final controller = Get.put
 
@@ -25,10 +29,16 @@ class ReviewPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          ReviewCard(user: user, item: item, arrDate: arrDate),
-          const Center(
-            child: PostButton()
-          )
+          ReviewCard(user: user, item: item, arrDate: arrDate,controllerFunction: reviewControler.reviewContentController),
+          Center(
+            child: PostButton(onPressed: () {
+                  // reviewControler.createReview(
+                  //   item.name, item.usedDuration, item.usability, item.price, 
+                  //     item.description, item.imageUrl, 'Note', 'Poln','James',19);
+
+
+            },))
+          
         ],
       ),
     );
@@ -39,12 +49,14 @@ class ReviewCard extends StatelessWidget {
   final DonationItem item;
   final UserSahara user;
   final DateTime arrDate;
+  late TextEditingController? controllerFunction;
 
-  const ReviewCard(
+ ReviewCard(
       {super.key,
       required this.user,
       required this.item,
-      required this.arrDate});
+      required this.arrDate,
+      this.controllerFunction});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -71,12 +83,13 @@ class ReviewCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ItemInfo(item: item)
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: TextField(
+                controller: controllerFunction,
                 keyboardType: TextInputType.multiline,
                 maxLines: 4,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Enter a search term',
             ),
@@ -98,19 +111,15 @@ class ReviewCard extends StatelessWidget {
 }
 
 class PostButton extends StatelessWidget {
-  const PostButton({super.key});
+  final Function()? onPressed;
+  final CreateReviewController reviewControler = Get.put(CreateReviewController());
+  PostButton({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-            onPressed: (){
-              showDialog(context: context, builder: (BuildContext context){
-                return const AlertDialog(
-                  title: Text('Successfully Post Review'),
-                  content: Padding(padding: EdgeInsets.all(16.0), child: Text('Your Review will be shown in the Feed Page.'),),
-                );
-              });
-          }, child: const Padding(
+            onPressed: onPressed 
+            , child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
             child: Text('Post', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
           )

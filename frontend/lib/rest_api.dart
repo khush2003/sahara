@@ -82,11 +82,11 @@ class RestAPI {
     }
   }
 
-  Future<dynamic> postReview(UserSahara user) async {
+   Future<dynamic> postReview(Review review) async {
     //body data
-    final Map<String, dynamic> userData = user.toJson();
+    final Map<String, dynamic> reviewData = review.toJson();
 
-    Response response = await connect.post('$postBackendUrl/users', userData);
+    Response response = await connect.post('$postBackendUrl/reviews', reviewData);
     if (response.statusCode == 200) {
       return response.body;
     } else {
