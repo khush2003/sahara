@@ -25,7 +25,7 @@ class DonationDetailsSectionDetailed extends StatelessWidget {
         InfoRow(
             icon: UniconsLine.clock,
             label: 'Used Duration',
-            value: formatDuration(item.usedDurationTotal)),
+            value: formatDuration(item.usedDuration)),
         InfoRow(
             icon: UniconsLine.star,
             label: 'Usability',

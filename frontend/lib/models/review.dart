@@ -37,7 +37,8 @@ class Review {
       name: "Chair",
       donorName: "Thomas Shelby",
       receiverName: "James Shelby",
-      imageUrl: "",
+      imageUrl:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png",
       rating: 0,
       price: 100,
       usability: 50,

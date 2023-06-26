@@ -22,8 +22,7 @@ class RestAPI {
     if (response.statusCode == 200) {
       final List<DonationItem> donationItems = [];
       response.body.forEach((element) {
-        donationItems
-            .add(DonationItem.fromJson(element, element['donationId']));
+        donationItems.add(DonationItem.fromJson(element));
       });
       return donationItems;
     } else {

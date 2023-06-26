@@ -76,19 +76,19 @@ class CreateDonationController extends GetxController {
     super.onInit();
   }
 
-  void setSelectedCatagory(String value){
+  void setSelectedCatagory(String value) {
     selectedCategory.value = value;
   }
 
-  void setDuration (String value){
+  void setDuration(String value) {
     duration.value = value;
   }
 
-  void setDurationType (String value){
+  void setDurationType(String value) {
     durationType.value = value;
   }
 
-  void setPaidBy (String value){
+  void setPaidBy(String value) {
     paidBy.value = value;
   }
 
@@ -107,14 +107,13 @@ class CreateDonationController extends GetxController {
     return durationType.value;
   }*/
 
-  Duration getDurationTotal(){
-    if(durationType.value == 'Week'){
+  Duration getDurationTotal() {
+    if (durationType.value == 'Week') {
       durationTotal.value = Duration(
         days: int.parse(duration.value) * 7,
       );
       return durationTotal.value;
-    }
-    else if(durationType.value == 'Month'){
+    } else if (durationType.value == 'Month') {
       durationTotal.value = Duration(
         days: int.parse(duration.value) * 30,
       );
@@ -131,7 +130,8 @@ class CreateDonationController extends GetxController {
   getEstimatedValue() {
     //estimatedValue.value = EstimatedItemValueState().getEstimatedValue();
     //estimatedValue.value = EstimatedItemValueState().estimatedValue;
-    estimatedValue.value = getUsabilityValue() * double.parse(priceController.text);
+    estimatedValue.value =
+        getUsabilityValue() * double.parse(priceController.text);
     return estimatedValue.value;
   }
 
@@ -207,34 +207,34 @@ class CreateDonationController extends GetxController {
   void createDonation() async {
     if (validateInputs()) {
       try {
-        final item = DonationItem(
-          donationId: '',
-          imageUrl: imageUrl.value,
-          name: nameController.text,
-          category: selectedCategory.value ?? 'Electronic',
-          usedDuration: int.parse(duration.value) ?? 1,
-          usedDurationType: durationType.value ?? 'Week',
-          usedDurationTotal: getDurationTotal(),
-          usability: getUsabilityValue(),
-          price: double.parse(priceController.text),
-          estimatedItemValue: getEstimatedValue(),
-          itemWidth: double.parse(widthController.text),
-          itemLength: double.parse(lengthController.text),
-          itemHeight: double.parse(heightController.text),
-          weight: double.parse(weightController.text),
-          deliveryFees: getDeliveryFeeValue(),
-          deliveryPaidBy: paidBy.value ?? 'Donor (you)',
-          description: descriptionController.text,
-          tags: tags,
-          author: Author(
-            authorId: _firebaseAuth.currentUser!.uid,
-            name: _firebaseAuth.currentUser!.displayName!,
-            imageUrl: _firebaseAuth.currentUser!.photoURL!,
-          ),
-        );
-        await restAPI.postDonationItem(item);
-        successSnackBar('Success: Donation Item was created successfully');
-        Get.offAllNamed(Routes.app);
+        // final item = DonationItem(
+        //   donationId: '',
+        //   imageUrl: imageUrl.value,
+        //   name: nameController.text,
+        //   category: selectedCategory.value ?? 'Electronic',
+        //   usedDuration: int.parse(duration.value) ?? 1,
+        //   usedDurationType: durationType.value ?? 'Week',
+        //   usedDurationTotal: getDurationTotal(),
+        //   usability: getUsabilityValue(),
+        //   price: double.parse(priceController.text),
+        //   estimatedItemValue: getEstimatedValue(),
+        //   itemWidth: double.parse(widthController.text),
+        //   itemLength: double.parse(lengthController.text),
+        //   itemHeight: double.parse(heightController.text),
+        //   weight: double.parse(weightController.text),
+        //   deliveryFees: getDeliveryFeeValue(),
+        //   deliveryPaidBy: paidBy.value ?? 'Donor (you)',
+        //   description: descriptionController.text,
+        //   tags: tags,
+        //   author: Author(
+        //     authorId: _firebaseAuth.currentUser!.uid,
+        //     name: _firebaseAuth.currentUser!.displayName!,
+        //     imageUrl: _firebaseAuth.currentUser!.photoURL!,
+        //   ),
+        // );
+        // await restAPI.postDonationItem(item);
+        // successSnackBar('Success: Donation Item was created successfully');
+        // Get.offAllNamed(Routes.app);
       } catch (e) {
         errorSnackBar('Error: There is an error in creating donation $e');
       }

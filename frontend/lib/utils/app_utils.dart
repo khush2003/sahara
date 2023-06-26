@@ -17,6 +17,19 @@ DeliveryPaidBy convertFromString(String deliveryPaidBy) {
   }
 }
 
+String convertToString(DeliveryPaidBy deliveryPaidBy){
+  switch (deliveryPaidBy) {
+    case DeliveryPaidBy.donor:
+      return 'donor';
+    case DeliveryPaidBy.receiver:
+      return 'receiver';
+    case DeliveryPaidBy.both:
+      return 'both';
+    default:
+      return 'donor';
+  }
+}
+
 String formatDuration(Duration duration) {
   int days = duration.inDays;
   return '$days ${days == 1 ? 'day' : 'days'}';

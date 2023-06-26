@@ -21,8 +21,8 @@ Content-Type: application/json
     "name": "Refrigertor Samsung",
     "description": "Refrigertor Samsung 2019 model in good condition with a shelf for storing food. The ice box is not working but everything else is working. There are a few scratches",
     "category": "Electronics",
-    "imageUrl": "https://images.unsplash.com/photo-1581091019745-0d5b8b6a4b0e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVmcmlnZXJ0b3IlMjBzb21ldGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
-    "useability": 0.9,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png",
+    "usability": 0.9,
     "price": 888.8,
     "itemWidth": 500.2,
     "itemHeight": 100,
@@ -36,7 +36,7 @@ Content-Type: application/json
     "isGiven": false,
     "authorId": "60b9b5b9e4b0f3b2a8b0b3a0",
     "authorName": "John Doe",
-    "authorImageURL": "https://images.unsplash.com/photo-1581091019745-0d5b8b6a4b0e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVmcmlnZXJ0b3IlMjBzb21ldGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
+    "authorImageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png"
 }
 
 ### POST (change id everytime you post)
@@ -46,7 +46,7 @@ Content-Type: application/json
 {
    "userName": "Note",
    "userPhoneNumber": "0894499153",
-   "profilePicture": "https://images.unsplash.com/photo-1581091019745-0d5b8b6a4b0e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVmcmlnZXJ0b3IlMjBzb21ldGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
+   "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png",
    "userAddress": "122 Wattana nakorkorn",
    "blockedUser": [],
    "discountCoupon": [],

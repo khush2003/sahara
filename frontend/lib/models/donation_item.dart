@@ -1,14 +1,14 @@
 import 'dart:convert';
+
+import '../utils/app_utils.dart';
 import 'author.dart';
 
 class DonationItem {
-  final String donationId;
+  final String? donationId;
   final String name, description, imageUrl, category;
   final double itemWidth, itemLength, itemHeight, weight;
-  final String deliveryPaidBy;
-  final int usedDuration;
-  final String usedDurationType;
-  final Duration usedDurationTotal;
+  final DeliveryPaidBy deliveryPaidBy;
+  final Duration usedDuration;
   final double usability, price, deliveryFees;
   final List<String> tags;
   final Author author;
@@ -16,7 +16,7 @@ class DonationItem {
   final double estimatedItemValue;
 
   DonationItem({
-    this.donationId = '',
+    this.donationId,
     required this.name,
     required this.description,
     required this.imageUrl,
@@ -27,15 +27,12 @@ class DonationItem {
     required this.weight,
     required this.deliveryPaidBy,
     required this.usedDuration,
-    required this.usedDurationType,
-    this.usedDurationTotal = const Duration(days: 0),
     required this.usability,
     required this.price,
-    required this.estimatedItemValue,
     required this.deliveryFees,
     required this.tags,
     required this.author,
-  }) : //estimatedItemValue = price * useability,
+  })  : estimatedItemValue = price * usability,
         isOverPriced = deliveryFees > price * usability;
 
   factory DonationItem.test() {
@@ -51,13 +48,10 @@ class DonationItem {
         itemLength: 10,
         itemHeight: 50,
         weight: 120,
-        deliveryPaidBy: 'Donor (you)',
-        usedDuration: 2,
-        usedDurationType: 'Week',
-        usedDurationTotal: const Duration(days: 14),
+        deliveryPaidBy: DeliveryPaidBy.donor,
+        usedDuration: const Duration(days: 14),
         usability: 0.80,
         price: 5000,
-        estimatedItemValue: 4000,
         deliveryFees: 5000,
         tags: ['fridge', 'giveaway'],
         author: Author(
@@ -66,41 +60,34 @@ class DonationItem {
             imageUrl:
                 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'));
   }
-  factory DonationItem.fromJson(Map<String, dynamic> json, String documentId) {
+  factory DonationItem.fromJson(Map<String, dynamic> json) {
     return DonationItem(
-      donationId: documentId,
-      name: json['name'] ?? '',
-      description: json['description '] ?? '',
-      imageUrl: json['imageUrl'] ?? '',
-      category: json['category'] ?? '',
-      itemWidth: json['itemWidth'] as double,
-      itemLength: json['itemLength'] as double,
-      itemHeight: json['itemHeight'] as double,
-      weight: json['weight'] as double,
-      deliveryPaidBy: json['deliveryPaidBy'] ?? '',
-      usedDuration: json['usedDuration'] as int,
-      usedDurationType: json['usedDurationType'] ?? '',
-      usedDurationTotal: Duration(days: json['usedDurationTotal']),
-      usability: json['useability'] as double,
-      price: json['price'] as double,
-      estimatedItemValue: json['estimatedItemValue'] as double,
-      deliveryFees: json['deliveryFees'] as double,
-      tags: json['tags'] == null
-          ? []
-          : List<String>.from(json['tags'] as List<dynamic>),
-      author: Author.fromJson(json),
-    );
+        donationId: json['donationId'],
+        name: json['name'] ?? '',
+        description: json['description'] ?? '',
+        imageUrl: json['imageUrl'] ?? '',
+        category: json['category'] ?? '',
+        itemWidth: json['itemWidth'] as double,
+        itemLength: json['itemLength'] as double,
+        itemHeight: json['itemHeight'] as double,
+        weight: json['weight'] as double,
+        deliveryPaidBy: convertFromString(json['deliveryPaidBy']),
+        usedDuration: Duration(days: json['usedDuration'] as int),
+        usability: json['usability'] as double,
+        price: json['price'] as double,
+        deliveryFees: json['deliveryFees'] as double,
+        tags: json['tags'] == null
+            ? []
+            : List<String>.from(json['tags'] as List<dynamic>),
+        author: Author.fromJson(json));
   }
-
   Map<String, dynamic> toJson() {
     return {
       'donationId': donationId,
       'imageUrl': imageUrl,
       'name': name,
       'category': category,
-      'usedDuration': usedDuration,
-      'usedDurationType': usedDurationType,
-      'usedDurationTotal': usedDurationTotal.inDays,
+      'usedDuration': usedDuration.inDays,
       'usability': usability,
       'price': price,
       'estimatedItemValue': estimatedItemValue,
@@ -109,16 +96,17 @@ class DonationItem {
       'itemHeight': itemHeight,
       'weight': weight,
       'deliveryFees': deliveryFees,
-      'deliveryPaidBy': deliveryPaidBy,
+      'deliveryPaidBy': convertToString(deliveryPaidBy),
       'description': description,
       'tags': tags,
-      'author': author.toJson(),
+      'authorName': author.name,
+      'authorImageURL': author.imageUrl,
+      'authorId': author.authorId,
     };
   }
 
   @override
   String toString() {
     return jsonEncode(toJson());
-    //'DonationItem{donationId: $donationId, name: $name, description: $description, imageUrl: $imageUrl, category: $category, itemWidth: $itemWidth, itemLength: $itemLength, itemHeight: $itemHeight, weight: $weight, deliveryPaidBy: $deliveryPaidBy, usedDuration: $usedDuration, usedDurationType: $usedDurationType, usedDurationTotal: $usedDurationTotal, useability: $usability, price: $price, deliveryFees: $deliveryFees, tags: $tags, author: $author, isOverPriced: $isOverPriced, estimatedItemValue: $estimatedItemValue}';
   }
 }
