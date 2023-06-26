@@ -105,6 +105,10 @@ class DonationItem {
     };
   }
 
+  factory DonationItem.getFromId(String donationId ,List<DonationItem> list){
+    return list.firstWhere((element) => element.donationId == donationId);
+  }
+
   @override
   String toString() {
     return jsonEncode(toJson());
