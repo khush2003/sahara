@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/user.dart';
@@ -10,6 +12,29 @@ class AuthController extends GetxController {
   static AuthController get instance => Get.find();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final restApi = RestAPI.instance;
+  StreamSubscription<UserSahara>? userSubscription;
+  final userSahara = UserSahara.empty().obs;
+  late Rx<User?> firebaseUser;
+
+  @override
+  void onInit() async {
+    if (_auth.currentUser != null) {
+      userSahara(await RestAPI.instance.getUserById(_auth.currentUser!.uid));
+    }
+    firebaseUser.bindStream(_auth.userChanges());
+    ever(firebaseUser, (User? user) async {
+      if (user == null) {
+        userSahara(UserSahara.empty());
+        Get.offAllNamed(Routes.login);
+      } else {
+        userSahara(await RestAPI.instance.getUserById(user.uid));
+        Get.offAllNamed(Routes.app);
+      }
+    });
+    super.onInit();
+  }
+
+
 
   Future<String?> createUser(
       String email, String password, String userName) async {

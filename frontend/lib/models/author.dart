@@ -1,6 +1,7 @@
 class Author {
   final String authorId;
-  final String name, imageUrl;
+  final String name;
+  final String? imageUrl;
 
   Author({
     required this.authorId,

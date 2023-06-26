@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/author.dart';
 import '../models/donation_item.dart';
+import 'image_thumbnail.dart';
 
 
 class ReceivedCard extends StatelessWidget {
@@ -99,15 +100,7 @@ class DetailRow extends StatelessWidget {
   }
 }
 
-class ImageThumbnail extends StatelessWidget {
-  final String imageUrl;
-  const ImageThumbnail({super.key, required this.imageUrl});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 
 class Donor extends StatelessWidget {
   final Author author;

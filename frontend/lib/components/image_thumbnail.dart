@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 class ImageThumbnail extends StatelessWidget {
-  final String imageUrl;
+  final String? imageUrl;
   final double size;
   final bool isCircular, isFlat;
   final double? fixedHeight;
   const ImageThumbnail(
       {super.key,
-      required this.imageUrl,
+      this.imageUrl,
       this.size = 125,
       this.isCircular = false,
       this.isFlat = false,
@@ -30,6 +30,6 @@ class ImageThumbnail extends StatelessWidget {
                     : BorderRadius.circular(10),
             color: Colors.amberAccent,
             image: DecorationImage(
-                image: NetworkImage(imageUrl), fit: BoxFit.cover)));
+                image: NetworkImage(imageUrl ?? ''), fit: BoxFit.cover)));
   }
 }
