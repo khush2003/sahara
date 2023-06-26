@@ -40,6 +40,9 @@ class Review {
       rating: json['rating'] as int? ?? 0,
     );
   }
+    factory Review.getFromId(String reviewId ,List<Review> list){
+    return list.firstWhere((element) => element.reviewId == reviewId);
+  }
 
   Map<String, dynamic> toJson() {
     return {

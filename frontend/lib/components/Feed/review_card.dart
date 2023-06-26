@@ -22,7 +22,9 @@ class ReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardSahara(
-        onPressed: () => Get.toNamed(Routes.reviewDetails),
+        onPressed: () => Get.toNamed(Routes.reviewDetails, parameters: {
+              'id': review.reviewId!,
+            }),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(

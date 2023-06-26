@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../components/Feed/author_detail_section.dart';
 import '../components/Feed/donation_details_section.dart';
 import '../components/Feed/donation_details_section_detailed.dart';
 import '../components/Feed/review_card.dart';
 import '../components/image_thumbnail.dart';
-import '../models/author.dart';
+import '../controllers/donation_item_controller.dart';
 import '../models/donation_item.dart';
 import '../models/review.dart';
-import '../models/user.dart';
 import '../theme/app_theme.dart';
 
 class ReviewPostDetailsView extends StatelessWidget {
   ReviewPostDetailsView({super.key});
-  final Author author = Author.test();
-  final UserSahara user = UserSahara.test();
-  final DonationItem item = DonationItem.test();
-  final Review review = Review.test();
+  final controller = DonationItemController.instance;
+  final reviewId = Get.parameters['id'] ?? '';
   @override
   Widget build(BuildContext context) {
+    final review = Review.getFromId(reviewId, controller.reviewList);
+    final item =
+        DonationItem.getFromId(review.donationId, controller.donationItems);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Review Details'),
@@ -29,7 +30,8 @@ class ReviewPostDetailsView extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: AutherDetailSection(author: author, showChatButton: false),
+              child: AutherDetailSection(
+                  author: item.author, showChatButton: false),
             ),
             ImageThumbnail(
                 fixedHeight: 300,
@@ -37,7 +39,7 @@ class ReviewPostDetailsView extends StatelessWidget {
                 imageUrl: 'https://picsum.photos/200',
                 size: MediaQuery.of(context).size.width),
             DonationDetailsSectionDetailed(
-              author: author,
+              author: item.author,
               item: item,
             ),
             Padding(
