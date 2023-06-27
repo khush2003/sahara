@@ -21,20 +21,17 @@ class AuthController extends GetxController {
     if (_auth.currentUser != null) {
       userSahara(await RestAPI.instance.getUserById(_auth.currentUser!.uid));
     }
+    firebaseUser = _auth.currentUser.obs;
     firebaseUser.bindStream(_auth.userChanges());
     ever(firebaseUser, (User? user) async {
       if (user == null) {
         userSahara(UserSahara.empty());
-        Get.offAllNamed(Routes.login);
       } else {
         userSahara(await RestAPI.instance.getUserById(user.uid));
-        Get.offAllNamed(Routes.app);
       }
     });
     super.onInit();
   }
-
-
 
   Future<String?> createUser(
       String email, String password, String userName) async {
@@ -42,18 +39,19 @@ class AuthController extends GetxController {
       // Authenticate user (Create account)
       final userData = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
       final confirmedUser = UserSahara(
-          userName: userName,
-          userPhoneNumber: '',
-          userAddress: '',
-          profilePicture: '',
-          coverPicture: '',
-          blockedUser: [],
-          discountCoupon: [],
-          userOwnPost: [],
-          userReviewPost: [],
-          );
+        userName: userName,
+        userPhoneNumber: '',
+        userAddress: '',
+        profilePicture: '',
+        coverPicture: '',
+        blockedUser: [],
+        discountCoupon: [],
+      );
+
       await restApi.postUserInfo(confirmedUser, userData.user!.uid);
+      
       Get.offAllNamed(Routes.app);
       successSnackBar("Account Created Sucessfully!");
     } on FirebaseAuthException catch (e) {
@@ -92,8 +90,6 @@ class AuthController extends GetxController {
         userAddress: currentUser.userAddress,
         blockedUser: currentUser.blockedUser,
         discountCoupon: currentUser.discountCoupon,
-        userOwnPost: currentUser.userOwnPost,
-        userReviewPost: currentUser.userReviewPost,
         token: currentUser.token,
       );
 
@@ -127,8 +123,6 @@ class AuthController extends GetxController {
         userAddress: currentUser.userAddress,
         blockedUser: currentUser.blockedUser,
         discountCoupon: currentUser.discountCoupon,
-        userOwnPost: currentUser.userOwnPost,
-        userReviewPost: currentUser.userReviewPost,
         token: currentUser.token,
       );
 

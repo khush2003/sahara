@@ -5,15 +5,19 @@ import 'donation_item_controller.dart';
 
 class DonationDetailsController extends GetxController {
   late DonationItem donationItem;
-  final DonationItemController donationItemController = DonationItemController.instance;
+  final DonationItemController donationItemController =
+      DonationItemController.instance;
 
   @override
   void onInit() {
-    try{
-        var donationId = Get.parameters['id'];
-    donationItem = DonationItem.getFromId(donationId!, donationItemController.donationItems);
-    } catch(e){
-      print(e); //TODO: Handle Error
+    try {
+      print(donationItemController.donationItems);
+      print(Get.parameters['id']);
+      var donationId = Get.parameters['id'];
+      donationItem = DonationItem.getFromId(
+          donationId!, donationItemController.donationItems);
+    } catch (e) {
+      throw (e); //TODO: Handle Error
     }
     super.onInit();
   }

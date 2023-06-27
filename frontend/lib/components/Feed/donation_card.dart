@@ -21,7 +21,8 @@ class DonationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardSahara(
-        onPressed: () => Get.toNamed(Routes.donationDetails, parameters: {'id': donationPost.donationId!}),
+        onPressed: () => Get.toNamed(Routes.donationDetails,
+            parameters: {'id': donationPost.donationId!}),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(

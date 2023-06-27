@@ -9,8 +9,6 @@ class UserSahara {
   final String? userAddress;
   final List<String>? blockedUser;
   final List<String>? discountCoupon;
-  final List<String>? userOwnPost;
-  final List<String>? userReviewPost;
   final String? token;
 
   UserSahara({
@@ -18,8 +16,6 @@ class UserSahara {
     this.profilePicture,
     this.coverPicture,
     this.blockedUser,
-    this.userOwnPost,
-    this.userReviewPost,
     this.userPhoneNumber,
     this.uid,
     required this.userName,
@@ -53,18 +49,16 @@ class UserSahara {
     return UserSahara(
       uid: userId,
       token: json['token'] ?? '',
-      userName: json['userName'],
-      userPhoneNumber: json['userPhoneNumber'],
-      profilePicture: json['profilePicture'],
-      coverPicture: json['coverPicture'],
-      userAddress: json['userAddress'],
+      userName: json['userName'] ?? '',
+      userPhoneNumber: json['userPhoneNumber'] ?? '',
+      profilePicture: json['profilePicture'] ?? '',
+      coverPicture: json['coverPicture'] ?? '',
+      userAddress: json['userAddress'] ?? '',
       blockedUser: List<String>.from(json['blockedUser'] ?? []),
       discountCoupon: List<String>.from(json['discountCoupon'] ?? []),
-      userOwnPost: List<String>.from(json['userOwnPost'] ?? []),
-      userReviewPost: List<String>.from(json['userReviewPost'] ?? []),
     );
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'userName': userName,
@@ -74,8 +68,6 @@ class UserSahara {
       'userAddress': userAddress,
       'blockedUser': blockedUser,
       'discountCoupon': discountCoupon,
-      'userOwnPost': userOwnPost,
-      'userReviewPost': userReviewPost,
       'token': token,
     };
   }

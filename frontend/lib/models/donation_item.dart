@@ -83,7 +83,6 @@ class DonationItem {
   }
   Map<String, dynamic> toJson() {
     return {
-      'donationId': donationId,
       'imageUrl': imageUrl,
       'name': name,
       'category': category,
@@ -105,7 +104,7 @@ class DonationItem {
     };
   }
 
-  factory DonationItem.getFromId(String donationId ,List<DonationItem> list){
+  factory DonationItem.getFromId(String donationId, List<DonationItem> list) {
     return list.firstWhere((element) => element.donationId == donationId);
   }
 
