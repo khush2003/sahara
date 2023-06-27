@@ -141,7 +141,70 @@ class ButtonSection extends StatelessWidget {
           labelColor: Colors.red,
           backgroundColor: Colors.white,
           onPress: () {
-            AuthController.instance.signOut();
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  //title: const Text('Confirm'),
+                  title: Text(
+                      'Are you sure you want to log out from this account?',
+                      style: headTextBold()),
+                  actions: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () {
+                              AuthController.instance.signOut();
+                            },
+                            style: TextButton.styleFrom(
+                              backgroundColor: const Color(0xFFffC736),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                'Log Out',
+                                style: headText(),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () {
+                              // Perform unblock logic here
+                              Navigator.of(context).pop();
+                            },
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: const BorderSide(
+                                    color: Color.fromARGB(255, 164, 164, 164)),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                'Cancel',
+                                style: headText(),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
+            );
           },
         ),
       ],
