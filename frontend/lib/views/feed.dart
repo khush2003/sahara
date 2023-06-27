@@ -14,6 +14,7 @@ class FeedView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
+      initialIndex: 1,
       child: Scaffold(
         appBar: const AppBarFeedPage(),
         body: Padding(
@@ -36,11 +37,11 @@ class FeedView extends StatelessWidget {
                   () => ListView.separated(
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: 10),
-                      itemCount: donationItemController.donationItems.length,
+                      itemCount: donationItemController.filteredList.length,
                       itemBuilder: (context, index) {
                         return DonationCard(
                             donationPost:
-                                donationItemController.donationItems[index]);
+                                donationItemController.filteredList[index]);
                       }),
                 )
               ],

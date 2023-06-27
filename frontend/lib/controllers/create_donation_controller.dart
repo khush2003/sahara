@@ -52,9 +52,9 @@ class CreateDonationController extends GetxController {
   List<String> categoryOptions = [
     'Electronic',
     'Clothing',
-    'Cosmetic',
+    'Cosmetics',
     'Furniture',
-    'Accessaries',
+    'Accessories'
   ];
   List<String> durationOptions = [
     '1',
