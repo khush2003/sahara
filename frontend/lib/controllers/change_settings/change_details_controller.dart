@@ -42,6 +42,7 @@ class ChangeUserDetailsController extends GetxController {
     _auth.updateUser();
   }
 
+
   void changeUserPassword() async {
     if (newPasswordController.text.trim() ==
         confirmPasswordController.text.trim()) {
@@ -68,5 +69,16 @@ class ChangeUserDetailsController extends GetxController {
     } else {
       errorSnackBar('New password and confirm password does not match');
     }
+  }
+  
+  String? validatePhoneNumber(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your phonenumber';
+    } else if (value.length > 20) {
+      return 'Phone number cannot be longer than 20 characters';
+    } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return 'Phone number should contain only numbers';
+    }
+    return null;
   }
 }

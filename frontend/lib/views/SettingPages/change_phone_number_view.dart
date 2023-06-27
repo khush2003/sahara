@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sahara/controllers/auth/auth_controller.dart';
-import 'package:sahara/controllers/setting/phoneNumber_update_controller.dart';
+import 'package:sahara/controllers/change_settings/change_details_controller.dart';
+import 'package:sahara/utils/app_utils.dart';
 
 import '../../components/primary_button.dart';
 import '../../components/textfield_head.dart';
@@ -9,10 +9,7 @@ import '../../theme/app_theme.dart';
 
 class ChangePhoneNumberView extends StatelessWidget {
   ChangePhoneNumberView({super.key});
-
-  final PhoneNumberController phoneNumberController =
-      Get.put(PhoneNumberController());
-  final AuthController donationDetailsController = Get.put(AuthController());
+  final changeController = Get.put(ChangeUserDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +38,14 @@ class ChangePhoneNumberView extends StatelessWidget {
                   ),
                   Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: phoneNumberController.buildPhoneNumberWidget(),
-                    ),
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          changeController.user.value.userPhoneNumber ??
+                              "No phone number",
+                          style: headText().copyWith(
+                            decoration: TextDecoration.underline,
+                          ),
+                        )),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
@@ -53,14 +55,22 @@ class ChangePhoneNumberView extends StatelessWidget {
                         borderColor: defaultTextColor,
                         headText: "New Phone Number",
                         controllerFunction:
-                            phoneNumberController.phoneNumberController,
-                        validator: phoneNumberController.validatePhoneNumber),
+                            changeController.userPhoneNumberController,
+                        validator: changeController.validatePhoneNumber),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: PrimaryButton(
                         onPressed: () {
-                          phoneNumberController.updateUserPhoneNumber();
+                          if (changeController.validatePhoneNumber(
+                                  changeController
+                                      .userPhoneNumberController.text
+                                      .trim()) ==
+                              null) {
+                            changeController.changeNonAuthUserDetails();
+                          } else {
+                            errorSnackBar("Please enter a valid phone number");
+                          }
                         },
                         text: "Change"),
                   )
