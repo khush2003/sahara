@@ -140,7 +140,7 @@ class ButtonSection extends StatelessWidget {
           labelColor: Colors.red,
           backgroundColor: Colors.white,
           onPress: () {
-            // Add the desired action for the button here
+            AuthController.instance.signOut();
           },
         ),
       ],
