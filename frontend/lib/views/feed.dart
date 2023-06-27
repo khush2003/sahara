@@ -37,11 +37,11 @@ class FeedView extends StatelessWidget {
                   () => ListView.separated(
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: 10),
-                      itemCount: donationItemController.donationItems.length,
+                      itemCount: donationItemController.filteredList.length,
                       itemBuilder: (context, index) {
                         return DonationCard(
                             donationPost:
-                                donationItemController.donationItems[index]);
+                                donationItemController.filteredList[index]);
                       }),
                 )
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/donation_item_controller.dart';
 
 var filterOptions = [
   'All',
@@ -20,7 +21,11 @@ void openFilterDialog() {
     ),
     const Divider()
   ];
-  filterItems.addAll(filterOptions.map((e) => FilterItem(option: e)).toList());
+  var index = -1;
+  filterItems.addAll(filterOptions.map((e) {
+    index++;
+    return FilterItem(option: e, index: index);
+  }).toList());
 
   Get.dialog(SimpleDialog(
       insetPadding: const EdgeInsets.all(20),
@@ -29,10 +34,13 @@ void openFilterDialog() {
 }
 
 class FilterItem extends StatelessWidget {
+  final donationController = DonationItemController.instance;
   final String option;
-  const FilterItem({
+  final int index;
+  FilterItem({
     super.key,
     required this.option,
+    required this.index,
   });
 
   @override
@@ -42,7 +50,11 @@ class FilterItem extends StatelessWidget {
             backgroundColor: Colors.white,
             elevation: 0,
             minimumSize: const Size.fromHeight(50)),
-        onPressed: () {},
+        onPressed: () {
+          donationController.selectedCategoryIndex(index);
+          donationController.filterDonationItems(option);
+          Get.back();
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -54,7 +66,8 @@ class FilterItem extends StatelessWidget {
                     color: Colors.black)),
             Radio(
               value: option,
-              groupValue: filterOptions[0],
+              groupValue:
+                  filterOptions[donationController.selectedCategoryIndex.value],
               onChanged: null,
             ),
           ],

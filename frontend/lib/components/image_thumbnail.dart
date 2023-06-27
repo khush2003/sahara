@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../theme/app_theme.dart';
@@ -29,7 +28,9 @@ class ImageThumbnail extends StatelessWidget {
                     ? BorderRadius.circular(0)
                     : BorderRadius.circular(10),
             color: Colors.amberAccent,
-            image: DecorationImage(
-                image: NetworkImage(imageUrl ?? ''), fit: BoxFit.cover)));
+            image: imageUrl == null || imageUrl!.trim() == ''
+                ? null
+                : DecorationImage(
+                    image: NetworkImage(imageUrl!), fit: BoxFit.cover)));
   }
 }
