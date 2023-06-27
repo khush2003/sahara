@@ -14,16 +14,16 @@ class AuthController extends GetxController {
   final restApi = RestAPI.instance;
   StreamSubscription<UserSahara>? userSubscription;
   final userSahara = UserSahara.empty().obs;
-  late Rx<User?> firebaseUser;
+  late Rx<User?> _firebaseUser;
 
   @override
   void onInit() async {
     if (_auth.currentUser != null) {
       userSahara(await RestAPI.instance.getUserById(_auth.currentUser!.uid));
     }
-    firebaseUser = _auth.currentUser.obs;
-    firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, (User? user) async {
+    _firebaseUser = _auth.currentUser.obs;
+    _firebaseUser.bindStream(_auth.userChanges());
+    ever(_firebaseUser, (User? user) async {
       if (user == null) {
         userSahara(UserSahara.empty());
       } else {
