@@ -15,7 +15,7 @@ class ChangePhoneNumberView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Change Phone Number"),
+        title: const Text("Update Phone Number"),
       ),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -40,8 +40,12 @@ class ChangePhoneNumberView extends StatelessWidget {
                     child: Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
-                          changeController.user.value.userPhoneNumber ??
-                              "No phone number",
+                          changeController.user.value.userPhoneNumber
+                                      ?.trim()
+                                      .isEmpty ??
+                                  true
+                              ? "No phone number"
+                              : changeController.user.value.userPhoneNumber!,
                           style: headText().copyWith(
                             decoration: TextDecoration.underline,
                           ),
@@ -72,7 +76,7 @@ class ChangePhoneNumberView extends StatelessWidget {
                             errorSnackBar("Please enter a valid phone number");
                           }
                         },
-                        text: "Change"),
+                        text: "Update"),
                   )
                 ],
               ),

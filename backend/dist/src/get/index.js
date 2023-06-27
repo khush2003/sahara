@@ -157,4 +157,18 @@ getRoutes.get('/reviews', (req, res) => __awaiter(void 0, void 0, void 0, functi
         return res.status(400).send("An Error Occured" + error);
     }
 }));
+getRoutes.get('/eachUsers', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { userName } = req.query;
+        const snapshot = yield firebase_1.db.collection('users').where('userName', '==', userName).get();
+        const users = [];
+        snapshot.forEach(doc => {
+            users.push(doc.data());
+        });
+        res.status(200).send(users);
+    }
+    catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+}));
 exports.default = getRoutes;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sahara/models/user.dart';
 import 'package:get/get.dart';
+import 'package:sahara/rest_api.dart';
 
 import '../../utils/app_utils.dart';
 import 'auth_controller.dart';
@@ -12,6 +13,7 @@ class RegisterController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  final RestAPI restAPI = RestAPI();
 
   final _auth = AuthController.instance;
 
@@ -19,10 +21,18 @@ class RegisterController extends GetxController {
     String username = usernameController.text;
     String email = emailController.text;
     String password = passwordController.text;
+    bool isAvailableUserName =
+        await restAPI.checkUsernameAvailability(username);
+    print(isAvailableUserName);
     if (validateInputs()) {
-      String? error = await _auth.createUser(email, password, username);
-      if (error != null) {
-        errorSnackBar(error.toString());
+      if (isAvailableUserName) {
+        String? error = await _auth.createUser(email, password, username);
+        if (error != null) {
+          errorSnackBar(error.toString());
+        }
+      } else {
+        errorSnackBar(
+            'This username has already been used. Please choose a different one');
       }
     } else {
       errorSnackBar(

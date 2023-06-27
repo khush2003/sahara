@@ -82,11 +82,12 @@ class RestAPI {
     }
   }
 
-   Future<dynamic> postReview(Review review) async {
+  Future<dynamic> postReview(Review review) async {
     //body data
     final Map<String, dynamic> reviewData = review.toJson();
 
-    Response response = await connect.post('$postBackendUrl/reviews', reviewData);
+    Response response =
+        await connect.post('$postBackendUrl/reviews', reviewData);
     if (response.statusCode == 200) {
       return response.body;
     } else {
@@ -115,6 +116,19 @@ class RestAPI {
       return reviews;
     } else {
       return null;
-    } 
+    }
+  }
+
+  Future<dynamic> checkUsernameAvailability(String username) async {
+    final query =
+        await connect.get('$getBackendUrl/eachUsers?userName=$username');
+    if (query.statusCode == 200) {
+      final List<dynamic> users = query.body;
+      return users.isEmpty
+          ? true
+          : false; // Return true if username is available, false otherwise
+    } else {
+      throw Exception('Failed to check username availability');
+    }
   }
 }

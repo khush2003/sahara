@@ -101,3 +101,6 @@ Content-Type: application/json
   "reviewText": "James loves this chair."
 }
 
+### GET
+GET http://localhost:8000/get/eachUsers?userName=note
+

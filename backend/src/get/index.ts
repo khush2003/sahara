@@ -160,7 +160,19 @@ getRoutes.get('/reviews', async (req, res) => {
     }
 })
 
-
+getRoutes.get('/eachUsers', async (req, res) => {
+    try {
+      const { userName } = req.query;
+      const snapshot = await db.collection('users').where('userName', '==', userName).get();
+      const users: FirebaseFirestore.DocumentData[] = [];
+      snapshot.forEach(doc => {
+        users.push(doc.data());
+      });
+      res.status(200).send(users);
+    } catch (error) {
+      return res.status(400).send("An Error Occured" + error);
+    }
+  });
 
 
 export default getRoutes

@@ -14,7 +14,7 @@ class ChangePasswordView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Change Password"),
+        title: const Text("Update Password"),
       ),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -59,7 +59,7 @@ class ChangePasswordView extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 20),
                   child: PrimaryButton(
                       onPressed: () => changeController.changeUserPassword(),
-                      text: "Change"),
+                      text: "Update"),
                 )
               ],
             )),

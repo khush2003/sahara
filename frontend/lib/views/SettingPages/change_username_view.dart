@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/change_settings/change_details_controller.dart';
+import 'package:sahara/utils/app_utils.dart';
 
 import '../../components/primary_button.dart';
 import '../../components/textfield_head.dart';
@@ -14,7 +15,7 @@ class ChangeUsernameView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Change Username"),
+        title: const Text("Update Username"),
       ),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -36,25 +37,32 @@ class ChangeUsernameView extends StatelessWidget {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: Text(
-                      changeController.user.value.userName,
-                      style: headText()
-                          .copyWith(decoration: TextDecoration.underline),
-                    ),
+                    child: changeController.buildPhoneNumberWidget(),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: TextfieldWithHead(
-                      hintText: "Enter new username",
-                      textStyle: formFieldText(),
-                      borderColor: defaultTextColor,
-                      headText: "New Username",
-                      controllerFunction: changeController.userNameController,),
+                    hintText: "Enter new username",
+                    textStyle: formFieldText(),
+                    borderColor: defaultTextColor,
+                    headText: "New Username",
+                    controllerFunction: changeController.userNameController,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
-                  child: PrimaryButton(onPressed: () => changeController.changeNonAuthUserDetails(), text: "Change"),
+                  child: PrimaryButton(
+                      onPressed: () async {
+                        if (await changeController.isAvailableUserName(
+                            changeController.userNameController.text)) {
+                          changeController.changeNonAuthUserDetails();
+                        } else {
+                          errorSnackBar(
+                              'This username has already been used. Please choose a different one');
+                        }
+                      },
+                      text: "Update"),
                 )
               ],
             )),

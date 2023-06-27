@@ -13,7 +13,7 @@ class ChangeAddressView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Change Address"),
+        title: const Text("Update Address"),
       ),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -60,7 +60,7 @@ class ChangeAddressView extends StatelessWidget {
                   child: PrimaryButton(
                       onPressed: () =>
                           changeController.changeNonAuthUserDetails(),
-                      text: "Change"),
+                      text: "Update"),
                 ),
               ],
             )),

@@ -29,7 +29,7 @@ class ProfileSettingView extends StatelessWidget {
                       onPressed: () {
                         Get.toNamed(Routes.changeUsername);
                       },
-                      text: "Change Username"),
+                      text: "Update Username"),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
@@ -37,7 +37,7 @@ class ProfileSettingView extends StatelessWidget {
                       onPressed: () {
                         Get.toNamed(Routes.changePhoneNumber);
                       },
-                      text: "Change Phone number"),
+                      text: "Update Phone number"),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
@@ -45,7 +45,7 @@ class ProfileSettingView extends StatelessWidget {
                       onPressed: () {
                         Get.toNamed(Routes.changeAddress);
                       },
-                      text: "Change Address"),
+                      text: "Update Address"),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
@@ -53,7 +53,7 @@ class ProfileSettingView extends StatelessWidget {
                       onPressed: () {
                         Get.toNamed(Routes.changePassword);
                       },
-                      text: "Change Password"),
+                      text: "Update Password"),
                 ),
               ],
             ),

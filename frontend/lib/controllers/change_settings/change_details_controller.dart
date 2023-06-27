@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/rest_api.dart';
+import 'package:sahara/theme/app_theme.dart';
 import 'package:sahara/utils/app_utils.dart';
 
 import '../../models/user.dart';
@@ -90,5 +91,43 @@ class ChangeUserDetailsController extends GetxController {
       return 'Phone number should contain only numbers';
     }
     return null;
+  }
+
+  Future<bool> isAvailableUserName(String username) async {
+    bool userNameCheck = await _restAPI.checkUsernameAvailability(username);
+    if (userNameCheck) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<String>? getCurrentUserName() async {
+    try {
+      final UserSahara user = await _restAPI.getCurrentUserInfo();
+      final username = user.userName;
+      return username;
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
+  Widget buildPhoneNumberWidget() {
+    return FutureBuilder<String?>(
+      future: getCurrentUserName(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(
+            snapshot.data!,
+            style: headText().copyWith(
+              decoration: TextDecoration.underline,
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        }
+        return const CircularProgressIndicator();
+      },
+    );
   }
 }
