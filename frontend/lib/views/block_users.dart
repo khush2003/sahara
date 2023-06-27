@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../controllers/block_users_controller.dart';
+import '../controllers/profile_view_controller.dart';
 import '../theme/app_theme.dart';
 
 class BlockUsers extends StatelessWidget {
-  const BlockUsers({super.key});
+  BlockUsers({Key? key}) : super(key: key);
+
+  final CustomTabController controller = Get.put(CustomTabController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +32,32 @@ class BlockUsers extends StatelessWidget {
             border: Border.all(color: const Color(0xFFedebeb)),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              UserProfile(
-                picturePath:
-                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                username: 'Gorgeous Girl',
-              ),
-              Spacer(),
-              CrossIcon(),
-              SizedBox(width: 8)
-            ],
+          child: ListView.builder(
+            itemCount: controller.blockedUsers.length,
+            itemBuilder: (context, index) {
+              final blockedUser = controller.blockedUsers[index];
+              return Obx(() {
+                if (controller.blockedUsers.isEmpty) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      UserProfile(
+                        picturePath: blockedUser.profilePicture ??
+                            'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
+                        username: blockedUser.userName,
+                      ),
+                      Spacer(),
+                      CrossIcon(),
+                      const SizedBox(width: 8),
+                    ],
+                  );
+                }
+              });
+            },
           ),
         ),
       ),

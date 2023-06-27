@@ -69,7 +69,7 @@ final getPages = [
   GetPage(name: Routes.notifications, page: () => const NotificationsView()),
   GetPage(name: Routes.chat, page: () => const ChatView()),
   GetPage(name: Routes.profileView, page: () => ProfileView()),
-  GetPage(name: Routes.blockUsers, page: () => const BlockUsers()),
+  GetPage(name: Routes.blockUsers, page: () => BlockUsers()),
   GetPage(
     name: Routes.login,
     page: () => LoginView(),
