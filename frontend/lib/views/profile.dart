@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/auth/auth_controller.dart';
 
 import '../routes/routes.dart';
 import '../theme/app_theme.dart';
@@ -17,7 +18,7 @@ class Profile extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            const ProfileCard(),
+            ProfileCard(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -148,7 +149,8 @@ class ButtonSection extends StatelessWidget {
 }
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({super.key});
+  ProfileCard({super.key});
+  final _auth = AuthController.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -196,7 +198,7 @@ class ProfileCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Gorgeous Girl',
+                      _auth.userSahara.value.userName,
                       style: headTextBold(),
                     ),
                   ),

@@ -25,7 +25,6 @@ class DonationItemController extends GetxController {
     } else {
       donationItems(donationResult);
     }
-    print(donationItems);
 
     final List<Review>? reviews = await restApi.getReviews();
     if (reviews == null) {

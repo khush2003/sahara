@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_theme.dart';
 
-
 class BlockUsers extends StatelessWidget {
   const BlockUsers({super.key});
 
@@ -54,87 +53,82 @@ class CrossIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 91,
-      child: Center(
-        child: Expanded(
-          child: GestureDetector(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    //title: const Text('Confirm'),
-                    title: Text('Are you sure you want to unblock this user?',
-                        style: headTextBold()),
-                    actions: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              style: TextButton.styleFrom(
-                                backgroundColor: const Color(0xFFffC736),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  'Unblock',
-                                  style: headText(),
-                                ),
-                              ),
+      child: GestureDetector(
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                //title: const Text('Confirm'),
+                title: Text('Are you sure you want to unblock this user?',
+                    style: headTextBold()),
+                actions: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xFFffC736),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextButton(
-                              onPressed: () {
-                                // Perform unblock logic here
-                                Navigator.of(context).pop();
-                              },
-                              style: TextButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  side: const BorderSide(
-                                      color:
-                                          Color.fromARGB(255, 164, 164, 164)),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  'Cancel',
-                                  style: headText(),
-                                ),
-                              ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text(
+                              'Unblock',
+                              style: headText(),
                             ),
                           ),
-                        ],
+                        ),
                       ),
                     ],
-                  );
-                },
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            // Perform unblock logic here
+                            Navigator.of(context).pop();
+                          },
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: const BorderSide(
+                                  color: Color.fromARGB(255, 164, 164, 164)),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text(
+                              'Cancel',
+                              style: headText(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               );
             },
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-              padding: const EdgeInsets.all(8.0),
-              child: const Icon(
-                Icons.clear,
-                color: Colors.white,
-                size: 18,
-              ),
-            ),
+          );
+        },
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Colors.red,
+            shape: BoxShape.circle,
+          ),
+          padding: const EdgeInsets.all(8.0),
+          child: const Icon(
+            Icons.clear,
+            color: Colors.white,
+            size: 18,
           ),
         ),
       ),

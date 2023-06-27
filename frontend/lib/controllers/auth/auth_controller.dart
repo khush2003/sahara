@@ -14,23 +14,30 @@ class AuthController extends GetxController {
   final restApi = RestAPI.instance;
   StreamSubscription<UserSahara>? userSubscription;
   final userSahara = UserSahara.empty().obs;
-  late Rx<User?> _firebaseUser;
+  late Rx<User?> firebaseUser;
 
   @override
   void onInit() async {
     if (_auth.currentUser != null) {
       userSahara(await RestAPI.instance.getUserById(_auth.currentUser!.uid));
     }
-    _firebaseUser = _auth.currentUser.obs;
-    _firebaseUser.bindStream(_auth.userChanges());
-    ever(_firebaseUser, (User? user) async {
-      if (user == null) {
+    firebaseUser = _auth.currentUser.obs;
+    firebaseUser.bindStream(_auth.userChanges());
+    ever(firebaseUser, _updateUser);
+    super.onInit();
+  }
+  void _updateUser(User?user) async {
+    if (user == null) {
         userSahara(UserSahara.empty());
       } else {
         userSahara(await RestAPI.instance.getUserById(user.uid));
       }
-    });
-    super.onInit();
+  }
+  void updateUser() async {
+    // Write documentation for this function
+    /// This function is used to update the userSahara object
+    /// when the user changes their details
+      userSahara(await RestAPI.instance.getUserById(firebaseUser.value!.uid));
   }
 
   Future<String?> createUser(
@@ -51,7 +58,7 @@ class AuthController extends GetxController {
       );
 
       await restApi.postUserInfo(confirmedUser, userData.user!.uid);
-      
+
       Get.offAllNamed(Routes.app);
       successSnackBar("Account Created Sucessfully!");
     } on FirebaseAuthException catch (e) {
@@ -139,6 +146,16 @@ class AuthController extends GetxController {
       // Handle exception/error
       print(e);
       return 'An error occurred. Please try again later';
+    }
+  }
+
+  // Create a function to signout user and route to onboarding
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+      Get.offAllNamed(Routes.onboarding);
+    } catch (e) {
+      errorSnackBar('Error: There is an error in signing out $e');
     }
   }
 }

@@ -11,8 +11,6 @@ class DonationDetailsController extends GetxController {
   @override
   void onInit() {
     try {
-      print(donationItemController.donationItems);
-      print(Get.parameters['id']);
       var donationId = Get.parameters['id'];
       donationItem = DonationItem.getFromId(
           donationId!, donationItemController.donationItems);

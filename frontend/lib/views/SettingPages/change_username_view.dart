@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sahara/controllers/change_settings/change_details_controller.dart';
 
 import '../../components/primary_button.dart';
 import '../../components/textfield_head.dart';
 import '../../theme/app_theme.dart';
 
 class ChangeUsernameView extends StatelessWidget {
-  const ChangeUsernameView({super.key});
+  ChangeUsernameView({super.key});
+  final changeController = Get.put(ChangeUserDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,7 @@ class ChangeUsernameView extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Text(
-                      "Sample",
+                      changeController.user.value.userName,
                       style: headText()
                           .copyWith(decoration: TextDecoration.underline),
                     ),
@@ -46,11 +49,12 @@ class ChangeUsernameView extends StatelessWidget {
                       hintText: "Enter new username",
                       textStyle: formFieldText(),
                       borderColor: defaultTextColor,
-                      headText: "New Username"),
+                      headText: "New Username",
+                      controllerFunction: changeController.userNameController,),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
-                  child: PrimaryButton(onPressed: () {}, text: "Change"),
+                  child: PrimaryButton(onPressed: () => changeController.changeNonAuthUserDetails(), text: "Change"),
                 )
               ],
             )),
