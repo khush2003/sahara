@@ -42,6 +42,16 @@ class ChangeUserDetailsController extends GetxController {
     _auth.updateUser();
   }
 
+  @override
+  void onClose() {
+    userAddressController.dispose();
+    userPhoneNumberController.dispose();
+    userNameController.dispose();
+    currentPasswordController.dispose();
+    newPasswordController.dispose();
+    confirmPasswordController.dispose();
+    super.onClose();
+  }
 
   void changeUserPassword() async {
     if (newPasswordController.text.trim() ==
@@ -70,7 +80,7 @@ class ChangeUserDetailsController extends GetxController {
       errorSnackBar('New password and confirm password does not match');
     }
   }
-  
+
   String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your phonenumber';

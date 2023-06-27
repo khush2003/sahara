@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sahara/controllers/change_settings/change_details_controller.dart';
 import '../../components/primary_button.dart';
 import '../../theme/app_theme.dart';
 
 import '../../components/textfield_description_head.dart';
 
 class ChangeAddressView extends StatelessWidget {
-  const ChangeAddressView({super.key});
-
+  ChangeAddressView({super.key});
+  final changeController = Get.put(ChangeUserDetailsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +36,10 @@ class ChangeAddressView extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "122/10 Wattnanakorn Sa-keao City 27160",
+                      changeController.user.value.userAddress!.trim() == ''
+                          ? "No address"
+                          : changeController.user.value.userAddress ??
+                              "No address",
                       style: regularTextBold()
                           .copyWith(decoration: TextDecoration.underline),
                     ),
@@ -46,11 +51,16 @@ class ChangeAddressView extends StatelessWidget {
                       hintText: "Enter new address",
                       textStyle: regularTextBold(),
                       borderColor: defaultTextColor,
+                      controllerFunction:
+                          changeController.userAddressController,
                       headText: "New Address"),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
-                  child: PrimaryButton(onPressed: () {}, text: "Change"),
+                  child: PrimaryButton(
+                      onPressed: () =>
+                          changeController.changeNonAuthUserDetails(),
+                      text: "Change"),
                 ),
               ],
             )),
