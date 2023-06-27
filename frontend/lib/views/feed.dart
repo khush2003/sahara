@@ -14,6 +14,7 @@ class FeedView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
+      initialIndex: 1,
       child: Scaffold(
         appBar: const AppBarFeedPage(),
         body: Padding(
