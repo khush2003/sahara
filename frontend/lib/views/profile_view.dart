@@ -37,7 +37,7 @@ class ProfileView extends StatelessWidget {
                       if (user != null) {
                         return TopSection(
                           profile: user.profilePicture == ''
-                              ? 'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg'
+                              ? ''
                               : user.profilePicture,
                           cover: user.coverPicture,
                           username: user.userName,
@@ -140,7 +140,15 @@ class TopSection extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         GestureDetector(
-          onTap: () => _tabController.uploadImage(),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ChangeProfileAndCoverPhotoDialog(
+                    photo: cover!, type: 'Cover');
+              },
+            );
+          },
           child: Container(
             height: 150,
             width: double.infinity,
@@ -153,11 +161,20 @@ class TopSection extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                   )
                 : Center(
-                    child: Text(
-                      'Add Cover Photo',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: primary),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 12, right: 5, bottom: 5, left: 5),
+                        child: Text(
+                          'Add Cover Photo',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -172,18 +189,28 @@ class TopSection extends StatelessWidget {
                 height: 130,
                 width: 130,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(100),
                   border: Border.all(
                     color: const Color(0xFFBEEF00),
                     width: 2,
                   ),
                 ),
                 child: GestureDetector(
-                  onTap: () => _tabController.uploadImage(),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return ChangeProfileAndCoverPhotoDialog(
+                            photo: profile!, type: 'Profile');
+                      },
+                    );
+                  },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
-                      profile!,
+                      profile == ''
+                          ? 'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg'
+                          : profile!,
                       height: 130,
                       width: 130,
                       fit: BoxFit.cover,
@@ -205,6 +232,124 @@ class TopSection extends StatelessWidget {
           child: Text(email, style: regularText()),
         ),
       ],
+    );
+  }
+}
+
+class ChangeProfileAndCoverPhotoDialog extends StatelessWidget {
+  final String photo;
+  final String type;
+  final CustomTabController _tabController = Get.put(CustomTabController());
+
+  ChangeProfileAndCoverPhotoDialog({required this.photo, required this.type});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Center(
+        child: Text(
+          type == 'Profile' ? 'Change Profile Picture' : 'Change Cover Photo',
+          style: headTextBold(),
+        ),
+      ),
+      content: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 220,
+        child: Column(
+          children: [
+            Expanded(
+              child: OutlinedButton.icon(
+                icon: photo == ''
+                    ? Expanded(
+                        child: type == 'Profile'
+                            ? Image.network(
+                                'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
+                                fit: BoxFit.fill,
+                              )
+                            : Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 12, right: 5, bottom: 5, left: 5),
+                                  child: Text(
+                                    'No Cover Photo',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      )
+                    : Expanded(
+                        child: Image.network(
+                          photo,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                onPressed: () => {},
+                label: const Text(''),
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(
+                    color: Colors.black,
+                    width: 1,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: () => _tabController.uploadImage(context),
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xFFffC736),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        'Select Photo',
+                        style: headText(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      // Perform cancel logic here
+                      Navigator.of(context).pop();
+                    },
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: const BorderSide(
+                          color: Color.fromARGB(255, 164, 164, 164),
+                        ),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        'Cancel',
+                        style: headText(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

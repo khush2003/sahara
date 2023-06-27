@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/auth/auth_controller.dart';
 
+import '../controllers/profile_view_controller.dart';
 import '../routes/routes.dart';
 import '../theme/app_theme.dart';
 
@@ -150,7 +151,7 @@ class ButtonSection extends StatelessWidget {
 
 class ProfileCard extends StatelessWidget {
   ProfileCard({super.key});
-  final _auth = AuthController.instance;
+  final CustomTabController _tabController = Get.put(CustomTabController());
 
   @override
   Widget build(BuildContext context) {
@@ -173,38 +174,52 @@ class ProfileCard extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(Routes.profileView);
-                  },
-                  child: Container(
-                    width: 75,
-                    height: 75,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: const Color(0xFFBEEF00)),
-                        borderRadius: BorderRadius.circular(10),
-                        //color: Color(0xFFBEEF00),
-                        image: const DecorationImage(
-                            image: NetworkImage(
-                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'))),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(Routes.profileView);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      _auth.userSahara.value.userName,
-                      style: headTextBold(),
+            child: Obx(() {
+              final user = _tabController.user.value;
+              var profilePicture = user!.profilePicture;
+              if (profilePicture == '') {
+                profilePicture = null;
+              }
+              if (user != null) {
+                return Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.profileView);
+                      },
+                      child: Container(
+                        width: 75,
+                        height: 75,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: const Color(0xFFBEEF00)),
+                          borderRadius: BorderRadius.circular(100),
+                          image: DecorationImage(
+                            image: NetworkImage(profilePicture ??
+                                'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg'),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                )
-              ],
-            ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.profileView);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          user.userName,
+                          style: headTextBold(),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }),
           ),
         ],
       ),

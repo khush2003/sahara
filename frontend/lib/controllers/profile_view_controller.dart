@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -6,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
+
+import '../views/profile_view.dart';
 
 class CustomTabController extends GetxController {
   static CustomTabController get instance => Get.find<CustomTabController>();
@@ -38,7 +41,21 @@ class CustomTabController extends GetxController {
     }
   }
 
-  uploadImage() async {
+  // uploadImage() async {
+  //   //Select Image
+  //   final image = await _imagePicker.pickImage(source: ImageSource.gallery);
+  //   if (image != null) {
+  //     var file = File(image.path);
+  //     //Upload to Firebase
+  //     var snapshot = await _firebaseStorage
+  //         .ref()
+  //         .child('images/${image.name}')
+  //         .putFile(file);
+  //     var downloadUrl = await snapshot.ref.getDownloadURL();
+  //     imageUrl(downloadUrl);
+  //   }
+  // }
+  uploadImage(BuildContext context) async {
     //Select Image
     final image = await _imagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
@@ -50,6 +67,14 @@ class CustomTabController extends GetxController {
           .putFile(file);
       var downloadUrl = await snapshot.ref.getDownloadURL();
       imageUrl(downloadUrl);
+      print(downloadUrl);
+      showDialog(
+        context: context,
+        builder: (context) => ChangeProfileAndCoverPhotoDialog(
+          photo: downloadUrl,
+          type: 'Profile', // Or 'Cover' depending on the dialog type
+        ),
+      );
     }
   }
 
