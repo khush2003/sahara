@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sahara/utils/auth_middleware.dart';
 
 import '../components/Chat/chat_room.dart';
 import '../views/FirstVisitPages/forgot_password_view.dart';
@@ -60,15 +61,15 @@ abstract class Routes {
 
 final getPages = [
   GetPage(name: Routes.delivery, page: () => DeliveryView()),
-  GetPage(name: Routes.chatRoom, page: () => ChatRoom()),
+  GetPage(name: Routes.chatRoom, page: () => const ChatRoom()),
   GetPage(name: Routes.feed, page: () => FeedView()),
   GetPage(name: Routes.profile, page: () => const Profile()),
-  GetPage(name: Routes.testNote, page: () => TestNote()),
+  GetPage(name: Routes.testNote, page: () => const TestNote()),
   GetPage(name: Routes.createDonation, page: () => CreateDonationView()),
   GetPage(name: Routes.notifications, page: () => const NotificationsView()),
   GetPage(name: Routes.chat, page: () => const ChatView()),
   GetPage(name: Routes.profileView, page: () => ProfileView()),
-  GetPage(name: Routes.blockUsers, page: () => BlockUsers()),
+  GetPage(name: Routes.blockUsers, page: () => const BlockUsers()),
   GetPage(
     name: Routes.login,
     page: () => LoginView(),
@@ -76,20 +77,23 @@ final getPages = [
     transitionDuration: const Duration(milliseconds: 500),
   ),
   GetPage(name: Routes.register, page: () => RegisterView()),
-  GetPage(name: Routes.whatIs, page: () => WhatIsView()),
-  GetPage(name: Routes.onboarding, page: () => OnBoardingView()),
+  GetPage(name: Routes.whatIs, page: () => const WhatIsView()),
+  GetPage(
+      name: Routes.onboarding,
+      page: () => const OnBoardingView(),
+      middlewares: [AuthManager()]),
   GetPage(name: Routes.review, page: () => ReviewPage()),
-  GetPage(name: Routes.help, page: () => Help()),
+  GetPage(name: Routes.help, page: () => const Help()),
   GetPage(name: Routes.donationDetails, page: () => DonationItemDetailsView()),
-  GetPage(name: Routes.payment, page: () => PaymentPage()),
+  GetPage(name: Routes.payment, page: () => const PaymentPage()),
   GetPage(name: Routes.reviewDetails, page: () => ReviewPostDetailsView()),
   GetPage(name: Routes.donationDetails, page: () => DonationItemDetailsView()),
-  GetPage(name: Routes.profileSetting, page: () => ProfileSettingView()),
+  GetPage(name: Routes.profileSetting, page: () => const ProfileSettingView()),
   GetPage(name: Routes.changeUsername, page: () => ChangeUsernameView()),
   GetPage(name: Routes.changePhoneNumber, page: () => ChangePhoneNumberView()),
   GetPage(name: Routes.changeAddress, page: () => ChangeAddressView()),
   GetPage(name: Routes.changePassword, page: () => ChangePasswordView()),
-  GetPage(name: Routes.coupon, page: () => CouponView()),
-  GetPage(name: Routes.forgotPass, page: () => ForgotPassView()),
+  GetPage(name: Routes.coupon, page: () => const CouponView()),
+  GetPage(name: Routes.forgotPass, page: () => const ForgotPassView()),
   GetPage(name: Routes.app, page: () => App())
 ];
