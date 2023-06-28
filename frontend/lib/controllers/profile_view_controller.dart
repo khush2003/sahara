@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
+import '../models/donation_item.dart';
+import '../models/review.dart';
 import '../views/profile_view.dart';
 import 'auth/auth_controller.dart';
 
@@ -24,12 +27,15 @@ class CustomTabController extends GetxController {
 
   Rx<UserSahara?> user = Rx<UserSahara?>(null);
   Rx<UserSahara?> fuser = Rx<UserSahara?>(null);
+  final RxList<DonationItem> donationItems = <DonationItem>[].obs;
+  final RxList<Review> reviewList = <Review>[].obs;
 
   @override
   void onInit() {
     super.onInit();
     getUserById();
     getBlockedUsersDetails();
+    setupLists();
   }
 
   void getUserById() async {
@@ -97,6 +103,27 @@ class CustomTabController extends GetxController {
         fuser.value = fetchedUser;
         print(fetchedUser);
       }
+    }
+  }
+
+  Future<void> setupLists() async {
+    final List<DonationItem>? donationResult = await restApi.getDonationItems();
+    if (donationResult == null) {
+      log("No donation items found");
+    } else {
+      final filteredDonationItems = donationResult
+          .where((item) =>
+              item.author.authorId == FirebaseAuth.instance.currentUser!.uid)
+          .toList();
+      donationItems(filteredDonationItems);
+    }
+
+    final List<Review>? reviews = await restApi.getReviews();
+    if (reviews == null) {
+      log("No donation items found");
+    } else {
+      reviewList(reviews);
+      print(reviews);
     }
   }
 }

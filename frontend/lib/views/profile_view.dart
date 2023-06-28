@@ -552,17 +552,27 @@ class NewAndHistory extends StatelessWidget {
 
 // For New Tab
 class DonatingItem extends StatelessWidget {
-  final DonationItem donationPost = DonationItem.test();
+  //final DonationItem donationPost = DonationItem.test();
+  final CustomTabController controller = Get.put(CustomTabController());
 
   DonatingItem({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        DonationCard(donationPost: donationPost),
-        DonationCard(donationPost: donationPost),
-        DonationCard(donationPost: donationPost),
-        // Add more DonationCard widgets here as needed
+        SizedBox(
+          height: 500,
+          child: Obx(
+            () => ListView.separated(
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
+                itemCount: controller.donationItems.length,
+                itemBuilder: (context, index) {
+                  return DonationCard(
+                      donationPost: controller.donationItems[index]);
+                }),
+          ),
+        )
       ],
     );
   }
@@ -591,25 +601,57 @@ class DonatingItem extends StatelessWidget {
 class ReceivedItem extends StatelessWidget {
   final DonationItem donationPost = DonationItem.test();
   final Review review = Review.test();
-
+  final CustomTabController controller = Get.put(CustomTabController());
   ReceivedItem({super.key});
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ReviewCard(
-          donationPost: donationPost,
-          review: review,
-        ),
-        ReviewCard(
-          donationPost: donationPost,
-          review: review,
-        ),
-        ReviewCard(
-          donationPost: donationPost,
-          review: review,
-        ),
-      ],
+    return SizedBox(
+      height: 500,
+      child: Column(
+        children: [
+          ReviewCard(
+            donationPost: donationPost,
+            review: review,
+          ),
+          ReviewCard(
+            donationPost: donationPost,
+            review: review,
+          ),
+          ReviewCard(
+            donationPost: donationPost,
+            review: review,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class History extends StatelessWidget {
+  final DonationItem donationPost = DonationItem.test();
+  final Review review = Review.test();
+  final CustomTabController controller = Get.put(CustomTabController());
+  History({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 500,
+      child: Column(
+        children: [
+          ReviewCard(
+            donationPost: donationPost,
+            review: review,
+          ),
+          ReviewCard(
+            donationPost: donationPost,
+            review: review,
+          ),
+          ReviewCard(
+            donationPost: donationPost,
+            review: review,
+          ),
+        ],
+      ),
     );
   }
 }

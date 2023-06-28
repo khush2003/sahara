@@ -53,7 +53,9 @@ class DetailRow extends StatelessWidget {
     return Row(
       children: [
         Text('$label: ', style: regularTextBold()),
-        Text(value, style: regularText()),
+        //overflow: TextOverflow.ellipsis not working
+        Text(value.length > 15 ? value.substring(0, 16) + '...' : value,
+            style: regularText()),
       ],
     );
   }
