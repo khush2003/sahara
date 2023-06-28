@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/donation_item.dart';
@@ -5,12 +7,13 @@ import 'package:sahara/models/review.dart';
 
 import 'models/user.dart';
 
-const backendPort = 8000;
-const backendUrl = 'http://localhost:$backendPort';
-const getBackendUrl = '$backendUrl/get';
-const postBackendUrl = '$backendUrl/post';
-const putBackendUrl = '$backendUrl/put';
-const deleteBackendUrl = '$backendUrl/delete';
+const backendPort = 5000;
+String host = (Platform.isAndroid) ? '10.0.2.2' : 'localhost';
+String backendUrl = 'http://$host:$backendPort';
+String getBackendUrl = '$backendUrl/get';
+String postBackendUrl = '$backendUrl/post';
+String putBackendUrl = '$backendUrl/put';
+String deleteBackendUrl = '$backendUrl/delete';
 
 class RestAPI {
   final connect = Get.find<GetConnect>();
@@ -57,14 +60,10 @@ class RestAPI {
   }
 
   Future<dynamic> putUserName(UserSahara user) async {
-    print("Called");
     final uid = auth.currentUser!.uid;
-    print(uid);
     Response response = await connect
         .put('$putBackendUrl/allUserName/$uid', {"userName": user.userName});
     if (response.statusCode == 200) {
-      print(response);
-      print(response.body);
       return response.body;
     } else {
       throw Exception('Failed to put user info');

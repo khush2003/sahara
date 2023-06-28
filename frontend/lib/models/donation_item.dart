@@ -74,15 +74,15 @@ class DonationItem {
         description: json['description'] ?? '',
         imageUrl: json['imageUrl'] ?? '',
         category: json['category'] ?? '',
-        itemWidth: json['itemWidth'] as double,
-        itemLength: json['itemLength'] as double,
-        itemHeight: json['itemHeight'] as double,
-        weight: json['weight'] as double,
+        itemWidth: convertToDouble(json['itemWidth']),
+        itemLength: convertToDouble(json['itemLength']),
+        itemHeight: convertToDouble(json['itemHeight']),
+        weight: convertToDouble(json['weight']),
         deliveryPaidBy: convertFromString(json['deliveryPaidBy']),
         usedDuration: Duration(days: json['usedDuration'] as int),
-        usability: json['usability'] as double,
-        price: json['price'] as double,
-        deliveryFees: json['deliveryFees'] as double,
+        usability: convertToDouble(json['usability']),
+        price: convertToDouble(json['price']),
+        deliveryFees: convertToDouble(json['deliveryFees']),
         expectedArrivalDate: json['expectedArrivalDate'] == null
             ? null
             : DateTime.parse(json['expectedArrivalDate'] as String),
@@ -132,5 +132,18 @@ class DonationItem {
   @override
   String toString() {
     return jsonEncode(toJson());
+  }
+}
+
+// Write a function to check if value is int or double, if the value is int convert to double
+// and return the value
+// if the value is double return the value
+double convertToDouble(dynamic value) {
+  if (value is int) {
+    return value.toDouble();
+  } else if (value is double) {
+    return value;
+  } else {
+    throw Exception('Value is not int or double');
   }
 }

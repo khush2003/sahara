@@ -10,7 +10,8 @@ dotenv.config();
 import cors from 'cors';
 
 const app: Express = express();
-const port = process.env.PORT;
+const port: number = parseInt(process.env.PORT ?? '5000') as number;
+const hostname = '127.0.0.1';
 
 app.use(cors());
 
@@ -25,6 +26,6 @@ app.use('/get', getRoutes)
 app.use('/put', putRoutes)
 app.use('/delete', deleteRoutes)
 
-app.listen(port, () => {
+app.listen(port, hostname, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
