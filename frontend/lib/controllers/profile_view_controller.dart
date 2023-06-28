@@ -29,6 +29,7 @@ class CustomTabController extends GetxController {
   RxList<UserSahara> blockedUsers = <UserSahara>[].obs;
   final RxList<DonationItem> donationItems = <DonationItem>[].obs;
   final RxList<Review> reviewList = <Review>[].obs;
+  final RxList<Review> userReviewList = <Review>[].obs;
 
   @override
   void onInit() {
@@ -104,7 +105,12 @@ class CustomTabController extends GetxController {
           .where((review) =>
               donationItems.any((item) => item.donationId == review.donationId))
           .toList();
+      final filteredUserReviews = reviews
+          .where((review) =>
+              review.reviewerId == FirebaseAuth.instance.currentUser!.uid)
+          .toList();
       reviewList(filteredReviews);
+      userReviewList(filteredUserReviews);
     }
   }
 }
