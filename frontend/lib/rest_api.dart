@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:html' as h;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:random_string/random_string.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/review.dart';
 
@@ -201,6 +202,39 @@ class RestAPI {
       return blockedUserIds;
     } else {
       return null;
+    }
+  }
+
+  Future<dynamic> postCoupon() async {
+    final availableCouponsResponse =
+        await connect.get('$getBackendUrl/availableCoupons');
+    if (availableCouponsResponse.statusCode == 200) {
+      final List<dynamic> availableCoupons = availableCouponsResponse.body;
+      final randomCouponIndex =
+          DateTime.now().millisecondsSinceEpoch % availableCoupons.length;
+      final randomCoupon = availableCoupons[randomCouponIndex];
+
+      final discountCode = randomAlphaNumeric(8);
+      final uid = auth.currentUser!.uid;
+
+      final couponData = {
+        'uid': uid,
+        'couponName': randomCoupon['couponName'],
+        'couponImage': randomCoupon['couponImage'],
+        'discountPrice': randomCoupon['discountPrice'],
+        'discountCode': discountCode,
+      };
+
+      print('Coupon Data: $couponData'); // Print couponData for debugging
+
+      final response = await connect.post('$postBackendUrl/coupon', couponData);
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        throw Exception('Failed to post coupon');
+      }
+    } else {
+      throw Exception('Failed to fetch available coupons');
     }
   }
 }

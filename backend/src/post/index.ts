@@ -22,4 +22,17 @@ postRoutes.post("/review", async (req, res) =>  {
     res.status(200).send(user);
 });
 
+postRoutes.post("/coupon", async (req, res) =>  {
+    const coupon = await db.collection('coupons').add(req.body
+    );
+    res.status(200).send(coupon);
+});
+
+postRoutes.post("/availableCoupons/:id", async (req, res) =>  {
+    const availableCouponId = req.params.id;
+    const availableCoupon = await db.collection('availableCoupons').doc(availableCouponId).set(req.body
+    );
+    res.status(200).send(availableCouponId);
+});
+
 export default postRoutes

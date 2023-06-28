@@ -174,5 +174,24 @@ getRoutes.get('/eachUsers', async (req, res) => {
     }
   });
 
+  getRoutes.get("/availableCoupons", async (req, res) => {
+    try {
+      const snapshot = await db.collection('availableCoupons').get();
+      const availableCoupons: any[]= [];
+     
+        snapshot.forEach(doc => {
+            var couponsWithId = {
+                couponId: doc.id,
+                ...doc.data(),
+            }
+            availableCoupons.push(couponsWithId)
+        });
+      res.status(200).send(availableCoupons);
+    } catch (error) {
+      console.error('Error fetching available coupons:', error);
+      res.status(500).send('Internal server error');
+    }
+  });
+
 
 export default getRoutes

@@ -37,7 +37,22 @@ class ChangeUsernameView extends StatelessWidget {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: changeController.buildPhoneNumberWidget(),
+                    child: FutureBuilder<String?>(
+                      future: changeController.getCurrentUserName(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            snapshot.data!,
+                            style: headText().copyWith(
+                              decoration: TextDecoration.underline,
+                            ),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text("Error: ${snapshot.error}");
+                        }
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Padding(
