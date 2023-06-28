@@ -558,23 +558,27 @@ class DonatingItem extends StatelessWidget {
   DonatingItem({super.key});
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 500,
-          child: Obx(
-            () => ListView.separated(
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 10),
-                itemCount: controller.donationItems.length,
-                itemBuilder: (context, index) {
-                  return DonationCard(
-                      donationPost: controller.donationItems[index]);
-                }),
-          ),
-        )
-      ],
-    );
+    if (controller.donationItems.length == 0) {
+      return NoItemFound(text: 'You do not have any donating items.');
+    } else {
+      return Column(
+        children: [
+          SizedBox(
+            height: 500,
+            child: Obx(
+              () => ListView.separated(
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
+                  itemCount: controller.donationItems.length,
+                  itemBuilder: (context, index) {
+                    return DonationCard(
+                        donationPost: controller.donationItems[index]);
+                  }),
+            ),
+          )
+        ],
+      );
+    }
   }
 }
 
@@ -599,31 +603,32 @@ class DonatingItem extends StatelessWidget {
 // For History and Receive Tabs
 
 class ReceivedItem extends StatelessWidget {
-  final DonationItem donationPost = DonationItem.test();
-  final Review review = Review.test();
   final CustomTabController controller = Get.put(CustomTabController());
   ReceivedItem({super.key});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 500,
-      child: Column(
+    if (controller.userReviewList.length == 0) {
+      return NoItemFound(text: 'You do not have any received items.');
+    } else {
+      return Column(
         children: [
-          ReviewCard(
-            donationPost: donationPost,
-            review: review,
-          ),
-          ReviewCard(
-            donationPost: donationPost,
-            review: review,
-          ),
-          ReviewCard(
-            donationPost: donationPost,
-            review: review,
-          ),
+          SizedBox(
+            height: 500,
+            child: Obx(() => ListView.separated(
+                itemBuilder: (context, index) {
+                  return ReviewCard(
+                      donationPost: DonationItem.getFromId(
+                          controller.userReviewList[index].donationId,
+                          controller.donationItems),
+                      review: controller.userReviewList[index]);
+                },
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
+                itemCount: controller.userReviewList.length)),
+          )
         ],
-      ),
-    );
+      );
+    }
   }
 }
 
@@ -632,22 +637,57 @@ class History extends StatelessWidget {
   History({super.key});
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 500,
-          child: Obx(() => ListView.separated(
-              itemBuilder: (context, index) {
-                return ReviewCard(
-                    donationPost: DonationItem.getFromId(
-                        controller.reviewList[index].donationId,
-                        controller.donationItems),
-                    review: controller.reviewList[index]);
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
-              itemCount: controller.reviewList.length)),
-        )
-      ],
+    if (controller.reviewList.length == 0) {
+      return NoItemFound(text: 'You do not have any donated items.');
+    } else {
+      return Column(
+        children: [
+          SizedBox(
+            height: 500,
+            child: Obx(() => ListView.separated(
+                itemBuilder: (context, index) {
+                  return ReviewCard(
+                      donationPost: DonationItem.getFromId(
+                          controller.reviewList[index].donationId,
+                          controller.donationItems),
+                      review: controller.reviewList[index]);
+                },
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
+                itemCount: controller.reviewList.length)),
+          )
+        ],
+      );
+    }
+  }
+}
+
+class NoItemFound extends StatelessWidget {
+  final String text;
+  NoItemFound({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 200.0),
+      child: Center(
+        child: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(12.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            color: Colors.yellow,
+          ),
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

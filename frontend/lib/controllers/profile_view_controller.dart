@@ -29,6 +29,7 @@ class CustomTabController extends GetxController {
   Rx<UserSahara?> fuser = Rx<UserSahara?>(null);
   final RxList<DonationItem> donationItems = <DonationItem>[].obs;
   final RxList<Review> reviewList = <Review>[].obs;
+  final RxList<Review> userReviewList = <Review>[].obs;
 
   @override
   void onInit() {
@@ -72,23 +73,23 @@ class CustomTabController extends GetxController {
   }
 
   void selectNew() {
-    isNewSelected.value = true;
-    isHistorySelected.value = false;
+    isNewSelected(true);
+    isHistorySelected(false);
   }
 
   void selectHistory() {
-    isHistorySelected.value = true;
-    isNewSelected.value = false;
+    isHistorySelected(true);
+    isNewSelected(false);
   }
 
   void selectGive() {
-    isGiveSelected.value = true;
-    isReceiveSelected.value = false;
+    isGiveSelected(true);
+    isReceiveSelected(false);
   }
 
   void selectReceive() {
-    isGiveSelected.value = false;
-    isReceiveSelected.value = true;
+    isGiveSelected(false);
+    isReceiveSelected(true);
   }
 
   void getBlockedUsersDetails() async {
@@ -126,8 +127,13 @@ class CustomTabController extends GetxController {
           .where((review) =>
               donationItems.any((item) => item.donationId == review.donationId))
           .toList();
+      final filteredUserReviews = reviews
+          .where((review) =>
+              review.reviewerId == FirebaseAuth.instance.currentUser!.uid)
+          .toList();
       reviewList(filteredReviews);
-      print(reviewList[0].donationId);
+      userReviewList(filteredUserReviews);
+      print(reviewList[0].reviewerId);
     }
   }
 }
