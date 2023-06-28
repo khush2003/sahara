@@ -124,22 +124,4 @@ class ChangeUserDetailsController extends GetxController {
     }
   }
 
-  Widget buildPhoneNumberWidget() {
-    return FutureBuilder<String?>(
-      future: getCurrentUserName(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Text(
-            snapshot.data!,
-            style: headText().copyWith(
-              decoration: TextDecoration.underline,
-            ),
-          );
-        } else if (snapshot.hasError) {
-          return Text("Error: ${snapshot.error}");
-        }
-        return const CircularProgressIndicator();
-      },
-    );
-  }
 }
