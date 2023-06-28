@@ -65,6 +65,36 @@ getRoutes.get('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, func
         return res.status(400).send("An Error Occured" + error);
     }
 }));
+//Get Specific coupon of user
+// getRoutes.get('/users/:userId/discountCoupon/:couponId', async (req, res) => {
+//     try {
+//         const snapshot = await db.collection('users').doc(req.params.userId).get()
+//         const coupon = snapshot.data();
+//         const result = { ...coupon, couponId: req.params.couponId};
+//         res.status(200).send(result)
+//     } catch (error) {
+//         return res.status(400).send("An Error Occured" + error)
+//     }
+// })
+//Get user's coupons
+getRoutes.get('/users/:userId/discountCoupon/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const snapshot = yield firebase_1.db.collection('users').doc(req.params.userId).get();
+        const couponList = [];
+        const userData = snapshot.data();
+        if (userData && userData.discountCoupon) {
+            for (const couponId of userData.discountCoupon) {
+                const couponDetail = yield firebase_1.db.collection('coupons').doc(couponId).get();
+                const couponDetailData = couponDetail.data();
+                couponList.push(couponDetailData);
+            }
+        }
+        res.status(200).send(couponList);
+    }
+    catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+}));
 // getRoutes.get('/reviews', async (req, res) => {
 //     try {
 //         const snapshot = await db.collection('reviews').get()
@@ -128,16 +158,6 @@ getRoutes.get('/payments/:id', (req, res) => __awaiter(void 0, void 0, void 0, f
         const snapshot = yield firebase_1.db.collection('payment').doc(req.params.id).get();
         const payment = snapshot.data();
         res.status(200).send(payment);
-    }
-    catch (error) {
-        return res.status(400).send("An Error Occured" + error);
-    }
-}));
-getRoutes.get('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const snapshot = yield firebase_1.db.collection('users').doc(req.params.id).get();
-        const users = snapshot.data();
-        res.status(200).send(users);
     }
     catch (error) {
         return res.status(400).send("An Error Occured" + error);

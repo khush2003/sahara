@@ -93,7 +93,7 @@ final getPages = [
   GetPage(name: Routes.changePhoneNumber, page: () => ChangePhoneNumberView()),
   GetPage(name: Routes.changeAddress, page: () => ChangeAddressView()),
   GetPage(name: Routes.changePassword, page: () => ChangePasswordView()),
-  GetPage(name: Routes.coupon, page: () => const CouponView()),
+  GetPage(name: Routes.coupon, page: () => CouponView()),
   GetPage(name: Routes.forgotPass, page: () => const ForgotPassView()),
   GetPage(name: Routes.app, page: () => App())
 ];

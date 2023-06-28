@@ -110,11 +110,12 @@ Content-Type: application/json
 }
 
 ### GET
-GET http://localhost:5000/get/eachUsers?userName=note
+GET http://localhost:5000/get/eachUsers?userName=jasos
 
 ### GET
 GET http://localhost:5000/get/availableCoupons
 
+// Create coupon
 ### POST
 POST http://localhost:5000/post/availableCoupons/Shabushi01
 Content-Type: application/json
@@ -125,3 +126,13 @@ Content-Type: application/json
   "discountPrice": 75,
   "discountCode": ""
 }
+
+### GET
+GET http://localhost:5000/get/users/uwClP6WMzYT3H3zSniR8v06HRdw2/discountCoupon
+
+
+### GET
+GET http://localhost:5000/get/donationItems
+
+### GET
+GET http://localhost:5000/get/coupons/8hpzFvGG4yDuOhfSvj4F

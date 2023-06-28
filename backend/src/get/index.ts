@@ -56,6 +56,37 @@ getRoutes.get('/users/:id', async (req, res) => {
         return res.status(400).send("An Error Occured" + error)
     }
 })
+//Get Specific coupon of user
+// getRoutes.get('/users/:userId/discountCoupon/:couponId', async (req, res) => {
+//     try {
+//         const snapshot = await db.collection('users').doc(req.params.userId).get()
+//         const coupon = snapshot.data();
+//         const result = { ...coupon, couponId: req.params.couponId};
+//         res.status(200).send(result)
+//     } catch (error) {
+//         return res.status(400).send("An Error Occured" + error)
+//     }
+// })
+
+//Get user's coupons
+getRoutes.get('/users/:userId/discountCoupon/', async (req, res) => {
+    try {
+        const snapshot = await db.collection('users').doc(req.params.userId).get()
+        const couponList: any[] = []
+        const userData = snapshot.data();
+        if (userData && userData.discountCoupon) {         
+            for(const couponId of userData.discountCoupon){
+                const couponDetail = await db.collection('coupons').doc(couponId).get()
+                const couponDetailData = couponDetail.data();
+                couponList.push(couponDetailData)
+            }
+
+          }
+        res.status(200).send(couponList)
+    } catch (error) {
+        return res.status(400).send("An Error Occured" + error)
+    }
+})
 
 
 // getRoutes.get('/reviews', async (req, res) => {
@@ -127,16 +158,6 @@ getRoutes.get('/payments/:id', async (req, res) => {
         const snapshot = await db.collection('payment').doc(req.params.id).get()
         const payment = snapshot.data()
         res.status(200).send(payment)
-    } catch (error) {
-        return res.status(400).send("An Error Occured" + error)
-    }
-})
-
-getRoutes.get('/users/:id', async (req, res) => {
-    try {
-        const snapshot = await db.collection('users').doc(req.params.id).get()
-        const users = snapshot.data()
-        res.status(200).send(users)
     } catch (error) {
         return res.status(400).send("An Error Occured" + error)
     }

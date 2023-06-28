@@ -22,6 +22,19 @@ putRoutes.put("/users/:id", async (req, res) => {
       res.status(500).send("Error updating user");
     }
   });
+  
+  putRoutes.put("/users/:userId/discountCoupon/:couponId", async (req, res) => {
+    const userId = req.params.userId;
+    const CouponId = req.params.couponId;
+    const userData = req.body;
+    try {
+      await db.collection('users').doc(userId).set(userData, { merge: true });
+      res.status(200).send("User updated successfully");
+    } catch (error) {
+      console.error("Error updating user:", error);
+      res.status(500).send("Error updating user");
+    }
+  });
 
   putRoutes.put("/allUserName/:id", async (req, res) => {
     const userId = req.params.id; 

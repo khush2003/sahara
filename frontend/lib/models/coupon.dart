@@ -3,7 +3,7 @@ import 'dart:convert';
 class Coupon {
   final String couponName;
   final String couponImage;
-  final String discountPrice;
+  final int discountPrice;
   final String discountCode;
 
   Coupon({
@@ -22,7 +22,7 @@ class Coupon {
     return Coupon(
       couponName: json['couponName'] ?? '',
       couponImage: json['couponImage'] ?? '',
-      discountPrice: json['discountPrice'] ?? '',
+      discountPrice: json['discountPrice'] as int? ?? 0,
       discountCode: json['discountCode'] ?? '',
     );
   }

@@ -35,6 +35,19 @@ putRoutes.put("/users/:id", (req, res) => __awaiter(void 0, void 0, void 0, func
         res.status(500).send("Error updating user");
     }
 }));
+putRoutes.put("/users/:userId/discountCoupon/:couponId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.params.userId;
+    const CouponId = req.params.couponId;
+    const userData = req.body;
+    try {
+        yield firebase_1.db.collection('users').doc(userId).set(userData, { merge: true });
+        res.status(200).send("User updated successfully");
+    }
+    catch (error) {
+        console.error("Error updating user:", error);
+        res.status(500).send("Error updating user");
+    }
+}));
 putRoutes.put("/allUserName/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.params.id;
     const userName = req.body.userName;
