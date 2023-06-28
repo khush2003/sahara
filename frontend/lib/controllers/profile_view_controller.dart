@@ -11,6 +11,7 @@ import '../models/donation_item.dart';
 import '../models/review.dart';
 import '../views/profile_view.dart';
 import 'auth/auth_controller.dart';
+import 'package:sahara/controllers/donation_item_controller.dart';
 
 class CustomTabController extends GetxController {
   static CustomTabController get instance => Get.find<CustomTabController>();
@@ -24,17 +25,18 @@ class CustomTabController extends GetxController {
   final isHistorySelected = false.obs;
   final _firebaseStorage = FirebaseStorage.instance;
   final _imagePicker = ImagePicker();
+  final DonationItemController donationItem = Get.put(DonationItemController());
 
   final auth = AuthController.instance;
-  RxList<UserSahara> blockedUsers = <UserSahara>[].obs;
+  //List<UserSahara> blockedUsers = <UserSahara>[].obs;
   final RxList<DonationItem> donationItems = <DonationItem>[].obs;
+  final RxList<UserSahara> blockedUsers = <UserSahara>[].obs;
   final RxList<Review> reviewList = <Review>[].obs;
   final RxList<Review> userReviewList = <Review>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    getBlockedUsersDetails();
     setupLists();
   }
 
@@ -53,6 +55,11 @@ class CustomTabController extends GetxController {
         type: 'Profile',
       ));
     }
+  }
+
+  unblockUserById(userId) async {
+    await restApi.unblockUserById(userId, auth.userSahara.value.blockedUser!);
+    setupLists();
   }
 
   void selectNew() {
@@ -75,18 +82,9 @@ class CustomTabController extends GetxController {
     isReceiveSelected(true);
   }
 
-  void getBlockedUsersDetails() async {
-    List<String> blockedUserIds = auth.userSahara.value.blockedUser ?? [];
-    for (String userId in blockedUserIds) {
-      UserSahara? fetchedUser = await restApi.getUserById(userId);
-      if (fetchedUser != null) {
-        blockedUsers.add(fetchedUser);
-      }
-    }
-  }
-
   Future<void> setupLists() async {
-    final List<DonationItem>? donationResult = await restApi.getDonationItems();
+    final List<DonationItem> donationResult = await restApi.getDonationItems();
+    // final List<DonationItem> donationResult = donationItem.donationItems;
     if (donationResult == null) {
       log("No donation items found");
     } else {
@@ -96,10 +94,10 @@ class CustomTabController extends GetxController {
           .toList();
       donationItems(filteredDonationItems);
     }
-
     final List<Review>? reviews = await restApi.getReviews();
+    // final List<Review> reviews = donationItem.reviewList;
     if (reviews == null) {
-      log("No donation items found");
+      log("No review items found");
     } else {
       final filteredReviews = reviews
           .where((review) =>
@@ -111,6 +109,14 @@ class CustomTabController extends GetxController {
           .toList();
       reviewList(filteredReviews);
       userReviewList(filteredUserReviews);
+    }
+
+    final List<UserSahara>? allUsers =
+        await restApi.getBlockedUsers(auth.userSahara.value.blockedUser!);
+    if (allUsers == null) {
+      log("No Users found");
+    } else {
+      blockedUsers(allUsers);
     }
   }
 }

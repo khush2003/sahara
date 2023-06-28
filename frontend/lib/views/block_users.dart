@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/auth/auth_controller.dart';
 import '../controllers/block_users_controller.dart';
 import '../controllers/profile_view_controller.dart';
 import '../theme/app_theme.dart';
@@ -9,6 +10,7 @@ class BlockUsers extends StatelessWidget {
   BlockUsers({Key? key}) : super(key: key);
 
   final CustomTabController controller = Get.put(CustomTabController());
+  final auth = AuthController.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -18,55 +20,29 @@ class BlockUsers extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 3,
-                blurRadius: 5,
-                offset: const Offset(0, 3),
-              )
-            ],
-            border: Border.all(color: const Color(0xFFedebeb)),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ListView.builder(
-            itemCount: controller.blockedUsers.length,
-            itemBuilder: (context, index) {
-              final blockedUser = controller.blockedUsers[index];
-              return Obx(() {
-                if (controller.blockedUsers.isEmpty) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      UserProfile(
-                        picturePath: blockedUser.profilePicture ??
-                            'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
-                        username: blockedUser.userName,
-                      ),
-                      Spacer(),
-                      CrossIcon(),
-                      const SizedBox(width: 8),
-                    ],
-                  );
-                }
+        child: Obx(() {
+          return ListView.separated(
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
+              itemCount: controller.blockedUsers.length,
+              itemBuilder: (context, index) {
+                final blockedUser = controller.blockedUsers[index];
+                return UserProfile(
+                  picturePath: blockedUser.profilePicture ??
+                      'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
+                  username: blockedUser.userName,
+                  blockedUserId: auth.userSahara.value.blockedUser![index],
+                );
               });
-            },
-          ),
-        ),
+        }),
       ),
     );
   }
 }
 
 class CrossIcon extends StatelessWidget {
-  const CrossIcon({super.key});
+  final String blockedUserId;
+  CrossIcon({super.key, required this.blockedUserId});
+  final CustomTabController controller = Get.put(CustomTabController());
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +63,7 @@ class CrossIcon extends StatelessWidget {
                       Expanded(
                         child: TextButton(
                           onPressed: () {
+                            controller.unblockUserById(blockedUserId);
                             Navigator.of(context).pop();
                           },
                           style: TextButton.styleFrom(
@@ -158,37 +135,62 @@ class CrossIcon extends StatelessWidget {
 class UserProfile extends StatelessWidget {
   final String picturePath;
   final String username;
+  final String blockedUserId;
 
   const UserProfile({
     required this.picturePath,
     required this.username,
+    required this.blockedUserId,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 3,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          )
+        ],
+        border: Border.all(color: const Color(0xFFedebeb)),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 75,
-            height: 75,
-            decoration: BoxDecoration(
-              border: Border.all(color: const Color(0xFFBEEF00)),
-              borderRadius: BorderRadius.circular(100),
-              image: DecorationImage(
-                image: NetworkImage(picturePath),
-              ),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              username,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+            child: Row(
+              children: [
+                Container(
+                  width: 75,
+                  height: 75,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFFBEEF00)),
+                    borderRadius: BorderRadius.circular(100),
+                    image: DecorationImage(
+                      image: NetworkImage(picturePath),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    username,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
           ),
+          Spacer(),
+          CrossIcon(blockedUserId: blockedUserId),
+          const SizedBox(width: 8),
         ],
       ),
     );
