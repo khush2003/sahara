@@ -29,7 +29,7 @@ class DonationCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              DonationDetailSection(donationPost: donationPost),
+              DonationDetailSection(item: donationPost),
               const Divider(),
               AutherDetailSection(author: donationPost.author),
               const SizedBox(height: 5),

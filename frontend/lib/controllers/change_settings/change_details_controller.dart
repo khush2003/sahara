@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/auth/auth_controller.dart';
+import 'package:sahara/controllers/donation_item_controller.dart';
 import 'package:sahara/rest_api.dart';
 import 'package:sahara/theme/app_theme.dart';
 import 'package:sahara/utils/app_utils.dart';
@@ -27,9 +28,7 @@ class ChangeUserDetailsController extends GetxController {
 
   void changeNonAuthUserDetails() async {
     final newUser = UserSahara(
-      userName: userNameController.text.trim() == ''
-          ? user.value.userName
-          : userNameController.text.trim(),
+      userName: user.value.userName,
       userPhoneNumber: userPhoneNumberController.text.trim() == ''
           ? user.value.userPhoneNumber
           : userPhoneNumberController.text.trim(),
@@ -41,6 +40,19 @@ class ChangeUserDetailsController extends GetxController {
     Get.back();
     successSnackBar('User details changed successfully');
     _auth.updateUser();
+  }
+
+  void changeUserName() async {
+    final newUser = UserSahara(
+      userName: userNameController.text.trim() == ''
+          ? user.value.userName
+          : userNameController.text.trim(),
+    );
+    await _restAPI.putUserName(newUser);
+    Get.back();
+    successSnackBar('User details changed successfully');
+    _auth.updateUser();
+    DonationItemController.instance.setupLists();
   }
 
   @override

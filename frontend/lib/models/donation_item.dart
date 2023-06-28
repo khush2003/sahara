@@ -16,9 +16,11 @@ class DonationItem {
   final double estimatedItemValue;
   final DateTime? expectedArrivalDate, pickUpDate;
   final DeliveryStatus deliveryStatus;
+  final String? receiverId;
 
   DonationItem({
     this.donationId,
+    this.receiverId,
     required this.name,
     required this.description,
     required this.imageUrl,
@@ -93,6 +95,7 @@ class DonationItem {
         tags: json['tags'] == null
             ? []
             : List<String>.from(json['tags'] as List<dynamic>),
+        receiverId: json['receiverId'],
         author: Author.fromJson(json));
   }
   Map<String, dynamic> toJson() {
@@ -115,6 +118,7 @@ class DonationItem {
       'expectedArrivalDate': expectedArrivalDate?.toIso8601String(),
       'pickUpDate': pickUpDate?.toIso8601String(),
       'deliveryStatus': convertDeliveryStatusToString(deliveryStatus),
+      'receiverId': receiverId,
       'authorName': author.name,
       'authorImageURL': author.imageUrl,
       'authorId': author.authorId,

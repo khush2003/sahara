@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/components/Feed/donation_details_section.dart';
+import 'package:sahara/utils/app_utils.dart';
 
 import '../../models/donation_item.dart';
 import '../../models/user.dart';
@@ -9,13 +11,12 @@ import '../../theme/app_theme.dart';
 class InTransitCard extends StatelessWidget {
   final DonationItem item;
   final UserSahara user;
-  final DateTime arrDate;
 
-  const InTransitCard(
-      {super.key,
-      required this.user,
-      required this.item,
-      required this.arrDate});
+  const InTransitCard({
+    super.key,
+    required this.user,
+    required this.item,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,9 +40,12 @@ class InTransitCard extends StatelessWidget {
           children: [
             // First Row
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ItemInfo(item: item)
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: DonationDetailSection(
+                    item: item,
+                    showDescription: false,
+                    showTags: false,
+                    showOverPricedWarning: false)),
             // Black line seperating top inf and bottom info
             Container(
               height: 0.5,
@@ -50,32 +54,12 @@ class InTransitCard extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DeliveryInformation(
-                    arrDate: arrDate, item: item, user: user))
+                    arrDate: item.expectedArrivalDate ?? DateTime(2023, 9, 1),
+                    item: item,
+                    user: user))
           ],
         ),
       ),
-    );
-  }
-}
-
-class ItemDetails extends StatelessWidget {
-  const ItemDetails({
-    super.key,
-    required this.item,
-  });
-
-  final DonationItem item;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CardRowDesc(label: 'Name', input: item.name),
-        CardRowDesc(
-            label: 'Used Duration', input: item.usedDuration.toString()),
-        CardRowDesc(label: 'Usability', input: '${item.usability}%'),
-        CardRowDesc(label: 'Price', input: "฿${item.price}")
-      ],
     );
   }
 }
@@ -110,13 +94,12 @@ class CardRowDesc extends StatelessWidget {
 class ToDeliverCard extends StatelessWidget {
   final DonationItem item;
   final UserSahara user;
-  final DateTime arrDate;
 
-  const ToDeliverCard(
-      {super.key,
-      required this.user,
-      required this.item,
-      required this.arrDate});
+  const ToDeliverCard({
+    super.key,
+    required this.user,
+    required this.item,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -141,9 +124,12 @@ class ToDeliverCard extends StatelessWidget {
           children: [
             // First Row
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ItemInfo(item: item)
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: DonationDetailSection(
+                    item: item,
+                    showDescription: false,
+                    showTags: false,
+                    showOverPricedWarning: false)),
             // Black line seperating top inf and bottom info
             Container(
               height: 0.5,
@@ -152,7 +138,9 @@ class ToDeliverCard extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DeliveryInformationPickUp(
-                    item: item, user: user, arrDate: arrDate))
+                    item: item,
+                    user: user,
+                    arrDate: item.pickUpDate ?? DateTime(2023, 8, 1)))
           ],
         ),
       ),
@@ -163,12 +151,12 @@ class ToDeliverCard extends StatelessWidget {
 class ToReceiveCard extends StatelessWidget {
   final DonationItem item;
   final UserSahara user;
-  final DateTime arrDate;
-  const ToReceiveCard(
-      {super.key,
-      required this.item,
-      required this.user,
-      required this.arrDate});
+
+  const ToReceiveCard({
+    super.key,
+    required this.item,
+    required this.user,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -193,9 +181,12 @@ class ToReceiveCard extends StatelessWidget {
           children: [
             // First Row
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ItemInfo(item: item)
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: DonationDetailSection(
+                    item: item,
+                    showDescription: false,
+                    showTags: false,
+                    showOverPricedWarning: false)),
             // Black line seperating top inf and bottom info
             Container(
               height: 0.5,
@@ -204,7 +195,9 @@ class ToReceiveCard extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DeliveryInformation(
-                    item: item, user: user, arrDate: arrDate))
+                    item: item,
+                    user: user,
+                    arrDate: item.expectedArrivalDate ?? DateTime(2023, 9, 1)))
           ],
         ),
       ),
@@ -215,13 +208,12 @@ class ToReceiveCard extends StatelessWidget {
 class DeliveredCard extends StatelessWidget {
   final DonationItem item;
   final UserSahara user;
-  final DateTime arrDate;
 
-  const DeliveredCard(
-      {super.key,
-      required this.user,
-      required this.item,
-      required this.arrDate});
+  const DeliveredCard({
+    super.key,
+    required this.user,
+    required this.item,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -245,9 +237,12 @@ class DeliveredCard extends StatelessWidget {
           children: [
             // First Row
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ItemInfo(item: item)
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: DonationDetailSection(
+                    item: item,
+                    showDescription: false,
+                    showTags: false,
+                    showOverPricedWarning: false)),
             // Black line seperating top inf and bottom info
             Container(
               height: 0.5,
@@ -256,7 +251,9 @@ class DeliveredCard extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DeliveryInformationDelivered(
-                    arrDate: arrDate, item: item, user: user)),
+                    arrDate: item.expectedArrivalDate ?? DateTime(2023, 9, 1),
+                    item: item,
+                    user: user)),
             Container(
               height: 0.5,
               decoration: const BoxDecoration(color: Colors.black),
@@ -306,9 +303,9 @@ class DeliveryInformation extends StatelessWidget {
         ),
         CardRowDesc(label: 'Name', input: user.userName),
         CardRowDesc(label: 'Phone', input: user.userPhoneNumber),
-        CardRowDesc(label: 'Delivery Fee', input: "฿${item.deliveryFees}"),
+        CardRowDesc(label: 'Delivery Fee', input: "${item.deliveryFees} bhat"),
         CardRowDesc(label: 'Address', input: user.userAddress),
-        CardRowDesc(label: 'Expected Arrival Date', input: arrDate.toString())
+        CardRowDesc(label: 'Expected Arrival Date', input: formatDate(arrDate))
       ],
     );
   }
@@ -335,9 +332,9 @@ class DeliveryInformationPickUp extends StatelessWidget {
         ),
         CardRowDesc(label: 'Name', input: user.userName),
         CardRowDesc(label: 'Phone', input: user.userPhoneNumber),
-        CardRowDesc(label: 'Delivery Fee', input: "฿${item.deliveryFees}"),
+        CardRowDesc(label: 'Delivery Fee', input: "${item.deliveryFees} bhat"),
         CardRowDesc(label: 'Address', input: user.userAddress),
-        CardRowDesc(label: 'Pick Up Date', input: arrDate.toString())
+        CardRowDesc(label: 'Pick Up Date', input: formatDate(arrDate))
       ],
     );
   }
@@ -364,39 +361,10 @@ class DeliveryInformationDelivered extends StatelessWidget {
         ),
         CardRowDesc(label: 'Name', input: user.userName),
         CardRowDesc(label: 'Phone', input: user.userPhoneNumber),
-        CardRowDesc(label: 'Delivery Fee', input: "฿${item.deliveryFees}"),
+        CardRowDesc(label: 'Delivery Fee', input: "${item.deliveryFees} bhat"),
         CardRowDesc(label: 'Address', input: user.userAddress),
-        CardRowDesc(label: 'Expected Arrival Date', input: arrDate.toString()),
+        CardRowDesc(label: 'Expected Arrival Date', input: formatDate(arrDate)),
       ],
     );
-  }
-}
-
-class ItemInfo extends StatelessWidget {
-  final DonationItem item;
-  const ItemInfo({super.key, required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-                children: [
-                  Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                        // border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.amberAccent,
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                item.imageUrl))),
-                  ),
-                  const Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
-                  Expanded(
-                    // ignore: avoid_unnecessary_containers
-                    child: ItemDetails(item: item),
-                  )
-                ],
-              );
   }
 }
