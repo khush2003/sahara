@@ -14,6 +14,8 @@ class DonationItem {
   final Author author;
   final bool isOverPriced;
   final double estimatedItemValue;
+  final DateTime? expectedArrivalDate, pickUpDate;
+  final DeliveryStatus deliveryStatus;
 
   DonationItem({
     this.donationId,
@@ -32,6 +34,9 @@ class DonationItem {
     required this.deliveryFees,
     required this.tags,
     required this.author,
+    this.expectedArrivalDate,
+    this.pickUpDate, 
+    this.deliveryStatus = DeliveryStatus.toDeliver,
   })  : estimatedItemValue = price * usability,
         isOverPriced = deliveryFees > price * usability;
 
@@ -76,6 +81,13 @@ class DonationItem {
         usability: json['usability'] as double,
         price: json['price'] as double,
         deliveryFees: json['deliveryFees'] as double,
+        expectedArrivalDate: json['expectedArrivalDate'] == null
+            ? null
+            : DateTime.parse(json['expectedArrivalDate'] as String),
+        pickUpDate: json['pickUpDate'] == null
+            ? null
+            : DateTime.parse(json['pickUpDate'] as String),
+        deliveryStatus: convertDeliveryStatusFromString(json['deliveryStatus']),
         tags: json['tags'] == null
             ? []
             : List<String>.from(json['tags'] as List<dynamic>),
@@ -98,6 +110,9 @@ class DonationItem {
       'deliveryPaidBy': convertToString(deliveryPaidBy),
       'description': description,
       'tags': tags,
+      'expectedArrivalDate': expectedArrivalDate?.toIso8601String(),
+      'pickUpDate': pickUpDate?.toIso8601String(),
+      'deliveryStatus': convertDeliveryStatusToString(deliveryStatus),
       'authorName': author.name,
       'authorImageURL': author.imageUrl,
       'authorId': author.authorId,

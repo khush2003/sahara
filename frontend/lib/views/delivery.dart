@@ -5,7 +5,6 @@ import '../models/donation_item.dart';
 import '../models/user.dart';
 import '../theme/app_theme.dart';
 
-
 class DeliveryView extends StatelessWidget {
   DeliveryView({super.key});
   final DonationItem item = DonationItem.test();
@@ -15,20 +14,6 @@ class DeliveryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBarJames(myitem: item, myuser: user, myarrDate: arrDate);
-
-    // Scaffold(
-    //   appBar: AppBar(title: const Text('James View'),),
-    //   body: Center(
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.center,
-    //       mainAxisAlignment: MainAxisAlignment.start,
-    //       children: [
-    //         // InTransitCard(user: user, item: item, arrDate: arrDate)
-    //         DeliveredCard(user: user, item: item, arrDate: arrDate)
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }
 

@@ -71,7 +71,7 @@ class DonationItemController extends GetxController {
       final lowercaseEventOwner = item.author.name.toLowerCase();
       final lowercaseTags = item.tags.map((tag) => tag.toLowerCase()).toList();
       if (lowercaseTitle.contains(lowercaseSearchString) ||
-          lowercaseDescription.contains(lowercaseSearchString) ||
+          lowercaseDescription.contains(lowercaseSearchString) || 
           lowercaseCategory.contains(lowercaseSearchString) ||
           lowercaseEventOwner.contains(lowercaseSearchString)) {
         return true;

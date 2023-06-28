@@ -2,6 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/theme/app_theme.dart';
 
+enum DeliveryStatus {inTransit, toDeliver, toReceive, delivered}
+
+DeliveryStatus convertDeliveryStatusFromString(String deliveryStatus) {
+  switch (deliveryStatus) {
+    case 'inTransit':
+      return DeliveryStatus.inTransit;
+    case 'toDeliver':
+      return DeliveryStatus.toDeliver;
+    case 'toReceive':
+      return DeliveryStatus.toReceive;
+    case 'delivered':
+      return DeliveryStatus.delivered;
+    default:
+      return DeliveryStatus.inTransit;
+  }
+}
+
+String convertDeliveryStatusToString(DeliveryStatus deliveryStatus){
+  switch (deliveryStatus) {
+    case DeliveryStatus.inTransit:
+      return 'inTransit';
+    case DeliveryStatus.toDeliver:
+      return 'toDeliver';
+    case DeliveryStatus.toReceive:
+      return 'toReceive';
+    case DeliveryStatus.delivered:
+      return 'delivered';
+    default:
+      return 'inTransit';
+  }
+}
+
+
 enum DeliveryPaidBy { donor, receiver, both }
 
 DeliveryPaidBy convertFromString(String deliveryPaidBy) {
