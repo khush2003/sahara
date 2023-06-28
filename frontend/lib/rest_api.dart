@@ -119,6 +119,17 @@ class RestAPI {
     }
   }
 
+  Future<List<UserSahara>?> getBlockedUsers(List<String> userIds) async {
+    final List<UserSahara> users = [];
+    for (String userId in userIds) {
+      final UserSahara? user = await getUserById(userId);
+      if (user != null) {
+        users.add(user);
+      }
+    }
+    return users;
+  }
+
   Future<dynamic> checkUsernameAvailability(String username) async {
     final query =
         await connect.get('$getBackendUrl/eachUsers?userName=$username');
@@ -129,6 +140,42 @@ class RestAPI {
           : false; // Return true if username is available, false otherwise
     } else {
       throw Exception('Failed to check username availability');
+    }
+  }
+
+  Future<dynamic> unblockUserById(String userId, List<String> userIds) async {
+    final uid = auth.currentUser!.uid;
+    final blockedUserIds = userIds;
+
+    if (blockedUserIds.contains(userId)) {
+      blockedUserIds.remove(userId);
+      final Map<String, dynamic> userData = {'blockedUser': blockedUserIds};
+
+      try {
+        Response response =
+            await connect.put('$putBackendUrl/users/$uid', userData);
+        if (response.statusCode == 200) {
+          return response.body;
+        } else {
+          throw Exception('Failed to unblock user');
+        }
+      } catch (e) {
+        throw Exception('Error: $e');
+      }
+    } else {
+      throw Exception('User ID not found in the blockedUser list');
+    }
+  }
+
+  Future<List<String>?> getBlockedUserIds(String userId) async {
+    Response response = await connect.get('$getBackendUrl/users/$userId');
+    if (response.statusCode == 200) {
+      dynamic userData = response.body;
+      List<String> blockedUserIds =
+          List<String>.from(userData['blockedUser'] ?? []);
+      return blockedUserIds;
+    } else {
+      return null;
     }
   }
 }

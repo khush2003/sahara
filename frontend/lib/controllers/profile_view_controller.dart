@@ -26,15 +26,15 @@ class CustomTabController extends GetxController {
   final _imagePicker = ImagePicker();
 
   final auth = AuthController.instance;
-  RxList<UserSahara> blockedUsers = <UserSahara>[].obs;
+  //List<UserSahara> blockedUsers = <UserSahara>[].obs;
   final RxList<DonationItem> donationItems = <DonationItem>[].obs;
+  final RxList<UserSahara> blockedUsers = <UserSahara>[].obs;
   final RxList<Review> reviewList = <Review>[].obs;
   final RxList<Review> userReviewList = <Review>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    getBlockedUsersDetails();
     setupLists();
   }
 
@@ -55,6 +55,11 @@ class CustomTabController extends GetxController {
     }
   }
 
+  unblockUserById(userId) async {
+    await restApi.unblockUserById(userId, auth.userSahara.value.blockedUser!);
+    setupLists();
+  }
+
   void selectNew() {
     isNewSelected(true);
     isHistorySelected(false);
@@ -73,16 +78,6 @@ class CustomTabController extends GetxController {
   void selectReceive() {
     isGiveSelected(false);
     isReceiveSelected(true);
-  }
-
-  void getBlockedUsersDetails() async {
-    List<String> blockedUserIds = auth.userSahara.value.blockedUser ?? [];
-    for (String userId in blockedUserIds) {
-      UserSahara? fetchedUser = await restApi.getUserById(userId);
-      if (fetchedUser != null) {
-        blockedUsers.add(fetchedUser);
-      }
-    }
   }
 
   Future<void> setupLists() async {
@@ -111,6 +106,15 @@ class CustomTabController extends GetxController {
           .toList();
       reviewList(filteredReviews);
       userReviewList(filteredUserReviews);
+    }
+
+    final List<UserSahara>? allUsers =
+        await restApi.getBlockedUsers(auth.userSahara.value.blockedUser!);
+    if (allUsers == null) {
+      log("No Users found");
+    } else {
+      blockedUsers(allUsers);
+      print(blockedUsers);
     }
   }
 }
