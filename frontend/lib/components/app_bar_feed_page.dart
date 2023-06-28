@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/components/Feed/search_bar.dart';
 
 import 'package:unicons/unicons.dart';
 
@@ -64,7 +65,7 @@ class AppBarFeedPage extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(UniconsLine.filter),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () => showSearchDialog(),
           icon: const Icon(UniconsLine.search),
         ),
       ],

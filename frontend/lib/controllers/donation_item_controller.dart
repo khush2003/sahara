@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/review.dart';
@@ -12,7 +13,10 @@ class DonationItemController extends GetxController {
   final RxList<DonationItem> donationItems = <DonationItem>[].obs;
   final RxList<Review> reviewList = <Review>[].obs;
   final RxList<DonationItem> filteredList = <DonationItem>[].obs;
+  final RxList<DonationItem> filteredItemsStored = <DonationItem>[].obs;
   final RxInt selectedCategoryIndex = 0.obs;
+
+  final searchController = TextEditingController();
 
   @override
   void onInit() async {
@@ -27,6 +31,7 @@ class DonationItemController extends GetxController {
     } else {
       donationItems(donationResult);
       filteredList(donationResult);
+      filteredItemsStored(donationResult);
     }
 
     final List<Review>? reviews = await restApi.getReviews();
@@ -40,6 +45,7 @@ class DonationItemController extends GetxController {
   void filterDonationItems(String category) {
     if (category == 'All') {
       filteredList(donationItems.toList());
+      filteredItemsStored(donationItems.toList());
     } else {
       final lowercaseCategory = category.toLowerCase();
       final filteredItems = donationItems.where((item) {
@@ -47,40 +53,50 @@ class DonationItemController extends GetxController {
         return lowercaseEventCategory == lowercaseCategory;
       }).toList();
       filteredList(filteredItems);
+      filteredItemsStored(filteredItems);
     }
   }
 
-  // void searchEvents() {
-  //   if (searchController.text.isEmpty) {
-  //     filteredEvents(_event.events.toList());
-  //   }
+  void searchEvents() {
+    if (searchController.text.isEmpty) {
+      filteredList(filteredItemsStored.toList());
+    }
 
-  //   final lowercaseSearchString = searchController.text.toLowerCase();
+    final lowercaseSearchString = searchController.text.toLowerCase();
 
-  //   final filterEvents = _event.events.where((event) {
-  //     final lowercaseTitle = event.title.toLowerCase();
-  //     final lowercaseDescription = event.description.toLowerCase();
-  //     final lowercaseCategory = event.category.toLowerCase();
-  //     final lowercaseEventOwner = event.eventOwner.name.toLowerCase();
-  //     final lowercaseTags =
-  //         event.tags?.map((tag) => tag.toLowerCase()).toList() ?? [];
+    final filteredSearched = filteredList.where((item) {
+      final lowercaseTitle = item.name.toLowerCase();
+      final lowercaseDescription = item.description.toLowerCase();
+      final lowercaseCategory = item.category.toLowerCase();
+      final lowercaseEventOwner = item.author.name.toLowerCase();
+      final lowercaseTags = item.tags.map((tag) => tag.toLowerCase()).toList();
+      if (lowercaseTitle.contains(lowercaseSearchString) ||
+          lowercaseDescription.contains(lowercaseSearchString) ||
+          lowercaseCategory.contains(lowercaseSearchString) ||
+          lowercaseEventOwner.contains(lowercaseSearchString)) {
+        return true;
+      }
 
-  //     if (lowercaseTitle.contains(lowercaseSearchString) ||
-  //         lowercaseDescription.contains(lowercaseSearchString) ||
-  //         lowercaseCategory.contains(lowercaseSearchString) ||
-  //         lowercaseEventOwner.contains(lowercaseSearchString)) {
-  //       return true;
-  //     }
+      for (final tag in lowercaseTags) {
+        if (tag.contains(lowercaseSearchString)) {
+          return true;
+        }
+      }
 
-  //     for (final tag in lowercaseTags) {
-  //       if (tag.contains(lowercaseSearchString)) {
-  //         return true;
-  //       }
-  //     }
+      return false;
+    }).toList();
 
-  //     return false;
-  //   }).toList();
+    filteredList(filteredSearched);
+  }
 
-  //   filteredEvents(filterEvents);
-  // }
+  void clearEvents() {
+    filteredList(filteredItemsStored.toList());
+    searchController.text = '';
+  }
+
+  @override
+  void onClose() {
+    searchController.dispose();
+    super.onClose();
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/theme/app_theme.dart';
 
 import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
@@ -21,20 +22,30 @@ class FeedView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TabBarView(
               children: [
-                Obx(() => ListView.separated(
-                    itemBuilder: (context, index) {
-                      return ReviewCard(
-                          donationPost: DonationItem.getFromId(
-                              donationItemController
-                                  .reviewList[index].donationId,
-                              donationItemController.donationItems),
-                          review: donationItemController.reviewList[index]);
-                    },
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 10),
-                    itemCount: donationItemController.reviewList.length)),
-                Obx(
-                  () => ListView.separated(
+                Obx(() {
+                  if (donationItemController.reviewList.isEmpty) {
+                    return Center(
+                        child: Text("No Reviews Found", style: headTextBold()));
+                  }
+                  return ListView.separated(
+                      itemBuilder: (context, index) {
+                        return ReviewCard(
+                            donationPost: DonationItem.getFromId(
+                                donationItemController
+                                    .reviewList[index].donationId,
+                                donationItemController.donationItems),
+                            review: donationItemController.reviewList[index]);
+                      },
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 10),
+                      itemCount: donationItemController.reviewList.length);
+                }),
+                Obx(() {
+                  if (donationItemController.filteredList.isEmpty) {
+                    return Center(
+                        child: Text("No Items Found", style: headTextBold()));
+                  }
+                  return ListView.separated(
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: 10),
                       itemCount: donationItemController.filteredList.length,
@@ -42,8 +53,8 @@ class FeedView extends StatelessWidget {
                         return DonationCard(
                             donationPost:
                                 donationItemController.filteredList[index]);
-                      }),
-                )
+                      });
+                })
               ],
             )),
       ),
