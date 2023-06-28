@@ -31,25 +31,16 @@ class ProfileView extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 215,
-                    child: Obx(() {
-                      final user = _tabController.user.value;
-                      if (user != null) {
-                        return TopSection(
-                          profile: user.profilePicture == ''
-                              ? ''
-                              : user.profilePicture,
-                          cover: user.coverPicture,
-                          username: user.userName,
-                          email: FirebaseAuth.instance.currentUser!.email ?? '',
-                        );
-                      } else {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    }),
-                  ),
+                      height: 215,
+                      child: TopSection(
+                        profile:
+                            _tabController.auth.userSahara.value.profilePicture,
+                        cover:
+                            _tabController.auth.userSahara.value.coverPicture,
+                        username: _tabController.auth.userSahara.value.userName,
+                        email:
+                            _tabController.auth.firebaseUser.value!.email ?? '',
+                      )),
                   //SocialIcons(),
                   Padding(
                     padding: const EdgeInsets.all(16.0),

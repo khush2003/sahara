@@ -14,7 +14,7 @@ import 'auth/auth_controller.dart';
 
 class CustomTabController extends GetxController {
   static CustomTabController get instance => Get.find<CustomTabController>();
-  RxList<UserSahara> blockedUsers = <UserSahara>[].obs;
+
   final connect = Get.find<GetConnect>();
   final restApi = RestAPI.instance;
   final imageUrl = ''.obs;
@@ -25,29 +25,16 @@ class CustomTabController extends GetxController {
   final _firebaseStorage = FirebaseStorage.instance;
   final _imagePicker = ImagePicker();
 
-  Rx<UserSahara?> user = Rx<UserSahara?>(null);
-  Rx<UserSahara?> fuser = Rx<UserSahara?>(null);
+  final auth = AuthController.instance;
+  RxList<UserSahara> blockedUsers = <UserSahara>[].obs;
   final RxList<DonationItem> donationItems = <DonationItem>[].obs;
   final RxList<Review> reviewList = <Review>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    getUserById();
     getBlockedUsersDetails();
     setupLists();
-  }
-
-  void getUserById() async {
-    UserSahara? fetchedUser =
-        await restApi.getUserById(FirebaseAuth.instance.currentUser!.uid);
-    if (fetchedUser != null) {
-      user.value = fetchedUser;
-      getBlockedUsersDetails();
-      print("This is from getUserById ${user.value!.blockedUser}");
-    } else {
-      print("User not found");
-    }
   }
 
   uploadImage(BuildContext context) async {
@@ -60,48 +47,39 @@ class CustomTabController extends GetxController {
           .putFile(file);
       var downloadUrl = await snapshot.ref.getDownloadURL();
       imageUrl(downloadUrl);
-      print(downloadUrl);
-      showDialog(
-        context: context,
-        builder: (context) => ChangeProfileAndCoverPhotoDialog(
-          photo: downloadUrl,
-          type: 'Profile',
-        ),
-      );
+      Get.dialog(ChangeProfileAndCoverPhotoDialog(
+        photo: downloadUrl,
+        type: 'Profile',
+      ));
     }
   }
 
   void selectNew() {
-    isNewSelected.value = true;
-    isHistorySelected.value = false;
+    isNewSelected(true);
+    isHistorySelected(false);
   }
 
   void selectHistory() {
-    isHistorySelected.value = true;
-    isNewSelected.value = false;
+    isHistorySelected(true);
+    isNewSelected(false);
   }
 
   void selectGive() {
-    isGiveSelected.value = true;
-    isReceiveSelected.value = false;
+    isGiveSelected(true);
+    isReceiveSelected(false);
   }
 
   void selectReceive() {
-    isGiveSelected.value = false;
-    isReceiveSelected.value = true;
+    isGiveSelected(false);
+    isReceiveSelected(true);
   }
 
   void getBlockedUsersDetails() async {
-    List<String> blockedUserIds = user.value!.blockedUser ?? [];
-    print(blockedUserIds);
-    //blockedUsers.clear();
-
+    List<String> blockedUserIds = auth.userSahara.value.blockedUser ?? [];
     for (String userId in blockedUserIds) {
       UserSahara? fetchedUser = await restApi.getUserById(userId);
       if (fetchedUser != null) {
-        //blockedUsers.add(fetchedUser);
-        fuser.value = fetchedUser;
-        print(fetchedUser);
+        blockedUsers.add(fetchedUser);
       }
     }
   }
@@ -127,7 +105,6 @@ class CustomTabController extends GetxController {
               donationItems.any((item) => item.donationId == review.donationId))
           .toList();
       reviewList(filteredReviews);
-      print(reviewList[0].donationId);
     }
   }
 }

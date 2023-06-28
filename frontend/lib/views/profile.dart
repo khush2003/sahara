@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/components/image_thumbnail.dart';
 import 'package:sahara/controllers/auth/auth_controller.dart';
 
 import '../controllers/profile_view_controller.dart';
@@ -236,54 +237,37 @@ class ProfileCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Obx(() {
-              final user = _tabController.user.value;
-              var profilePicture = user!.profilePicture;
-              if (profilePicture == '') {
-                profilePicture = null;
-              }
-              if (user != null) {
-                return Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(Routes.profileView);
-                      },
-                      child: Container(
-                        width: 75,
-                        height: 75,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xFFBEEF00)),
-                          borderRadius: BorderRadius.circular(100),
-                          image: DecorationImage(
-                            image: NetworkImage(profilePicture ??
-                                'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(Routes.profileView);
-                      },
-                      child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(Routes.profileView);
+                    },
+                    child: Obx(() => ImageThumbnail(
+                          imageUrl: _tabController
+                                  .auth.userSahara.value.profilePicture ??
+                              'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
+                          isCircular: true,
+                          size: 75,
+                        )),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(Routes.profileView);
+                    },
+                    child: Obx(
+                      () => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          user.userName,
+                          _tabController.auth.userSahara.value.userName,
                           style: headTextBold(),
                         ),
                       ),
                     ),
-                  ],
-                );
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }),
-          ),
+                  ),
+                ],
+              )),
         ],
       ),
     );
