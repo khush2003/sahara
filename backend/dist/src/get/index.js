@@ -171,4 +171,19 @@ getRoutes.get('/eachUsers', (req, res) => __awaiter(void 0, void 0, void 0, func
         return res.status(400).send("An Error Occured" + error);
     }
 }));
+getRoutes.get("/availableCoupons", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const snapshot = yield firebase_1.db.collection('availableCoupons').get();
+        const availableCoupons = [];
+        snapshot.forEach(doc => {
+            var couponsWithId = Object.assign({ couponId: doc.id }, doc.data());
+            availableCoupons.push(couponsWithId);
+        });
+        res.status(200).send(availableCoupons);
+    }
+    catch (error) {
+        console.error('Error fetching available coupons:', error);
+        res.status(500).send('Internal server error');
+    }
+}));
 exports.default = getRoutes;

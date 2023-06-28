@@ -23,7 +23,6 @@ class RegisterController extends GetxController {
     String password = passwordController.text;
     bool isAvailableUserName =
         await restAPI.checkUsernameAvailability(username);
-    print(isAvailableUserName);
     if (validateInputs()) {
       if (isAvailableUserName) {
         String? error = await _auth.createUser(email, password, username);

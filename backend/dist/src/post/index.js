@@ -29,4 +29,13 @@ postRoutes.post("/review", (req, res) => __awaiter(void 0, void 0, void 0, funct
     const user = yield firebase_1.db.collection('reviews').add(req.body);
     res.status(200).send(user);
 }));
+postRoutes.post("/coupon", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const coupon = yield firebase_1.db.collection('coupons').add(req.body);
+    res.status(200).send(coupon);
+}));
+postRoutes.post("/availableCoupons/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const availableCouponId = req.params.id;
+    const availableCoupon = yield firebase_1.db.collection('availableCoupons').doc(availableCouponId).set(req.body);
+    res.status(200).send(availableCouponId);
+}));
 exports.default = postRoutes;

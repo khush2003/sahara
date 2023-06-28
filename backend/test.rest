@@ -110,5 +110,18 @@ Content-Type: application/json
 }
 
 ### GET
-GET http://localhost:8000/get/eachUsers?userName=note
+GET http://localhost:5000/get/eachUsers?userName=note
 
+### GET
+GET http://localhost:5000/get/availableCoupons
+
+### POST
+POST http://localhost:5000/post/availableCoupons/Shabushi01
+Content-Type: application/json
+
+{
+  "couponName": "Shabushi",
+  "couponImage": "https://i.imgur.com/modPPoN.png",
+  "discountPrice": 75,
+  "discountCode": ""
+}

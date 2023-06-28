@@ -1,14 +1,15 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/counpon_controller.dart';
 
 import '../../components/primary_button.dart';
 import '../../routes/routes.dart';
 
 class ProfileSettingView extends StatelessWidget {
-  const ProfileSettingView({super.key});
+  ProfileSettingView({super.key});
+
+  final couponController = Get.put(CouponController());
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +55,14 @@ class ProfileSettingView extends StatelessWidget {
                         Get.toNamed(Routes.changePassword);
                       },
                       text: "Update Password"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: PrimaryButton(
+                      onPressed: () {
+                        couponController.updateCoupon();
+                      },
+                      text: "GET COUPON!!!"),
                 ),
               ],
             ),
