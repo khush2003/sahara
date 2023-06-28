@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:sahara/components/Feed/donation_details_section.dart';
 import 'package:sahara/controllers/create_review_controller.dart';
-
-import '../components/DeliveryPage/delivery_card.dart';
 import '../models/donation_item.dart';
 import '../models/user.dart';
 
@@ -36,16 +34,15 @@ class ReviewPage extends StatelessWidget {
           Center(child: PostButton(
             onPressed: () {
               reviewControler.createReview(
-                item.name,
-                item.usedDuration,
-                item.usability,
-                item.price,
-                "donationIdtest",
-                item.description,
-                item.imageUrl,
-                item.name,
-                0
-              );
+                  item.name,
+                  item.usedDuration,
+                  item.usability,
+                  item.price,
+                  "donationIdtest",
+                  item.description,
+                  item.imageUrl,
+                  item.name,
+                  0);
             },
           ))
         ],
@@ -92,7 +89,11 @@ class ReviewCard extends StatelessWidget {
             // First Row
             Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ItemInfo(item: item)),
+                child: DonationDetailSection(
+                    item: item,
+                    showDescription: false,
+                    showTags: false,
+                    showOverPricedWarning: false)),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(

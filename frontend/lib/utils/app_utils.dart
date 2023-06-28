@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/theme/app_theme.dart';
 
-enum DeliveryStatus {inTransit, toDeliver, toReceive, delivered}
+enum DeliveryStatus { inTransit, toDeliver, toReceive, delivered }
 
 DeliveryStatus convertDeliveryStatusFromString(String deliveryStatus) {
   switch (deliveryStatus) {
@@ -15,11 +15,11 @@ DeliveryStatus convertDeliveryStatusFromString(String deliveryStatus) {
     case 'delivered':
       return DeliveryStatus.delivered;
     default:
-      return DeliveryStatus.inTransit;
+      return DeliveryStatus.toDeliver;
   }
 }
 
-String convertDeliveryStatusToString(DeliveryStatus deliveryStatus){
+String convertDeliveryStatusToString(DeliveryStatus deliveryStatus) {
   switch (deliveryStatus) {
     case DeliveryStatus.inTransit:
       return 'inTransit';
@@ -30,10 +30,9 @@ String convertDeliveryStatusToString(DeliveryStatus deliveryStatus){
     case DeliveryStatus.delivered:
       return 'delivered';
     default:
-      return 'inTransit';
+      return 'toDeliver';
   }
 }
-
 
 enum DeliveryPaidBy { donor, receiver, both }
 
@@ -50,7 +49,7 @@ DeliveryPaidBy convertFromString(String deliveryPaidBy) {
   }
 }
 
-String convertToString(DeliveryPaidBy deliveryPaidBy){
+String convertToString(DeliveryPaidBy deliveryPaidBy) {
   switch (deliveryPaidBy) {
     case DeliveryPaidBy.donor:
       return 'donor';
@@ -61,6 +60,54 @@ String convertToString(DeliveryPaidBy deliveryPaidBy){
     default:
       return 'donor';
   }
+}
+
+String formatDate(DateTime date) {
+  String month;
+  switch (date.month) {
+    case 1:
+      month = 'January';
+      break;
+    case 2:
+      month = 'February';
+      break;
+    case 3:
+      month = 'March';
+      break;
+    case 4:
+      month = 'April';
+      break;
+    case 5:
+      month = 'May';
+      break;
+    case 6:
+      month = 'June';
+      break;
+    case 7:
+      month = 'July';
+      break;
+    case 8:
+      month = 'August';
+      break;
+    case 9:
+      month = 'September';
+      break;
+    case 10:
+      month = 'October';
+      break;
+    case 11:
+      month = 'November';
+      break;
+    case 12:
+      month = 'December';
+      break;
+    default:
+      month = 'January';
+      break;
+  }
+  String formattedDate =
+      "${date.day.toString().padLeft(2, '0')}-$month-${date.year}";
+  return formattedDate;
 }
 
 String formatDuration(Duration duration) {

@@ -1,9 +1,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:sahara/components/Feed/donation_details_section.dart';
 
-import '../components/DeliveryPage/delivery_card.dart';
 import '../models/donation_item.dart';
 
 class PaymentPage extends StatelessWidget {
@@ -58,7 +57,7 @@ class CardItemInfo extends StatelessWidget {
           ),
         child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ItemInfo(item: item),
+                child: DonationDetailSection(item: item, showDescription: false, showTags: false, showOverPricedWarning: false),
               ),
       ),
     );

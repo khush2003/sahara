@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../models/donation_item.dart';
@@ -9,12 +8,12 @@ import '../tag.dart';
 import 'donation_card.dart';
 
 class DonationDetailSection extends StatelessWidget {
-  final DonationItem donationPost;
+  final DonationItem item;
   final bool showDescription, showTags;
   final bool showOverPricedWarning;
   const DonationDetailSection(
       {super.key,
-      required this.donationPost,
+      required this.item,
       this.showDescription = true,
       this.showTags = true,
       this.showOverPricedWarning = true});
@@ -24,30 +23,28 @@ class DonationDetailSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (donationPost.isOverPriced && showOverPricedWarning)
+        if (item.isOverPriced && showOverPricedWarning)
           WarningOverPriced(
-              deliveryFees: donationPost.deliveryFees,
-              estimatedItemValue: donationPost.estimatedItemValue),
+              deliveryFees: item.deliveryFees,
+              estimatedItemValue: item.estimatedItemValue),
         const SizedBox(height: 5),
         Row(
           children: [
-            ImageThumbnail(imageUrl: donationPost.imageUrl),
+            ImageThumbnail(imageUrl: item.imageUrl),
             const SizedBox(width: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                DetailRow(label: 'Name', value: donationPost.name),
+                DetailRow(label: 'Name', value: item.name),
                 DetailRow(
                     label: 'Used Duration',
-                    value: formatDuration(donationPost.usedDuration)),
+                    value: formatDuration(item.usedDuration)),
                 DetailRow(
-                    label: 'Usability',
-                    value: '${donationPost.usability * 100}%'),
-                DetailRow(label: 'Price', value: '${donationPost.price} bhat'),
+                    label: 'Usability', value: '${item.usability * 100}%'),
+                DetailRow(label: 'Price', value: '${item.price} bhat'),
                 DetailRow(
-                    label: 'Delivery Fees',
-                    value: '${donationPost.deliveryFees} bhat'),
+                    label: 'Delivery Fees', value: '${item.deliveryFees} bhat'),
               ],
             )
           ],
@@ -60,11 +57,11 @@ class DonationDetailSection extends StatelessWidget {
           ),
         if (showDescription)
           Text(
-            donationPost.description,
+            item.description,
             style: const TextStyle(
                 fontWeight: FontWeight.w300, fontSize: 24, height: 0.7),
           ),
-        if (showTags) createTags(donationPost.tags)
+        if (showTags) createTags(item.tags)
       ],
     );
   }
@@ -73,9 +70,7 @@ class DonationDetailSection extends StatelessWidget {
 Widget createTags(List<String> tags) {
   final tagsWidgets = <Widget>[];
   for (int i = 0; i < tags.length; i++) {
-    tagsWidgets.add(
-      Tag(tags[i])
-    );
+    tagsWidgets.add(Tag(tags[i]));
   }
   return Wrap(
     direction: Axis.horizontal,

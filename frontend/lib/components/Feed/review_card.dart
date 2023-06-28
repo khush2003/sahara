@@ -38,7 +38,7 @@ class ReviewCard extends StatelessWidget {
               const Divider(),
               DonationDetailSection(
                   showOverPricedWarning: false,
-                  donationPost: donationPost,
+                  item: donationPost,
                   showDescription: false,
                   showTags: false),
               const Divider(),
