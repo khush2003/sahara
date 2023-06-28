@@ -35,7 +35,7 @@ class DonationItem {
     required this.tags,
     required this.author,
     this.expectedArrivalDate,
-    this.pickUpDate, 
+    this.pickUpDate,
     this.deliveryStatus = DeliveryStatus.toDeliver,
   })  : estimatedItemValue = price * usability,
         isOverPriced = deliveryFees > price * usability;
@@ -87,7 +87,9 @@ class DonationItem {
         pickUpDate: json['pickUpDate'] == null
             ? null
             : DateTime.parse(json['pickUpDate'] as String),
-        deliveryStatus: convertDeliveryStatusFromString(json['deliveryStatus']),
+        deliveryStatus: json['deliveryStatus'] == null
+            ? DeliveryStatus.inTransit
+            : convertDeliveryStatusFromString(json['deliveryStatus']),
         tags: json['tags'] == null
             ? []
             : List<String>.from(json['tags'] as List<dynamic>),
