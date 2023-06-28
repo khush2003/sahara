@@ -7,7 +7,7 @@ class Review {
   final String reviewerImageURL;
   final int rating;
 
-  Review( {
+  Review({
     this.reviewId,
     required this.rating,
     required this.reviewerId,
@@ -25,7 +25,8 @@ class Review {
       reviewerName: "Chair",
       reviewerImageURL: "",
       reviewText:
-          "I'm absolutely thrilled about the wonderful water bottle you graciously gave me! It has truly become an essential part of my daily routine, I'm absolutely thrilled about the wonderful water bottle you graciously gave me! It has truly become an essential part of my daily routine,", rating: 200,
+          "I'm absolutely thrilled about the wonderful water bottle you graciously gave me! It has truly become an essential part of my daily routine, I'm absolutely thrilled about the wonderful water bottle you graciously gave me! It has truly become an essential part of my daily routine,",
+      rating: 200,
     );
   }
 
@@ -36,22 +37,21 @@ class Review {
       donationId: json['donationId'],
       reviewText: json['reviewText'] ?? '',
       reviewerName: json['reviewerName'] ?? '',
-      reviewerImageURL: json['reviewerImageURL'] ?? '', 
+      reviewerImageURL: json['reviewerImageURL'] ?? '',
       rating: json['rating'] as int? ?? 0,
     );
   }
-    factory Review.getFromId(String reviewId ,List<Review> list){
+  factory Review.getFromId(String reviewId, List<Review> list) {
     return list.firstWhere((element) => element.reviewId == reviewId);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'reviewId': reviewId,
       'reviewerId': reviewerId,
       'donationId': donationId,
       'reviewText': reviewText,
-      'name': reviewerName,
-      'imageUrl': reviewerImageURL,
+      'reviewerName': reviewerName,
+      'reviewerImageURL': reviewerImageURL,
       'rating': rating
     };
   }

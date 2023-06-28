@@ -2,68 +2,33 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/donation_item_controller.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/review.dart';
 import 'package:sahara/rest_api.dart';
-
-import '../models/user.dart';
 import '../utils/app_utils.dart';
 
 class CreateReviewController extends GetxController {
   final dateTime = DateTime.now().obs;
-  final sliderValue = 0.obs;
+  final sliderValue = 0.0.obs;
   final TextEditingController reviewContentController = TextEditingController();
-  ValueNotifier<int> reviewSliderController = ValueNotifier<int>(0);
   final auth = FirebaseAuth.instance;
-  final DonationItem item = DonationItem.test();
   final RestAPI restAPI = RestAPI();
-  // final TextEditingController reviewScoreController = SliderController();
-  void getSliderValue(int value) {
-    sliderValue(value);
+  final item = DonationItem.test().obs;
+  final _itemController = DonationItemController.instance;
+
+  @override
+  void onInit() {
+    final itemId = Get.parameters['id'] ?? '';
+    item(DonationItem.getFromId(itemId, _itemController.donationItems));
+    super.onInit();
   }
 
-  // createReview function below can't be completed yet, since I
-
-  Future<String> getCurrentUsername() async {
-    try {
-      // Get the current user info
-
-  
-      final UserSahara currentUser = await restAPI.getCurrentUserInfo();
-
-      return currentUser.userName;
-    } catch (error) {
-      print(error);
-      throw Exception('Failed to get current username');
-    }
-  }
-
-  Future<void>? createReview(
-      String name,
-      Duration duration,
-      double usability,
-      double price,
-      String donationId,
-      String reviewText,
-      String imageUrl,
-      String donorName,
-      int rating) async {
+  Future<void>? createReview(Review review) async {
     if (validateInputs()) {
       try {
-        // Authenticate user (Create account)
-        final String receiverName = await getCurrentUsername();
-
-        final review = Review(
-          reviewerId: auth.currentUser!.uid,
-          donationId: donationId,
-          reviewText: reviewText,
-          reviewerName: name,
-          reviewerImageURL: imageUrl,
-          rating: rating,
-        );
-
         await restAPI.postReview(review);
-
+        Get.back();
         successSnackBar("Review Created Sucessfully!");
       } on FirebaseAuthException catch (e) {
         return errorSnackBar(e.code);
@@ -73,16 +38,20 @@ class CreateReviewController extends GetxController {
     }
   }
 
+  void updateSliderValue(double value) {
+    sliderValue(value);
+  }
+
   String? validateReviewContent(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter any meaningful review';
+    if (value == null || value.isEmpty || value.length < 20) {
+      return 'Please enter a meaningful review';
     }
     return null;
   }
 
   String? validateReviewScore(int? value) {
     if (value == 0) {
-      return 'Please give any score';
+      return 'Please give some score';
     }
     return null;
   }
@@ -95,19 +64,4 @@ class CreateReviewController extends GetxController {
     }
     return true;
   }
-
-  // void createReview() async{
-  //   if(validateInputs()){
-  //     try{
-  //       final review = Review(
-  //         reviewId: reviewId,
-  //         reviewerId: reviewerId,
-  //         donationId: donationId,
-  //         reviewText: reviewText,
-  //         name: name,
-  //         imageUrl: imageUrl,
-  //         donationItemId: donationItemId)
-  //     }
-  //   }
-  // }
 }

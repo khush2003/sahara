@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/components/Feed/donation_details_section.dart';
+import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/controllers/create_review_controller.dart';
+import 'package:sahara/models/review.dart';
 import '../models/donation_item.dart';
-import '../models/user.dart';
 
 class ReviewPage extends StatelessWidget {
   ReviewPage({super.key});
-
-  final DonationItem item = DonationItem.test();
-  final UserSahara user = UserSahara.test();
-  final arrDate = DateTime.now();
   final CreateReviewController reviewControler =
       Get.put(CreateReviewController());
-
+  final _auth = AuthController.instance;
   // final controller = Get.put
 
   @override
@@ -22,49 +19,44 @@ class ReviewPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Review'),
       ),
-      body: Column(
-        children: [
-          ReviewCard(
-            user: user,
-            item: item,
-            arrDate: arrDate,
-            controllerFunction: reviewControler.reviewContentController,
-            controllerFunctionSlider: reviewControler.reviewSliderController,
-          ),
-          Center(child: PostButton(
-            onPressed: () {
-              reviewControler.createReview(
-                  item.name,
-                  item.usedDuration,
-                  item.usability,
-                  item.price,
-                  "donationIdtest",
-                  item.description,
-                  item.imageUrl,
-                  item.name,
-                  0);
-            },
-          ))
-        ],
+      body: Form(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Column(
+          children: [
+            ReviewCard(
+              item: reviewControler.item.value,
+              controllerFunction: reviewControler.reviewContentController,
+            ),
+            Center(child: PostButton(
+              onPressed: () {
+                reviewControler.createReview(Review(
+                  donationId: reviewControler.item.value.donationId!,
+                  reviewerId: _auth.userSahara.value.uid!,
+                  reviewText: reviewControler.reviewContentController.text,
+                  reviewerName: _auth.userSahara.value.userName,
+                  reviewerImageURL: _auth.userSahara.value.profilePicture ?? '',
+                  rating: reviewControler.sliderValue.value.round(),
+                ));
+              },
+            ))
+          ],
+        ),
       ),
     );
   }
 }
 
 class ReviewCard extends StatelessWidget {
+  final CreateReviewController reviewControler =
+      Get.find<CreateReviewController>();
   final DonationItem item;
-  final UserSahara user;
-  final DateTime arrDate;
   final TextEditingController? controllerFunction;
-  final ValueNotifier<int>? controllerFunctionSlider;
 
-  const ReviewCard(
-      {super.key,
-      required this.user,
-      required this.item,
-      required this.arrDate,
-      this.controllerFunction,
-      this.controllerFunctionSlider});
+  ReviewCard({
+    super.key,
+    required this.item,
+    this.controllerFunction,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -96,13 +88,14 @@ class ReviewCard extends StatelessWidget {
                     showOverPricedWarning: false)),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextField(
+              child: TextFormField(
+                validator: reviewControler.validateReviewContent,
                 controller: controllerFunction,
                 keyboardType: TextInputType.multiline,
                 maxLines: 4,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Enter a search term',
+                  hintText: 'Enter your experience with the item',
                 ),
               ),
             ),
@@ -111,9 +104,7 @@ class ReviewCard extends StatelessWidget {
               height: 0.5,
               decoration: const BoxDecoration(color: Colors.black),
             ),
-            PointSlider(
-              controller: controllerFunctionSlider,
-            )
+            PointSlider()
           ],
         ),
       ),
@@ -141,39 +132,10 @@ class PostButton extends StatelessWidget {
   }
 }
 
-class PointSlider extends StatefulWidget {
-  final ValueNotifier<int>? controller;
+class PointSlider extends StatelessWidget {
+  final reviewController = Get.find<CreateReviewController>();
 
-  const PointSlider({Key? key, this.controller}) : super(key: key);
-
-  @override
-  State<PointSlider> createState() => _PointSliderState();
-}
-
-class _PointSliderState extends State<PointSlider> {
-  late ValueNotifier<int> sliderController;
-  int currentSliderValue = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.controller != null) {
-      // Use the provided controller
-      sliderController = widget.controller!;
-      currentSliderValue = sliderController.value;
-    } else {
-      // Create a new controller
-      sliderController = ValueNotifier<int>(currentSliderValue);
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      sliderController.dispose();
-    }
-    super.dispose();
-  }
+  PointSlider({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -187,47 +149,20 @@ class _PointSliderState extends State<PointSlider> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Please rate the item'),
-                Text('$currentSliderValue / 2500')
+                Obx(() => Text(
+                    '${reviewController.sliderValue.value.round()} / 2500'))
               ],
             ),
           ),
-          Slider(
-            value: currentSliderValue.toDouble(),
-            min: 0,
-            max: 2500,
-            divisions: 100,
-            onChanged: (double value) {
-              setState(() {
-                currentSliderValue = value.round();
-                if (widget.controller == null) {
-                  sliderController.value =
-                      currentSliderValue; // Update the controller's value
-                }
-              });
-            },
-            onChangeEnd: (double value) {
-              setState(() {
-                currentSliderValue = value.round();
-              });
-            },
-            onChangeStart: (double value) {
-              setState(() {
-                currentSliderValue = value.round();
-              });
-            },
-          ),
-          if (widget.controller == null)
-            TextFormField(
-              keyboardType: TextInputType.number,
-              initialValue: currentSliderValue.toString(),
-              onChanged: (value) {
-                setState(() {
-                  final intValue = int.tryParse(value) ?? 0;
-                  sliderController.value = intValue.clamp(0, 100);
-                  currentSliderValue = intValue;
-                });
-              },
+          Obx(
+            () => Slider(
+              value: reviewController.sliderValue.value,
+              min: 0,
+              max: 2500,
+              divisions: 100,
+              onChanged: reviewController.updateSliderValue,
             ),
+          ),
         ],
       ),
     );

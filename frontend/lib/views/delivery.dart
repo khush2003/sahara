@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/delivery_status_controller.dart';
+import 'package:sahara/utils/app_utils.dart';
 
 import '../components/DeliveryPage/delivery_card.dart';
 import '../models/donation_item.dart';
@@ -72,9 +75,18 @@ class ListItems extends StatelessWidget {
     }
     return SingleChildScrollView(
       child: Column(
-          children: items
-              .map((element) => ToReceiveCard(user: user, item: element))
-              .toList()),
+          children: items.map((element) {
+        if (element.deliveryStatus == DeliveryStatus.inTransit) {
+          return InTransitCard(user: user, item: element);
+        } else if (element.deliveryStatus == DeliveryStatus.toDeliver) {
+          return ToDeliverCard(user: user, item: element);
+        } else if (element.deliveryStatus == DeliveryStatus.toReceive) {
+          return ToReceiveCard(user: user, item: element);
+        } else if (element.deliveryStatus == DeliveryStatus.delivered) {
+          return DeliveredCard(user: user, item: element);
+        }
+        return ToDeliverCard(user: user, item: element);
+      }).toList()),
     );
   }
 }

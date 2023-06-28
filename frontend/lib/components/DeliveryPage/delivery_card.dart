@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/components/Feed/donation_details_section.dart';
+import 'package:sahara/controllers/delivery_status_controller.dart';
 import 'package:sahara/utils/app_utils.dart';
 
 import '../../models/donation_item.dart';
@@ -206,10 +207,11 @@ class ToReceiveCard extends StatelessWidget {
 }
 
 class DeliveredCard extends StatelessWidget {
+  final controller = Get.find<DeliveryStatusController>();
   final DonationItem item;
   final UserSahara user;
 
-  const DeliveredCard({
+  DeliveredCard({
     super.key,
     required this.user,
     required this.item,
@@ -258,23 +260,26 @@ class DeliveredCard extends StatelessWidget {
               height: 0.5,
               decoration: const BoxDecoration(color: Colors.black),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Center(
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: primary),
-                    onPressed: () => Get.toNamed(Routes.review),
-                    child: const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Text(
-                        'Review',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
-                      ),
-                    )),
-              ),
-            )
+            if (controller.isPostReviewable(item))
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Center(
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor: primary),
+                      onPressed: () => Get.toNamed(Routes.review, parameters: {
+                            'id': item.donationId!,
+                          }),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        child: Text(
+                          'Review',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
+                      )),
+                ),
+              )
           ],
         ),
       ),
