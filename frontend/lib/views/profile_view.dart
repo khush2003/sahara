@@ -1,14 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-import 'package:image_picker/image_picker.dart';
-import 'package:http/http.dart' as http;
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
 import '../models/donation_item.dart';
-import '../models/review.dart';
-import '../models/user.dart';
 import '../theme/app_theme.dart';
 import 'package:get/get.dart';
 
@@ -144,7 +138,7 @@ class TopSection extends StatelessWidget {
             height: 150,
             width: double.infinity,
             color: cover != '' ? null : Colors.white,
-            child: cover != ''
+            child: cover != '' && cover != null
                 ? Image.network(
                     cover!,
                     height: 150,
@@ -156,8 +150,8 @@ class TopSection extends StatelessWidget {
                       decoration: BoxDecoration(
                           border: Border.all(color: primary),
                           borderRadius: BorderRadius.circular(5)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
+                      child: const Padding(
+                        padding: EdgeInsets.only(
                             top: 12, right: 5, bottom: 5, left: 5),
                         child: Text(
                           'Add Cover Photo',
@@ -232,7 +226,7 @@ class ChangeProfileAndCoverPhotoDialog extends StatelessWidget {
   final String type;
   final CustomTabController _tabController = Get.put(CustomTabController());
 
-  ChangeProfileAndCoverPhotoDialog({required this.photo, required this.type});
+  ChangeProfileAndCoverPhotoDialog({super.key, required this.photo, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -257,9 +251,9 @@ class ChangeProfileAndCoverPhotoDialog extends StatelessWidget {
                                 'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
                                 fit: BoxFit.fill,
                               )
-                            : Center(
+                            : const Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
+                                  padding: EdgeInsets.only(
                                       top: 12, right: 5, bottom: 5, left: 5),
                                   child: Text(
                                     'No Cover Photo',
@@ -378,7 +372,7 @@ class SocialIcons extends StatelessWidget {
             ),
             label: const Text('Facebook', style: TextStyle(fontSize: 10)),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           ElevatedButton.icon(
             onPressed: () {
               // Handle button press
@@ -390,7 +384,7 @@ class SocialIcons extends StatelessWidget {
             ),
             label: const Text('Instagram', style: TextStyle(fontSize: 10)),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           ElevatedButton.icon(
             onPressed: () {
               // Handle button press
@@ -551,7 +545,7 @@ class DonatingItem extends StatelessWidget {
   DonatingItem({super.key});
   @override
   Widget build(BuildContext context) {
-    if (controller.donationItems.length == 0) {
+    if (controller.donationItems.isEmpty) {
       return NoItemFound(text: 'You do not have any donating items.');
     } else {
       return Column(
@@ -600,7 +594,7 @@ class ReceivedItem extends StatelessWidget {
   ReceivedItem({super.key});
   @override
   Widget build(BuildContext context) {
-    if (controller.userReviewList.length == 0) {
+    if (controller.userReviewList.isEmpty) {
       return NoItemFound(text: 'You do not have any received items.');
     } else {
       return Column(
@@ -630,7 +624,7 @@ class History extends StatelessWidget {
   History({super.key});
   @override
   Widget build(BuildContext context) {
-    if (controller.reviewList.length == 0) {
+    if (controller.reviewList.isEmpty) {
       return NoItemFound(text: 'You do not have any donated items.');
     } else {
       return Column(
@@ -657,7 +651,7 @@ class History extends StatelessWidget {
 
 class NoItemFound extends StatelessWidget {
   final String text;
-  NoItemFound({super.key, required this.text});
+  const NoItemFound({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -666,14 +660,14 @@ class NoItemFound extends StatelessWidget {
       child: Center(
         child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(12.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
             color: Colors.yellow,
           ),
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Colors.black,

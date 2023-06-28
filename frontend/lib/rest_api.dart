@@ -213,7 +213,6 @@ class RestAPI {
       final randomCouponIndex =
           DateTime.now().millisecondsSinceEpoch % availableCoupons.length;
       final randomCoupon = availableCoupons[randomCouponIndex];
-
       final discountCode = randomAlphaNumeric(8);
       final uid = auth.currentUser!.uid;
 
@@ -224,8 +223,6 @@ class RestAPI {
         'discountPrice': randomCoupon['discountPrice'],
         'discountCode': discountCode,
       };
-
-      print('Coupon Data: $couponData'); // Print couponData for debugging
 
       final response = await connect.post('$postBackendUrl/coupon', couponData);
       if (response.statusCode == 200) {

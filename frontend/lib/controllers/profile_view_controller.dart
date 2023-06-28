@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
@@ -25,7 +24,8 @@ class CustomTabController extends GetxController {
   final isHistorySelected = false.obs;
   final _firebaseStorage = FirebaseStorage.instance;
   final _imagePicker = ImagePicker();
-  final DonationItemController donationItem = Get.put(DonationItemController());
+  final DonationItemController _itemController =
+      Get.put(DonationItemController());
 
   final auth = AuthController.instance;
   //List<UserSahara> blockedUsers = <UserSahara>[].obs;
@@ -83,36 +83,30 @@ class CustomTabController extends GetxController {
   }
 
   Future<void> setupLists() async {
-    final List<DonationItem> donationResult = await restApi.getDonationItems();
+    final List<DonationItem> donationResult = _itemController.donationItems;
     // final List<DonationItem> donationResult = donationItem.donationItems;
-    if (donationResult == null) {
-      log("No donation items found");
-    } else {
       final filteredDonationItems = donationResult
           .where((item) =>
-              item.author.authorId == FirebaseAuth.instance.currentUser!.uid)
+              item.author.authorId == auth.userSahara.value.uid!)
           .toList();
       donationItems(filteredDonationItems);
-    }
-    final List<Review>? reviews = await restApi.getReviews();
+    
+    final List<Review> reviews = _itemController.reviewList;
     // final List<Review> reviews = donationItem.reviewList;
-    if (reviews == null) {
-      log("No review items found");
-    } else {
       final filteredReviews = reviews
           .where((review) =>
               donationItems.any((item) => item.donationId == review.donationId))
           .toList();
       final filteredUserReviews = reviews
           .where((review) =>
-              review.reviewerId == FirebaseAuth.instance.currentUser!.uid)
+              review.reviewerId == auth.userSahara.value.uid!)
           .toList();
       reviewList(filteredReviews);
       userReviewList(filteredUserReviews);
-    }
+    
 
     final List<UserSahara>? allUsers =
-        await restApi.getBlockedUsers(auth.userSahara.value.blockedUser!);
+        await restApi.getBlockedUsers(auth.userSahara.value.blockedUser ?? []);
     if (allUsers == null) {
       log("No Users found");
     } else {

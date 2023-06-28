@@ -17,9 +17,10 @@ class CouponController extends GetxController {
   final restAPI = RestAPI.instance;
 
   Future<void>? updateCoupon() async {
-    String? error = await restAPI.postCoupon();
-    if (error != null) {
-          errorSnackBar(error.toString());
-        }
+    try {
+      await restAPI.postCoupon();
+    } catch (e) {
+      errorSnackBar(e.toString());
+    }
   }
 }

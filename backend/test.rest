@@ -1,8 +1,8 @@
 ### GET
-GET http://localhost:8000
+GET http://localhost:5000
 
 ### POST
-POST http://localhost:8000/post/user
+POST http://localhost:5000/post/user
 Content-Type: application/json
 
 {
@@ -11,13 +11,13 @@ Content-Type: application/json
 }
 
 ### GET all donations
-GET http://localhost:8000/get/donationItems/kbVtokJSTNiGTirsmnQZ
+GET http://localhost:5000/get/donationItems/kbVtokJSTNiGTirsmnQZ
 
 ### Get Reviews
-GET http://localhost:8000/get/reviews
+GET http://localhost:5000/get/reviews
 
 ### POST Review
-POST http://localhost:8000/post/review
+POST http://localhost:5000/post/review
 Content-Type: application/json
 
 {
@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 ### POST
-POST http://localhost:8000/post/donationItem
+POST http://localhost:5000/post/donationItem
 Content-Type: application/json
 
 {
@@ -56,7 +56,7 @@ Content-Type: application/json
 }
 
 ### POST (change id everytime you post)
-POST http://localhost:8000/post/users/
+POST http://localhost:5000/post/users/
 Content-Type: application/json
 
 {
@@ -71,7 +71,7 @@ Content-Type: application/json
 }
 
 ### PUT
-PUT http://localhost:8000/put/allUserName/ZZoc0nABxOd5XELhchn7M1CtajD3
+PUT http://localhost:5000/put/allUserName/ZZoc0nABxOd5XELhchn7M1CtajD3
 Content-Type: application/json
 
 {
@@ -80,7 +80,7 @@ Content-Type: application/json
 
 
 ### PUT
-PUT http://localhost:8000/put/users/vY9xlAikX2RnpXG6JpuV1zZbIQq1
+PUT http://localhost:5000/put/users/vY9xlAikX2RnpXG6JpuV1zZbIQq1
 Content-Type: application/json
 
 {
@@ -90,11 +90,11 @@ Content-Type: application/json
 }
 
 ### GET
-GET http://localhost:8000/get/users/xmAaGZwuTPbiXENzvuSKeRdpaWG2
+GET http://localhost:5000/get/users/xmAaGZwuTPbiXENzvuSKeRdpaWG2
 
 ### POST 
 
-POST http://localhost:8000/post/review
+POST http://localhost:5000/post/review
 Content-Type: application/json
 
 {
