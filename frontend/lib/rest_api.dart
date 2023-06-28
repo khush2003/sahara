@@ -12,13 +12,18 @@ class RestAPI {
   static RestAPI get instance => Get.find<RestAPI>();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final backendPort = 5000;
-  late String host, backendUrl, getBackendUrl, postBackendUrl, putBackendUrl, deleteBackendUrl;
+  late String host,
+      backendUrl,
+      getBackendUrl,
+      postBackendUrl,
+      putBackendUrl,
+      deleteBackendUrl;
 
   void onInit() {
     const backendPort = 5000;
-    try{
+    try {
       host = (Platform.isAndroid) ? '10.0.2.2' : 'localhost';
-    } catch(e){
+    } catch (e) {
       host = 'localhost';
     }
     backendUrl = 'http://$host:$backendPort';
