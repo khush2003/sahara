@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:html' as h;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:sahara/models/donation_item.dart';
@@ -7,18 +7,26 @@ import 'package:sahara/models/review.dart';
 
 import 'models/user.dart';
 
-const backendPort = 5000;
-String host = (Platform.isAndroid) ? '10.0.2.2' : 'localhost';
-String backendUrl = 'http://$host:$backendPort';
-String getBackendUrl = '$backendUrl/get';
-String postBackendUrl = '$backendUrl/post';
-String putBackendUrl = '$backendUrl/put';
-String deleteBackendUrl = '$backendUrl/delete';
-
 class RestAPI {
   final connect = Get.find<GetConnect>();
   static RestAPI get instance => Get.find<RestAPI>();
   final FirebaseAuth auth = FirebaseAuth.instance;
+  final backendPort = 5000;
+  late String host, backendUrl, getBackendUrl, postBackendUrl, putBackendUrl, deleteBackendUrl;
+
+  void onInit() {
+    const backendPort = 5000;
+    try{
+      host = (Platform.isAndroid) ? '10.0.2.2' : 'localhost';
+    } catch(e){
+      host = 'localhost';
+    }
+    backendUrl = 'http://$host:$backendPort';
+    getBackendUrl = '$backendUrl/get';
+    postBackendUrl = '$backendUrl/post';
+    putBackendUrl = '$backendUrl/put';
+    deleteBackendUrl = '$backendUrl/delete';
+  }
 
   //GET all donation items
   Future<dynamic> getDonationItems() async {

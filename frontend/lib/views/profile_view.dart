@@ -445,29 +445,31 @@ class TabSection extends StatelessWidget {
         ),
         GestureDetector(
           onTap: _tabController.selectReceive,
-          child: Obx(() => Column(
-                children: [
-                  SizedBox(
-                    width: 120,
-                    child: Text('Receive',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: _tabController.isReceiveSelected.value
-                              ? Colors.black
-                              : const Color(0xff848484),
-                        ),
-                        textAlign: TextAlign.center),
-                  ),
-                  Visibility(
-                    visible: _tabController.isReceiveSelected.value,
-                    child: Container(
-                      height: 1,
-                      width: 120,
-                      color: Colors.black,
+          child: Column(
+            children: [
+              SizedBox(
+                width: 120,
+                child: Text('Receive',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: _tabController.isReceiveSelected.value
+                          ? Colors.black
+                          : const Color(0xff848484),
                     ),
+                    textAlign: TextAlign.center),
+              ),
+              Obx(
+                () => Visibility(
+                  visible: _tabController.isReceiveSelected.value,
+                  child: Container(
+                    height: 1,
+                    width: 120,
+                    color: Colors.black,
                   ),
-                ],
-              )),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
