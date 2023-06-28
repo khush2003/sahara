@@ -56,7 +56,7 @@ class ChangeUsernameView extends StatelessWidget {
                       onPressed: () async {
                         if (await changeController.isAvailableUserName(
                             changeController.userNameController.text)) {
-                          changeController.changeNonAuthUserDetails();
+                          changeController.changeUserName();
                         } else {
                           errorSnackBar(
                               'This username has already been used. Please choose a different one');

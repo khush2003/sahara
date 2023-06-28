@@ -43,16 +43,31 @@ class RestAPI {
   }
 
   Future<dynamic> putUserInfo(UserSahara user) async {
-    //body data
     final uid = auth.currentUser!.uid;
     final Map<String, dynamic> userData = user.toJson();
 
     Response response =
         await connect.put('$putBackendUrl/users/$uid', userData);
+
     if (response.statusCode == 200) {
       return response.body;
     } else {
-      throw Exception('Failed to post user info');
+      throw Exception('Failed to put user info');
+    }
+  }
+
+  Future<dynamic> putUserName(UserSahara user) async {
+    print("Called");
+    final uid = auth.currentUser!.uid;
+    print(uid);
+    Response response = await connect
+        .put('$putBackendUrl/allUserName/$uid', {"userName": user.userName});
+    if (response.statusCode == 200) {
+      print(response);
+      print(response.body);
+      return response.body;
+    } else {
+      throw Exception('Failed to put user info');
     }
   }
 
