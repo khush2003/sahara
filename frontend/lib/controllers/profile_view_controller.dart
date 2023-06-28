@@ -11,6 +11,7 @@ import '../models/donation_item.dart';
 import '../models/review.dart';
 import '../views/profile_view.dart';
 import 'auth/auth_controller.dart';
+import 'package:sahara/controllers/donation_item_controller.dart';
 
 class CustomTabController extends GetxController {
   static CustomTabController get instance => Get.find<CustomTabController>();
@@ -24,6 +25,7 @@ class CustomTabController extends GetxController {
   final isHistorySelected = false.obs;
   final _firebaseStorage = FirebaseStorage.instance;
   final _imagePicker = ImagePicker();
+  final DonationItemController donationItem = Get.put(DonationItemController());
 
   final auth = AuthController.instance;
   //List<UserSahara> blockedUsers = <UserSahara>[].obs;
@@ -81,7 +83,8 @@ class CustomTabController extends GetxController {
   }
 
   Future<void> setupLists() async {
-    final List<DonationItem>? donationResult = await restApi.getDonationItems();
+    final List<DonationItem> donationResult = await restApi.getDonationItems();
+    // final List<DonationItem> donationResult = donationItem.donationItems;
     if (donationResult == null) {
       log("No donation items found");
     } else {
@@ -91,10 +94,10 @@ class CustomTabController extends GetxController {
           .toList();
       donationItems(filteredDonationItems);
     }
-
     final List<Review>? reviews = await restApi.getReviews();
+    // final List<Review> reviews = donationItem.reviewList;
     if (reviews == null) {
-      log("No donation items found");
+      log("No review items found");
     } else {
       final filteredReviews = reviews
           .where((review) =>
@@ -114,7 +117,6 @@ class CustomTabController extends GetxController {
       log("No Users found");
     } else {
       blockedUsers(allUsers);
-      print(blockedUsers);
     }
   }
 }
