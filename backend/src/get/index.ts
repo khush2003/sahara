@@ -56,17 +56,6 @@ getRoutes.get('/users/:id', async (req, res) => {
         return res.status(400).send("An Error Occured" + error)
     }
 })
-//Get Specific coupon of user
-// getRoutes.get('/users/:userId/discountCoupon/:couponId', async (req, res) => {
-//     try {
-//         const snapshot = await db.collection('users').doc(req.params.userId).get()
-//         const coupon = snapshot.data();
-//         const result = { ...coupon, couponId: req.params.couponId};
-//         res.status(200).send(result)
-//     } catch (error) {
-//         return res.status(400).send("An Error Occured" + error)
-//     }
-// })
 
 //Get user's coupons
 getRoutes.get('/users/:userId/discountCoupon/', async (req, res) => {
@@ -78,7 +67,11 @@ getRoutes.get('/users/:userId/discountCoupon/', async (req, res) => {
             for(const couponId of userData.discountCoupon){
                 const couponDetail = await db.collection('coupons').doc(couponId).get()
                 const couponDetailData = couponDetail.data();
-                couponList.push(couponDetailData)
+                if (couponDetailData) {
+                    // Add the couponId to the couponDetailData object
+                    couponDetailData.couponId = couponId;
+                    couponList.push(couponDetailData);
+                  }
             }
 
           }
@@ -190,6 +183,20 @@ getRoutes.get('/eachUsers', async (req, res) => {
         users.push(doc.data());
       });
       res.status(200).send(users);
+    } catch (error) {
+      return res.status(400).send("An Error Occured" + error);
+    }
+  });
+
+  getRoutes.get('/findCouponFromDiscountCode', async (req, res) => {
+    try {
+      const { discountCode } = req.query;
+      const snapshot = await db.collection('coupons').where('discountCode', '==', discountCode).get();
+      const coupons: FirebaseFirestore.DocumentData[] = [];
+      snapshot.forEach(doc => {
+        coupons.push(doc.data());
+      });
+      res.status(200).send(coupons);
     } catch (error) {
       return res.status(400).send("An Error Occured" + error);
     }

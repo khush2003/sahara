@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 class Coupon {
+  late String? couponId;
   final String couponName;
   final String couponImage;
   final int discountPrice;
   final String discountCode;
 
   Coupon({
+    this.couponId,
     required this.couponName,
     required this.couponImage,
     required this.discountPrice,
@@ -35,5 +37,4 @@ class Coupon {
       'discountCode': discountCode,
     };
   }
-
 }

@@ -65,17 +65,6 @@ getRoutes.get('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, func
         return res.status(400).send("An Error Occured" + error);
     }
 }));
-//Get Specific coupon of user
-// getRoutes.get('/users/:userId/discountCoupon/:couponId', async (req, res) => {
-//     try {
-//         const snapshot = await db.collection('users').doc(req.params.userId).get()
-//         const coupon = snapshot.data();
-//         const result = { ...coupon, couponId: req.params.couponId};
-//         res.status(200).send(result)
-//     } catch (error) {
-//         return res.status(400).send("An Error Occured" + error)
-//     }
-// })
 //Get user's coupons
 getRoutes.get('/users/:userId/discountCoupon/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -86,7 +75,11 @@ getRoutes.get('/users/:userId/discountCoupon/', (req, res) => __awaiter(void 0, 
             for (const couponId of userData.discountCoupon) {
                 const couponDetail = yield firebase_1.db.collection('coupons').doc(couponId).get();
                 const couponDetailData = couponDetail.data();
-                couponList.push(couponDetailData);
+                if (couponDetailData) {
+                    // Add the couponId to the couponDetailData object
+                    couponDetailData.couponId = couponId;
+                    couponList.push(couponDetailData);
+                }
             }
         }
         res.status(200).send(couponList);
@@ -186,6 +179,20 @@ getRoutes.get('/eachUsers', (req, res) => __awaiter(void 0, void 0, void 0, func
             users.push(doc.data());
         });
         res.status(200).send(users);
+    }
+    catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+}));
+getRoutes.get('/findCouponFromDiscountCode', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { discountCode } = req.query;
+        const snapshot = yield firebase_1.db.collection('coupons').where('discountCode', '==', discountCode).get();
+        const coupons = [];
+        snapshot.forEach(doc => {
+            coupons.push(doc.data());
+        });
+        res.status(200).send(coupons);
     }
     catch (error) {
         return res.status(400).send("An Error Occured" + error);

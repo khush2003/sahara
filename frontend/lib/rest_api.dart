@@ -213,7 +213,7 @@ class RestAPI {
 //   Future<List<String>?> getUserCoupons(String userId) async {
 //   Response response = await connect.get('$getBackendUrl/users/$userId/discountCoupon/');
 //   if (response.statusCode == 200) {
-//     List<dynamic> userData = response.body;
+//     List<dynamic> couponData = response.body;
 //     List<String> userCoupons = List<String>.from(userData);
 //     return userCoupons;
 //   } else {

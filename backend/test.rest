@@ -127,12 +127,14 @@ Content-Type: application/json
   "discountCode": ""
 }
 
+// Get user coupon
 ### GET
 GET http://localhost:5000/get/users/uwClP6WMzYT3H3zSniR8v06HRdw2/discountCoupon
 
-
-### GET
-GET http://localhost:5000/get/donationItems
-
+// Find CouponFromId
 ### GET
 GET http://localhost:5000/get/coupons/8hpzFvGG4yDuOhfSvj4F
+
+// Find CouponFromDiscountCode
+### GET
+GET http://localhost:5000/get/findCouponFromDiscountCode?discountCode=PUHEBXOM
