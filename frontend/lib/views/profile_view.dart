@@ -72,7 +72,7 @@ class ProfileView extends StatelessWidget {
                             const SizedBox(height: 10),
                             _tabController.isNewSelected.value
                                 ? DonatingItem()
-                                : ReceivedItem(),
+                                : History(),
                           ],
                         ),
                       );
@@ -628,30 +628,26 @@ class ReceivedItem extends StatelessWidget {
 }
 
 class History extends StatelessWidget {
-  final DonationItem donationPost = DonationItem.test();
-  final Review review = Review.test();
   final CustomTabController controller = Get.put(CustomTabController());
   History({super.key});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 500,
-      child: Column(
-        children: [
-          ReviewCard(
-            donationPost: donationPost,
-            review: review,
-          ),
-          ReviewCard(
-            donationPost: donationPost,
-            review: review,
-          ),
-          ReviewCard(
-            donationPost: donationPost,
-            review: review,
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        SizedBox(
+          height: 500,
+          child: Obx(() => ListView.separated(
+              itemBuilder: (context, index) {
+                return ReviewCard(
+                    donationPost: DonationItem.getFromId(
+                        controller.reviewList[index].donationId,
+                        controller.donationItems),
+                    review: controller.reviewList[index]);
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
+              itemCount: controller.reviewList.length)),
+        )
+      ],
     );
   }
 }

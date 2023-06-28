@@ -122,8 +122,12 @@ class CustomTabController extends GetxController {
     if (reviews == null) {
       log("No donation items found");
     } else {
-      reviewList(reviews);
-      print(reviews);
+      final filteredReviews = reviews
+          .where((review) =>
+              donationItems.any((item) => item.donationId == review.donationId))
+          .toList();
+      reviewList(filteredReviews);
+      print(reviewList[0].donationId);
     }
   }
 }
