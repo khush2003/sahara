@@ -15,7 +15,7 @@ class DonationDetailsController extends GetxController {
       donationItem = DonationItem.getFromId(
           donationId!, donationItemController.donationItems);
     } catch (e) {
-      throw (e); //TODO: Handle Error
+      rethrow;
     }
     super.onInit();
   }

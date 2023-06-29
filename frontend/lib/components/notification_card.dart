@@ -27,7 +27,7 @@ class NotificationCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // TODO: Use image from database if exists
+                  
                   Row(
                     children: [
                       ClipRRect(

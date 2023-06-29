@@ -65,7 +65,7 @@ class ChatListCard extends StatelessWidget {
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.pop(context, 'Yes'),
-                                      //TODO: Block user
+                                      
                                       child: const Text('Yes'),
                                     ),
                                     TextButton(
@@ -111,15 +111,15 @@ class ChatListCard extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
-                              const Text(
-                                'Him : Give me your bottle', //TODO: Fetch latest message
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    height: 1,
-                                    color: Color.fromRGBO(150, 150, 150, 1)),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
+                              // const Text(
+                              //   'Him : Give me your bottle', //TODO: Fetch latest message
+                              //   style: TextStyle(
+                              //       fontSize: 20,
+                              //       height: 1,
+                              //       color: Color.fromRGBO(150, 150, 150, 1)),
+                              //   overflow: TextOverflow.ellipsis,
+                              //   maxLines: 1,
+                              // ),
                             ],
                           )),
                     ],

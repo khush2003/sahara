@@ -59,9 +59,6 @@ class MessageController extends GetxController {
     }
   }
 
-  //TODO: Update delveiery page after payment complete
-  //TODO: Post payment
-
   void checkCondition() async {
     if (item.value.paymentId != null) {
       final Payment payment =
