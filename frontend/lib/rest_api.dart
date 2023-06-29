@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,7 @@ import 'package:sahara/models/review.dart';
 
 import 'models/user.dart';
 
-class RestAPI {
+class RestAPI extends GetConnect{
   final connect = Get.find<GetConnect>();
   static RestAPI get instance => Get.find<RestAPI>();
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -20,6 +21,7 @@ class RestAPI {
       putBackendUrl,
       deleteBackendUrl;
 
+  @override
   void onInit() {
     const backendPort = 5000;
     try {
@@ -32,6 +34,7 @@ class RestAPI {
     postBackendUrl = '$backendUrl/post';
     putBackendUrl = '$backendUrl/put';
     deleteBackendUrl = '$backendUrl/delete';
+    super.onInit();
   }
 
   //GET all donation items
@@ -154,19 +157,6 @@ class RestAPI {
       }
     }
     return users;
-  }
-
-  Future<dynamic> checkUsernameAvailability(String username) async {
-    final query =
-        await connect.get('$getBackendUrl/eachUsers?userName=$username');
-    if (query.statusCode == 200) {
-      final List<dynamic> users = query.body;
-      return users.isEmpty
-          ? true
-          : false; // Return true if username is available, false otherwise
-    } else {
-      throw Exception('Failed to check username availability');
-    }
   }
 
   Future<dynamic> unblockUserById(String userId, List<String> userIds) async {

@@ -256,10 +256,10 @@ class ProfileCard extends StatelessWidget {
                     onTap: () {
                       Get.toNamed(Routes.profileView);
                     },
-                    child: Obx(
-                      () => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Obx(
+                        () => Text(
                           _tabController.auth.userSahara.value.userName,
                           style: headTextBold(),
                         ),

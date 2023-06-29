@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/auth/register_controller.dart';
-import 'package:sahara/views/profile_view.dart';
 import '../../components/primary_button.dart';
 import '../../components/textfield_app.dart';
 import '../../routes/routes.dart';
@@ -44,7 +43,7 @@ class RegisterView extends StatelessWidget {
                       child: TextfieldAPP(
                         borderColor:const Color(0xffffffff),
                         textStyle: formFieldText(color: Colors.white),
-                        hintText: "Enter your username",
+                        hintText: "Enter your name",
                         controllerFunction:
                             registerController.usernameController,
                         validator: registerController.validateUsername,

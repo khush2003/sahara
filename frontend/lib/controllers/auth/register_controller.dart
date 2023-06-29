@@ -13,7 +13,7 @@ class RegisterController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  final RestAPI restAPI = RestAPI();
+  final RestAPI restAPI = RestAPI.instance;
 
   final _auth = AuthController.instance;
 
@@ -21,18 +21,11 @@ class RegisterController extends GetxController {
     String username = usernameController.text;
     String email = emailController.text;
     String password = passwordController.text;
-    bool isAvailableUserName =
-        await restAPI.checkUsernameAvailability(username);
     if (validateInputs()) {
-      if (isAvailableUserName) {
         String? error = await _auth.createUser(email, password, username);
         if (error != null) {
           errorSnackBar(error.toString());
         }
-      } else {
-        errorSnackBar(
-            'This username has already been used. Please choose a different one');
-      }
     } else {
       errorSnackBar(
           'Please fill in all the fields correctly to create an account.');

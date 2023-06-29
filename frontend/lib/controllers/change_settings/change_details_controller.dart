@@ -105,14 +105,6 @@ class ChangeUserDetailsController extends GetxController {
     return null;
   }
 
-  Future<bool> isAvailableUserName(String username) async {
-    bool userNameCheck = await _restAPI.checkUsernameAvailability(username);
-    if (userNameCheck) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   Future<String>? getCurrentUserName() async {
     try {

@@ -15,7 +15,7 @@ class ChangeUsernameView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Update Username"),
+        title: const Text("Update User's name"),
       ),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -29,7 +29,7 @@ class ChangeUsernameView extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: Text(
                       textAlign: TextAlign.left,
-                      "Your current username :",
+                      "Your current name :",
                       style: headTextBold(),
                     ),
                   ),
@@ -58,25 +58,17 @@ class ChangeUsernameView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: TextfieldWithHead(
-                    hintText: "Enter new username",
+                    hintText: "Enter new name",
                     textStyle: formFieldText(),
                     borderColor: defaultTextColor,
-                    headText: "New Username",
+                    headText: "New name",
                     controllerFunction: changeController.userNameController,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: PrimaryButton(
-                      onPressed: () async {
-                        if (await changeController.isAvailableUserName(
-                            changeController.userNameController.text)) {
-                          changeController.changeUserName();
-                        } else {
-                          errorSnackBar(
-                              'This username has already been used. Please choose a different one');
-                        }
-                      },
+                          onPressed: changeController.changeUserName,
                       text: "Update"),
                 )
               ],
