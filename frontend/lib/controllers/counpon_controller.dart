@@ -37,7 +37,7 @@ class CouponController extends GetxController {
   Future<void>? setupCouponList() async {
     final uid = auth.currentUser!.uid;
     try {
-      List<Coupon>? userCoupons = await restAPI.getUserCoupons(uid);
+      List<Coupon>? userCoupons = await restAPI.getUserCoupons(uid);   
       couponList(userCoupons);
     } catch (e) {
       errorSnackBar(e.toString());

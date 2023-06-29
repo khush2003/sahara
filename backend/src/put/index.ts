@@ -25,11 +25,28 @@ putRoutes.put("/users/:id", async (req, res) => {
   
   putRoutes.put("/users/:userId/discountCoupon/:couponId", async (req, res) => {
     const userId = req.params.userId;
-    const CouponId = req.params.couponId;
-    const userData = req.body;
+    const couponId = req.params.couponId;
+  
     try {
-      await db.collection('users').doc(userId).set(userData, { merge: true });
-      res.status(200).send("User updated successfully");
+      const couponSnapshot = await db.collection('coupons').doc(couponId).get();
+      const couponData = couponSnapshot.data();
+  
+      if (couponData) {
+        const userSnapshot = await db.collection('users').doc(userId).get();
+        const userData = userSnapshot.data();
+        
+        if (userData) {
+          const discountCoupon = userData.discountCoupon || [];
+          discountCoupon.push(couponId);
+  
+          await db.collection('users').doc(userId).set({ discountCoupon }, { merge: true });
+          res.status(200).send("User updated successfully");
+        } else {
+          res.status(404).send("User not found");
+        }
+      } else {
+        res.status(404).send("Coupon not found");
+      }
     } catch (error) {
       console.error("Error updating user:", error);
       res.status(500).send("Error updating user");

@@ -122,7 +122,7 @@ class ButtonSection extends StatelessWidget {
           labelColor: Colors.green,
           backgroundColor: Colors.white,
           onPress: () {
-            // Add the desired action for the button here
+            Get.toNamed(Routes.coupon);
           },
         ),
         const SizedBox(height: 10),

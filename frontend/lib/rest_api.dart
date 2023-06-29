@@ -9,7 +9,7 @@ import 'package:sahara/models/review.dart';
 
 import 'models/user.dart';
 
-class RestAPI extends GetConnect{
+class RestAPI extends GetConnect {
   final connect = Get.find<GetConnect>();
   static RestAPI get instance => Get.find<RestAPI>();
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -197,16 +197,17 @@ class RestAPI extends GetConnect{
 
 // DON'T DELETE v
 
-//   Future<List<String>?> getUserCoupons(String userId) async {
-//   Response response = await connect.get('$getBackendUrl/users/$userId/discountCoupon/');
-//   if (response.statusCode == 200) {
-//     List<dynamic> couponData = response.body;
-//     List<String> userCoupons = List<String>.from(userData);
-//     return userCoupons;
-//   } else {
-//     return null;
-//   }
-// }
+  // Future<List<Coupon>?> getUserCoupons(String userId) async {
+  //   Response response =
+  //       await connect.get('$getBackendUrl/users/$userId/discountCoupon/');
+  //   if (response.statusCode == 200) {
+  //     List<dynamic> couponData = response.body;
+  //     List<Coupon> userCoupons = List<Coupon>.from(couponData);
+  //     return userCoupons;
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   Future<List<Coupon>?> getUserCoupons(String userId) async {
     Response response =
@@ -244,9 +245,11 @@ class RestAPI extends GetConnect{
 
       if (response.statusCode == 200) {
         try {
-          final couponDocId = response.body['docId'];
-          await connect
-              .put('$putBackendUrl/users/$uid/discountCoupon/$couponDocId', {});
+          final couponDocId = response.body['_path']['segments'][1];
+
+          await connect.put(
+              '$putBackendUrl/users/$uid/discountCoupon/$couponDocId',
+              {'couponId': couponDocId});
         } on Exception catch (e) {
           return e;
         }
