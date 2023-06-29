@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sahara/controllers/counpon_controller.dart';
 
 import '../theme/app_theme.dart';
 
@@ -44,7 +46,7 @@ class CouponCard extends StatelessWidget {
                   child: SizedBox(
                       height: 70,
                       width: 70,
-                      child: Image.asset(couponImage, fit: BoxFit.fill)),
+                      child: Image.network(couponImage, fit: BoxFit.fill)),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,16 +73,13 @@ class CouponCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 5),
+              padding: const EdgeInsets.only(right: 10, bottom: 10),
               child: Align(
                 alignment: Alignment.bottomRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Click to use",
-                    style: regularTextBold(height: 0.5)
-                        .copyWith(decoration: TextDecoration.underline),
-                  ),
+                child: Text(
+                  "Click to use",
+                  style: regularTextBold(height: 0.5)
+                      .copyWith(decoration: TextDecoration.underline),
                 ),
               ),
             )
@@ -93,6 +92,7 @@ class CouponCard extends StatelessWidget {
 
 void _showCouponDialog(BuildContext context, String couponName,
     String couponImage, int discountPrice, String discountCode) {
+  final CouponController couponController = Get.put(CouponController());
   showDialog<String>(
     context: context,
     builder: (BuildContext context) => AlertDialog(
@@ -105,7 +105,7 @@ void _showCouponDialog(BuildContext context, String couponName,
                 SizedBox(
                     height: 100,
                     width: 100,
-                    child: Image.asset(couponImage, fit: BoxFit.fill)),
+                    child: Image.network(couponImage, fit: BoxFit.fill)),
                 Padding(
                   padding: const EdgeInsets.only(top: 13),
                   child: Text(
@@ -139,7 +139,12 @@ void _showCouponDialog(BuildContext context, String couponName,
                           discountCode,
                           style: regularText(),
                         ),
-                        const Icon(FontAwesomeIcons.copy)
+                        GestureDetector(
+                          child: const Icon(FontAwesomeIcons.copy),
+                          onTap: () {
+                            couponController.copytoClipBoard(discountCode);
+                          },
+                        )
                       ],
                     ),
                   ),

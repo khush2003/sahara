@@ -141,3 +141,6 @@ GET http://localhost:5000/get/coupons/8hpzFvGG4yDuOhfSvj4F
 // Find CouponFromDiscountCode
 ### GET
 GET http://localhost:5000/get/findCouponFromDiscountCode?discountCode=PUHEBXOM
+
+### PUT
+PUT http://localhost:5000/put/users/4F9m1RZ145VwMWFJ9lDHlkwVrxe2/discountCoupon/WUQrJ1vGoiWeSBltCHi9

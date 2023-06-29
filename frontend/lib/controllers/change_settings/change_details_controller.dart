@@ -116,4 +116,5 @@ class ChangeUserDetailsController extends GetxController {
     }
   }
 
+
 }

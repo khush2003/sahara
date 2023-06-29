@@ -37,11 +37,26 @@ putRoutes.put("/users/:id", (req, res) => __awaiter(void 0, void 0, void 0, func
 }));
 putRoutes.put("/users/:userId/discountCoupon/:couponId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.params.userId;
-    const CouponId = req.params.couponId;
-    const userData = req.body;
+    const couponId = req.params.couponId;
     try {
-        yield firebase_1.db.collection('users').doc(userId).set(userData, { merge: true });
-        res.status(200).send("User updated successfully");
+        const couponSnapshot = yield firebase_1.db.collection('coupons').doc(couponId).get();
+        const couponData = couponSnapshot.data();
+        if (couponData) {
+            const userSnapshot = yield firebase_1.db.collection('users').doc(userId).get();
+            const userData = userSnapshot.data();
+            if (userData) {
+                const discountCoupon = userData.discountCoupon || [];
+                discountCoupon.push(couponId);
+                yield firebase_1.db.collection('users').doc(userId).set({ discountCoupon }, { merge: true });
+                res.status(200).send("User updated successfully");
+            }
+            else {
+                res.status(404).send("User not found");
+            }
+        }
+        else {
+            res.status(404).send("Coupon not found");
+        }
     }
     catch (error) {
         console.error("Error updating user:", error);
