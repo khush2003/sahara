@@ -37,7 +37,7 @@ class AutherDetailSection extends StatelessWidget {
         const Spacer(),
         if (showChatButton)
           IconButton(
-              onPressed: () => chatRoomController.joinChatRoom(item),
+              onPressed: () => chatRoomController.routeToChat(item),
               icon: const UnIcon(UniconsLine.comment))
       ],
     );

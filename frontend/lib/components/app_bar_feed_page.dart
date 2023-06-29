@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/components/Feed/search_bar.dart';
+import 'package:sahara/controllers/donation_item_controller.dart';
 
 import 'package:unicons/unicons.dart';
 
@@ -8,8 +9,8 @@ import '../routes/routes.dart';
 import 'Feed/filter_menu.dart';
 
 class AppBarFeedPage extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarFeedPage({super.key});
-
+  AppBarFeedPage({super.key});
+  final itemController = DonationItemController.instance;
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
@@ -52,9 +53,7 @@ class AppBarFeedPage extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       leading: IconButton(
-        onPressed: () {
-          Get.toNamed(Routes.createDonation);
-        },
+        onPressed: itemController.routeToCreateDonation,
         icon: const Icon(UniconsLine.plus_circle),
       ),
       actions: [

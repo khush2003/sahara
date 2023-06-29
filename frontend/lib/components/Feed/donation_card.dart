@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/donation_item_controller.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../models/donation_item.dart';
@@ -13,16 +14,20 @@ import 'donation_details_section.dart';
 class DonationCard extends StatelessWidget {
   final DonationItem item;
   final bool showChatButton;
-  const DonationCard({
+  final DonationItemController controller = DonationItemController.instance;
+  DonationCard({
     super.key,
-    required this.item, required this.showChatButton,
+    required this.item,
+    required this.showChatButton,
   });
 
   @override
   Widget build(BuildContext context) {
     return CardSahara(
-        onPressed: () => Get.toNamed(Routes.donationDetails,
-            parameters: {'id': item.donationId!}),
+        onPressed: () {
+          Get.toNamed(Routes.donationDetails,
+              parameters: {'id': item.donationId!});
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(

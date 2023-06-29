@@ -156,7 +156,6 @@ class RestAPI extends GetConnect {
 
   WebSocketChannel getMessageStream(
       String chatRoomId, void Function(List<Message>) updateMessages) {
-    log("start");
     WebSocketChannel channel = IOWebSocketChannel.connect('ws://$host:$wsPort');
     channel.sink.add('{"chatRoomId": "$chatRoomId"}');
     channel.stream.listen((message) {
@@ -164,10 +163,21 @@ class RestAPI extends GetConnect {
       final List<dynamic> jsonList = json.decode(message);
       final List<Message> receivedMessages =
           jsonList.map((json) => Message.fromjson(json)).toList();
-      log('Received message: $receivedMessages');
       updateMessages(receivedMessages);
     });
-    log("Noe returning channel");
+    return channel;
+  }
+
+  WebSocketChannel startMessageStream(
+      void Function(List<Message>) updateMessages) {
+    WebSocketChannel channel = IOWebSocketChannel.connect('ws://$host:$wsPort');
+    channel.stream.listen((message) {
+      log(message.toString());
+      final List<dynamic> jsonList = json.decode(message);
+      final List<Message> receivedMessages =
+          jsonList.map((json) => Message.fromjson(json)).toList();
+      updateMessages(receivedMessages);
+    });
     return channel;
   }
 

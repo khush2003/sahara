@@ -19,7 +19,7 @@ class FeedView extends StatelessWidget {
       length: 2,
       initialIndex: 1,
       child: Scaffold(
-        appBar: const AppBarFeedPage(),
+        appBar: AppBarFeedPage(),
         body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TabBarView(

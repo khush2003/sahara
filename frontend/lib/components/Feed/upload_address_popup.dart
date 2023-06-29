@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/routes/routes.dart';
 import '../../theme/app_theme.dart';
 import '../primary_button.dart';
 
-void showUploadAddressDialog() {
+void showUploadAddressDialog({bool isReciever = false}) {
+  String donateType = isReciever ? 'recieve' : 'donate';
   final List<Widget> content = [
     const Center(
       child: Text(
@@ -16,18 +18,18 @@ void showUploadAddressDialog() {
       padding: const EdgeInsets.all(11.0),
       child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(20.0),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Text(
-              "You need to have contact information to donate items. You can add address and phone number in the setting.",
+              "You need to have contact information to $donateType items. You can add address and phone number in the setting.",
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 32, fontWeight: FontWeight.w400, height: 0.5),
             ),
           ),
           PrimaryButton(
               onPressed: () {
-                // Get.toNamed(Routes.settings);
+                Get.toNamed(Routes.profileSetting);
               },
               text: 'Go to Settings'),
           const SizedBox(height: 15),
