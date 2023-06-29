@@ -22,10 +22,10 @@ class RegisterController extends GetxController {
     String email = emailController.text;
     String password = passwordController.text;
     if (validateInputs()) {
-        String? error = await _auth.createUser(email, password, username);
-        if (error != null) {
-          errorSnackBar(error.toString());
-        }
+      String? error = await _auth.createUser(email, password, username);
+      if (error != null) {
+        errorSnackBar(error.toString());
+      }
     } else {
       errorSnackBar(
           'Please fill in all the fields correctly to create an account.');
@@ -87,5 +87,26 @@ class RegisterController extends GetxController {
     }
 
     return true;
+  }
+
+  bool validateInputsForForgotPassword() {
+    String? emailError = validateEmail(emailController.text);
+
+    if (emailController.text.isEmpty || emailError != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  Future<bool> updatePassword() async {
+    String email = emailController.text.trim();
+    try {
+      await _auth.resetPassword(email);
+      return true;
+    } on Exception catch (e) {
+      errorSnackBar(e.toString());
+      return false;
+    }
   }
 }

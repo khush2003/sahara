@@ -26,18 +26,20 @@ class AuthController extends GetxController {
     ever(firebaseUser, _updateUser);
     super.onInit();
   }
-  void _updateUser(User?user) async {
+
+  void _updateUser(User? user) async {
     if (user == null) {
-        userSahara(UserSahara.empty());
-      } else {
-        userSahara(await RestAPI.instance.getUserById(user.uid));
-      }
+      userSahara(UserSahara.empty());
+    } else {
+      userSahara(await RestAPI.instance.getUserById(user.uid));
+    }
   }
+
   void updateUser() async {
     // Write documentation for this function
     /// This function is used to update the userSahara object
     /// when the user changes their details
-      userSahara(await RestAPI.instance.getUserById(firebaseUser.value!.uid));
+    userSahara(await RestAPI.instance.getUserById(firebaseUser.value!.uid));
   }
 
   Future<String?> createUser(
@@ -156,6 +158,14 @@ class AuthController extends GetxController {
       Get.offAllNamed(Routes.onboarding);
     } catch (e) {
       errorSnackBar('Error: There is an error in signing out $e');
+    }
+  }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on Exception catch (e) {
+      errorSnackBar(e.toString());
     }
   }
 }
