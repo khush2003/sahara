@@ -1,9 +1,7 @@
 import 'dart:io';
-import 'dart:html' as h;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:random_string/random_string.dart';
-import 'package:sahara/controllers/change_settings/change_details_controller.dart';
 import 'package:sahara/models/coupon.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/review.dart';
@@ -14,7 +12,6 @@ class RestAPI {
   final connect = Get.find<GetConnect>();
   static RestAPI get instance => Get.find<RestAPI>();
   final FirebaseAuth auth = FirebaseAuth.instance;
-  final changeController = Get.put(ChangeUserDetailsController());
   final backendPort = 5000;
   late String host,
       backendUrl,
@@ -234,6 +231,7 @@ class RestAPI {
       return null;
     }
   }
+
   Future<dynamic> postCoupon() async {
     final availableCouponsResponse =
         await connect.get('$getBackendUrl/availableCoupons');

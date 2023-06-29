@@ -23,8 +23,8 @@ class App extends StatelessWidget {
                 FeedView(),
                 DeliveryView(),
                 ChatView(),
-                NotificationsView(),
-                Profile()
+                const NotificationsView(),
+                const Profile()
               ])),
       bottomNavigationBar: AppBottomNavBar(
         navController: navController,
