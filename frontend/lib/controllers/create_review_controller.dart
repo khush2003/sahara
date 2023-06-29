@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/counpon_controller.dart';
+import 'package:sahara/controllers/delivery_status_controller.dart';
 import 'package:sahara/controllers/donation_item_controller.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/review.dart';
@@ -14,10 +15,11 @@ class CreateReviewController extends GetxController {
   final sliderValue = 0.0.obs;
   final TextEditingController reviewContentController = TextEditingController();
   final auth = FirebaseAuth.instance;
-  final RestAPI restAPI = RestAPI();
+  final RestAPI restAPI = RestAPI.instance;
   final item = DonationItem.test().obs;
   final _itemController = DonationItemController.instance;
   final couponController = Get.put(CouponController());
+  final deliveryStatusController = Get.find<DeliveryStatusController>();
 
   @override
   void onInit() {
@@ -32,6 +34,8 @@ class CreateReviewController extends GetxController {
         await restAPI.postReview(review);
         couponController.updateCoupon();
         Get.back();
+        _itemController.setupLists();
+        deliveryStatusController.setupLists();
         successSnackBar("Review Created Sucessfully!");
       } on FirebaseAuthException catch (e) {
         return errorSnackBar(e.code);

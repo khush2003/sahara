@@ -17,6 +17,11 @@ class DeliveryStatusController extends GetxController {
 
   @override
   void onInit() async {
+    setupLists();
+    super.onInit();
+  }
+
+  void setupLists() {
     _itemController.donationItems.listen((donationItemList) async {
       // // TESTMODE
       // final donationItems = donationItemList.toList();
@@ -55,7 +60,7 @@ class DeliveryStatusController extends GetxController {
       toDeliverList.clear();
       toReceiveList.clear();
       deliveredList.clear();
-
+    
       for (var element in completedDonationItems) {
         if (element.deliveryStatus == DeliveryStatus.inTransit) {
           inTransitList.add(element);
@@ -70,7 +75,6 @@ class DeliveryStatusController extends GetxController {
         }
       }
     });
-    super.onInit();
   }
 
   bool isPostReviewable(DonationItem item) {

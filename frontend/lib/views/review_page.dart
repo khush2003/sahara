@@ -19,27 +19,29 @@ class ReviewPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Review'),
       ),
-      body: Form(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Column(
-          children: [
-            ReviewCard(
-              item: reviewControler.item.value,
-              controllerFunction: reviewControler.reviewContentController,
-            ),
-            Center(child: PostButton(
-              onPressed: () {
-                reviewControler.createReview(Review(
-                  donationId: reviewControler.item.value.donationId!,
-                  reviewerId: _auth.userSahara.value.uid!,
-                  reviewText: reviewControler.reviewContentController.text,
-                  reviewerName: _auth.userSahara.value.userName,
-                  reviewerImageURL: _auth.userSahara.value.profilePicture ?? '',
-                  rating: reviewControler.sliderValue.value.round(),
-                ));
-              },
-            ))
-          ],
+      body: SingleChildScrollView(
+        child: Form(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Column(
+            children: [
+              ReviewCard(
+                item: reviewControler.item.value,
+                controllerFunction: reviewControler.reviewContentController,
+              ),
+              Center(child: PostButton(
+                onPressed: () {
+                  reviewControler.createReview(Review(
+                    donationId: reviewControler.item.value.donationId!,
+                    reviewerId: _auth.userSahara.value.uid!,
+                    reviewText: reviewControler.reviewContentController.text,
+                    reviewerName: _auth.userSahara.value.userName,
+                    reviewerImageURL: _auth.userSahara.value.profilePicture ?? '',
+                    rating: reviewControler.sliderValue.value.round(),
+                  ));
+                },
+              ))
+            ],
+          ),
         ),
       ),
     );

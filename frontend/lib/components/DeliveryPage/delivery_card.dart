@@ -260,26 +260,30 @@ class DeliveredCard extends StatelessWidget {
               height: 0.5,
               decoration: const BoxDecoration(color: Colors.black),
             ),
-            if (controller.isPostReviewable(item))
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Center(
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: primary),
-                      onPressed: () => Get.toNamed(Routes.review, parameters: {
-                            'id': item.donationId!,
-                          }),
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        child: Text(
-                          'Review',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                        ),
-                      )),
-                ),
-              )
+            Obx(() => controller.isPostReviewable(item)
+                ? Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Center(
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: primary),
+                          onPressed: () =>
+                              Get.toNamed(Routes.review, parameters: {
+                                'id': item.donationId!,
+                              }),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            child: Text(
+                              'Review',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                            ),
+                          )),
+                    ),
+                  )
+                : Container())
           ],
         ),
       ),
