@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sahara/utils/auth_middleware.dart';
 
-import '../components/Chat/chat_room.dart';
+import '../components/Chat/messaging_view.dart';
 import '../views/FirstVisitPages/forgot_password_view.dart';
 import '../views/FirstVisitPages/login_view.dart';
 import '../views/FirstVisitPages/onboarding_view.dart';
@@ -67,7 +67,7 @@ final getPages = [
   GetPage(name: Routes.testNote, page: () => const TestNote()),
   GetPage(name: Routes.createDonation, page: () => CreateDonationView()),
   GetPage(name: Routes.notifications, page: () => const NotificationsView()),
-  GetPage(name: Routes.chat, page: () => const MessagingView()),
+  GetPage(name: Routes.chat, page: () => MessagingView()),
   GetPage(name: Routes.profileView, page: () => ProfileView()),
   GetPage(name: Routes.blockUsers, page: () => BlockUsers()),
   GetPage(

@@ -251,6 +251,23 @@ getRoutes.get('/chatRooms/:id', (req, res) => __awaiter(void 0, void 0, void 0, 
         return res.status(400).send("An Error Occured" + error);
     }
 }));
+// // Get message stream where message.chatRoomId == chatRoomId
+// getRoutes.get('/messages/:chatRoomId', async (req, res) => {
+//     try {
+//         db.collection('messages').where('chatRoomId', '==', req.params.chatRoomId).onSnapshot((snapshot) => {
+//             snapshot.docChanges().forEach(change => {
+//                 if (change.type === 'added') {
+//                     const message = { messageId: change.doc.id, ...change.doc.data() };
+//                     res.write(JSON.stringify(message) + '\n');
+//                 }
+//             });
+//         });
+//         // Complete the response after sending initial messages
+//         res.status(200).end();
+//     } catch (error) {
+//         return res.status(400).send("An Error Occurred: " + error);
+//     }
+// });
 // Get message stream where message.chatRoomId == chatRoomId
 getRoutes.get('/messages/:chatRoomId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

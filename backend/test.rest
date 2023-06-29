@@ -78,6 +78,9 @@ Content-Type: application/json
   "userName": "N3"
 }
 
+### GET
+GET http://localhost:5000/get/messages/8bjAC1EgJog9OAPOauRR
+
 
 ### PUT
 PUT http://localhost:5000/put/users/vY9xlAikX2RnpXG6JpuV1zZbIQq1

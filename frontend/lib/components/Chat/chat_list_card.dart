@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/components/image_thumbnail.dart';
 import 'package:sahara/models/chat_room.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/routes/routes.dart';
@@ -38,24 +39,15 @@ class ChatListCard extends StatelessWidget {
                       const SizedBox(
                         width: 12,
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0), //or 15.0
-                        child: Container(
-                          height: 50.0,
-                          width: 50.0,
-                          color: const Color(0xffFF0E58),
-                          // child: Icon(Icons.volume_up, color: Colors.white, size: 50.0),
-                          // Image.asset("Assets/Images/music_default.png",
-                        ),
-                      ),
+                      ImageThumbnail(imageUrl: item.imageUrl, size: 50),
                       const SizedBox(
                         width: 8,
                       ),
-                      const SizedBox(
+                      SizedBox(
                           width: 230,
                           child: Text(
-                            'Drinking bottle (Donor POV)',
-                            style: TextStyle(fontSize: 20, height: 1),
+                            item.name,
+                            style: const TextStyle(fontSize: 20, height: 1),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                           )),
@@ -71,6 +63,7 @@ class ChatListCard extends StatelessWidget {
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.pop(context, 'Yes'),
+                                      //TODO: Block user
                                       child: const Text('Yes'),
                                     ),
                                     TextButton(
@@ -97,15 +90,10 @@ class ChatListCard extends StatelessWidget {
                       const SizedBox(
                         width: 12,
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(30.0), //or 15.0
-                        child: Container(
-                          height: 50.0,
-                          width: 50.0,
-                          color: Colors.amberAccent,
-                          // child: Icon(Icons.volume_up, color: Colors.white, size: 50.0),
-                          // Image.asset("Assets/Images/music_default.png",
-                        ),
+                      ImageThumbnail(
+                        imageUrl: item.author.imageUrl,
+                        isCircular: true,
+                        size: 50,
                       ),
                       const SizedBox(
                         width: 12,
@@ -114,15 +102,15 @@ class ChatListCard extends StatelessWidget {
                           width: 230,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text(
-                                'WaterMelon Sugar',
-                                style: TextStyle(fontSize: 20, height: 1),
+                                item.author.name,
+                                style: const TextStyle(fontSize: 20, height: 1),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
-                              Text(
-                                'Him : Give me your bottle',
+                              const Text(
+                                'Him : Give me your bottle', //TODO: Fetch latest message
                                 style: TextStyle(
                                     fontSize: 20,
                                     height: 1,

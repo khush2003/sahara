@@ -14,7 +14,7 @@ class ChatRoomView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Fai's View"),
+          title: const Text("Chats"),
         ),
         body: SingleChildScrollView(
           child: Obx(

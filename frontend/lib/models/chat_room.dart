@@ -33,4 +33,13 @@ class ChatRoom {
     };
   }
 
+  factory ChatRoom.getFromId(String chatRoomId, List<ChatRoom> list) {
+    for (final room in list) {
+      if (room.chatRoomId == chatRoomId) {
+        return room;
+      }
+    }
+    return ChatRoom.empty();
+  }
+
 }

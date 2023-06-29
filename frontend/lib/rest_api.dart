@@ -9,15 +9,17 @@ import 'package:sahara/models/coupon.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/message.dart';
 import 'package:sahara/models/review.dart';
-import 'package:http/http.dart' as http;
+import 'package:web_socket_channel/web_socket_channel.dart';
 import 'models/user.dart';
 import 'dart:convert';
+import 'package:web_socket_channel/io.dart';
 
 class RestAPI extends GetConnect {
   final connect = Get.find<GetConnect>();
   static RestAPI get instance => Get.find<RestAPI>();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final backendPort = 5000;
+  final wsPort = 8080;
   late String host,
       backendUrl,
       getBackendUrl,
@@ -122,7 +124,6 @@ class RestAPI extends GetConnect {
         await connect.post('$postBackendUrl/chatRoom', chatRoom.toJson());
     if (response.statusCode == 200) {
       final chatRoomId = response.body['_path']['segments'].last as String;
-      print(chatRoomId);
       return chatRoomId;
     } else {
       throw Exception('Failed to post chat room info');
@@ -153,17 +154,21 @@ class RestAPI extends GetConnect {
     }
   }
 
-  Stream<List<Message>> getMessageStream(String chatRoomId) {
-    return http
-        .get(Uri.parse('$getBackendUrl/messages/$chatRoomId'))
-        .asStream()
-        .transform(utf8.decoder as StreamTransformer<http.Response, dynamic>)
-        .transform(json.decoder)
-        .map<List<Message>>((json) {
-      return (json as List<dynamic>)
-          .map((item) => Message.fromjson(item, item['messageId']))
-          .toList();
+  WebSocketChannel getMessageStream(
+      String chatRoomId, void Function(List<Message>) updateMessages) {
+    log("start");
+    WebSocketChannel channel = IOWebSocketChannel.connect('ws://$host:$wsPort');
+    channel.sink.add('{"chatRoomId": "$chatRoomId"}');
+    channel.stream.listen((message) {
+      log(message.toString());
+      final List<dynamic> jsonList = json.decode(message);
+      final List<Message> receivedMessages =
+          jsonList.map((json) => Message.fromjson(json)).toList();
+      log('Received message: $receivedMessages');
+      updateMessages(receivedMessages);
     });
+    log("Noe returning channel");
+    return channel;
   }
 
   Future<dynamic> postReview(Review review) async {

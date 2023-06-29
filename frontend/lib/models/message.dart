@@ -24,13 +24,15 @@ class Message {
     );
   }
 
-  factory Message.fromjson(Map<String, dynamic> json, String messageId) {
+  factory Message.fromjson(Map<String, dynamic> json) {
     return Message(
-      messageId: messageId,
+      messageId: json['messageId'],
       senderId: json['senderId'] ?? '',
       chatRoomId: json['chatRoomId'] ?? '',
       message: json['message'] ?? '',
-      timeStamp: (json['timeStamp'] as Timestamp).toDate(),
+      timeStamp: json['timeStamp'] == null
+            ? null
+            : DateTime.parse(json['timeStamp'] as String),
     );
   }
 
@@ -39,8 +41,7 @@ class Message {
       'senderId': senderId,
       'chatRoomId': chatRoomId,
       'message': message,
-      'timeStamp':
-          timeStamp == null ? Timestamp.now() : Timestamp.fromDate(timeStamp!),
+      'timeStamp': DateTime.now().toIso8601String(),
     };
   }
 
