@@ -23,6 +23,7 @@ class RegisterController extends GetxController {
     String password = passwordController.text;
     if (validateInputs()) {
       String? error = await _auth.createUser(email, password, username);
+      
       if (error != null) {
         errorSnackBar(error.toString());
       }

@@ -216,7 +216,7 @@ class ButtonSection extends StatelessWidget {
 class ProfileCard extends StatelessWidget {
   ProfileCard({super.key});
   final CustomTabController _tabController = Get.put(CustomTabController());
-
+  final auth = AuthController.instance;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -260,7 +260,7 @@ class ProfileCard extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Obx(
                         () => Text(
-                          _tabController.auth.userSahara.value.userName,
+                          auth.userSahara.value.userName,
                           style: headTextBold(),
                         ),
                       ),

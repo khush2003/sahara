@@ -32,6 +32,7 @@ class AuthController extends GetxController {
       userSahara(UserSahara.empty());
     } else {
       userSahara(await RestAPI.instance.getUserById(user.uid));
+      print(userSahara.value);
     }
   }
 
@@ -63,6 +64,7 @@ class AuthController extends GetxController {
 
       Get.offAllNamed(Routes.app);
       successSnackBar("Account Created Sucessfully!");
+      updateUser();
     } on FirebaseAuthException catch (e) {
       return getAuthErrorMessage(e.code);
     } catch (e) {

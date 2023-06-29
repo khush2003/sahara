@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahara/components/image_thumbnail.dart';
 import 'package:sahara/controllers/auth/auth_controller.dart';
 import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
@@ -190,17 +191,13 @@ class TopSection extends StatelessWidget {
                       },
                     );
                   },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      profile == ''
-                          ? 'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg'
-                          : profile!,
-                      height: 130,
-                      width: 130,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  child: ImageThumbnail(
+                          imageUrl: _tabController
+                                  .auth.userSahara.value.profilePicture ??
+                              'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
+                          isCircular: true,
+                          size: 130,
+                        ),
                 ),
               ),
             ],
