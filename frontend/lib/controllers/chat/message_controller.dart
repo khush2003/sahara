@@ -10,6 +10,8 @@ import 'package:sahara/models/chat_room.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/message.dart';
 import 'package:sahara/rest_api.dart';
+import 'package:sahara/routes/routes.dart';
+import 'package:sahara/utils/app_utils.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class MessageController extends GetxController {
@@ -22,6 +24,7 @@ class MessageController extends GetxController {
   final itemController = DonationItemController.instance;
   final chatController = ChatRoomController.instance;
   late WebSocketChannel channel;
+  final canGiveItem = true.obs;
   @override
   void onInit() {
     try {
@@ -30,15 +33,34 @@ class MessageController extends GetxController {
       item(DonationItem.getFromId(
           chatRoom.value.donationId, itemController.donationItems));
       channel = _restApi.getMessageStream(chatRoomId, updateMessages);
+      setCanGiveItem();
     } catch (e) {
       log(e.toString());
     }
     super.onInit();
   }
 
+  void setCanGiveItem() {
+    if (item.value.author.authorId == auth.userSahara.value.uid!) {
+      canGiveItem(true);
+    } else {
+      canGiveItem(false);
+    }
+  }
+
   void updateMessages(List<Message> messageList) {
     messageList.sort((a, b) => a.timeStamp!.compareTo(b.timeStamp!));
     messages(messageList);
+  }
+
+  void giveDonation() async {
+    if (item.value.deliveryPaidBy == DeliveryPaidBy.donor) {
+      Get.toNamed(Routes.payment, parameters: {'id': item.value.donationId!});
+    } else if (item.value.deliveryPaidBy == DeliveryPaidBy.both) {
+      Get.toNamed(Routes.payment, parameters: {'id': item.value.donationId!});
+    } else {
+      await _restApi.putReceiverInfo(item.value.donationId!);
+    }
   }
 
   void sendMessage() {

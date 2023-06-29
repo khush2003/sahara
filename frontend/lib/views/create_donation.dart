@@ -10,7 +10,6 @@ import 'package:sahara/components/CreateDonation/duration_drop_down.dart';
 import 'package:sahara/components/CreateDonation/estimated_item_value.dart';
 import 'package:sahara/components/Feed/donation_details_section.dart';
 
-
 import 'package:sahara/controllers/create_donation_controller.dart';
 
 import 'package:sahara/theme/app_theme.dart';
@@ -46,28 +45,8 @@ class CreateDonationView extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: 250,
                     child: Obx(
-                      () => OutlinedButton.icon(
-                        icon: createDonationController.imageUrl.value == ''
-                            ? const Icon(
-                                Icons.image_outlined,
-                                color: Colors.grey,
-                                size: 100,
-                              )
-                            : Expanded(
-                                child: Image.network(
-                                  createDonationController.imageUrl.value,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                        onPressed: () => createDonationController.uploadImage(),
-                        label: const Text(''),
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(
-                            color: Colors.black,
-                            width: 1,
+                      () => UploadImageButton(image: createDonationController.imageUrl.value,onPressed: () => createDonationController.uploadImage(),
                           ),
-                        ),
-                      ),
                     )),
               ),
               Padding(
@@ -212,6 +191,41 @@ class CreateDonationView extends StatelessWidget {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class UploadImageButton extends StatelessWidget {
+  final String image;
+  final VoidCallback onPressed;
+  const UploadImageButton({
+    super.key,
+    required this.image, required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton.icon(
+      icon: image == ''
+          ? const Icon(
+              Icons.image_outlined,
+              color: Colors.grey,
+              size: 100,
+            )
+          : Expanded(
+              child: Image.network(
+                image,
+                fit: BoxFit.fill,
+              ),
+            ),
+      onPressed: onPressed,
+      label: const Text(''),
+      style: OutlinedButton.styleFrom(
+        side: const BorderSide(
+          color: Colors.black,
+          width: 1,
         ),
       ),
     );

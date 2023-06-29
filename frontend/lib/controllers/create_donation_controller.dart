@@ -176,7 +176,7 @@ class CreateDonationController extends GetxController {
     return durationTotal.value;
   }
 
-  uploadImage() async {
+  void uploadImage() async {
     //Select Image
     final image = await _imagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {

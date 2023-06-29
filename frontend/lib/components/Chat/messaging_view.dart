@@ -33,7 +33,10 @@ class MessagingView extends StatelessWidget {
                 const SizedBox(
                   width: 2,
                 ),
-                ImageThumbnail(imageUrl: controller.item.value.imageUrl, size: 20, isCircular: true),
+                ImageThumbnail(
+                    imageUrl: controller.item.value.imageUrl,
+                    size: 20,
+                    isCircular: true),
                 const SizedBox(
                   width: 12,
                 ),
@@ -42,7 +45,7 @@ class MessagingView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                       Text(
+                      Text(
                         controller.item.value.author.name,
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
@@ -58,19 +61,22 @@ class MessagingView extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  color: const Color.fromRGBO(190, 239, 0, 1),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      disabledForegroundColor: Colors.white,
+                if (controller.canGiveItem.value)
+                  Container(
+                    color: const Color.fromRGBO(190, 239, 0, 1),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        disabledForegroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        Get.toNamed(Routes.payment, parameters: {
+                          'id': controller.item.value.donationId!
+                        });
+                      },
+                      child: const Text('Give', style: TextStyle(fontSize: 20)),
                     ),
-                    onPressed: () {
-                      Get.toNamed(Routes.payment);
-                    },
-                    child: const Text('Give', style: TextStyle(fontSize: 20)),
-                  ),
-                )
+                  )
               ],
             ),
           ),
@@ -114,7 +120,7 @@ class MessagingView extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Obx(
-            ()=> ListView.builder(
+            () => ListView.builder(
               itemCount: controller.messages.length,
               shrinkWrap: true,
               padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -125,14 +131,16 @@ class MessagingView extends StatelessWidget {
                       left: 14, right: 14, top: 10, bottom: 10),
                   child: Obx(
                     () => Align(
-                      alignment: (controller.messages[index].senderId != controller.auth.firebaseUser.value!.uid
+                      alignment: (controller.messages[index].senderId !=
+                              controller.auth.firebaseUser.value!.uid
                           ? Alignment.topLeft
                           : Alignment.topRight),
                       child: Obx(
                         () => Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: (controller.messages[index].senderId != controller.auth.firebaseUser.value!.uid
+                            color: (controller.messages[index].senderId !=
+                                    controller.auth.firebaseUser.value!.uid
                                 ? Colors.grey.shade200
                                 : Colors.blue[200]),
                           ),

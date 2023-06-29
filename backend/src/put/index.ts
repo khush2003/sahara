@@ -78,6 +78,20 @@ putRoutes.put("/users/:id", async (req, res) => {
     }
   });
 
+  //Write a put method to update donationItem's recieverId
+  putRoutes.put("/donationItems/:id", async (req, res) => {
+    const donationItemId = req.params.id;
+    const recieverId = req.body.recieverId;
+    try {
+      await db.collection('donationItems').doc(donationItemId).update({recieverId: recieverId});
+      res.status(200).send("Donation Item updated successfully");
+    } catch (error) {
+      console.error("Error updating donation item:", error);
+      res.status(500).send("Error updating donation item");
+    }
+  });
+  
+
   
 
 export default putRoutes;

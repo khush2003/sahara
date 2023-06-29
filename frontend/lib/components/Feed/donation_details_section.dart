@@ -11,15 +11,21 @@ class DonationDetailSection extends StatelessWidget {
   final DonationItem item;
   final bool showDescription, showTags;
   final bool showOverPricedWarning;
+  final bool showHalfDelivery;
   const DonationDetailSection(
       {super.key,
       required this.item,
       this.showDescription = true,
       this.showTags = true,
-      this.showOverPricedWarning = true});
+      this.showOverPricedWarning = true,
+      this.showHalfDelivery = false,});
 
   @override
   Widget build(BuildContext context) {
+    var deliveryFees = item.deliveryPaidBy == DeliveryPaidBy.both
+        ? item.deliveryFees / 2
+        : item.deliveryFees;
+    var showDeliveryFees = showHalfDelivery ? deliveryFees : item.deliveryFees;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -44,7 +50,10 @@ class DonationDetailSection extends StatelessWidget {
                     label: 'Usability', value: '${item.usability * 100}%'),
                 DetailRow(label: 'Price', value: '${item.price} bhat'),
                 DetailRow(
-                    label: 'Delivery Fees', value: '${item.deliveryFees} bhat'),
+                    label: 'Delivery Paid By',
+                    value: convertToString(item.deliveryPaidBy)),
+                DetailRow(
+                    label: 'Delivery Fees', value: '$showDeliveryFees bhat'),
               ],
             )
           ],

@@ -93,6 +93,18 @@ class RestAPI extends GetConnect {
     }
   }
 
+  Future<dynamic> putReceiverInfo(String donationId) async {
+    final uid = auth.currentUser!.uid;
+    Response response = await connect.put(
+        '$putBackendUrl/donationItems/$donationId', {"receiverId": uid});
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Failed to put receiver info');
+    }
+  }
+
+
   Future<dynamic> getCurrentUserInfo() async {
     final User? user = auth.currentUser;
     final uid = user!.uid;

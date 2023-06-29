@@ -88,4 +88,17 @@ putRoutes.put("/allUserName/:id", (req, res) => __awaiter(void 0, void 0, void 0
         res.status(500).send("Error updating user");
     }
 }));
+//Write a put method to update donationItem's recieverId
+putRoutes.put("/donationItems/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const donationItemId = req.params.id;
+    const recieverId = req.body.recieverId;
+    try {
+        yield firebase_1.db.collection('donationItems').doc(donationItemId).update({ recieverId: recieverId });
+        res.status(200).send("Donation Item updated successfully");
+    }
+    catch (error) {
+        console.error("Error updating donation item:", error);
+        res.status(500).send("Error updating donation item");
+    }
+}));
 exports.default = putRoutes;
