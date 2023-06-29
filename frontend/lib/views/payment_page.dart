@@ -24,13 +24,17 @@ class PaymentPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: SizedBox(
                   height: 400,
-                  child: UploadImageButton(
-                      image: controller.imageUrl.value,
-                      onPressed: controller.uploadImage))),
+                  child: Obx(
+                    () => UploadImageButton(
+                        image: controller.imageUrl.value,
+                        onPressed: controller.uploadImage),
+                  ))),
           const Padding(padding: EdgeInsets.all(16)),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: GiveButton(),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: GiveButton(
+              controller: controller,
+            ),
           )
         ],
       ),
@@ -63,11 +67,12 @@ class CardItemInfo extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: DonationDetailSection(
-              item: item,
-              showDescription: false,
-              showTags: false,
-              showOverPricedWarning: false,
-              showHalfDelivery: true,),
+            item: item,
+            showDescription: false,
+            showTags: false,
+            showOverPricedWarning: false,
+            showHalfDelivery: true,
+          ),
         ),
       ),
     );
@@ -120,24 +125,13 @@ class ImageInput extends StatelessWidget {
 }
 
 class GiveButton extends StatelessWidget {
-  const GiveButton({super.key});
+  final PaymentController controller;
+  const GiveButton({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return const AlertDialog(
-                  title: Text('Successfully Donate Item'),
-                  content: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text('Your Item will be delivered soon.'),
-                  ),
-                );
-              });
-        },
+        onPressed: controller.give,
         child: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
           child: Text(

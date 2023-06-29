@@ -49,5 +49,15 @@ postRoutes.post("/message", async (req, res) =>  {
     res.status(200).send(message);
 });
 
+//post payment
+postRoutes.post("/payment", async (req, res) =>  {
+    const payment = await db.collection('payments').add(req.body
+    );
+    await payment.get().then((doc) => {
+        const paymentId = doc.id;
+        res.status(200).send(paymentId);
+    });
+});
+
 
 export default postRoutes

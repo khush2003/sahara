@@ -86,4 +86,16 @@ class UserSahara {
       return null;
     }
   }
+
+  static UserSahara? getUserFromId(
+      String? userId, List<UserSahara> list) {
+    if (userId == null) {
+      return null;
+    }
+    try {
+      return list.where((user) => user.uid == userId).first;
+    } catch (e) {
+      return null;
+    }
+  }
 }

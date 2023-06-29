@@ -33,10 +33,12 @@ class MessagingView extends StatelessWidget {
                 const SizedBox(
                   width: 2,
                 ),
-                ImageThumbnail(
-                    imageUrl: controller.item.value.imageUrl,
-                    size: 20,
-                    isCircular: true),
+                Obx(
+                  () => ImageThumbnail(
+                      imageUrl: controller.item.value.imageUrl,
+                      size: 20,
+                      isCircular: true),
+                ),
                 const SizedBox(
                   width: 12,
                 ),
@@ -45,79 +47,37 @@ class MessagingView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        controller.item.value.author.name,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                      Obx(
+                        () => Text(
+                          controller.user.value.userName,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
                       ),
                       const SizedBox(
                         height: 6,
                       ),
-                      Text(
-                        controller.item.value.name,
-                        style: TextStyle(
-                            color: Colors.grey.shade600, fontSize: 13),
+                      Obx(
+                        () => Text(
+                          controller.item.value.name,
+                          style: TextStyle(
+                              color: Colors.grey.shade600, fontSize: 13),
+                        ),
                       ),
                     ],
                   ),
                 ),
-                if (controller.canGiveItem.value)
-                  Container(
-                    color: const Color.fromRGBO(190, 239, 0, 1),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        disabledForegroundColor: Colors.white,
-                      ),
-                      onPressed: () {
-                        Get.toNamed(Routes.payment, parameters: {
-                          'id': controller.item.value.donationId!
-                        });
-                      },
-                      child: const Text('Give', style: TextStyle(fontSize: 20)),
-                    ),
-                  )
+                Obx(() => controller.canGiveItem.value
+                    ? GiveButton(controller: controller)
+                    : Container())
               ],
             ),
           ),
         ),
       ),
-//       appBar: AppBar(
-//         backgroundColor: Colors.white,
-//         foregroundColor: Colors.black,
-// iconTheme: IconThemeData(
-//     color: Colors.black
-//   ),
-//         title: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceAround,
-//           children: [
-//              Container(
-//             width: 30,
-//             height: 30,
-//             color: Colors.pink,
-//           ),
-//             Container(width: 200,child: const Text('WaterMelon Sugar', style: TextStyle(fontSize: 20),overflow: TextOverflow.ellipsis, maxLines: 1,)),
-//           ]),
-//         actions: [
-//           Container(
-//             color: const Color.fromRGBO(190, 239, 0, 1),
-
-//             child: TextButton(
-//   style: TextButton.styleFrom(
-//     foregroundColor: Colors.black,
-//     disabledForegroundColor: Colors.white,
-//   ),
-//   onPressed: () {
-//     Get.toNamed(Routes.payment);
-//   },
-//   child: const Text('Give', style: TextStyle(fontSize: 20)),
-// ),
-//           )
-
-//         ],
-//         ),
-
-      body: Stack(
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Obx(
             () => ListView.builder(
@@ -159,42 +119,93 @@ class MessagingView extends StatelessWidget {
               },
             ),
           ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
+          Container(
               padding: const EdgeInsets.only(left: 10, bottom: 10, top: 10),
-              height: 60,
               width: double.infinity,
-              color: Colors.white,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      controller: controller.messageController,
-                      decoration: const InputDecoration(
-                          hintText: "Write message...",
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: InputBorder.none),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  FloatingActionButton(
-                    onPressed: controller.sendMessage,
-                    backgroundColor: Colors.blue,
-                    elevation: 0,
-                    child: const Icon(
-                      Icons.send,
-                      color: Colors.white,
-                      size: 18,
-                    ),
+              color: Colors.grey.shade200,
+              child: Column(
+                children: [
+                  Obx(() => controller.letReceiverPay.value
+                      ? Row(children: [
+                          const Text('You need to pay for delivery fees',
+                              style: TextStyle(fontSize: 20)),
+                          const SizedBox(width: 10),
+                          GiveButton(
+                            controller: controller,
+                            text: "Pay",
+                          )
+                        ])
+                      : Container()),
+                  Obx(() => controller.letReceiverPay.value == false &&
+                          controller.isPaymentComplete.value == true
+                      ? Row(
+                          children: const [
+                            Expanded(
+                              child: Text(
+                                  'Payment for this item is complete! You can check delivery status in delivery tab!',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.black)),
+                            ),
+                          ],
+                        )
+                      : Container()),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          controller: controller.messageController,
+                          decoration: const InputDecoration(
+                              hintText: "Write message...",
+                              hintStyle: TextStyle(color: Colors.black54),
+                              border: InputBorder.none),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      FloatingActionButton(
+                        onPressed: controller.sendMessage,
+                        backgroundColor: Colors.blue,
+                        elevation: 0,
+                        child: const Icon(
+                          Icons.send,
+                          color: Colors.white,
+                          size: 18,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
-              ),
-            ),
-          ),
+              )),
         ],
+      ),
+    );
+  }
+}
+
+class GiveButton extends StatelessWidget {
+  final String text;
+  const GiveButton({
+    super.key,
+    required this.controller,
+    this.text = "Give",
+  });
+
+  final MessageController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color.fromRGBO(190, 239, 0, 1),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          foregroundColor: Colors.black,
+          disabledForegroundColor: Colors.white,
+        ),
+        onPressed: () {
+          controller.giveDonation();
+        },
+        child: Text(text, style: const TextStyle(fontSize: 20)),
       ),
     );
   }

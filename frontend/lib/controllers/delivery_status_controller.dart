@@ -3,6 +3,7 @@ import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/controllers/donation_item_controller.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/review.dart';
+import 'package:sahara/rest_api.dart';
 import 'package:sahara/utils/app_utils.dart';
 
 class DeliveryStatusController extends GetxController {
@@ -12,22 +13,50 @@ class DeliveryStatusController extends GetxController {
   final toDeliverList = <DonationItem>[].obs;
   final toReceiveList = <DonationItem>[].obs;
   final deliveredList = <DonationItem>[].obs;
+  final _restApi = RestAPI.instance;
 
   @override
-  void onInit() {
-    _itemController.donationItems.listen((donationItemList) {
-      // TESTMODE
-      final donationItems = donationItemList.toList();
-      // final donationItems = donationItemList
-      //     .where(
-      //         (element) => element.receiverId == auth.userSahara.value.uid)
-      //     .toList();
+  void onInit() async {
+    _itemController.donationItems.listen((donationItemList) async {
+      // // TESTMODE
+      // final donationItems = donationItemList.toList();
+      final donationItems = donationItemList
+          .where((element) => element.paymentId != null)
+          .toList();
+      final completedDonationItems = <DonationItem>[];
+      for (DonationItem item in donationItems) {
+        final payment = await _restApi.getPaymentById(item.paymentId!);
+        switch (payment.deliveryPaidBy) {
+          case DeliveryPaidBy.donor:
+            if (payment.paymentImageUrlSender != null &&
+                payment.paymentImageUrlSender!.isNotEmpty) {
+              completedDonationItems.add(item);
+            }
+            break;
+          case DeliveryPaidBy.receiver:
+            if (payment.paymentImageUrlReceiver != null &&
+                payment.paymentImageUrlReceiver!.isNotEmpty) {
+              completedDonationItems.add(item);
+            }
+            break;
+          case DeliveryPaidBy.both:
+            if (payment.paymentImageUrlSender != null &&
+                payment.paymentImageUrlSender!.isNotEmpty &&
+                payment.paymentImageUrlReceiver != null &&
+                payment.paymentImageUrlReceiver!.isNotEmpty) {
+              completedDonationItems.add(item);
+            }
+            break;
+          default:
+            break;
+        }
+      }
       inTransitList.clear();
       toDeliverList.clear();
       toReceiveList.clear();
       deliveredList.clear();
 
-      for (var element in donationItems) {
+      for (var element in completedDonationItems) {
         if (element.deliveryStatus == DeliveryStatus.inTransit) {
           inTransitList.add(element);
         } else if (element.deliveryStatus == DeliveryStatus.toDeliver) {
@@ -45,17 +74,11 @@ class DeliveryStatusController extends GetxController {
   }
 
   bool isPostReviewable(DonationItem item) {
-    //TODO: Fix this so that user can only review once
-    if (item.deliveryStatus == DeliveryStatus.delivered) {
-      if (_itemController.reviewList.firstWhere((element) {
-            return element.reviewerId == auth.userSahara.value.uid;
-          }, orElse: () => Review.test()) ==
-          Review.test()) {
+    for (Review review in _itemController.reviewList) {
+      if (review.reviewerId == auth.userSahara.value.uid) {
         return false;
-      } else {
-        return true;
       }
     }
-    return false;
+    return true;
   }
 }

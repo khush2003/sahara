@@ -3,9 +3,11 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:sahara/components/Feed/upload_address_popup.dart';
+import 'package:sahara/controllers/donation_item_controller.dart';
 import 'package:sahara/models/chat_room.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/message.dart';
+import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
 import 'package:sahara/routes/routes.dart';
 import 'package:web_socket_channel/io.dart';
@@ -20,6 +22,7 @@ class ChatRoomController extends GetxController {
   final RxList<Message> messages = <Message>[].obs;
   static ChatRoomController get instance => Get.find<ChatRoomController>();
   late WebSocketChannel channel;
+  final RxList<UserSahara> allUsers = <UserSahara>[].obs;
 
   @override
   void onInit() {
@@ -27,11 +30,31 @@ class ChatRoomController extends GetxController {
     initilizeLists();
   }
 
+  final Rx<UserSahara> user = UserSahara.test().obs;
+
   void updateMessages(List<Message> messageList) {}
+
+  UserSahara getUser(ChatRoom room) {
+    final item = DonationItem.getFromId(
+        room.donationId, DonationItemController.instance.donationItems);
+    if (item.author.authorId == _auth.firebaseUser.value!.uid) {
+      final user = UserSahara.getUserFromId(room.userId, allUsers);
+      if (user != null) {
+        return user;
+      }
+    } else {
+      final user = UserSahara.getUserFromId(room.authorId, allUsers);
+      if (user != null) {
+        return user;
+      }
+    }
+    return _auth.userSahara.value;
+  }
 
   void initilizeLists() async {
     final chatRoomsUser = await _restApi.getChatRooms();
     chatRooms(chatRoomsUser ?? []);
+    allUsers(await _restApi.getAllUsers());
 
     // WebSocketChannel channel =
     //     IOWebSocketChannel.connect('ws://${_restApi.host}:${_restApi.wsPort}');

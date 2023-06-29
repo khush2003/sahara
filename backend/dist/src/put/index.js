@@ -88,17 +88,30 @@ putRoutes.put("/allUserName/:id", (req, res) => __awaiter(void 0, void 0, void 0
         res.status(500).send("Error updating user");
     }
 }));
-//Write a put method to update donationItem's recieverId
+//Write a put method to update donationItem's paymentId
 putRoutes.put("/donationItems/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const donationItemId = req.params.id;
-    const recieverId = req.body.recieverId;
+    const itemData = req.body;
     try {
-        yield firebase_1.db.collection('donationItems').doc(donationItemId).update({ recieverId: recieverId });
+        yield firebase_1.db.collection('donationItems').doc(donationItemId).set(itemData, { merge: true });
         res.status(200).send("Donation Item updated successfully");
     }
     catch (error) {
         console.error("Error updating donation item:", error);
         res.status(500).send("Error updating donation item");
+    }
+}));
+//Write a put method to update payment's paymentImageUrlReceiver
+putRoutes.put("/payments/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const paymentId = req.params.id;
+    const paymentData = req.body;
+    try {
+        yield firebase_1.db.collection('payments').doc(paymentId).set(paymentData, { merge: true });
+        res.status(200).send("Payment updated successfully");
+    }
+    catch (error) {
+        console.error("Error updating payment:", error);
+        res.status(500).send("Error updating payment");
     }
 }));
 exports.default = putRoutes;

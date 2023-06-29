@@ -9,6 +9,8 @@ import 'package:sahara/controllers/donation_item_controller.dart';
 import 'package:sahara/models/chat_room.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/message.dart';
+import 'package:sahara/models/payment.dart';
+import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
 import 'package:sahara/routes/routes.dart';
 import 'package:sahara/utils/app_utils.dart';
@@ -24,27 +26,70 @@ class MessageController extends GetxController {
   final itemController = DonationItemController.instance;
   final chatController = ChatRoomController.instance;
   late WebSocketChannel channel;
-  final canGiveItem = true.obs;
+  final canGiveItem = false.obs;
+  final letReceiverPay = false.obs;
+  final isPaymentComplete = false.obs;
+  final Rx<UserSahara> user = UserSahara.test().obs;
   @override
   void onInit() {
     try {
-      final chatRoomId = Get.parameters['id'] ?? '';
-      chatRoom(ChatRoom.getFromId(chatRoomId, chatController.chatRooms));
-      item(DonationItem.getFromId(
-          chatRoom.value.donationId, itemController.donationItems));
-      channel = _restApi.getMessageStream(chatRoomId, updateMessages);
-      setCanGiveItem();
+      initializeLists();
     } catch (e) {
       log(e.toString());
     }
     super.onInit();
   }
 
+  void initializeLists() {
+    final chatRoomId = Get.parameters['id'] ?? '';
+    chatRoom(ChatRoom.getFromId(chatRoomId, chatController.chatRooms));
+    item(DonationItem.getFromId(
+        chatRoom.value.donationId, itemController.donationItems));
+    channel = _restApi.getMessageStream(chatRoomId, updateMessages);
+    setCanGiveItem();
+    checkCondition();
+    user(chatController.getUser(chatRoom.value));
+  }
+
   void setCanGiveItem() {
     if (item.value.author.authorId == auth.userSahara.value.uid!) {
-      canGiveItem(true);
-    } else {
-      canGiveItem(false);
+      if (item.value.paymentId == null || item.value.paymentId!.isEmpty) {
+        canGiveItem(true);
+      }
+    }
+  }
+
+  //TODO: Update delveiery page after payment complete
+  //TODO: Post payment
+
+  void checkCondition() async {
+    if (item.value.paymentId != null) {
+      final Payment payment =
+          await _restApi.getPaymentById(item.value.paymentId);
+      if (payment.receiverId == auth.userSahara.value.uid!) {
+        if (item.value.deliveryPaidBy == DeliveryPaidBy.both) {
+          if (payment.paymentImageUrlReceiver == null) {
+            letReceiverPay(true);
+            isPaymentComplete(false);
+          } else {
+            letReceiverPay(false);
+            isPaymentComplete(true);
+          }
+        } else if (item.value.deliveryPaidBy == DeliveryPaidBy.receiver) {
+          if (payment.paymentImageUrlReceiver == null) {
+            letReceiverPay(true);
+            isPaymentComplete(false);
+          } else {
+            letReceiverPay(false);
+            isPaymentComplete(true);
+          }
+        } else {
+          letReceiverPay(false);
+          isPaymentComplete(true);
+        }
+      } else {
+        isPaymentComplete(true);
+      }
     }
   }
 
@@ -55,12 +100,30 @@ class MessageController extends GetxController {
 
   void giveDonation() async {
     if (item.value.deliveryPaidBy == DeliveryPaidBy.donor) {
-      Get.toNamed(Routes.payment, parameters: {'id': item.value.donationId!});
+      routeToPayment();
     } else if (item.value.deliveryPaidBy == DeliveryPaidBy.both) {
-      Get.toNamed(Routes.payment, parameters: {'id': item.value.donationId!});
+      routeToPayment();
     } else {
-      await _restApi.putReceiverInfo(item.value.donationId!);
+      if (auth.userSahara.value.uid == chatRoom.value.userId) {
+        routeToPayment();
+      } else {
+        final payment = Payment(
+            deliveryPaidBy: item.value.deliveryPaidBy,
+            senderId: item.value.author.authorId,
+            receiverId: chatRoom.value.userId);
+        final paymentId = await _restApi.postPayment(payment);
+        await _restApi.putPaymentId(item.value.donationId!, paymentId);
+        await itemController.setupLists();
+        successSnackBar("Sucessfully Given item!");
+      }
     }
+  }
+
+  void routeToPayment() {
+    Get.toNamed(Routes.payment, parameters: {
+      'id': item.value.donationId!,
+      'receiverId': chatRoom.value.userId,
+    });
   }
 
   void sendMessage() {

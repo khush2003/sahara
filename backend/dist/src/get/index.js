@@ -46,7 +46,7 @@ getRoutes.get('/users', (req, res) => __awaiter(void 0, void 0, void 0, function
         const snapshot = yield firebase_1.db.collection('users').get();
         const users = [];
         snapshot.forEach(doc => {
-            users.push(doc.data());
+            users.push(Object.assign({ uid: doc.id }, doc.data()));
         });
         res.status(200).send(users);
     }
@@ -278,6 +278,17 @@ getRoutes.get('/messages/:chatRoomId', (req, res) => __awaiter(void 0, void 0, v
             });
             res.status(200).send(messages);
         });
+    }
+    catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+}));
+// get payemnt by id
+getRoutes.get('/payment/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const snapshot = yield firebase_1.db.collection('payments').doc(req.params.id).get();
+        const payment = snapshot.data();
+        res.status(200).send(Object.assign({ paymentId: req.params.id }, payment));
     }
     catch (error) {
         return res.status(400).send("An Error Occured" + error);

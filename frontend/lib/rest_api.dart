@@ -8,6 +8,7 @@ import 'package:sahara/models/chat_room.dart';
 import 'package:sahara/models/coupon.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/message.dart';
+import 'package:sahara/models/payment.dart';
 import 'package:sahara/models/review.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'models/user.dart';
@@ -93,17 +94,55 @@ class RestAPI extends GetConnect {
     }
   }
 
-  Future<dynamic> putReceiverInfo(String donationId) async {
-    final uid = auth.currentUser!.uid;
+  Future<dynamic> putPaymentId(String donationId, String paymentId) async {
     Response response = await connect.put(
-        '$putBackendUrl/donationItems/$donationId', {"receiverId": uid});
+        '$putBackendUrl/donationItems/$donationId', {"paymentId": paymentId});
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Failed to put payment id');
+    }
+  }
+
+  // Get payment info by payment id
+  Future<Payment> getPaymentById(String? paymentId) async {
+    Response response = await connect.get('$getBackendUrl/payment/$paymentId');
+    if (response.statusCode == 200) {
+      dynamic paymentData = response.body;
+      print(paymentData);
+      return Payment.fromJson(paymentData);
+    } else {
+      throw Exception('Failed to retrieve payment info');
+    }
+  }
+
+  // post payment info
+  Future<String> postPayment(Payment payment) async {
+    final Map<String, dynamic> paymentData = payment.toJson();
+    print(paymentData);
+    Response response =
+        await connect.post('$postBackendUrl/payment', paymentData);
+    print(response);
+    print(response.body);
+    if (response.statusCode == 200) {
+      final paymentId = response.body as String;
+      return paymentId;
+    } else {
+      throw Exception('Failed to post payment info');
+    }
+  }
+
+  // update receiver paymentImage
+  Future<dynamic> putReceiverPayment(
+      String paymentId, String receiverPaymentImage) async {
+    Response response = await connect.put('$putBackendUrl/payments/$paymentId',
+        {"paymentImageUrlReceiver": receiverPaymentImage});
     if (response.statusCode == 200) {
       return response.body;
     } else {
       throw Exception('Failed to put receiver info');
     }
   }
-
 
   Future<dynamic> getCurrentUserInfo() async {
     final User? user = auth.currentUser;
@@ -118,6 +157,20 @@ class RestAPI extends GetConnect {
       }
     } catch (e) {
       throw Exception('Error: $e');
+    }
+  }
+
+  // Get all users
+  Future<dynamic> getAllUsers() async {
+    Response response = await connect.get('$getBackendUrl/users');
+    if (response.statusCode == 200) {
+      final List<UserSahara> users = [];
+      response.body.forEach((element) {
+        users.add(UserSahara.fromjson(element, element['uid']));
+      });
+      return users;
+    } else {
+      throw Exception('Failed to retrieve user info');
     }
   }
 
@@ -171,7 +224,6 @@ class RestAPI extends GetConnect {
     WebSocketChannel channel = IOWebSocketChannel.connect('ws://$host:$wsPort');
     channel.sink.add('{"chatRoomId": "$chatRoomId"}');
     channel.stream.listen((message) {
-      log(message.toString());
       final List<dynamic> jsonList = json.decode(message);
       final List<Message> receivedMessages =
           jsonList.map((json) => Message.fromjson(json)).toList();
@@ -184,7 +236,6 @@ class RestAPI extends GetConnect {
       void Function(List<Message>) updateMessages) {
     WebSocketChannel channel = IOWebSocketChannel.connect('ws://$host:$wsPort');
     channel.stream.listen((message) {
-      log(message.toString());
       final List<dynamic> jsonList = json.decode(message);
       final List<Message> receivedMessages =
           jsonList.map((json) => Message.fromjson(json)).toList();

@@ -78,19 +78,35 @@ putRoutes.put("/users/:id", async (req, res) => {
     }
   });
 
-  //Write a put method to update donationItem's recieverId
+  //Write a put method to update donationItem's paymentId
   putRoutes.put("/donationItems/:id", async (req, res) => {
     const donationItemId = req.params.id;
-    const recieverId = req.body.recieverId;
+    const itemData = req.body;
     try {
-      await db.collection('donationItems').doc(donationItemId).update({recieverId: recieverId});
+      await db.collection('donationItems').doc(donationItemId).set(itemData, { merge: true });
       res.status(200).send("Donation Item updated successfully");
     } catch (error) {
       console.error("Error updating donation item:", error);
       res.status(500).send("Error updating donation item");
     }
   });
+
+  //Write a put method to update payment's paymentImageUrlReceiver
+  putRoutes.put("/payments/:id", async (req, res) => {
+    const paymentId = req.params.id;
+    const paymentData = req.body;
+    try {
+      await db.collection('payments').doc(paymentId).set(paymentData, { merge: true });
+      res.status(200).send("Payment updated successfully");
+    } catch (error) {
+      console.error("Error updating payment:", error);
+      res.status(500).send("Error updating payment");
+    }
+  });
   
+
+
+
 
   
 

@@ -52,9 +52,22 @@ class FeedView extends StatelessWidget {
                           const SizedBox(height: 10),
                       itemCount: donationItemController.filteredList.length,
                       itemBuilder: (context, index) {
-                        return DonationCard(
+                        if (donationItemController
+                                .filteredList[index].paymentId ==
+                            null) {
+                          return DonationCard(
                             item: donationItemController.filteredList[index],
-                            showChatButton: donationItemController.filteredList[index].author.authorId == auth.userSahara.value.uid! ? false : true,);
+                            showChatButton: donationItemController
+                                        .filteredList[index].author.authorId ==
+                                    auth.userSahara.value.uid!
+                                ? false
+                                : true,
+                          );
+                        } else {
+                          return DonationCard(
+                              item: donationItemController.filteredList[index],
+                              showChatButton: false);
+                        }
                       });
                 })
               ],

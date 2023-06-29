@@ -147,7 +147,7 @@ void normalSnackBar(String titleText, String message, Color? backgroundColor,
   );
 }
 
-void successSnackBar(String message) {
+void successSnackBar(String message, {int durationSeconds = 3}) {
   Get.snackbar(
     "Success",
     message,
@@ -157,7 +157,7 @@ void successSnackBar(String message) {
     margin: const EdgeInsets.all(16),
     padding: const EdgeInsets.all(16),
     borderRadius: 8,
-    duration: const Duration(seconds: 3),
+    duration:  Duration(seconds: durationSeconds),
     snackStyle: SnackStyle.FLOATING,
     shouldIconPulse: true,
     titleText: Text(

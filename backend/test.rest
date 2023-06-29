@@ -81,6 +81,8 @@ Content-Type: application/json
 ### GET
 GET http://localhost:5000/get/messages/8bjAC1EgJog9OAPOauRR
 
+### GET
+GET http://localhost:5000/get/payment/pql8QzjWBRQq7qZs9hF4
 
 ### PUT
 PUT http://localhost:5000/put/users/vY9xlAikX2RnpXG6JpuV1zZbIQq1
@@ -90,6 +92,14 @@ Content-Type: application/json
   "userName": "Updated Name",
   "userPhoneNumber": "1234567890",
   "userAddress": "New Address"
+}
+
+### PUT
+PUT http://localhost:5000/put/donationItems/OL2oaQTO3KWNYBrWqFFJ
+Content-Type: application/json
+
+{
+  "receiverId": "Jyn97u8sQ4dUBMiFXkgzIlX0fR83"
 }
 
 ### GET

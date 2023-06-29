@@ -23,10 +23,14 @@ class ChatRoomView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: controller.chatRooms
                     .map((room) => Obx(
-                      () => ChatListCard(
-                            room: room, item: DonationItem.getFromId(room.donationId, itemController.donationItems),
-                          ),
-                    ))
+                          () {
+                            return ChatListCard(
+                              room: room,
+                              item: DonationItem.getFromId(room.donationId,
+                                  itemController.donationItems), user: controller.getUser(room),
+                            );
+                          },
+                        ))
                     .toList()),
           ),
         ));

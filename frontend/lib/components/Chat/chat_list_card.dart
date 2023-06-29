@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:sahara/components/image_thumbnail.dart';
 import 'package:sahara/models/chat_room.dart';
 import 'package:sahara/models/donation_item.dart';
+import 'package:sahara/models/user.dart';
 import 'package:sahara/routes/routes.dart';
 
 class ChatListCard extends StatelessWidget {
   final ChatRoom room;
   final DonationItem item;
-  const ChatListCard({super.key, required this.room, required this.item});
+  final UserSahara user;
+  const ChatListCard({super.key, required this.room, required this.item, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +93,7 @@ class ChatListCard extends StatelessWidget {
                         width: 12,
                       ),
                       ImageThumbnail(
-                        imageUrl: item.author.imageUrl,
+                        imageUrl: user.profilePicture,
                         isCircular: true,
                         size: 50,
                       ),
@@ -104,7 +106,7 @@ class ChatListCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                item.author.name,
+                                user.userName,
                                 style: const TextStyle(fontSize: 20, height: 1),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,

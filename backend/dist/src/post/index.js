@@ -48,4 +48,12 @@ postRoutes.post("/message", (req, res) => __awaiter(void 0, void 0, void 0, func
     const message = yield firebase_1.db.collection('messages').add(req.body);
     res.status(200).send(message);
 }));
+//post payment
+postRoutes.post("/payment", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const payment = yield firebase_1.db.collection('payments').add(req.body);
+    yield payment.get().then((doc) => {
+        const paymentId = doc.id;
+        res.status(200).send(paymentId);
+    });
+}));
 exports.default = postRoutes;

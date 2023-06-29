@@ -37,7 +37,7 @@ getRoutes.get('/users', async (req, res) => {
         const snapshot = await db.collection('users').get()
         const users: any[] = []
         snapshot.forEach(doc => {
-            users.push(doc.data())
+            users.push({uid: doc.id, ...doc.data()})
         })
         res.status(200).send(users)
     } catch (error) {
@@ -296,6 +296,18 @@ getRoutes.get('/messages/:chatRoomId', async (req, res) => {
         return res.status(400).send("An Error Occured" + error);
     }
 });
+
+// get payemnt by id
+getRoutes.get('/payment/:id', async (req, res) => {
+    try {
+        const snapshot = await db.collection('payments').doc(req.params.id).get();
+        const payment = snapshot.data();
+        res.status(200).send({paymentId: req.params.id, ...payment});
+    } catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+});
+
 
 
 
