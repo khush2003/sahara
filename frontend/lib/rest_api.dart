@@ -109,7 +109,6 @@ class RestAPI extends GetConnect {
     Response response = await connect.get('$getBackendUrl/payment/$paymentId');
     if (response.statusCode == 200) {
       dynamic paymentData = response.body;
-      print(paymentData);
       return Payment.fromJson(paymentData);
     } else {
       throw Exception('Failed to retrieve payment info');
@@ -119,11 +118,8 @@ class RestAPI extends GetConnect {
   // post payment info
   Future<String> postPayment(Payment payment) async {
     final Map<String, dynamic> paymentData = payment.toJson();
-    print(paymentData);
     Response response =
         await connect.post('$postBackendUrl/payment', paymentData);
-    print(response);
-    print(response.body);
     if (response.statusCode == 200) {
       final paymentId = response.body as String;
       return paymentId;

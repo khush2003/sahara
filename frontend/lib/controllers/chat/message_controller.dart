@@ -35,7 +35,7 @@ class MessageController extends GetxController {
     try {
       initializeLists();
     } catch (e) {
-      log(e.toString());
+      //
     }
     super.onInit();
   }

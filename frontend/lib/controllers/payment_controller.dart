@@ -39,16 +39,13 @@ class PaymentController extends GetxController {
     final image = await _imagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       var file = File(image.path);
-      log(file.path);
       //Upload to Firebase
       final randomString = randomAlphaNumeric(30);
-      log(randomString);
       var snapshot = await _firebaseStorage
           .ref()
           .child('images/$randomString')
           .putFile(file);
       var downloadUrl = await snapshot.ref.getDownloadURL();
-      log(downloadUrl);
       imageUrl(downloadUrl);
     } else {
       warningSnackBar('Warning: No Image Selected');

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sahara/components/image_thumbnail.dart';
 import 'package:sahara/controllers/auth/auth_controller.dart';
+import 'package:sahara/controllers/donation_item_controller.dart';
 import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
 import '../models/donation_item.dart';
@@ -192,12 +193,12 @@ class TopSection extends StatelessWidget {
                     );
                   },
                   child: ImageThumbnail(
-                          imageUrl: _tabController
-                                  .auth.userSahara.value.profilePicture ??
-                              'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
-                          isCircular: true,
-                          size: 130,
-                        ),
+                    imageUrl: _tabController
+                            .auth.userSahara.value.profilePicture ??
+                        'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
+                    isCircular: true,
+                    size: 130,
+                  ),
                 ),
               ),
             ],
@@ -539,7 +540,7 @@ class NewAndHistory extends StatelessWidget {
 class DonatingItem extends StatelessWidget {
   //final DonationItem donationPost = DonationItem.test();
   final CustomTabController controller = Get.put(CustomTabController());
-  final auth  = AuthController.instance;
+  final auth = AuthController.instance;
   DonatingItem({super.key});
   @override
   Widget build(BuildContext context) {
@@ -556,8 +557,13 @@ class DonatingItem extends StatelessWidget {
                       const SizedBox(height: 10),
                   itemCount: controller.donationItems.length,
                   itemBuilder: (context, index) {
-                    return DonationCard(item: controller.donationItems[index], showChatButton: auth.userSahara.value.uid! == controller.donationItems[index].author.authorId ? false : true
-                    ,);
+                    return DonationCard(
+                      item: controller.donationItems[index],
+                      showChatButton: auth.userSahara.value.uid! ==
+                              controller.donationItems[index].author.authorId
+                          ? false
+                          : true,
+                    );
                   }),
             ),
           )
@@ -604,7 +610,7 @@ class ReceivedItem extends StatelessWidget {
                   return ReviewCard(
                       item: DonationItem.getFromId(
                           controller.userReviewList[index].donationId,
-                          controller.donationItems),
+                          DonationItemController.instance.donationItems),
                       review: controller.userReviewList[index]);
                 },
                 separatorBuilder: (context, index) =>

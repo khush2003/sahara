@@ -30,9 +30,6 @@ class BlockUsersController extends GetxController {
         await restApi.getUserById(FirebaseAuth.instance.currentUser!.uid);
     if (fetchedUser != null) {
       user.value = fetchedUser;
-      //print(AuthController.instance.userSahara.value.blockedUser);
-    } else {
-      print("User not found");
     }
   }
 
@@ -52,7 +49,6 @@ class BlockUsersController extends GetxController {
         blockedUsers.add(blockedUserData);
       }
     }
-    print(AuthController.instance.userSahara.value.blockedUser);
   }
 }
 

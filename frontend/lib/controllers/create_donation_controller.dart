@@ -105,11 +105,6 @@ class CreateDonationController extends GetxController {
 
   void calculateDelivery() {
     if (!isFieldZero()) {
-      print(weightController.text);
-      print(lengthController.text);
-      print(widthController.text);
-      print(heightController.text);
-      print(deliveryFee.value);
       deliveryFee(0.75 *
               (double.parse(widthController.text) +
                   double.parse(lengthController.text)) +

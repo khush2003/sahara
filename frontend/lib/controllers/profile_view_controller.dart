@@ -36,8 +36,8 @@ class CustomTabController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     setupLists();
+    super.onInit();
   }
 
   uploadImage(BuildContext context) async {
@@ -83,32 +83,28 @@ class CustomTabController extends GetxController {
   }
 
   Future<void> setupLists() async {
-    final List<DonationItem> donationResult = _itemController.donationItems;
-    // final List<DonationItem> donationResult = donationItem.donationItems;
+    _itemController.donationItems.listen((donationResult) {
       final filteredDonationItems = donationResult
-          .where((item) =>
-              item.author.authorId == auth.userSahara.value.uid!)
+          .where((item) => item.author.authorId == auth.userSahara.value.uid!)
           .toList();
       donationItems(filteredDonationItems);
-    
-    final List<Review> reviews = _itemController.reviewList;
-    // final List<Review> reviews = donationItem.reviewList;
+    });
+
+    _itemController.reviewList.listen((reviews) {
       final filteredReviews = reviews
           .where((review) =>
               donationItems.any((item) => item.donationId == review.donationId))
           .toList();
       final filteredUserReviews = reviews
-          .where((review) =>
-              review.reviewerId == auth.userSahara.value.uid!)
+          .where((review) => review.reviewerId == auth.userSahara.value.uid!)
           .toList();
       reviewList(filteredReviews);
       userReviewList(filteredUserReviews);
-    
+    });
 
     final List<UserSahara>? allUsers =
         await restApi.getBlockedUsers(auth.userSahara.value.blockedUser ?? []);
     if (allUsers == null) {
-      log("No Users found");
     } else {
       blockedUsers(allUsers);
     }

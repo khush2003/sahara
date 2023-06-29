@@ -44,7 +44,6 @@ class DonationItemController extends GetxController {
   Future<void> setupLists() async {
     final List<DonationItem>? donationResult = await restApi.getDonationItems();
     if (donationResult == null) {
-      log("No donation items found");
     } else {
       donationItems(donationResult);
       filteredList(donationResult);
@@ -53,7 +52,6 @@ class DonationItemController extends GetxController {
 
     final List<Review>? reviews = await restApi.getReviews();
     if (reviews == null) {
-      log("No donation items found");
     } else {
       reviewList(reviews);
     }

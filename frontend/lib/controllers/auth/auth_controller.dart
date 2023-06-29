@@ -32,7 +32,6 @@ class AuthController extends GetxController {
       userSahara(UserSahara.empty());
     } else {
       userSahara(await RestAPI.instance.getUserById(user.uid));
-      print(userSahara.value);
     }
   }
 
@@ -115,7 +114,6 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       // Handle exception/error
-      print(e);
       return 'An error occurred. Please try again later';
     }
   }
@@ -148,7 +146,6 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       // Handle exception/error
-      print(e);
       return 'An error occurred. Please try again later';
     }
   }
