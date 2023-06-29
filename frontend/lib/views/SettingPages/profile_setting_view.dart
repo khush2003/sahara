@@ -9,8 +9,6 @@ import '../../routes/routes.dart';
 class ProfileSettingView extends StatelessWidget {
   ProfileSettingView({super.key});
 
-  final couponController = Get.put(CouponController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,14 +53,6 @@ class ProfileSettingView extends StatelessWidget {
                         Get.toNamed(Routes.changePassword);
                       },
                       text: "Update Password"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: PrimaryButton(
-                      onPressed: () {
-                        couponController.updateCoupon();
-                      },
-                      text: "GET COUPON!!!"),
                 ),
               ],
             ),
