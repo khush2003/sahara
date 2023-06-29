@@ -122,6 +122,31 @@ bool checkEmail(String input) {
   return regex.hasMatch(input);
 }
 
+void normalSnackBar(String titleText, String message, Color? backgroundColor,
+    Color? textColor) {
+  Get.snackbar(
+    "Success",
+    message,
+    snackPosition: SnackPosition.BOTTOM,
+    colorText: textColor ?? Colors.white,
+    backgroundColor: backgroundColor ?? Colors.green,
+    margin: const EdgeInsets.all(16),
+    padding: const EdgeInsets.all(16),
+    borderRadius: 8,
+    duration: const Duration(seconds: 3),
+    snackStyle: SnackStyle.FLOATING,
+    shouldIconPulse: true,
+    titleText: Text(
+      titleText,
+      style: headTextBold(),
+    ),
+    messageText: Text(
+      message,
+      style: regularTextBold(color: textColor ?? Colors.white),
+    ),
+  );
+}
+
 void successSnackBar(String message) {
   Get.snackbar(
     "Success",

@@ -249,7 +249,7 @@ class RestAPI extends GetConnect {
 
           await connect.put(
               '$putBackendUrl/users/$uid/discountCoupon/$couponDocId',
-              {'couponId': couponDocId});
+              {couponDocId});
         } on Exception catch (e) {
           return e;
         }

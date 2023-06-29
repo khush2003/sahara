@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:sahara/controllers/auth/auth_controller.dart';
@@ -37,8 +39,18 @@ class CouponController extends GetxController {
   Future<void>? setupCouponList() async {
     final uid = auth.currentUser!.uid;
     try {
-      List<Coupon>? userCoupons = await restAPI.getUserCoupons(uid);   
+      List<Coupon>? userCoupons = await restAPI.getUserCoupons(uid);
       couponList(userCoupons);
+    } catch (e) {
+      errorSnackBar(e.toString());
+    }
+  }
+
+  Future<void>? copytoClipBoard(String text) async {
+    try {
+      await Clipboard.setData(ClipboardData(text: text));
+      normalSnackBar("COPIED!", "Copied discount code to your clipboard!",
+          Colors.white, Colors.black);
     } catch (e) {
       errorSnackBar(e.toString());
     }
