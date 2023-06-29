@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
+import 'package:random_string/random_string.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
+import 'package:sahara/utils/app_utils.dart';
 import '../models/donation_item.dart';
 import '../models/review.dart';
 import '../views/profile_view.dart';
@@ -17,7 +19,8 @@ class CustomTabController extends GetxController {
 
   final connect = Get.find<GetConnect>();
   final restApi = RestAPI.instance;
-  final imageUrl = ''.obs;
+  final profileImageUrl = ''.obs;
+  final coverImageUrl = ''.obs;
   final isGiveSelected = true.obs;
   final isReceiveSelected = false.obs;
   final isNewSelected = true.obs;
@@ -37,23 +40,49 @@ class CustomTabController extends GetxController {
   @override
   void onInit() {
     setupLists();
+    setImages();
     super.onInit();
   }
 
-  uploadImage(BuildContext context) async {
+  void setImages() {
+    profileImageUrl(auth.userSahara.value.profilePicture);
+    coverImageUrl(auth.userSahara.value.coverPicture);
+  }
+
+  uploadImage(String type) async {
+    //Select Image
     final image = await _imagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       var file = File(image.path);
+      //Upload to Firebase
+      final randomString = randomAlphaNumeric(30);
       var snapshot = await _firebaseStorage
           .ref()
-          .child('images/${image.name}')
+          .child('images/$randomString')
           .putFile(file);
       var downloadUrl = await snapshot.ref.getDownloadURL();
-      imageUrl(downloadUrl);
-      Get.dialog(ChangeProfileAndCoverPhotoDialog(
-        photo: downloadUrl,
-        type: 'Profile',
-      ));
+      type == 'Profile'
+          ? profileImageUrl(downloadUrl)
+          : coverImageUrl(downloadUrl);
+    } else {
+      warningSnackBar('Warning: No Image Selected');
+      return;
+    }
+  }
+
+  void setImage(String type) async {
+    if (type == 'Profile') {
+      await restApi.putProfilePicture(profileImageUrl.value);
+      Get.back();
+      successSnackBar("Profile Picture Updated");
+      auth.updateUser();
+      setImages();
+    } else {
+      await restApi.putCoverPicture(coverImageUrl.value);
+      Get.back();
+      successSnackBar("Cover Photo Updated");
+      auth.updateUser();
+      setImages();
     }
   }
 

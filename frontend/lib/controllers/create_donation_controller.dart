@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:random_string/random_string.dart';
 import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/models/author.dart';
 import 'package:sahara/models/donation_item.dart';
@@ -171,15 +172,16 @@ class CreateDonationController extends GetxController {
     return durationTotal.value;
   }
 
-  void uploadImage() async {
+  uploadImage() async {
     //Select Image
     final image = await _imagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       var file = File(image.path);
       //Upload to Firebase
+      final randomString = randomAlphaNumeric(30);
       var snapshot = await _firebaseStorage
           .ref()
-          .child('images/${image.name}')
+          .child('images/$randomString')
           .putFile(file);
       var downloadUrl = await snapshot.ref.getDownloadURL();
       imageUrl(downloadUrl);

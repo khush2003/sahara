@@ -28,14 +28,16 @@ class ProfileView extends StatelessWidget {
                 children: [
                   SizedBox(
                       height: 215,
-                      child: TopSection(
-                        profile:
-                            _tabController.auth.userSahara.value.profilePicture,
-                        cover:
-                            _tabController.auth.userSahara.value.coverPicture,
-                        username: _tabController.auth.userSahara.value.userName,
-                        email:
-                            _tabController.auth.firebaseUser.value!.email ?? '',
+                      child: Obx(
+                        () => TopSection(
+                          profile:
+                              _tabController.auth.userSahara.value.profilePicture,
+                          cover:
+                              _tabController.auth.userSahara.value.coverPicture,
+                          username: _tabController.auth.userSahara.value.userName,
+                          email:
+                              _tabController.auth.firebaseUser.value!.email ?? '',
+                        ),
                       )),
                   //SocialIcons(),
                   Padding(
@@ -242,50 +244,75 @@ class ChangeProfileAndCoverPhotoDialog extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: OutlinedButton.icon(
-                icon: photo == ''
-                    ? Expanded(
-                        child: type == 'Profile'
-                            ? Image.network(
-                                'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
-                                fit: BoxFit.fill,
-                              )
-                            : const Center(
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 12, right: 5, bottom: 5, left: 5),
-                                  child: Text(
-                                    'No Cover Photo',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
+              child: type == 'Profile' ? Obx(
+                () => OutlinedButton.icon(
+                  icon: _tabController.profileImageUrl.value == ''
+                      ? Expanded(
+                          child: Image.network(
+                                  'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg',
+                                  fit: BoxFit.fill,
+                                )
+                        )
+                      : Expanded(
+                          child: Obx(
+                            () => Image.network(
+                              _tabController.profileImageUrl.value,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                  onPressed: () => _tabController.uploadImage(type),
+                  label: const Text(''),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(
+                      color: Colors.black,
+                      width: 1,
+                    ),
+                  ),
+                ),
+              ) : Obx(
+                () => OutlinedButton.icon(
+                  icon: _tabController.coverImageUrl.value == ''
+                      ? const Expanded(
+                          child: Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 12, right: 5, bottom: 5, left: 5),
+                                    child: Text(
+                                      'No Cover Photo',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                      )
-                    : Expanded(
-                        child: Image.network(
-                          photo,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                onPressed: () => {},
-                label: const Text(''),
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(
-                    color: Colors.black,
-                    width: 1,
+                        )
+                      : Expanded(
+                          child: Obx(
+                            () => Image.network(
+                              _tabController.coverImageUrl.value,
+                              fit: BoxFit.fill,
+                            )),
+                          ),
+                        
+                  onPressed: () => _tabController.uploadImage(type),
+                  label: const Text(''),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(
+                      color: Colors.black,
+                      width: 1,
+                    ),
                   ),
                 ),
-              ),
+              )  ,
             ),
             const SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
                   child: TextButton(
-                    onPressed: () => _tabController.uploadImage(context),
+                    onPressed: () => _tabController.setImage(type),
                     style: TextButton.styleFrom(
                       backgroundColor: const Color(0xFFffC736),
                       shape: RoundedRectangleBorder(

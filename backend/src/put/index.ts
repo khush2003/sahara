@@ -78,6 +78,32 @@ putRoutes.put("/users/:id", async (req, res) => {
     }
   });
 
+  // Update all profilePicture
+  putRoutes.put("/allProfilePicture/:id", async (req, res) => {
+    const userId = req.params.id;
+    const profilePicture = req.body.profilePicture;
+    try {
+      await db.collection('users').doc(userId).update({profilePicture: profilePicture});
+      // Write a firebase call to update all donationItem's authorName where authorId = userId
+      await db.collection('donationItems').where('authorId', '==', userId).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({authorImageURL: profilePicture});
+        });
+      });
+      // Write a firebase call to update all reviews' reviewerName where reviewerId = userId
+      await db.collection('reviews').where('reviewerId', '==', userId).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({reviewerImageURL: profilePicture});
+        });
+      });
+      res.status(200).send("User updated successfully");
+    } catch (error) {
+      console.error("Error updating user:", error);
+      res.status(500).send("Error updating user");
+    }
+  });
+
+
   //Write a put method to update donationItem's paymentId
   putRoutes.put("/donationItems/:id", async (req, res) => {
     const donationItemId = req.params.id;

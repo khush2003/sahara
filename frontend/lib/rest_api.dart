@@ -94,6 +94,18 @@ class RestAPI extends GetConnect {
     }
   }
 
+  // PutProfilePicture
+  Future<dynamic> putProfilePicture(String profilePicture) async {
+    final uid = auth.currentUser!.uid;
+    Response response = await connect.put(
+        '$putBackendUrl/allProfilePicture/$uid', {"profilePicture": profilePicture});
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Failed to put profile picture');
+    }
+  }
+
   Future<dynamic> putPaymentId(String donationId, String paymentId) async {
     Response response = await connect.put(
         '$putBackendUrl/donationItems/$donationId', {"paymentId": paymentId});
@@ -103,6 +115,19 @@ class RestAPI extends GetConnect {
       throw Exception('Failed to put payment id');
     }
   }
+
+  // PutCoverPhoto
+  Future<dynamic> putCoverPicture(String coverPicture) async {
+    final uid = auth.currentUser!.uid;
+    Response response = await connect.put(
+        '$putBackendUrl/users/$uid', {"coverPicture": coverPicture});
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Failed to put cover picture');
+    }
+  }
+
 
   // Get payment info by payment id
   Future<Payment> getPaymentById(String? paymentId) async {
