@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/theme/app_theme.dart';
 
 import '../components/Feed/donation_card.dart';
@@ -11,6 +12,7 @@ import '../models/donation_item.dart';
 class FeedView extends StatelessWidget {
   FeedView({super.key});
   final donationItemController = DonationItemController.instance;
+  final auth = AuthController.instance;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -30,7 +32,7 @@ class FeedView extends StatelessWidget {
                   return ListView.separated(
                       itemBuilder: (context, index) {
                         return ReviewCard(
-                            donationPost: DonationItem.getFromId(
+                            item: DonationItem.getFromId(
                                 donationItemController
                                     .reviewList[index].donationId,
                                 donationItemController.donationItems),
@@ -51,8 +53,8 @@ class FeedView extends StatelessWidget {
                       itemCount: donationItemController.filteredList.length,
                       itemBuilder: (context, index) {
                         return DonationCard(
-                            donationPost:
-                                donationItemController.filteredList[index]);
+                            item: donationItemController.filteredList[index],
+                            showChatButton: donationItemController.filteredList[index].author.authorId == auth.userSahara.value.uid! ? false : true,);
                       });
                 })
               ],

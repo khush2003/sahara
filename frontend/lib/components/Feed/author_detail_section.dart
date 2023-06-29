@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/chat/chat_room_controller.dart';
+import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/routes/routes.dart';
 import 'package:unicons/unicons.dart';
 
@@ -8,10 +10,12 @@ import '../../utils/uni_icon.dart';
 import '../image_thumbnail.dart';
 
 class AutherDetailSection extends StatelessWidget {
+  final chatRoomController = Get.find<ChatRoomController>();
+  final DonationItem item;
   final Author author;
   final bool showChatButton;
-  const AutherDetailSection(
-      {super.key, required this.author, this.showChatButton = true});
+  AutherDetailSection(
+      {super.key, required this.author, this.showChatButton = true, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +37,7 @@ class AutherDetailSection extends StatelessWidget {
         const Spacer(),
         if (showChatButton)
           IconButton(
-              onPressed: () => Get.toNamed(Routes.chatRoom,
-                  parameters: {"id": author.authorId}),
+              onPressed: () => chatRoomController.joinChatRoom(item),
               icon: const UnIcon(UniconsLine.comment))
       ],
     );

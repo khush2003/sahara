@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../components/app_bottom_nav_bar.dart';
 import '../controllers/donation_item_controller.dart';
 import '../controllers/nav_bar_controller.dart';
-import 'chat.dart';
+import 'chat_room_view.dart';
 import 'delivery.dart';
 import 'feed.dart';
 import 'notifications.dart';
@@ -22,7 +22,7 @@ class App extends StatelessWidget {
               children: [
                 FeedView(),
                 DeliveryView(),
-                ChatView(),
+                ChatRoomView(),
                 const NotificationsView(),
                 const Profile()
               ])),

@@ -82,20 +82,6 @@ getRoutes.get('/users/:userId/discountCoupon/', async (req, res) => {
 })
 
 
-// getRoutes.get('/reviews', async (req, res) => {
-//     try {
-//         const snapshot = await db.collection('reviews').get()
-//         const reviews: any[] = []
-//         snapshot.forEach(doc => {
-//             reviews.push(doc.data())
-//         })
-//         res.status(200).send(reviews)
-//     } catch (error) {
-//         return res.status(400).send("An Error Occured" + error)
-//     }
-// })
-
-
 getRoutes.get('/reviews/:id', async (req, res) => {
     try {
         const snapshot = await db.collection('reviews').doc(req.params.id).get()
@@ -220,6 +206,78 @@ getRoutes.get('/eachUsers', async (req, res) => {
       res.status(500).send('Internal server error');
     }
   });
+
+
+  // Get all messages for a user chat, all messages include when I am the sender and he is the reciver or he is the sender and I am the reciver
+getRoutes.get('/messages/:userId/:otherUserId', async (req, res) => {
+    try {
+        const snapshot = await db.collection('messages').where('senderId', '==', req.params.userId).where('receiverId', '==', req.params.otherUserId).get();
+        const snapshot2 = await db.collection('messages').where('senderId', '==', req.params.otherUserId).where('receiverId', '==', req.params.userId).get();
+        const messages: FirebaseFirestore.DocumentData[] = [];
+        snapshot.forEach(doc => {
+            messages.push(doc.data());
+        });
+        snapshot2.forEach(doc => {
+            messages.push(doc.data());
+        });
+        res.status(200).send(messages);
+    } catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+});
+
+// Get all chatRooms
+getRoutes.get('/chatRooms', async (req, res) => {
+    try {
+        const snapshot = await db.collection('chatRooms').get();
+        const chatRooms: FirebaseFirestore.DocumentData[] = [];
+        snapshot.forEach(doc => {
+            chatRooms.push({
+                chatRoomId: doc.id,
+                ...doc.data(),
+            });
+        });
+        res.status(200).send(chatRooms);
+    } catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+});
+
+
+// Get all chatrooms for user (if authorId == id or userId == id)
+getRoutes.get('/chatRooms/:id', async (req, res) => {
+    try {
+        const snapshot = await db.collection('chatRooms').where('authorId', '==', req.params.id).get();
+        const snapshot2 = await db.collection('chatRooms').where('userId', '==', req.params.id).get();
+        const chatRooms: FirebaseFirestore.DocumentData[] = [];
+        snapshot.forEach(doc => {
+            chatRooms.push({chatRoomId: doc.id, ...doc.data()});
+        });
+        snapshot2.forEach(doc => {
+            chatRooms.push({chatRoomId: doc.id, ...doc.data()});
+        });
+        res.status(200).send(chatRooms);
+    } catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+});
+
+// Get message stream where message.chatRoomId == chatRoomId
+getRoutes.get('/messages/:chatRoomId', async (req, res) => {
+    try {
+        db.collection('messages').where('chatRoomId', '==', req.params.chatRoomId).onSnapshot((snapshot) => {
+            const messages: FirebaseFirestore.DocumentData[] = [];
+            snapshot.forEach(doc => {
+                messages.push({messageId: doc.id, ...doc.data()});
+            });
+            res.status(200).send(messages);
+        });
+    } catch (error) {
+        return res.status(400).send("An Error Occured" + error);
+    }
+});
+
+
 
 
 export default getRoutes

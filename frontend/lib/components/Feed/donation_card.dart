@@ -11,27 +11,31 @@ import 'author_detail_section.dart';
 import 'donation_details_section.dart';
 
 class DonationCard extends StatelessWidget {
-  final DonationItem donationPost;
-
+  final DonationItem item;
+  final bool showChatButton;
   const DonationCard({
     super.key,
-    required this.donationPost,
+    required this.item, required this.showChatButton,
   });
 
   @override
   Widget build(BuildContext context) {
     return CardSahara(
         onPressed: () => Get.toNamed(Routes.donationDetails,
-            parameters: {'id': donationPost.donationId!}),
+            parameters: {'id': item.donationId!}),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              DonationDetailSection(item: donationPost),
+              DonationDetailSection(item: item),
               const Divider(),
-              AutherDetailSection(author: donationPost.author),
+              AutherDetailSection(
+                author: item.author,
+                item: item,
+                showChatButton: showChatButton,
+              ),
               const SizedBox(height: 5),
             ],
           ),
@@ -54,7 +58,7 @@ class DetailRow extends StatelessWidget {
       children: [
         Text('$label: ', style: regularTextBold()),
         //overflow: TextOverflow.ellipsis not working
-        Text(value.length > 15 ? value.substring(0, 16) + '...' : value,
+        Text(value.length > 15 ? '${value.substring(0, 16)}...' : value,
             style: regularText()),
       ],
     );

@@ -35,4 +35,19 @@ postRoutes.post("/availableCoupons/:id", async (req, res) =>  {
     res.status(200).send(availableCouponId);
 });
 
+// Create a new chatRoom
+postRoutes.post("/chatRoom", async (req, res) =>  {
+    const chatRoom = await db.collection('chatRooms').add(req.body
+    );
+    res.status(200).send(chatRoom);
+});
+
+// Create a new message
+postRoutes.post("/message", async (req, res) =>  {
+    const message = await db.collection('messages').add(req.body
+    );
+    res.status(200).send(message);
+});
+
+
 export default postRoutes

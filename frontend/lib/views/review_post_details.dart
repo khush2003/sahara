@@ -31,7 +31,7 @@ class ReviewPostDetailsView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: AutherDetailSection(
-                  author: item.author, showChatButton: false),
+                  author: item.author, showChatButton: false, item: item,),
             ),
             ImageThumbnail(
                 fixedHeight: 300,

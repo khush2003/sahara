@@ -14,7 +14,7 @@ import '../views/SettingPages/change_username_view.dart';
 import '../views/SettingPages/profile_setting_view.dart';
 import '../views/app.dart';
 import '../views/block_users.dart';
-import '../views/chat.dart';
+import '../views/chat_room_view.dart';
 import '../views/coupon_view.dart';
 import '../views/create_donation.dart';
 import '../views/delivery.dart';
@@ -61,13 +61,13 @@ abstract class Routes {
 
 final getPages = [
   GetPage(name: Routes.delivery, page: () => DeliveryView()),
-  GetPage(name: Routes.chatRoom, page: () => const ChatRoom()),
+  GetPage(name: Routes.chatRoom, page: () =>  ChatRoomView()),
   GetPage(name: Routes.feed, page: () => FeedView()),
   GetPage(name: Routes.profile, page: () => const Profile()),
   GetPage(name: Routes.testNote, page: () => const TestNote()),
   GetPage(name: Routes.createDonation, page: () => CreateDonationView()),
   GetPage(name: Routes.notifications, page: () => const NotificationsView()),
-  GetPage(name: Routes.chat, page: () => const ChatView()),
+  GetPage(name: Routes.chat, page: () => const MessagingView()),
   GetPage(name: Routes.profileView, page: () => ProfileView()),
   GetPage(name: Routes.blockUsers, page: () => BlockUsers()),
   GetPage(

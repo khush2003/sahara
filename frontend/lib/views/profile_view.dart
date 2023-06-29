@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:sahara/controllers/auth/auth_controller.dart';
 import '../components/Feed/donation_card.dart';
 import '../components/Feed/review_card.dart';
 import '../models/donation_item.dart';
@@ -226,7 +226,8 @@ class ChangeProfileAndCoverPhotoDialog extends StatelessWidget {
   final String type;
   final CustomTabController _tabController = Get.put(CustomTabController());
 
-  ChangeProfileAndCoverPhotoDialog({super.key, required this.photo, required this.type});
+  ChangeProfileAndCoverPhotoDialog(
+      {super.key, required this.photo, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -541,12 +542,12 @@ class NewAndHistory extends StatelessWidget {
 class DonatingItem extends StatelessWidget {
   //final DonationItem donationPost = DonationItem.test();
   final CustomTabController controller = Get.put(CustomTabController());
-
+  final auth  = AuthController.instance;
   DonatingItem({super.key});
   @override
   Widget build(BuildContext context) {
     if (controller.donationItems.isEmpty) {
-      return NoItemFound(text: 'You do not have any donating items.');
+      return const NoItemFound(text: 'You do not have any donating items.');
     } else {
       return Column(
         children: [
@@ -558,8 +559,8 @@ class DonatingItem extends StatelessWidget {
                       const SizedBox(height: 10),
                   itemCount: controller.donationItems.length,
                   itemBuilder: (context, index) {
-                    return DonationCard(
-                        donationPost: controller.donationItems[index]);
+                    return DonationCard(item: controller.donationItems[index], showChatButton: auth.userSahara.value.uid! == controller.donationItems[index].author.authorId ? false : true
+                    ,);
                   }),
             ),
           )
@@ -595,7 +596,7 @@ class ReceivedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (controller.userReviewList.isEmpty) {
-      return NoItemFound(text: 'You do not have any received items.');
+      return const NoItemFound(text: 'You do not have any received items.');
     } else {
       return Column(
         children: [
@@ -604,7 +605,7 @@ class ReceivedItem extends StatelessWidget {
             child: Obx(() => ListView.separated(
                 itemBuilder: (context, index) {
                   return ReviewCard(
-                      donationPost: DonationItem.getFromId(
+                      item: DonationItem.getFromId(
                           controller.userReviewList[index].donationId,
                           controller.donationItems),
                       review: controller.userReviewList[index]);
@@ -625,7 +626,7 @@ class History extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (controller.reviewList.isEmpty) {
-      return NoItemFound(text: 'You do not have any donated items.');
+      return const NoItemFound(text: 'You do not have any donated items.');
     } else {
       return Column(
         children: [
@@ -634,7 +635,7 @@ class History extends StatelessWidget {
             child: Obx(() => ListView.separated(
                 itemBuilder: (context, index) {
                   return ReviewCard(
-                      donationPost: DonationItem.getFromId(
+                      item: DonationItem.getFromId(
                           controller.reviewList[index].donationId,
                           controller.donationItems),
                       review: controller.reviewList[index]);

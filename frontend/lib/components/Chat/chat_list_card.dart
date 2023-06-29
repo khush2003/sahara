@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/models/chat_room.dart';
+import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/routes/routes.dart';
 
 class ChatListCard extends StatelessWidget {
-  const ChatListCard({super.key});
+  final ChatRoom room;
+  final DonationItem item;
+  const ChatListCard({super.key, required this.room, required this.item});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(Routes.chatRoom);
+        Get.toNamed(Routes.chat, parameters: {'id': room.chatRoomId!});
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -20,10 +24,6 @@ class ChatListCard extends StatelessWidget {
               ),
               borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
-            // clipBehavior is necessary because, without it, the InkWell's animation
-            // will extend beyond the rounded edges of the [Card] (see https://github.com/flutter/flutter/issues/109776)
-            // This comes with a small performance cost, and you should not set [clipBehavior]
-            // unless you need it.
             clipBehavior: Clip.hardEdge,
             child: Padding(
               padding: const EdgeInsets.all(8.0),

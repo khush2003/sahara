@@ -38,4 +38,14 @@ postRoutes.post("/availableCoupons/:id", (req, res) => __awaiter(void 0, void 0,
     const availableCoupon = yield firebase_1.db.collection('availableCoupons').doc(availableCouponId).set(req.body);
     res.status(200).send(availableCouponId);
 }));
+// Create a new chatRoom
+postRoutes.post("/chatRoom", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const chatRoom = yield firebase_1.db.collection('chatRooms').add(req.body);
+    res.status(200).send(chatRoom);
+}));
+// Create a new message
+postRoutes.post("/message", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const message = yield firebase_1.db.collection('messages').add(req.body);
+    res.status(200).send(message);
+}));
 exports.default = postRoutes;

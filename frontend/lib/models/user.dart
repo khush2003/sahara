@@ -7,7 +7,7 @@ class UserSahara {
   final String? profilePicture;
   final String? coverPicture;
   final String? userAddress;
-  final List<String>? blockedUser;
+  final List<String>? blockedUser, chatWithUsers;
   final List<String>? discountCoupon;
   final String? token;
 
@@ -21,6 +21,7 @@ class UserSahara {
     required this.userName,
     this.userAddress,
     this.discountCoupon,
+    this.chatWithUsers,
   });
 
   @override
@@ -56,6 +57,7 @@ class UserSahara {
       userAddress: json['userAddress'] ?? '',
       blockedUser: List<String>.from(json['blockedUser'] ?? []),
       discountCoupon: List<String>.from(json['discountCoupon'] ?? []),
+      chatWithUsers: List<String>.from(json['chatWithUsers'] ?? []),
     );
   }
 
@@ -69,6 +71,7 @@ class UserSahara {
       'blockedUser': blockedUser,
       'discountCoupon': discountCoupon,
       'token': token,
+      'chatWithUsers': chatWithUsers,
     };
   }
 

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/chat/chat_room_controller.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/models/review.dart';
 import 'package:sahara/rest_api.dart';
@@ -15,9 +16,8 @@ class DonationItemController extends GetxController {
   final RxList<DonationItem> filteredList = <DonationItem>[].obs;
   final RxList<DonationItem> filteredItemsStored = <DonationItem>[].obs;
   final RxInt selectedCategoryIndex = 0.obs;
-
   final searchController = TextEditingController();
-
+  
   @override
   void onInit() async {
     await setupLists();

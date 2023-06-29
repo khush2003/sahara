@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/controllers/donation_details_controller.dart';
 
 import '../components/Feed/author_detail_section.dart';
@@ -9,6 +10,7 @@ import '../components/image_thumbnail.dart';
 import '../theme/app_theme.dart';
 
 class DonationItemDetailsView extends StatelessWidget {
+  final auth = AuthController.instance;
   DonationItemDetailsView({super.key});
   final DonationDetailsController controller =
       Get.put(DonationDetailsController());
@@ -25,8 +27,7 @@ class DonationItemDetailsView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child:
-                  AutherDetailSection(author: controller.donationItem.author),
-            ),
+                  AutherDetailSection(author: controller.donationItem.author, item: controller.donationItem, showChatButton: controller.donationItem.author.authorId == auth.userSahara.value.uid! ? false : true)),
             ImageThumbnail(
                 fixedHeight: 300,
                 isFlat: true,

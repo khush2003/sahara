@@ -1,15 +1,19 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:random_string/random_string.dart';
+import 'package:sahara/models/chat_room.dart';
 import 'package:sahara/models/coupon.dart';
 import 'package:sahara/models/donation_item.dart';
+import 'package:sahara/models/message.dart';
 import 'package:sahara/models/review.dart';
-
+import 'package:http/http.dart' as http;
 import 'models/user.dart';
+import 'dart:convert';
 
-class RestAPI extends GetConnect{
+class RestAPI extends GetConnect {
   final connect = Get.find<GetConnect>();
   static RestAPI get instance => Get.find<RestAPI>();
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -111,6 +115,55 @@ class RestAPI extends GetConnect{
     } else {
       return null;
     }
+  }
+
+  Future<dynamic> postChatRoom(ChatRoom chatRoom) async {
+    Response response =
+        await connect.post('$postBackendUrl/chatRoom', chatRoom.toJson());
+    if (response.statusCode == 200) {
+      final chatRoomId = response.body['_path']['segments'].last as String;
+      print(chatRoomId);
+      return chatRoomId;
+    } else {
+      throw Exception('Failed to post chat room info');
+    }
+  }
+
+  Future<List<ChatRoom>?> getChatRooms() async {
+    final uid = auth.currentUser!.uid;
+    Response response = await connect.get('$getBackendUrl/chatRooms/$uid');
+    if (response.statusCode == 200) {
+      List<ChatRoom> chatRooms = [];
+      response.body.forEach((element) {
+        chatRooms.add(ChatRoom.fromjson(element, element['chatRoomId']));
+      });
+      return chatRooms;
+    } else {
+      return null;
+    }
+  }
+
+  Future<dynamic> postMessage(Message message) async {
+    Response response =
+        await connect.post('$postBackendUrl/message', message.toJson());
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Failed to post message info');
+    }
+  }
+
+  Stream<List<Message>> getMessageStream(String chatRoomId) {
+    return http
+        .get(Uri.parse('$getBackendUrl/messages/$chatRoomId'))
+        .asStream()
+        .transform(utf8.decoder as StreamTransformer<http.Response, dynamic>)
+        .transform(json.decoder)
+        .map<List<Message>>((json) {
+      return (json as List<dynamic>)
+          .map((item) => Message.fromjson(item, item['messageId']))
+          .toList();
+    });
   }
 
   Future<dynamic> postReview(Review review) async {

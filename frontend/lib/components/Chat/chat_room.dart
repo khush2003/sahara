@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import '../../routes/routes.dart';
 import 'chat_message.dart';
 
-class ChatRoom extends StatefulWidget {
-  const ChatRoom({super.key});
+class MessagingView extends StatefulWidget {
+  const MessagingView({super.key});
 
   @override
-  State<ChatRoom> createState() => _ChatRoomState();
+  State<MessagingView> createState() => _MessagingViewState();
 }
 
-class _ChatRoomState extends State<ChatRoom> {
+class _MessagingViewState extends State<MessagingView> {
   final TextEditingController _messageController = TextEditingController();
 
   List<ChatMessage> messages = [

@@ -10,12 +10,12 @@ import '../../models/review.dart';
 import 'donation_details_section.dart';
 
 class ReviewCard extends StatelessWidget {
-  final DonationItem donationPost;
+  final DonationItem item;
   final Review review;
 
   const ReviewCard({
     super.key,
-    required this.donationPost,
+    required this.item,
     required this.review,
   });
 
@@ -32,13 +32,13 @@ class ReviewCard extends StatelessWidget {
             children: [
               const SizedBox(height: 10),
               AutherDetailSection(
-                author: donationPost.author,
-                showChatButton: false,
+                author: item.author,
+                showChatButton: false, item: item,
               ),
               const Divider(),
               DonationDetailSection(
                   showOverPricedWarning: false,
-                  item: donationPost,
+                  item: item,
                   showDescription: false,
                   showTags: false),
               const Divider(),
