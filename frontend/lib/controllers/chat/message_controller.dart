@@ -30,9 +30,11 @@ class MessageController extends GetxController {
   final letReceiverPay = false.obs;
   final isPaymentComplete = false.obs;
   final Rx<UserSahara> user = UserSahara.test().obs;
+  final Rx<String> chatRoomId = ''.obs;
   @override
   void onInit() {
     try {
+      chatRoomId(Get.parameters['id'] ?? '');
       initializeLists();
     } catch (e) {
       //
@@ -41,11 +43,10 @@ class MessageController extends GetxController {
   }
 
   void initializeLists() {
-    final chatRoomId = Get.parameters['id'] ?? '';
-    chatRoom(ChatRoom.getFromId(chatRoomId, chatController.chatRooms));
+    chatRoom(ChatRoom.getFromId(chatRoomId.value, chatController.chatRooms));
     item(DonationItem.getFromId(
         chatRoom.value.donationId, itemController.donationItems));
-    channel = _restApi.getMessageStream(chatRoomId, updateMessages);
+    channel = _restApi.getMessageStream(chatRoomId.value, updateMessages);
     setCanGiveItem();
     checkCondition();
     user(chatController.getUser(chatRoom.value));
@@ -85,7 +86,17 @@ class MessageController extends GetxController {
           isPaymentComplete(true);
         }
       } else {
-        isPaymentComplete(true);
+        if (item.value.deliveryPaidBy == DeliveryPaidBy.both) {
+          if (payment.paymentImageUrlReceiver == null) {
+            letReceiverPay(true);
+            isPaymentComplete(false);
+          } else {
+            letReceiverPay(false);
+            isPaymentComplete(true);
+          }
+        } else {
+          isPaymentComplete(true);
+        }
       }
     }
   }

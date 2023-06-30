@@ -73,7 +73,8 @@ class PaymentController extends GetxController {
         final paymentId = await _restApi.postPayment(payment);
         await _restApi.putPaymentId(item.value.donationId!, paymentId);
         await _itemController.setupLists();
-        messageController.initializeLists();
+        messageController.channel.sink.close();
+        messageController.initializeLists(); 
       }
       Get.back();
       Get.dialog(const SimpleDialog(

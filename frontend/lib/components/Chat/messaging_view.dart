@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/components/image_thumbnail.dart';
 import 'package:sahara/controllers/chat/message_controller.dart';
+import 'package:sahara/utils/app_utils.dart';
 
 class MessagingView extends StatelessWidget {
   final controller = Get.put(MessageController());
@@ -95,14 +96,18 @@ class MessagingView extends StatelessWidget {
                       child: Obx(
                         () => Container(
                           decoration: BoxDecoration(
-                            borderRadius: (controller.messages[index].senderId !=
-                              controller.auth.firebaseUser.value!.uid) ? const BorderRadius.only(
-                                topLeft: Radius.circular(0),
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20), bottomLeft: Radius.circular(20)) : const BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20),
-                                bottomLeft: Radius.circular(20)),
+                            borderRadius:
+                                (controller.messages[index].senderId !=
+                                        controller.auth.firebaseUser.value!.uid)
+                                    ? const BorderRadius.only(
+                                        topLeft: Radius.circular(0),
+                                        topRight: Radius.circular(20),
+                                        bottomRight: Radius.circular(20),
+                                        bottomLeft: Radius.circular(20))
+                                    : const BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20),
+                                        bottomLeft: Radius.circular(20)),
                             color: (controller.messages[index].senderId !=
                                     controller.auth.firebaseUser.value!.uid
                                 ? Colors.grey.shade200
@@ -129,7 +134,7 @@ class MessagingView extends StatelessWidget {
               color: Colors.grey.shade200,
               child: Column(
                 children: [
-                  Obx(() => controller.letReceiverPay.value
+                  Obx(() => controller.letReceiverPay.value && controller.chatRoom.value.userId == controller.auth.firebaseUser.value!.uid
                       ? Row(children: [
                           const Text('You need to pay for delivery fees',
                               style: TextStyle(fontSize: 20)),
@@ -139,6 +144,19 @@ class MessagingView extends StatelessWidget {
                             text: "Pay",
                           )
                         ])
+                      : Container()),
+                  Obx(() => controller.letReceiverPay.value == true &&
+                          controller.isPaymentComplete.value == false && controller.chatRoom.value.authorId == controller.auth.firebaseUser.value!.uid
+                      ? Row(
+                          children: const [
+                            Expanded(
+                              child: Text(
+                                  'Payemnt is complete from your side! Waiting for reciver to pay the payment before sending for delivery',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.black)),
+                            ),
+                          ],
+                        )
                       : Container()),
                   Obx(() => controller.letReceiverPay.value == false &&
                           controller.isPaymentComplete.value == true

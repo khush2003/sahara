@@ -99,7 +99,7 @@ PUT http://localhost:5000/put/donationItems/OL2oaQTO3KWNYBrWqFFJ
 Content-Type: application/json
 
 {
-  "receiverId": "Jyn97u8sQ4dUBMiFXkgzIlX0fR83"
+  "paymentId": null
 }
 
 ### GET
