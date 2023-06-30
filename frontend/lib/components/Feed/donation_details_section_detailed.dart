@@ -33,11 +33,11 @@ class DonationDetailsSectionDetailed extends StatelessWidget {
         InfoRow(
             icon: UniconsLine.bitcoin_circle,
             label: 'Price',
-            value: '${item.price} baht'),
+            value: '${item.price} bhat'),
         InfoRow(
             icon: UniconsLine.parcel,
             label: 'Delivery Fees',
-            value: '${item.deliveryFees} baht'),
+            value: '${item.deliveryFees} bhat'),
       ],
     );
   }

@@ -112,7 +112,7 @@ class ChatListCard extends StatelessWidget {
                                 maxLines: 2,
                               ),
                               // const Text(
-                              //   'Him : Give me your bottle', //TODO: Fetch latest message
+                              //   'Him : Give me your bottle', 
                               //   style: TextStyle(
                               //       fontSize: 20,
                               //       height: 1,

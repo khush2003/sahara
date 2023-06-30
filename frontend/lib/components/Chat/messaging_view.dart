@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/components/image_thumbnail.dart';
-import 'package:sahara/controllers/chat/chat_room_controller.dart';
 import 'package:sahara/controllers/chat/message_controller.dart';
-
-import '../../routes/routes.dart';
 
 class MessagingView extends StatelessWidget {
   final controller = Get.put(MessageController());
@@ -51,7 +48,7 @@ class MessagingView extends StatelessWidget {
                         () => Text(
                           controller.user.value.userName,
                           style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                              fontSize: 20, fontWeight: FontWeight.w600),
                         ),
                       ),
                       const SizedBox(
@@ -61,7 +58,7 @@ class MessagingView extends StatelessWidget {
                         () => Text(
                           controller.item.value.name,
                           style: TextStyle(
-                              color: Colors.grey.shade600, fontSize: 13),
+                              color: Colors.grey.shade600, fontSize: 18),
                         ),
                       ),
                     ],
@@ -98,7 +95,14 @@ class MessagingView extends StatelessWidget {
                       child: Obx(
                         () => Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: (controller.messages[index].senderId !=
+                              controller.auth.firebaseUser.value!.uid) ? const BorderRadius.only(
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(20),
+                                bottomRight: Radius.circular(20), bottomLeft: Radius.circular(20)) : const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                                bottomLeft: Radius.circular(20)),
                             color: (controller.messages[index].senderId !=
                                     controller.auth.firebaseUser.value!.uid
                                 ? Colors.grey.shade200
@@ -108,7 +112,7 @@ class MessagingView extends StatelessWidget {
                           child: Obx(
                             () => Text(
                               controller.messages[index].message,
-                              style: const TextStyle(fontSize: 15),
+                              style: const TextStyle(fontSize: 20),
                             ),
                           ),
                         ),
