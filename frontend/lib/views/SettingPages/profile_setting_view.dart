@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sahara/controllers/counpon_controller.dart';
 
 import '../../components/primary_button.dart';
 import '../../routes/routes.dart';
 
 class ProfileSettingView extends StatelessWidget {
-  ProfileSettingView({super.key});
+  const ProfileSettingView({super.key});
 
   @override
   Widget build(BuildContext context) {

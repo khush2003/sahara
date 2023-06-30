@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/controllers/donation_item_controller.dart';
 import 'package:sahara/rest_api.dart';
-import 'package:sahara/theme/app_theme.dart';
 import 'package:sahara/utils/app_utils.dart';
 
 import '../../models/user.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sahara/controllers/auth/auth_controller.dart';
 import 'package:sahara/controllers/auth/register_controller.dart';
 import 'package:sahara/utils/app_utils.dart';
 

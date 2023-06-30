@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sahara/views/delivery.dart';
 
 
 
@@ -18,7 +17,7 @@ Widget deliveryMenuButton(String label, bool isShown){
           ),
           onPressed: (){
           },
-          child: Text(label,style: TextStyle(fontWeight: FontWeight.bold),)),
+          child: Text(label,style: const TextStyle(fontWeight: FontWeight.bold),)),
   );
 
 }

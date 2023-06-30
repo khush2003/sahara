@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/components/image_thumbnail.dart';
 import 'package:sahara/controllers/chat/message_controller.dart';
-import 'package:sahara/utils/app_utils.dart';
 
 class MessagingView extends StatelessWidget {
   final controller = Get.put(MessageController());

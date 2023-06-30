@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import 'package:sahara/models/author.dart';
 import 'package:sahara/models/donation_item.dart';
 import 'package:sahara/rest_api.dart';
 import 'package:sahara/routes/routes.dart';
-import 'package:sahara/views/create_donation.dart';
 import 'package:sahara/utils/app_utils.dart';
 
 class CreateDonationController extends GetxController {

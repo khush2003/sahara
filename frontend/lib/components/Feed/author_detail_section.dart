@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/chat/chat_room_controller.dart';
 import 'package:sahara/models/donation_item.dart';
-import 'package:sahara/routes/routes.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../models/author.dart';

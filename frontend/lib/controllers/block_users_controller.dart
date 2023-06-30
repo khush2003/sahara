@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:sahara/models/user.dart';
 import 'package:sahara/rest_api.dart';
 
-import 'auth/auth_controller.dart';
-
 class BlockUsersController extends GetxController {
   List<BlockedUser> blockedUsers = <BlockedUser>[].obs;
   static BlockUsersController get instance => Get.find<BlockUsersController>();

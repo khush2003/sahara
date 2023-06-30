@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/auth/auth_controller.dart';
-import '../controllers/block_users_controller.dart';
 import '../controllers/profile_view_controller.dart';
 import '../theme/app_theme.dart';
 
@@ -188,7 +187,7 @@ class UserProfile extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           CrossIcon(blockedUserId: blockedUserId),
           const SizedBox(width: 8),
         ],

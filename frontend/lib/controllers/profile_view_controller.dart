@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
@@ -10,7 +8,6 @@ import 'package:sahara/rest_api.dart';
 import 'package:sahara/utils/app_utils.dart';
 import '../models/donation_item.dart';
 import '../models/review.dart';
-import '../views/profile_view.dart';
 import 'auth/auth_controller.dart';
 import 'package:sahara/controllers/donation_item_controller.dart';
 

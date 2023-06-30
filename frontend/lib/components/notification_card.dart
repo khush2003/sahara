@@ -59,7 +59,7 @@ class NotificationCard extends StatelessWidget {
                   IconButton(
                     padding: const EdgeInsets.all(0),
                     onPressed: () {
-                      // TODO: Delete notification
+                    
                     },
                     icon: const Icon(
                       Icons.delete_forever_outlined,

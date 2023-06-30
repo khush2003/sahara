@@ -5,9 +5,9 @@ import '../theme/app_theme.dart';
 class PrimaryButton extends StatelessWidget {
   final Function() onPressed;
   final String text;
-  late Color? backgroundColor;
+  final Color? backgroundColor;
 
-  PrimaryButton(
+  const PrimaryButton(
       {super.key,
       required this.onPressed,
       required this.text,

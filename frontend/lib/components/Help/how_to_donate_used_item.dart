@@ -67,7 +67,7 @@ class StepWidget extends StatelessWidget {
   final String stepTitle;
   final String stepDescription;
 
-  const StepWidget({
+  const StepWidget({super.key, 
     required this.stepNumber,
     required this.stepTitle,
     required this.stepDescription,

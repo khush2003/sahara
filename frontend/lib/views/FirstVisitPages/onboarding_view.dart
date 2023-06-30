@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:sahara/routes/routes.dart';
 import '../../theme/app_theme.dart';
 
-import 'login_view.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({Key? key}) : super(key: key);

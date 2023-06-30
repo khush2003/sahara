@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/change_settings/change_details_controller.dart';
-import 'package:sahara/utils/app_utils.dart';
 
 import '../../components/primary_button.dart';
 import '../../components/textfield_head.dart';
