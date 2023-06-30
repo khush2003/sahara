@@ -47,13 +47,14 @@ class DonationDetailSection extends StatelessWidget {
                     label: 'Used Duration',
                     value: formatDuration(item.usedDuration)),
                 DetailRow(
-                    label: 'Usability', value: '${item.usability * 100}%'),
+                    label: 'Usability', value: '${(item.usability * 100).toStringAsFixed(2)}%'),
                 DetailRow(label: 'Price', value: '${item.price} bhat'),
                 DetailRow(
                     label: 'Delivery Paid By',
                     value: convertToString(item.deliveryPaidBy)),
                 DetailRow(
                     label: 'Delivery Fees', value: '$showDeliveryFees bhat'),
+                DetailRow(label: 'Estmated Value', value: '${item.estimatedItemValue.round()} bhat'),
               ],
             )
           ],

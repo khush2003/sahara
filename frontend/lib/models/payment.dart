@@ -42,4 +42,9 @@ class Payment {
       deliveryPaidBy: DeliveryPaidBy.donor,
     );
   }
+
+  // getbyid
+  static Payment getFromId(String id, List<Payment> payments) {
+    return payments.firstWhere((element) => element.paymentId == id);
+  }
 }

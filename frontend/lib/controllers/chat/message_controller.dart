@@ -122,6 +122,8 @@ class MessageController extends GetxController {
         final paymentId = await _restApi.postPayment(payment);
         await _restApi.putPaymentId(item.value.donationId!, paymentId);
         await itemController.setupLists();
+        channel.sink.close();
+        initializeLists();
         successSnackBar("Sucessfully Given item!");
       }
     }

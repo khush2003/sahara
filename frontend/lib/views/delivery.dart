@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sahara/controllers/delivery_status_controller.dart';
+import 'package:sahara/models/payment.dart';
 import 'package:sahara/utils/app_utils.dart';
 
 import '../components/DeliveryPage/delivery_card.dart';
@@ -46,17 +47,21 @@ class TabBarDeliveryStatus extends StatelessWidget {
           body: TabBarView(
             children: [
               Obx(() => ListItems(
-                  items: controller.inTransitList,
-                  user: controller.auth.userSahara.value)),
+                    items: controller.inTransitList,
+                    user: controller.auth.userSahara.value
+                  )),
               Obx(() => ListItems(
-                  items: controller.toDeliverList,
-                  user: controller.auth.userSahara.value)),
+                    items: controller.toDeliverList,
+                    user: controller.auth.userSahara.value
+                  )),
               Obx(() => ListItems(
-                  items: controller.toReceiveList,
-                  user: controller.auth.userSahara.value)),
+                    items: controller.toReceiveList,
+                    user: controller.auth.userSahara.value
+                  )),
               Obx(() => ListItems(
-                  items: controller.deliveredList,
-                  user: controller.auth.userSahara.value)),
+                    items: controller.deliveredList,
+                    user: controller.auth.userSahara.value
+                  )),
             ],
           ),
         ));
@@ -64,9 +69,14 @@ class TabBarDeliveryStatus extends StatelessWidget {
 }
 
 class ListItems extends StatelessWidget {
-  final List<DonationItem> items;
+  final DeliveryStatusController controller =
+      Get.find<DeliveryStatusController>();
   final UserSahara user;
-  const ListItems({super.key, required this.items, required this.user});
+  final List<DonationItem> items;
+  ListItems({
+    super.key,
+    required this.items, required this.user,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,19 +84,29 @@ class ListItems extends StatelessWidget {
       return Center(child: Text("No Items Found", style: headTextBold()));
     }
     return SingleChildScrollView(
-      child: Column(
-          children: items.map((element) {
-        if (element.deliveryStatus == DeliveryStatus.inTransit) {
-          return InTransitCard(user: user, item: element);
-        } else if (element.deliveryStatus == DeliveryStatus.toDeliver) {
+      child: Obx(
+        () => Column(
+            children: items.map((element) {
+          final payment =
+              Payment.getFromId(element.paymentId!, controller.payments);
+          var user =
+              UserSahara.getUserFromId(payment.receiverId, controller.users) ??
+                  UserSahara.test();
+          if (element.deliveryStatus == DeliveryStatus.inTransit) {
+            return InTransitCard(user: user, item: element);
+          } else if (element.deliveryStatus == DeliveryStatus.toDeliver) {
+            user =
+                UserSahara.getUserFromId(payment.senderId, controller.users) ??
+                    UserSahara.test();
+            return ToDeliverCard(user: user, item: element);
+          } else if (element.deliveryStatus == DeliveryStatus.toReceive) {
+            return ToReceiveCard(user: user, item: element);
+          } else if (element.deliveryStatus == DeliveryStatus.delivered) {
+            return DeliveredCard(user: user, item: element);
+          }
           return ToDeliverCard(user: user, item: element);
-        } else if (element.deliveryStatus == DeliveryStatus.toReceive) {
-          return ToReceiveCard(user: user, item: element);
-        } else if (element.deliveryStatus == DeliveryStatus.delivered) {
-          return DeliveredCard(user: user, item: element);
-        }
-        return ToDeliverCard(user: user, item: element);
-      }).toList()),
+        }).toList()),
+      ),
     );
   }
 }

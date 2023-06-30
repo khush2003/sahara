@@ -29,15 +29,18 @@ class DonationDetailsSectionDetailed extends StatelessWidget {
         InfoRow(
             icon: UniconsLine.star,
             label: 'Usability',
-            value: '${item.usability * 100}%'),
+            value: '${(item.usability * 100).toStringAsFixed(2)}%'),
+        InfoRow(icon: UniconsLine.truck, label: 'Donation Paid By', value: convertToString(item.deliveryPaidBy)),
         InfoRow(
             icon: UniconsLine.bitcoin_circle,
             label: 'Price',
             value: '${item.price} bhat'),
+        InfoRow(icon: UniconsLine.bill, label: 'Estmated Value', value: '${item.estimatedItemValue.round()} bhat'),
         InfoRow(
             icon: UniconsLine.parcel,
             label: 'Delivery Fees',
             value: '${item.deliveryFees} bhat'),
+        
       ],
     );
   }
