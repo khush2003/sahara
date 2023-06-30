@@ -1,5 +1,4 @@
 import express, { Express, Request, Response } from 'express';
-import dotenv from 'dotenv';
 import { db } from './firebase';
 import postRoutes from './post';
 import getRoutes from './get';
@@ -8,16 +7,15 @@ import deleteRoutes from './delete';
 
 import WebSocket from 'ws';
 
-dotenv.config();
 import cors from 'cors';
 
 const app: Express = express();
-const port: number = parseInt(process.env.PORT ?? '5000') as number;
-const hostname = '127.0.0.1';
-
+const port: number = 5000; //Put this in .env file when building code for production
+const hostname = '127.0.0.1'; // Using this url for testing purposes (same as localhost), this supports android emulator when paired with 10.0.2.2
+const webPort = 8080;
 
 // Using the WebSocket library to create a WebSocket server
-const wss = new WebSocket.Server({ port: 8080, host: hostname});
+const wss = new WebSocket.Server({ port: webPort, host: hostname});
 
 wss.on('connection', (ws: WebSocket) => {
   console.log('New WebSocket connection');
