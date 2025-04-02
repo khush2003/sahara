@@ -1,16 +1,16 @@
-# sahara
+# Sahara Donation App
 
-A new Flutter project.
+Sahara is a donation app designed to reduce waste and provide a platform for individuals to give away their unused items to those in need. Our mission is to create a sustainable and caring community where people can easily connect and contribute to reducing waste.
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+### Running Application
+1. Open the repository in a code editor
+2. Open the terminal and type `cd backend`
+3. Type `npm install` to install all dependencies
+4. Type `npm run dev` to run the backend server
+> Running frontend
+5. Open a new terminal and type `cd frontend`
+6. Type `flutter pub get` to install all dependencies
+7. Select an android emulator or ios emulator for running the frontend code (do not run on web)
+8. Type `flutter run --release` to run the frontend code

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "get-latest-version": "^5.0.1",
+    "tar": "^6.1.15"
+  }
+}

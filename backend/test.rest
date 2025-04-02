@@ -1,0 +1,156 @@
+### GET
+GET http://localhost:5000
+
+### POST
+POST http://localhost:5000/post/user
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "hello"
+}
+
+### GET all donations
+GET http://localhost:5000/get/donationItems/kbVtokJSTNiGTirsmnQZ
+
+### Get Reviews
+GET http://localhost:5000/get/reviews
+
+### POST Review
+POST http://localhost:5000/post/review
+Content-Type: application/json
+
+{
+    "reviewerId": "vY9xlAikX2RnpXG6JpuV1zZbIQq1",
+    "donationId": "kbVtokJSTNiGTirsmnQZ",
+    "reviewText": "What a fabulous item, helped me a lot!",
+    "reviewerName": "John Doe",
+    "reviewerImageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png",
+    "rating": 200
+}
+
+### POST
+POST http://localhost:5000/post/donationItem
+Content-Type: application/json
+
+{
+    "name": "Refrigertor SamsungNote",
+    "description": "Refrigertor Samsung 2019 model in good condition with a shelf for storing food. The ice box is not working but everything else is working. There are a few scratches",
+    "category": "Electronics",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png",
+    "usability": 0.9,
+    "price": 888.8,
+    "itemWidth": 500.2,
+    "itemHeight": 100,
+    "itemLength": 800,
+    "weight": 1000,
+    "tags": ["fridge", "samsung", "icebox", "refrigertor"],
+    "deliveryFees": 700,
+    "deliveryPaidBy": "donor",
+    "donorName": "John Doe",
+    "usedDuration": 2,
+    "isGiven": false,
+    "authorId": "60b9b5b9e4b0f3b2a8b0b3a0",
+    "authorName": "John Doe",
+    "authorImageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png"
+}
+
+### POST (change id everytime you post)
+POST http://localhost:5000/post/users/
+Content-Type: application/json
+
+{
+   "userName": "Note",
+   "userPhoneNumber": "0894499153",
+   "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1200px-Test-Logo.svg.png",
+   "userAddress": "122 Wattana nakorkorn",
+   "blockedUser": [],
+   "discountCoupon": [],
+   "coverPicture": "",
+   "token": ""
+}
+
+### PUT
+PUT http://localhost:5000/put/allUserName/ZZoc0nABxOd5XELhchn7M1CtajD3
+Content-Type: application/json
+
+{
+  "userName": "N3"
+}
+
+### GET
+GET http://localhost:5000/get/messages/8bjAC1EgJog9OAPOauRR
+
+### GET
+GET http://localhost:5000/get/payment/pql8QzjWBRQq7qZs9hF4
+
+### PUT
+PUT http://localhost:5000/put/users/vY9xlAikX2RnpXG6JpuV1zZbIQq1
+Content-Type: application/json
+
+{
+  "userName": "Updated Name",
+  "userPhoneNumber": "1234567890",
+  "userAddress": "New Address"
+}
+
+### PUT
+PUT http://localhost:5000/put/donationItems/OL2oaQTO3KWNYBrWqFFJ
+Content-Type: application/json
+
+{
+  "paymentId": null
+}
+
+### GET
+GET http://localhost:5000/get/users/xmAaGZwuTPbiXENzvuSKeRdpaWG2
+
+### POST 
+
+POST http://localhost:5000/post/review
+Content-Type: application/json
+
+{
+  "itemName": "Chair",
+  "donorName": "Thomas Shelby",
+  "receiverName": "James Shelby",
+  "itemImage": "",
+  "rating": 0,
+  "price": 0,
+  "usability": 0,
+  "usedDuration": 0,
+  "reviewText": "James loves this chair."
+}
+
+### GET
+GET http://localhost:5000/get/eachUsers?userName=jasos
+
+### GET
+GET http://localhost:5000/get/availableCoupons
+
+// Create coupon
+### POST
+POST http://localhost:5000/post/availableCoupons/Shabushi01
+Content-Type: application/json
+
+{
+  "couponName": "Shabushi",
+  "couponImage": "https://i.imgur.com/modPPoN.png",
+  "discountPrice": 75,
+  "discountCode": ""
+}
+
+// Get user coupon
+### GET
+GET http://localhost:5000/get/users/uwClP6WMzYT3H3zSniR8v06HRdw2/discountCoupon
+
+// Find CouponFromId
+### GET
+GET http://localhost:5000/get/coupons/8hpzFvGG4yDuOhfSvj4F
+
+// Find CouponFromDiscountCode
+### GET
+GET http://localhost:5000/get/findCouponFromDiscountCode?discountCode=PUHEBXOM
+
+### PUT
+PUT http://localhost:5000/put/users/4F9m1RZ145VwMWFJ9lDHlkwVrxe2/discountCoupon/WUQrJ1vGoiWeSBltCHi9
